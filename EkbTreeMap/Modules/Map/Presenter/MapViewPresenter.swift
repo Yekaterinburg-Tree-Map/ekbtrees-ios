@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 
-final class MapViewPresenter: MapViewPresenterConfigurable {
+final class MapViewPresenter: Presenter {
     
     // MARK: Public
     

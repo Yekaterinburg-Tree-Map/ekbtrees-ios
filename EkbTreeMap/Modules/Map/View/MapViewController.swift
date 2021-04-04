@@ -13,11 +13,14 @@ import RxCocoa
 import CoreLocation
 
 
-final class MapViewController: UIViewController {
+final class MapViewController<T: Interactor>: UIViewController,
+                                              YMKMapObjectTapListener,
+                                              YMKMapInputListener
+where T.Input == MapViewOutput, T.Output == MapViewInput {
     
     // MARK: Private
     
-    private var interactor: MapViewInteractorConfigurable!
+    private var interactor: T!
     private var mapView: YMKMapView!
     
     private let didLoadSubject = PublishSubject<Void>()
@@ -27,7 +30,7 @@ final class MapViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    class func instantiate(interactor: MapViewInteractorConfigurable) -> MapViewController {
+    class func instantiate(interactor: T) -> MapViewController {
         let vc = MapViewController()
         vc.interactor = interactor
         return vc
@@ -42,6 +45,36 @@ final class MapViewController: UIViewController {
         didLoadSubject.onNext(())
     }
     
+    
+    // MARK: Public
+    
+    // MARK: - YMKMapObjectTapListener
+    
+    func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
+        guard let point = mapObject.userData as? TreePoint else {
+            return false
+        }
+        didTapPointSubject.onNext(point)
+        return true
+    }
+    
+    // MARK: - YMKMapInputListener
+    
+    func onMapTap(with map: YMKMap, point: YMKPoint) {
+        let circle = YMKCircle(center: point, radius: 2.5)
+        map.mapObjects.addCircle(with: circle, stroke: .clear,
+                                 strokeWidth: 0,
+                                 fill: UIColor.systemTeal.withAlphaComponent(0.5))
+    }
+    
+    func onMapLongTap(with map: YMKMap, point: YMKPoint) {
+        let circle = YMKCircle(center: point, radius: 5)
+        map.mapObjects.addCircle(with: circle,
+                                 stroke: .clear,
+                                 strokeWidth: 0,
+                                 fill: UIColor.systemTeal.withAlphaComponent(0.5))
+    }
+
     
     // MARK: Private
     
@@ -93,40 +126,5 @@ final class MapViewController: UIViewController {
                               fill: [UIColor.red, UIColor.blue].randomElement()!.withAlphaComponent(0.5))
             obj.userData = point
         }
-    }
-}
-
-
-// MARK: - YMKMapObjectTapListener
-
-extension MapViewController: YMKMapObjectTapListener {
-    
-    func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        guard let point = mapObject.userData as? TreePoint else {
-            return false
-        }
-        didTapPointSubject.onNext(point)
-        return true
-    }
-}
-
-
-// MARK: - YMKMapInputListener
-
-extension MapViewController: YMKMapInputListener {
-    
-    func onMapTap(with map: YMKMap, point: YMKPoint) {
-        let circle = YMKCircle(center: point, radius: 2.5)
-        map.mapObjects.addCircle(with: circle, stroke: .clear,
-                                 strokeWidth: 0,
-                                 fill: UIColor.systemTeal.withAlphaComponent(0.5))
-    }
-    
-    func onMapLongTap(with map: YMKMap, point: YMKPoint) {
-        let circle = YMKCircle(center: point, radius: 5)
-        map.mapObjects.addCircle(with: circle,
-                                 stroke: .clear,
-                                 strokeWidth: 0,
-                                 fill: UIColor.systemTeal.withAlphaComponent(0.5))
     }
 }

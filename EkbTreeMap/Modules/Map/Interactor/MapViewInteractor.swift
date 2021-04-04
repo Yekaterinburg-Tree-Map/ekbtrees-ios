@@ -10,11 +10,12 @@ import RxSwift
 import CoreLocation
 
 
-final class MapViewInteractor: MapViewInteractorConfigurable {
+final class MapViewInteractor<T: Presenter>: Interactor
+where T.Input == MapViewInteractorOutput, T.Output == MapViewInput {
     
     // MARK: Private Properties
     
-    private let presenter: MapViewPresenterConfigurable
+    private let presenter: T
     private let treeRepository: TreePointsRepositoryProtocol
     
     private let startPointSubject = BehaviorSubject<CLLocationCoordinate2D>(value: .init(latitude: 56.82,
@@ -25,7 +26,7 @@ final class MapViewInteractor: MapViewInteractorConfigurable {
     
     // MARK: Lifecycle
     
-    init(presenter: MapViewPresenterConfigurable,
+    init(presenter: T,
          treeRepository: TreePointsRepositoryProtocol) {
         self.presenter = presenter
         self.treeRepository = treeRepository
