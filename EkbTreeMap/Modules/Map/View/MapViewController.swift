@@ -21,6 +21,7 @@ final class MapViewController: UIViewController {
     private var mapView: YMKMapView!
     
     private let didLoadSubject = PublishSubject<Void>()
+    private let didTapPointSubject = PublishSubject<TreePoint>()
     private let bag = DisposeBag()
     
     
@@ -56,7 +57,8 @@ final class MapViewController: UIViewController {
     }
     
     private func setupIO() {
-        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject))
+        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
+                                                       didTapPoint: didTapPointSubject))
         
         input.moveToPoint
             .observe(on: MainScheduler.asyncInstance)
@@ -89,7 +91,7 @@ final class MapViewController: UIViewController {
                               stroke: stroke,
                               strokeWidth: 0,
                               fill: [UIColor.red, UIColor.blue].randomElement()!.withAlphaComponent(0.5))
-            obj.userData = point.diameter
+            obj.userData = point
         }
     }
 }
@@ -100,7 +102,10 @@ final class MapViewController: UIViewController {
 extension MapViewController: YMKMapObjectTapListener {
     
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        print(mapObject.userData)
+        guard let point = mapObject.userData as? TreePoint else {
+            return false
+        }
+        didTapPointSubject.onNext(point)
         return true
     }
 }

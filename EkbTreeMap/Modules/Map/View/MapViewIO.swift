@@ -13,6 +13,7 @@ import CoreLocation
 struct MapViewOutput {
     
     var didLoad: Observable<Void> = .never()
+    var didTapPoint: Observable<TreePoint> = .never()
 }
 
 struct MapViewInput {

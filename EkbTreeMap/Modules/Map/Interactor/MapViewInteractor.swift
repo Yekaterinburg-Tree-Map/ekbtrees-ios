@@ -39,6 +39,11 @@ final class MapViewInteractor: MapViewInteractorConfigurable {
             .subscribe(onNext: { [weak self] in self?.didLoad() })
             .disposed(by: bag)
         
+        output.didTapPoint
+            .withUnretained(self)
+            .subscribe(onNext: { $0.didTapPoint($1) })
+            .disposed(by: bag)
+        
         let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
                                                        visiblePoints: visiblePointsSubject)
         return presenter.configureIO(with: interactorOutput)
@@ -50,5 +55,9 @@ final class MapViewInteractor: MapViewInteractorConfigurable {
     private func didLoad() {
         let points = treeRepository.fetchTreePoints()
         visiblePointsSubject.onNext(points)
+    }
+    
+    private func didTapPoint(_ point: TreePoint) {
+        
     }
 }
