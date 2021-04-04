@@ -6,13 +6,13 @@
 //
 
 import UIKit
-import GoogleMaps
 import YandexMapsMobile
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var mainCoordinator: Coordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         let tabBar = UITabBarController()
-        tabBar.setViewControllers([MapViewController()], animated: false)
         window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
+        mainCoordinator = MainCoordinator(rootController: tabBar)
+        mainCoordinator?.start(animated: false)
         return true
     }
     

@@ -27,7 +27,6 @@ class TreePointsRepository: TreePointsRepositoryProtocol {
         let data = try! Data(contentsOf: url!)
         let json = try! JSON(data: data)
         points = parser.parse(json)
-        points.map(\.diameter).forEach { print($0) }
     }
     
     func fetchTreeClusters() -> [TreeCluster] {
