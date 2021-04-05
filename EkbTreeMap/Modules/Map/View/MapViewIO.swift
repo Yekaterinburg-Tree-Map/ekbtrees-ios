@@ -27,3 +27,13 @@ struct MapViewInteractorOutput {
     var startPoint: Observable<CLLocationCoordinate2D> = .never()
     var visiblePoints: Observable<[TreePoint]> = .never()
 }
+
+protocol MapViewInteractorConfigurable: AnyObject {
+    
+    func configureIO(with output: MapViewOutput) -> MapViewInput
+}
+
+protocol MapViewPresenterConfigurable: AnyObject {
+    
+    func configureIO(with output: MapViewInteractorOutput) -> MapViewInput
+}

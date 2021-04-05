@@ -19,8 +19,6 @@
 		2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96881A260CD67400574BE2 /* TreePointsRepository.swift */; };
 		2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96882B260CDCBD00574BE2 /* MapViewController.swift */; };
 		2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E968854260CFC5800574BE2 /* CircleImage.swift */; };
-		2EBBA987261A3DAB00773779 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBBA986261A3DAB00773779 /* Interactor.swift */; };
-		2EBBA98F261A3DDF00773779 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBBA98E261A3DDF00773779 /* Presenter.swift */; };
 		2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E6E2618D28D00EC9033 /* ApiKeyService.swift */; };
 		2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E762618D29800EC9033 /* ApiKeyParser.swift */; };
 		2ED57E7C2618D37B00EC9033 /* credentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ED57E7B2618D37B00EC9033 /* credentials.json */; };
@@ -73,8 +71,6 @@
 		2E96881A260CD67400574BE2 /* TreePointsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointsRepository.swift; sourceTree = "<group>"; };
 		2E96882B260CDCBD00574BE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2E968854260CFC5800574BE2 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
-		2EBBA986261A3DAB00773779 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
-		2EBBA98E261A3DDF00773779 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2ED57E6E2618D28D00EC9033 /* ApiKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyService.swift; sourceTree = "<group>"; };
 		2ED57E762618D29800EC9033 /* ApiKeyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyParser.swift; sourceTree = "<group>"; };
 		2ED57E7B2618D37B00EC9033 /* credentials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = credentials.json; sourceTree = "<group>"; };
@@ -193,7 +189,6 @@
 		2E96880B260CD41900574BE2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2EBBA985261A3D9C00773779 /* VIP */,
 				2E7FDAFC26105A620065E5C0 /* Parsers */,
 				2E968853260CFC4B00574BE2 /* UI */,
 				2E968819260CD5C500574BE2 /* Services */,
@@ -235,15 +230,6 @@
 				2E968854260CFC5800574BE2 /* CircleImage.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		2EBBA985261A3D9C00773779 /* VIP */ = {
-			isa = PBXGroup;
-			children = (
-				2EBBA986261A3DAB00773779 /* Interactor.swift */,
-				2EBBA98E261A3DDF00773779 /* Presenter.swift */,
-			);
-			path = VIP;
 			sourceTree = "<group>";
 		};
 		2ED57E642618B4F700EC9033 /* Map */ = {
@@ -533,9 +519,7 @@
 				2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */,
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
-				2EBBA98F261A3DDF00773779 /* Presenter.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
-				2EBBA987261A3DAB00773779 /* Interactor.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
