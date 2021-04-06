@@ -31,6 +31,8 @@
 		2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */; };
 		2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED02619E43600EC9033 /* MapCoordinator.swift */; };
 		2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */; };
+		2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */; };
+		2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */; };
 		2EE3673A620F3B7DCBA72998 /* Pods_EkbTreeMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +85,8 @@
 		2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED02619E43600EC9033 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
+		2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModuleFactory.swift; sourceTree = "<group>"; };
+		2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4B42923BC04993C8BA07528D /* Pods-EkbTreeMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.debug.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.debug.xcconfig"; sourceTree = "<group>"; };
 		CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EkbTreeMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -217,6 +221,7 @@
 		2E968822260CD7A500574BE2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2EDC6C17261CC19000BB7F5A /* Login */,
 				2ED57E8C2618E79700EC9033 /* Factory.swift */,
 				2ED57E642618B4F700EC9033 /* Map */,
 			);
@@ -302,6 +307,23 @@
 				2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2EDC6C17261CC19000BB7F5A /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */,
+				2EDC6C18261CC1BD00BB7F5A /* View */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		2EDC6C18261CC1BD00BB7F5A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		96DAE8556E6A8CB20BE4A1C5 /* Frameworks */ = {
@@ -513,6 +535,7 @@
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
+				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
 				2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */,
@@ -523,6 +546,7 @@
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
+				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
