@@ -35,7 +35,6 @@ final class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "yandex"
         setupMap()
         setupIO()
         
@@ -54,6 +53,7 @@ final class MapViewController: UIViewController {
         mapView.mapWindow.map.addInputListener(with: self)
         let objects = mapView.mapWindow.map.mapObjects
         objects.addTapListener(with: self)
+        mapView.mapWindow.map.addInertiaMoveListener(with: self)
     }
     
     private func setupIO() {
@@ -128,5 +128,25 @@ extension MapViewController: YMKMapInputListener {
                                  stroke: .clear,
                                  strokeWidth: 0,
                                  fill: UIColor.systemTeal.withAlphaComponent(0.5))
+    }
+}
+
+
+// MARK: - YMKInertiaMoveListener
+
+extension MapViewController: YMKInertiaMoveListener {
+    
+    
+    // TODO
+    func onStart(with map: YMKMap, finish finishCameraPosition: YMKCameraPosition) {
+        
+    }
+    
+    func onCancel(with map: YMKMap, cameraPosition: YMKCameraPosition) {
+        
+    }
+    
+    func onFinish(with map: YMKMap, cameraPosition: YMKCameraPosition) {
+        
     }
 }
