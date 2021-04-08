@@ -53,24 +53,28 @@ final class LoginViewController: UIViewController {
     private lazy var signInButton: UIButton = {
         let button = UIButton()
         button.setTitle("Войти", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
     private lazy var vkEntryButton: UIButton = {
         let button = UIButton()
         button.setTitle("Авторизация ВК", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
     private lazy var facebookEntry: UIButton = {
         let button = UIButton()
         button.setTitle("Авторизация facebook", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
     private lazy var appleEntry: UIButton = {
         let button = UIButton()
         button.setTitle("Авторизация Apple", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
         return button
     }()
     
@@ -81,10 +85,19 @@ final class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupConstraints()
         fillStackView()
+        setupUI()
     }
     
     
     // MARK: Private
+    
+    private func setupUI() {
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
+    }
     
     private func fillStackView() {
         [loginTitle, emailTextField, passwordTextField, signInButton, vkEntryButton, facebookEntry, appleEntry].forEach {
@@ -97,7 +110,7 @@ final class LoginViewController: UIViewController {
         formStackView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(64)
             $0.left.right.equalToSuperview().inset(16)
-            $0.bottom.greaterThanOrEqualToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview()
             $0.height.greaterThanOrEqualTo(100).priority(.low)
         }
     }
