@@ -19,6 +19,10 @@
 		2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96881A260CD67400574BE2 /* TreePointsRepository.swift */; };
 		2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96882B260CDCBD00574BE2 /* MapViewController.swift */; };
 		2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E968854260CFC5800574BE2 /* CircleImage.swift */; };
+		2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */; };
+		2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A77261F5E74005E382B /* Interactor.swift */; };
+		2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */; };
+		2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A84261F64F1005E382B /* LoginButtonType.swift */; };
 		2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E6E2618D28D00EC9033 /* ApiKeyService.swift */; };
 		2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E762618D29800EC9033 /* ApiKeyParser.swift */; };
 		2ED57E7C2618D37B00EC9033 /* credentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ED57E7B2618D37B00EC9033 /* credentials.json */; };
@@ -73,6 +77,10 @@
 		2E96881A260CD67400574BE2 /* TreePointsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointsRepository.swift; sourceTree = "<group>"; };
 		2E96882B260CDCBD00574BE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2E968854260CFC5800574BE2 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
+		2EAE5A77261F5E74005E382B /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewIO.swift; sourceTree = "<group>"; };
+		2EAE5A84261F64F1005E382B /* LoginButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonType.swift; sourceTree = "<group>"; };
 		2ED57E6E2618D28D00EC9033 /* ApiKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyService.swift; sourceTree = "<group>"; };
 		2ED57E762618D29800EC9033 /* ApiKeyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyParser.swift; sourceTree = "<group>"; };
 		2ED57E7B2618D37B00EC9033 /* credentials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = credentials.json; sourceTree = "<group>"; };
@@ -193,6 +201,7 @@
 		2E96880B260CD41900574BE2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2EAE5A76261F5E69005E382B /* VIP */,
 				2E7FDAFC26105A620065E5C0 /* Parsers */,
 				2E968853260CFC4B00574BE2 /* UI */,
 				2E968819260CD5C500574BE2 /* Services */,
@@ -222,8 +231,9 @@
 			isa = PBXGroup;
 			children = (
 				2EDC6C17261CC19000BB7F5A /* Login */,
-				2ED57E8C2618E79700EC9033 /* Factory.swift */,
+				2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */,
 				2ED57E642618B4F700EC9033 /* Map */,
+				2ED57E8C2618E79700EC9033 /* Factory.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -235,6 +245,22 @@
 				2E968854260CFC5800574BE2 /* CircleImage.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		2EAE5A70261F5E4E005E382B /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		2EAE5A76261F5E69005E382B /* VIP */ = {
+			isa = PBXGroup;
+			children = (
+				2EAE5A77261F5E74005E382B /* Interactor.swift */,
+			);
+			path = VIP;
 			sourceTree = "<group>";
 		};
 		2ED57E642618B4F700EC9033 /* Map */ = {
@@ -312,7 +338,7 @@
 		2EDC6C17261CC19000BB7F5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */,
+				2EAE5A70261F5E4E005E382B /* Interactor */,
 				2EDC6C18261CC1BD00BB7F5A /* View */,
 			);
 			path = Login;
@@ -322,6 +348,8 @@
 			isa = PBXGroup;
 			children = (
 				2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */,
+				2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */,
+				2EAE5A84261F64F1005E382B /* LoginButtonType.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -529,6 +557,8 @@
 			files = (
 				2E968815260CD48D00574BE2 /* TreeModels.swift in Sources */,
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
+				2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */,
+				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */,
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
@@ -545,8 +575,10 @@
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
+				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
+				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

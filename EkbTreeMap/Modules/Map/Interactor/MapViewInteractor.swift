@@ -10,7 +10,7 @@ import RxSwift
 import CoreLocation
 
 
-final class MapViewInteractor: MapViewInteractorConfigurable {
+final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     // MARK: Private Properties
     
@@ -34,7 +34,7 @@ final class MapViewInteractor: MapViewInteractorConfigurable {
     
     // MARK: Public
     
-    func configureIO(with output: MapViewOutput) -> MapViewInput {
+    override func configureIO(with output: MapViewOutput) -> MapViewInput? {
         output.didLoad
             .subscribe(onNext: { [weak self] in self?.didLoad() })
             .disposed(by: bag)

@@ -17,7 +17,7 @@ final class MapViewController: UIViewController {
     
     // MARK: Private
     
-    private var interactor: MapViewInteractorConfigurable!
+    private var interactor: AnyInteractor<MapViewOutput, MapViewInput>!
     private var mapView: YMKMapView!
     
     private let didLoadSubject = PublishSubject<Void>()
@@ -27,7 +27,7 @@ final class MapViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    class func instantiate(interactor: MapViewInteractorConfigurable) -> MapViewController {
+    class func instantiate(interactor: AnyInteractor<MapViewOutput, MapViewInput>) -> MapViewController {
         let vc = MapViewController()
         vc.interactor = interactor
         return vc
@@ -60,13 +60,13 @@ final class MapViewController: UIViewController {
         let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
                                                        didTapPoint: didTapPointSubject))
         
-        input.moveToPoint
+        input?.moveToPoint
             .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)
             .subscribe(onNext: { $0.moveToPoint($1) })
             .disposed(by: bag)
         
-        input.visiblePoints
+        input?.visiblePoints
             .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)
             .subscribe(onNext: { $0.showPoints($1) })
