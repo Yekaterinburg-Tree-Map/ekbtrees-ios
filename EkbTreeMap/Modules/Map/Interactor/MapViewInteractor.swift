@@ -14,7 +14,7 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     // MARK: Private Properties
     
-    private let presenter: MapViewPresenterConfigurable
+    private let presenter: AnyPresenter<MapViewInteractorOutput, MapViewInput>
     private let treeRepository: TreePointsRepositoryProtocol
     
     private let startPointSubject = BehaviorSubject<CLLocationCoordinate2D>(value: .init(latitude: 56.82,
@@ -25,7 +25,7 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     // MARK: Lifecycle
     
-    init(presenter: MapViewPresenterConfigurable,
+    init(presenter: AnyPresenter<MapViewInteractorOutput, MapViewInput>,
          treeRepository: TreePointsRepositoryProtocol) {
         self.presenter = presenter
         self.treeRepository = treeRepository
@@ -35,14 +35,19 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     // MARK: Public
     
     override func configureIO(with output: MapViewOutput) -> MapViewInput? {
-        output.didLoad
-            .subscribe(onNext: { [weak self] in self?.didLoad() })
-            .disposed(by: bag)
-        
-        output.didTapPoint
-            .withUnretained(self)
-            .subscribe(onNext: { $0.didTapPoint($1) })
-            .disposed(by: bag)
+        bag.insert {
+            output.didLoad
+                .subscribe(onNext: { [weak self] in self?.didLoad() })
+            
+            output.didTapPoint
+                .subscribe(onNext: { [weak self] point in self?.didTapPoint(point) })
+            
+            output.didTapOnMap
+                .subscribe(onNext: { [weak self] point in self?.didTapOnMap(point) })
+            
+            output.didChangeVisibleRegion
+                .subscribe(onNext: { [weak self] region in self?.didChangeVisibleRegion(region) })
+        }
         
         let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
                                                        visiblePoints: visiblePointsSubject)
@@ -57,7 +62,15 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
         visiblePointsSubject.onNext(points)
     }
     
-    private func didTapPoint(_ point: TreePoint) {
-        
+    private func didTapPoint(_ id: String) {
+        // TODO: show point data
+    }
+    
+    private func didTapOnMap(_ point: CLLocationCoordinate2D) {
+        // TODO: check state
+    }
+    
+    private func didChangeVisibleRegion(_ region: MapViewVisibleRegionPoints) {
+        // TODO: fetch data for region
     }
 }

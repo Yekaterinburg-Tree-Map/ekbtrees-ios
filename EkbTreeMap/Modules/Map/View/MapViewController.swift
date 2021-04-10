@@ -21,7 +21,9 @@ final class MapViewController: UIViewController {
     private var mapView: YMKMapView!
     
     private let didLoadSubject = PublishSubject<Void>()
-    private let didTapPointSubject = PublishSubject<TreePoint>()
+    private let didTapPointSubject = PublishSubject<String>()
+    private let didTapOnMapSubject = PublishSubject<CLLocationCoordinate2D>()
+    private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     private let bag = DisposeBag()
     
     
@@ -53,12 +55,14 @@ final class MapViewController: UIViewController {
         mapView.mapWindow.map.addInputListener(with: self)
         let objects = mapView.mapWindow.map.mapObjects
         objects.addTapListener(with: self)
-        mapView.mapWindow.map.addInertiaMoveListener(with: self)
+        mapView.mapWindow.map.addCameraListener(with: self)
     }
     
     private func setupIO() {
         let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
-                                                       didTapPoint: didTapPointSubject))
+                                                       didTapPoint: didTapPointSubject,
+                                                       didTapOnMap: didTapOnMapSubject,
+                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject))
         
         input?.moveToPoint
             .observe(on: MainScheduler.asyncInstance)
@@ -81,18 +85,29 @@ final class MapViewController: UIViewController {
             cameraCallback: nil)
     }
     
-    private func showPoints(_ points: [TreePoint]) {
+    private func showPoints(_ points: [TreePointRepresentable]) {
         let objects = mapView.mapWindow.map.mapObjects
         points.forEach { point in
             let circle = YMKCircle(center: .init(latitude: point.position.latitude, longitude: point.position.longitude),
-                                   radius: Float(point.diameter ?? 1) / 2)
+                                   radius: Float(point.radius / 2))
             let stroke = UIColor.clear
             let obj = objects.addCircle(with: circle,
                               stroke: stroke,
                               strokeWidth: 0,
-                              fill: [UIColor.red, UIColor.blue].randomElement()!.withAlphaComponent(0.5))
+                              fill: point.circleColor.withAlphaComponent(0.5))
             obj.userData = point
         }
+    }
+    
+    private func handleCameraPositionChanged(map: YMKMap) {
+        let visibleRegion = map.visibleRegion
+        let topLeftPoint = CLLocationCoordinate2D(latitude: visibleRegion.topLeft.latitude,
+                                                  longitude: visibleRegion.topLeft.longitude)
+        let bottomRightPoint = CLLocationCoordinate2D(latitude: visibleRegion.bottomRight.latitude,
+                                                      longitude: visibleRegion.bottomRight.longitude)
+        let region = MapViewVisibleRegionPoints(topLeft: topLeftPoint, bottomRight: bottomRightPoint)
+        
+        didChangeVisibleRegionSubject.onNext(region)
     }
 }
 
@@ -102,10 +117,10 @@ final class MapViewController: UIViewController {
 extension MapViewController: YMKMapObjectTapListener {
     
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        guard let point = mapObject.userData as? TreePoint else {
+        guard let pointData = mapObject.userData as? String else {
             return false
         }
-        didTapPointSubject.onNext(point)
+        didTapPointSubject.onNext(pointData)
         return true
     }
 }
@@ -116,37 +131,27 @@ extension MapViewController: YMKMapObjectTapListener {
 extension MapViewController: YMKMapInputListener {
     
     func onMapTap(with map: YMKMap, point: YMKPoint) {
-        let circle = YMKCircle(center: point, radius: 2.5)
-        map.mapObjects.addCircle(with: circle, stroke: .clear,
-                                 strokeWidth: 0,
-                                 fill: UIColor.systemTeal.withAlphaComponent(0.5))
+        didTapOnMapSubject.onNext(.init(latitude: point.latitude, longitude: point.longitude))
     }
     
     func onMapLongTap(with map: YMKMap, point: YMKPoint) {
-        let circle = YMKCircle(center: point, radius: 5)
-        map.mapObjects.addCircle(with: circle,
-                                 stroke: .clear,
-                                 strokeWidth: 0,
-                                 fill: UIColor.systemTeal.withAlphaComponent(0.5))
+        // unused
     }
 }
 
 
-// MARK: - YMKInertiaMoveListener
+// MARK: - YMKMapCameraListener
 
-extension MapViewController: YMKInertiaMoveListener {
+extension MapViewController: YMKMapCameraListener {
     
-    
-    // TODO
-    func onStart(with map: YMKMap, finish finishCameraPosition: YMKCameraPosition) {
+    func onCameraPositionChanged(with map: YMKMap,
+                                 cameraPosition: YMKCameraPosition,
+                                 cameraUpdateReason: YMKCameraUpdateReason,
+                                 finished: Bool) {
+        guard finished else {
+            return
+        }
         
-    }
-    
-    func onCancel(with map: YMKMap, cameraPosition: YMKCameraPosition) {
-        
-    }
-    
-    func onFinish(with map: YMKMap, cameraPosition: YMKCameraPosition) {
-        
+        handleCameraPositionChanged(map: map)
     }
 }

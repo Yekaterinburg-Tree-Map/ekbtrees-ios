@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */; };
+		2E3946402621CB310001E5FA /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463F2621CB310001E5FA /* Presenter.swift */; };
+		2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */; };
 		2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4917F8260B9AC300ECE0FD /* AppDelegate.swift */; };
 		2E491802260B9AC400ECE0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E491801260B9AC400ECE0FD /* Assets.xcassets */; };
 		2E491805260B9AC400ECE0FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E491803260B9AC400ECE0FD /* LaunchScreen.storyboard */; };
@@ -59,6 +62,9 @@
 
 /* Begin PBXFileReference section */
 		12BEC177D98EC628469F1ED5 /* Pods-EkbTreeMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.release.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.release.xcconfig"; sourceTree = "<group>"; };
+		2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointRepresentable.swift; sourceTree = "<group>"; };
+		2E39463F2621CB310001E5FA /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVisibleRegionPoints.swift; sourceTree = "<group>"; };
 		2E4917F5260B9AC300ECE0FD /* EkbTreeMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EkbTreeMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E4917F8260B9AC300ECE0FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E491801260B9AC400ECE0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -132,6 +138,22 @@
 				12BEC177D98EC628469F1ED5 /* Pods-EkbTreeMap.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		2E3946392621C9FA0001E5FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2E3946442621D2720001E5FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		2E4917EC260B9AC300ECE0FD = {
@@ -258,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				2EAE5A77261F5E74005E382B /* Interactor.swift */,
+				2E39463F2621CB310001E5FA /* Presenter.swift */,
 			);
 			path = VIP;
 			sourceTree = "<group>";
@@ -303,6 +326,7 @@
 		2ED57EAE2619CD0300EC9033 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				2E3946442621D2720001E5FA /* Models */,
 				2ED57EBB2619D0B100EC9033 /* MapViewInteractor.swift */,
 			);
 			path = Interactor;
@@ -311,6 +335,7 @@
 		2ED57EAF2619CD0B00EC9033 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				2E3946392621C9FA0001E5FA /* Models */,
 				2ED57EC02619D4C700EC9033 /* MapViewPresenter.swift */,
 			);
 			path = Presenter;
@@ -565,11 +590,14 @@
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
+				2E3946402621CB310001E5FA /* Presenter.swift in Sources */,
 				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
+				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
 				2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */,
 				2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */,
+				2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */,
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
