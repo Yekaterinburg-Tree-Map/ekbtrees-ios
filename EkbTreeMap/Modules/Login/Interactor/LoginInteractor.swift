@@ -39,12 +39,14 @@ class LoginInteractor: AnyInteractor<LoginViewOutput, LoginViewInput> {
     // MARK: Private
     
     private func didLoad() {
+        // update available buttons
+        // check if already logged in(should be in another place)
         
     }
     
     private func didTapEnter(email: String?, password: String?) {
         guard validateInput(email: email, password: password) else {
-            // show 
+            // show validation issues
             return
         }
     }

@@ -79,6 +79,18 @@ final class LoginViewController: UIViewController {
     }()
     
     
+    // MARK: Public Properties
+    
+    var interactor: AnyInteractor<LoginViewOutput, LoginViewInput>!
+    
+    
+    // MARK: Private Properties
+    
+    private let bag = DisposeBag()
+    private let didLoadSubject = PublishSubject<Void>()
+    private let didTapEnter = PublishSubject<(String?, String?)>()
+    
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -86,6 +98,7 @@ final class LoginViewController: UIViewController {
         setupConstraints()
         fillStackView()
         setupUI()
+        configureIO()
     }
     
     
@@ -100,7 +113,7 @@ final class LoginViewController: UIViewController {
     }
     
     private func fillStackView() {
-        [loginTitle, emailTextField, passwordTextField, signInButton, vkEntryButton, facebookEntry, appleEntry].forEach {
+        [loginTitle, emailTextField, passwordTextField, signInButton].forEach {
             formStackView.addArrangedSubview($0)
         }
     }
@@ -112,6 +125,35 @@ final class LoginViewController: UIViewController {
             $0.left.right.equalToSuperview().inset(16)
             $0.bottom.lessThanOrEqualToSuperview()
             $0.height.greaterThanOrEqualTo(100).priority(.low)
+        }
+    }
+    
+    private func configureIO() {
+        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
+                                                       didTapEnter: didTapEnter))
+        
+        input?.title
+            .bind(to: loginTitle.rx.text)
+            .disposed(by: bag)
+        
+        input?.availableButton
+            .withUnretained(self)
+            .subscribe(onNext: { $0.addEntryButtons($1) })
+            .disposed(by: bag)
+    }
+    
+    private func addEntryButtons(_ buttons: [LoginButtonType]) {
+        buttons.forEach {
+            let view: UIView
+            switch $0 {
+            case .vk:
+                view = vkEntryButton
+            case .facebook:
+                view = facebookEntry
+            case .apple:
+                view = appleEntry
+            }
+            formStackView.addArrangedSubview(view)
         }
     }
 }

@@ -11,6 +11,10 @@ import UIKit
 final class LoginModuleFactory: Factory {
     
     func build(with: Void) -> UIViewController {
-        LoginViewController()
+        let vc = LoginViewController()
+        let interactor = LoginInteractor()
+        
+        vc.interactor = interactor
+        return vc
     }
 }

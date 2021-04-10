@@ -31,7 +31,6 @@ final class MainCoordinator: ParentCoordinator {
     
     func start(animated: Bool) {
         appendMapCoordinator()
-        rootController!.append(LoginViewController())
     }
     
     func finish(animated: Bool) {

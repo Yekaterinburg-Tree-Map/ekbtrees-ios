@@ -231,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				2EDC6C17261CC19000BB7F5A /* Login */,
-				2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */,
 				2ED57E642618B4F700EC9033 /* Map */,
 				2ED57E8C2618E79700EC9033 /* Factory.swift */,
 			);
@@ -338,6 +337,7 @@
 		2EDC6C17261CC19000BB7F5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */,
 				2EAE5A70261F5E4E005E382B /* Interactor */,
 				2EDC6C18261CC1BD00BB7F5A /* View */,
 			);
