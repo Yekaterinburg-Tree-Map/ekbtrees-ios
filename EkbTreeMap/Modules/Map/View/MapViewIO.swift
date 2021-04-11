@@ -16,16 +16,19 @@ struct MapViewOutput {
     var didTapPoint: Observable<String> = .never()
     var didTapOnMap: Observable<CLLocationCoordinate2D> = .never()
     var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
+    var didTapMoreButton: Observable<Void> = .never()
 }
 
 struct MapViewInput {
     
     var moveToPoint: Observable<CLLocationCoordinate2D> = .never()
     var visiblePoints: Observable<[TreePointRepresentable]> = .never()
+    var annotationView: Observable<TreeAnnotationState> = .never()
 }
 
 struct MapViewInteractorOutput {
     
     var startPoint: Observable<CLLocationCoordinate2D> = .never()
     var visiblePoints: Observable<[TreePoint]> = .never()
+    var annotationData: Observable<TreePoint?> = .never()
 }

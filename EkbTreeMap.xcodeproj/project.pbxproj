@@ -11,6 +11,8 @@
 		2E3946402621CB310001E5FA /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463F2621CB310001E5FA /* Presenter.swift */; };
 		2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */; };
 		2E39464B26221EAF0001E5FA /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39464A26221EAF0001E5FA /* Tree.swift */; };
+		2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */; };
+		2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394658262340290001E5FA /* TreeAnnotationRepresentable.swift */; };
 		2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4917F8260B9AC300ECE0FD /* AppDelegate.swift */; };
 		2E491802260B9AC400ECE0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E491801260B9AC400ECE0FD /* Assets.xcassets */; };
 		2E491805260B9AC400ECE0FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E491803260B9AC400ECE0FD /* LaunchScreen.storyboard */; };
@@ -67,6 +69,8 @@
 		2E39463F2621CB310001E5FA /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVisibleRegionPoints.swift; sourceTree = "<group>"; };
 		2E39464A26221EAF0001E5FA /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
+		2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAnnotationView.swift; sourceTree = "<group>"; };
+		2E394658262340290001E5FA /* TreeAnnotationRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAnnotationRepresentable.swift; sourceTree = "<group>"; };
 		2E4917F5260B9AC300ECE0FD /* EkbTreeMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EkbTreeMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E4917F8260B9AC300ECE0FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E491801260B9AC400ECE0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */,
+				2E394658262340290001E5FA /* TreeAnnotationRepresentable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -156,6 +161,14 @@
 				2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2E39464F26233B120001E5FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2E4917EC260B9AC300ECE0FD = {
@@ -320,6 +333,7 @@
 		2ED57E962618E87F00EC9033 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2E39464F26233B120001E5FA /* Views */,
 				2ED57EB02619CD5900EC9033 /* MapViewIO.swift */,
 				2E96882B260CDCBD00574BE2 /* MapViewController.swift */,
 			);
@@ -588,6 +602,7 @@
 				2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
+				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
 				2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */,
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
@@ -609,6 +624,7 @@
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
+				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
 				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
 			);

@@ -20,6 +20,7 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     private let startPointSubject = BehaviorSubject<CLLocationCoordinate2D>(value: .init(latitude: 56.82,
                                                                                          longitude: 60.62))
     private let visiblePointsSubject = PublishSubject<[TreePoint]>()
+    private let annotationDataSubject = PublishSubject<TreePoint?>()
     private let bag = DisposeBag()
     
     
@@ -50,7 +51,8 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
         }
         
         let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
-                                                       visiblePoints: visiblePointsSubject)
+                                                       visiblePoints: visiblePointsSubject,
+                                                       annotationData: annotationDataSubject)
         return presenter.configureIO(with: interactorOutput)
     }
     
@@ -63,7 +65,7 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     }
     
     private func didTapPoint(_ id: String) {
-        // TODO: show point data
+        annotationDataSubject.onNext(.init(id: "", position: .init(), diameter: nil, species: "Data for annotation"))
     }
     
     private func didTapOnMap(_ point: CLLocationCoordinate2D) {

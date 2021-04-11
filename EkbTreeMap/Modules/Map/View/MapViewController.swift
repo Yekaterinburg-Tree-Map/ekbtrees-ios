@@ -15,6 +15,15 @@ import CoreLocation
 
 final class MapViewController: UIViewController {
     
+    // MARK: Frame
+    
+    private lazy var annotationView: TreeAnnotationView = {
+        let view = TreeAnnotationView(frame: .zero)
+        view.alpha = 0
+        return view
+    }()
+    
+    
     // MARK: Private
     
     private var interactor: AnyInteractor<MapViewOutput, MapViewInput>!
@@ -38,6 +47,7 @@ final class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMap()
+        setupConstraints()
         setupIO()
         
         didLoadSubject.onNext(())
@@ -48,33 +58,26 @@ final class MapViewController: UIViewController {
     
     private func setupMap() {
         mapView = YMKMapView()
+        setupListeners(for: mapView)
+    }
+    
+    private func setupConstraints() {
         view.addSubview(mapView)
         mapView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        mapView.mapWindow.map.addInputListener(with: self)
-        let objects = mapView.mapWindow.map.mapObjects
-        objects.addTapListener(with: self)
-        mapView.mapWindow.map.addCameraListener(with: self)
+
+        view.addSubview(annotationView)
+        annotationView.snp.makeConstraints {
+            $0.top.left.right.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
     }
     
-    private func setupIO() {
-        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
-                                                       didTapPoint: didTapPointSubject,
-                                                       didTapOnMap: didTapOnMapSubject,
-                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject))
-        
-        input?.moveToPoint
-            .observe(on: MainScheduler.asyncInstance)
-            .withUnretained(self)
-            .subscribe(onNext: { $0.moveToPoint($1) })
-            .disposed(by: bag)
-        
-        input?.visiblePoints
-            .observe(on: MainScheduler.asyncInstance)
-            .withUnretained(self)
-            .subscribe(onNext: { $0.showPoints($1) })
-            .disposed(by: bag)
+    private func setupListeners(for mapView: YMKMapView) {
+        let objects = mapView.mapWindow.map.mapObjects
+        objects.addTapListener(with: self)
+        mapView.mapWindow.map.addInputListener(with: self)
+        mapView.mapWindow.map.addCameraListener(with: self)
     }
     
     private func moveToPoint(_ point: CLLocationCoordinate2D) {
@@ -95,7 +98,7 @@ final class MapViewController: UIViewController {
                               stroke: stroke,
                               strokeWidth: 0,
                               fill: point.circleColor.withAlphaComponent(0.5))
-            obj.userData = point
+            obj.userData = point.id
         }
     }
     
@@ -109,6 +112,30 @@ final class MapViewController: UIViewController {
         
         didChangeVisibleRegionSubject.onNext(region)
     }
+    
+    private func setupIO() {
+        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
+                                                       didTapPoint: didTapPointSubject,
+                                                       didTapOnMap: didTapOnMapSubject,
+                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject))
+        
+        input?.moveToPoint
+            .observe(on: MainScheduler.asyncInstance)
+            .withUnretained(self)
+            .subscribe(onNext: { $0.moveToPoint($1) })
+            .disposed(by: bag)
+        
+        input?.visiblePoints
+            .observe(on: MainScheduler.asyncInstance)
+            .withUnretained(self)
+            .subscribe(onNext: { $0.showPoints($1) })
+            .disposed(by: bag)
+        
+        input?.annotationView
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(to: annotationView.rx.configuration)
+            .disposed(by: bag)
+    }
 }
 
 
@@ -120,6 +147,7 @@ extension MapViewController: YMKMapObjectTapListener {
         guard let pointData = mapObject.userData as? String else {
             return false
         }
+        
         didTapPointSubject.onNext(pointData)
         return true
     }
