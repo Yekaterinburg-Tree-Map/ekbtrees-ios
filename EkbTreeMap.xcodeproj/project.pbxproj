@@ -10,6 +10,7 @@
 		2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */; };
 		2E3946402621CB310001E5FA /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463F2621CB310001E5FA /* Presenter.swift */; };
 		2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */; };
+		2E39464B26221EAF0001E5FA /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39464A26221EAF0001E5FA /* Tree.swift */; };
 		2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4917F8260B9AC300ECE0FD /* AppDelegate.swift */; };
 		2E491802260B9AC400ECE0FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E491801260B9AC400ECE0FD /* Assets.xcassets */; };
 		2E491805260B9AC400ECE0FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E491803260B9AC400ECE0FD /* LaunchScreen.storyboard */; };
@@ -65,6 +66,7 @@
 		2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointRepresentable.swift; sourceTree = "<group>"; };
 		2E39463F2621CB310001E5FA /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVisibleRegionPoints.swift; sourceTree = "<group>"; };
+		2E39464A26221EAF0001E5FA /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		2E4917F5260B9AC300ECE0FD /* EkbTreeMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EkbTreeMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E4917F8260B9AC300ECE0FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E491801260B9AC400ECE0FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				2E968814260CD48D00574BE2 /* TreeModels.swift */,
+				2E39464A26221EAF0001E5FA /* Tree.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
+				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
