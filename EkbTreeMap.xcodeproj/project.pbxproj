@@ -44,6 +44,8 @@
 		2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */; };
 		2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */; };
 		2EE3673A620F3B7DCBA72998 /* Pods_EkbTreeMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */; };
+		2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE86182627579C002A9429 /* CircleImagedButton.swift */; };
+		2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE861D26275D5C002A9429 /* AuthorizationState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModuleFactory.swift; sourceTree = "<group>"; };
 		2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2EEE86182627579C002A9429 /* CircleImagedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImagedButton.swift; sourceTree = "<group>"; };
+		2EEE861D26275D5C002A9429 /* AuthorizationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationState.swift; sourceTree = "<group>"; };
 		4B42923BC04993C8BA07528D /* Pods-EkbTreeMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.debug.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.debug.xcconfig"; sourceTree = "<group>"; };
 		CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EkbTreeMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -167,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */,
+				2EEE86182627579C002A9429 /* CircleImagedButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 			children = (
 				2E968814260CD48D00574BE2 /* TreeModels.swift */,
 				2E39464A26221EAF0001E5FA /* Tree.swift */,
+				2EEE861D26275D5C002A9429 /* AuthorizationState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -602,10 +608,12 @@
 				2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
+				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
 				2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */,
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
+				2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
 				2E3946402621CB310001E5FA /* Presenter.swift in Sources */,

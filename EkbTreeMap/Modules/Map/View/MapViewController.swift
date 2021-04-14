@@ -23,6 +23,8 @@ final class MapViewController: UIViewController {
         return view
     }()
     
+    private lazy var addButton = CircleImagedButton(frame: .zero)
+
     
     // MARK: Private
     
@@ -71,6 +73,12 @@ final class MapViewController: UIViewController {
         annotationView.snp.makeConstraints {
             $0.top.left.right.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
+        
+        view.addSubview(addButton)
+        addButton.snp.makeConstraints {
+            $0.right.equalToSuperview().inset(16)
+            $0.bottom.equalTo(view.safeAreaInsets).inset(64)
+        }
     }
     
     private func setupListeners(for mapView: YMKMapView) {
@@ -117,7 +125,8 @@ final class MapViewController: UIViewController {
         let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
                                                        didTapPoint: didTapPointSubject,
                                                        didTapOnMap: didTapOnMapSubject,
-                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject))
+                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject,
+                                                       didTapAdd: addButton.rx.tap.asObservable()))
         
         input?.moveToPoint
             .observe(on: MainScheduler.asyncInstance)
@@ -134,6 +143,12 @@ final class MapViewController: UIViewController {
         input?.annotationView
             .observe(on: MainScheduler.asyncInstance)
             .bind(to: annotationView.rx.configuration)
+            .disposed(by: bag)
+        
+        input?.addButtonImage
+            .debug()
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(to: addButton.rx.icon)
             .disposed(by: bag)
     }
 }

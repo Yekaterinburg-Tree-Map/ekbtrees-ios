@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 
 final class MapViewPresenter: AnyPresenter<MapViewInteractorOutput, MapViewInput> {
@@ -16,24 +17,28 @@ final class MapViewPresenter: AnyPresenter<MapViewInteractorOutput, MapViewInput
     private let bag = DisposeBag()
     private let visiblePoints = PublishSubject<[TreePointRepresentable]>()
     private let annotationViewState = BehaviorSubject<TreeAnnotationState>(value: .hidden)
+    private let addButtonImage = PublishRelay<UIImage?>()
     
     
     // MARK: Public
     
     override func configureIO(with output: MapViewInteractorOutput) -> MapViewInput {
-        
-        output.visiblePoints
-            .map { [unowned self] points in self.mapTreeToRepresentable(points) }
-            .bind(to: visiblePoints)
-            .disposed(by: bag)
-        
-        output.annotationData
-            .subscribe(onNext: { [weak self] point in self?.proceesAnnotationData(point) })
-            .disposed(by: bag)
+        bag.insert {
+            output.visiblePoints
+                .map { [unowned self] points in self.mapTreeToRepresentable(points) }
+                .bind(to: visiblePoints)
+            
+            output.annotationData
+                .subscribe(onNext: { [weak self] point in self?.proceesAnnotationData(point) })
+            
+            output.authorizationState
+                .subscribe(onNext: { [weak self] state in self?.didChangeAuthState(state) })
+        }
         
         return MapViewInput(moveToPoint: output.startPoint,
                             visiblePoints: visiblePoints,
-                            annotationView: annotationViewState)
+                            annotationView: annotationViewState,
+                            addButtonImage: addButtonImage.asObservable())
     }
     
     
@@ -55,5 +60,16 @@ final class MapViewPresenter: AnyPresenter<MapViewInteractorOutput, MapViewInput
         }
         let annotation = TreeAnnotationRepresentable(title: point.species, buttonText: "Еще")
         annotationViewState.onNext(.visible(annotation))
+    }
+    
+    private func didChangeAuthState(_ state: AuthorizationState) {
+        let image: UIImage?
+        switch state {
+        case .authorized:
+            image = UIImage(named: "plus")
+        case .notAuthorized:
+            image = UIImage(named: "user-male")
+        }
+        addButtonImage.accept(image)
     }
 }

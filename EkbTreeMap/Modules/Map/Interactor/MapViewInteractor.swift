@@ -21,6 +21,8 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
                                                                                          longitude: 60.62))
     private let visiblePointsSubject = PublishSubject<[TreePoint]>()
     private let annotationDataSubject = PublishSubject<TreePoint?>()
+    // TODO: add authorization service binidng
+    private let authorizationState = BehaviorSubject<AuthorizationState>(value: .authorized)
     private let bag = DisposeBag()
     
     
@@ -52,7 +54,8 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
         
         let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
                                                        visiblePoints: visiblePointsSubject,
-                                                       annotationData: annotationDataSubject)
+                                                       annotationData: annotationDataSubject,
+                                                       authorizationState: authorizationState)
         return presenter.configureIO(with: interactorOutput)
     }
     

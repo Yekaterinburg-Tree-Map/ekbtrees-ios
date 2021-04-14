@@ -17,6 +17,7 @@ struct MapViewOutput {
     var didTapOnMap: Observable<CLLocationCoordinate2D> = .never()
     var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
     var didTapMoreButton: Observable<Void> = .never()
+    var didTapAdd: Observable<Void> = .never()
 }
 
 struct MapViewInput {
@@ -24,6 +25,7 @@ struct MapViewInput {
     var moveToPoint: Observable<CLLocationCoordinate2D> = .never()
     var visiblePoints: Observable<[TreePointRepresentable]> = .never()
     var annotationView: Observable<TreeAnnotationState> = .never()
+    var addButtonImage: Observable<UIImage?> = .never()
 }
 
 struct MapViewInteractorOutput {
@@ -31,4 +33,5 @@ struct MapViewInteractorOutput {
     var startPoint: Observable<CLLocationCoordinate2D> = .never()
     var visiblePoints: Observable<[TreePoint]> = .never()
     var annotationData: Observable<TreePoint?> = .never()
+    var authorizationState: Observable<AuthorizationState> = .never()
 }
