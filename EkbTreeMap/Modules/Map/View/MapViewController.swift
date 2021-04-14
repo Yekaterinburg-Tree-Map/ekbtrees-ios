@@ -146,7 +146,6 @@ final class MapViewController: UIViewController {
             .disposed(by: bag)
         
         input?.addButtonImage
-            .debug()
             .observe(on: MainScheduler.asyncInstance)
             .bind(to: addButton.rx.icon)
             .disposed(by: bag)

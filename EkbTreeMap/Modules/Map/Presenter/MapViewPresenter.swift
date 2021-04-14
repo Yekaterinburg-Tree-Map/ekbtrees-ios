@@ -17,7 +17,7 @@ final class MapViewPresenter: AnyPresenter<MapViewInteractorOutput, MapViewInput
     private let bag = DisposeBag()
     private let visiblePoints = PublishSubject<[TreePointRepresentable]>()
     private let annotationViewState = BehaviorSubject<TreeAnnotationState>(value: .hidden)
-    private let addButtonImage = PublishRelay<UIImage?>()
+    private let addButtonImage = ReplayRelay<UIImage?>.create(bufferSize: 1)
     
     
     // MARK: Public
