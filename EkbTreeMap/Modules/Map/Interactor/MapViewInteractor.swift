@@ -50,6 +50,9 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
             
             output.didChangeVisibleRegion
                 .subscribe(onNext: { [weak self] region in self?.didChangeVisibleRegion(region) })
+            
+            output.didTapAdd
+                .subscribe(onNext: { [weak self] in self?.didTapAdd() })
         }
         
         let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
@@ -77,5 +80,9 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     private func didChangeVisibleRegion(_ region: MapViewVisibleRegionPoints) {
         // TODO: fetch data for region
+    }
+    
+    private func didTapAdd() {
+        
     }
 }
