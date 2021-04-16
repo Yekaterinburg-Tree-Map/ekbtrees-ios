@@ -23,10 +23,10 @@ final class MapObserverPresenter: AnyPresenter<MapObserverInteractorOutput, MapO
     override func configureIO(with output: MapObserverInteractorOutput) -> MapObserverViewInput? {
         bag.insert {
             output.annotationData
-                .subscribe()
+                .subscribe(onNext: { [weak self] point in self?.proceesAnnotationData(point) })
             
             output.authorizationState
-                .subscribe()
+                .subscribe(onNext: { [weak self] state in self?.didChangeAuthState(state) })
         }
         
         return MapObserverViewInput(annotationView: annotationViewState,
