@@ -14,6 +14,7 @@ class MapViewModuleFactory: Factory {
     
     struct Context {
         let repository: TreePointsRepositoryProtocol
+        let output: MapViewConfigurable
     }
     
     
@@ -21,7 +22,9 @@ class MapViewModuleFactory: Factory {
     
     func build(with context: Context) -> UIViewController {
         let presenter = MapViewPresenter()
-        let interactor = MapViewInteractor(presenter: presenter, treeRepository: context.repository)
+        let interactor = MapViewInteractor(presenter: presenter,
+                                           treeRepository: context.repository,
+                                           output: context.output)
         let vc = MapViewController.instantiate(interactor: interactor)
         return vc
     }

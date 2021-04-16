@@ -14,24 +14,31 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     // MARK: Private Properties
     
+    private weak var output: MapViewConfigurable?
+    
     private let presenter: AnyPresenter<MapViewInteractorOutput, MapViewInput>
     private let treeRepository: TreePointsRepositoryProtocol
     
     private let startPointSubject = BehaviorSubject<CLLocationCoordinate2D>(value: .init(latitude: 56.82,
                                                                                          longitude: 60.62))
     private let visiblePointsSubject = PublishSubject<[TreePoint]>()
-    private let annotationDataSubject = PublishSubject<TreePoint?>()
-    // TODO: add authorization service binidng
-    private let authorizationState = BehaviorSubject<AuthorizationState>(value: .authorized)
     private let bag = DisposeBag()
+    
+    
+    // MARK: Output Observables
+    
+    private let didTapPointSubject = PublishSubject<String>()
+    private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     
     
     // MARK: Lifecycle
     
     init(presenter: AnyPresenter<MapViewInteractorOutput, MapViewInput>,
-         treeRepository: TreePointsRepositoryProtocol) {
+         treeRepository: TreePointsRepositoryProtocol,
+         output: MapViewConfigurable?) {
         self.presenter = presenter
         self.treeRepository = treeRepository
+        self.output = output
     }
     
     
@@ -42,23 +49,17 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
             output.didLoad
                 .subscribe(onNext: { [weak self] in self?.didLoad() })
             
-            output.didTapPoint
-                .subscribe(onNext: { [weak self] point in self?.didTapPoint(point) })
+            output.didTapPoint.bind(to: didTapPointSubject)
+            let visibleRegion = output.didChangeVisibleRegion.share()
+            visibleRegion.subscribe(onNext: { [weak self] region in self?.didChangeVisibleRegion(region) })
+            visibleRegion.bind(to: didChangeVisibleRegionSubject)
             
             output.didTapOnMap
                 .subscribe(onNext: { [weak self] point in self?.didTapOnMap(point) })
-            
-            output.didChangeVisibleRegion
-                .subscribe(onNext: { [weak self] region in self?.didChangeVisibleRegion(region) })
-            
-            output.didTapAdd
-                .subscribe(onNext: { [weak self] in self?.didTapAdd() })
         }
         
         let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
-                                                       visiblePoints: visiblePointsSubject,
-                                                       annotationData: annotationDataSubject,
-                                                       authorizationState: authorizationState)
+                                                       visiblePoints: visiblePointsSubject)
         return presenter.configureIO(with: interactorOutput)
     }
     
@@ -66,12 +67,9 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     // MARK: Private
     
     private func didLoad() {
+        configureOutputIO()
         let points = treeRepository.fetchTreePoints()
         visiblePointsSubject.onNext(points)
-    }
-    
-    private func didTapPoint(_ id: String) {
-        annotationDataSubject.onNext(.init(id: "", position: .init(), diameter: nil, species: "Data for annotation"))
     }
     
     private func didTapOnMap(_ point: CLLocationCoordinate2D) {
@@ -82,7 +80,12 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
         // TODO: fetch data for region
     }
     
-    private func didTapAdd() {
+    private func configureOutputIO() {
+        let moduleOutput = MapViewModuleOutput(didTapPoint: didTapPointSubject,
+                                               didChangeVisibleRegion: didChangeVisibleRegionSubject)
+        let input = output?.configureIO(with: moduleOutput)
         
+//        input?.moveToPoint
+//            .subscribe(onNext: { [weak self] point in self?.} )
     }
 }

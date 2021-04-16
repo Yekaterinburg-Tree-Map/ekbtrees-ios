@@ -11,5 +11,6 @@ import CoreLocation
 struct MapViewVisibleRegionPoints {
     
     let topLeft: CLLocationCoordinate2D
+    let center: CLLocationCoordinate2D
     let bottomRight: CLLocationCoordinate2D
 }

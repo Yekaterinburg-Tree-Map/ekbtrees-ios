@@ -42,9 +42,8 @@ final class MapCoordinator: ParentCoordinator {
     // MARK: Private
     
     private func appendMapView() {
-        let factory = MapViewModuleFactory()
-        let repository = TreePointsRepository()
-        let vc = factory.build(with: .init(repository: repository))
+        let factory = MapObserverModuleFactory()
+        let vc = factory.build(with: ())
         let nvc = UINavigationController(rootViewController: vc)
         nvc.tabBarItem = .init(title: "Map", image: nil, tag: 0)
         tabBarController?.append(nvc)

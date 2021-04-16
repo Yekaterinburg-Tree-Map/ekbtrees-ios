@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F7302629CC3100DA2EF1 /* MapViewModuleIO.swift */; };
+		2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F738262A0F2600DA2EF1 /* MapObserverModuleFactory.swift */; };
+		2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F73D262A0FF500DA2EF1 /* MapObserverViewController.swift */; };
+		2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F742262A108800DA2EF1 /* UIViewController+Extensions.swift */; };
+		2E01F748262A120A00DA2EF1 /* MapObserverViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F747262A120A00DA2EF1 /* MapObserverViewIO.swift */; };
+		2E01F74D262A16A300DA2EF1 /* MapObserverInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F74C262A16A300DA2EF1 /* MapObserverInteractor.swift */; };
+		2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F751262A19F400DA2EF1 /* MapObserverPresenter.swift */; };
 		2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */; };
 		2E3946402621CB310001E5FA /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463F2621CB310001E5FA /* Presenter.swift */; };
 		2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */; };
@@ -67,6 +74,13 @@
 
 /* Begin PBXFileReference section */
 		12BEC177D98EC628469F1ED5 /* Pods-EkbTreeMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.release.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.release.xcconfig"; sourceTree = "<group>"; };
+		2E01F7302629CC3100DA2EF1 /* MapViewModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModuleIO.swift; sourceTree = "<group>"; };
+		2E01F738262A0F2600DA2EF1 /* MapObserverModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverModuleFactory.swift; sourceTree = "<group>"; };
+		2E01F73D262A0FF500DA2EF1 /* MapObserverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverViewController.swift; sourceTree = "<group>"; };
+		2E01F742262A108800DA2EF1 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		2E01F747262A120A00DA2EF1 /* MapObserverViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverViewIO.swift; sourceTree = "<group>"; };
+		2E01F74C262A16A300DA2EF1 /* MapObserverInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverInteractor.swift; sourceTree = "<group>"; };
+		2E01F751262A19F400DA2EF1 /* MapObserverPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverPresenter.swift; sourceTree = "<group>"; };
 		2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointRepresentable.swift; sourceTree = "<group>"; };
 		2E39463F2621CB310001E5FA /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVisibleRegionPoints.swift; sourceTree = "<group>"; };
@@ -148,6 +162,49 @@
 				12BEC177D98EC628469F1ED5 /* Pods-EkbTreeMap.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		2E01F72E2629CC0200DA2EF1 /* MapObserver */ = {
+			isa = PBXGroup;
+			children = (
+				2E01F737262A0F1500DA2EF1 /* Presenter */,
+				2E01F736262A0F0F00DA2EF1 /* Interactor */,
+				2E01F735262A0F0A00DA2EF1 /* View */,
+				2E01F738262A0F2600DA2EF1 /* MapObserverModuleFactory.swift */,
+				2E01F747262A120A00DA2EF1 /* MapObserverViewIO.swift */,
+			);
+			path = MapObserver;
+			sourceTree = "<group>";
+		};
+		2E01F72F2629CC1200DA2EF1 /* MapPointChooser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MapPointChooser;
+			sourceTree = "<group>";
+		};
+		2E01F735262A0F0A00DA2EF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2E01F73D262A0FF500DA2EF1 /* MapObserverViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2E01F736262A0F0F00DA2EF1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2E01F74C262A16A300DA2EF1 /* MapObserverInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		2E01F737262A0F1500DA2EF1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2E01F751262A19F400DA2EF1 /* MapObserverPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		2E3946392621C9FA0001E5FA /* Models */ = {
@@ -255,6 +312,7 @@
 		2E96880C260CD45C00574BE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2ED57E8C2618E79700EC9033 /* Factory.swift */,
 				2E968814260CD48D00574BE2 /* TreeModels.swift */,
 				2E39464A26221EAF0001E5FA /* Tree.swift */,
 				2EEE861D26275D5C002A9429 /* AuthorizationState.swift */,
@@ -274,9 +332,10 @@
 		2E968822260CD7A500574BE2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2E01F72F2629CC1200DA2EF1 /* MapPointChooser */,
+				2E01F72E2629CC0200DA2EF1 /* MapObserver */,
 				2EDC6C17261CC19000BB7F5A /* Login */,
 				2ED57E642618B4F700EC9033 /* Map */,
-				2ED57E8C2618E79700EC9033 /* Factory.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -314,6 +373,7 @@
 				2ED57EAF2619CD0B00EC9033 /* Presenter */,
 				2ED57EAE2619CD0300EC9033 /* Interactor */,
 				2ED57E962618E87F00EC9033 /* View */,
+				2E01F7302629CC3100DA2EF1 /* MapViewModuleIO.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -378,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */,
+				2E01F742262A108800DA2EF1 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -607,14 +668,17 @@
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
 				2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
+				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
 				2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */,
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
+				2E01F74D262A16A300DA2EF1 /* MapObserverInteractor.swift in Sources */,
 				2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
+				2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
 				2E3946402621CB310001E5FA /* Presenter.swift in Sources */,
 				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
@@ -628,13 +692,17 @@
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
 				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,
+				2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
+				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
+				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
 				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
+				2E01F748262A120A00DA2EF1 /* MapObserverViewIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,17 +15,6 @@ import CoreLocation
 
 final class MapViewController: UIViewController {
     
-    // MARK: Frame
-    
-    private lazy var annotationView: TreeAnnotationView = {
-        let view = TreeAnnotationView(frame: .zero)
-        view.alpha = 0
-        return view
-    }()
-    
-    private lazy var addButton = CircleImagedButton(frame: .zero)
-
-    
     // MARK: Private
     
     private var interactor: AnyInteractor<MapViewOutput, MapViewInput>!
@@ -68,17 +57,6 @@ final class MapViewController: UIViewController {
         mapView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
-        view.addSubview(annotationView)
-        annotationView.snp.makeConstraints {
-            $0.top.left.right.equalTo(view.safeAreaLayoutGuide).inset(16)
-        }
-        
-        view.addSubview(addButton)
-        addButton.snp.makeConstraints {
-            $0.right.equalToSuperview().inset(16)
-            $0.bottom.equalTo(view.safeAreaInsets).inset(64)
-        }
     }
     
     private func setupListeners(for mapView: YMKMapView) {
@@ -116,7 +94,12 @@ final class MapViewController: UIViewController {
                                                   longitude: visibleRegion.topLeft.longitude)
         let bottomRightPoint = CLLocationCoordinate2D(latitude: visibleRegion.bottomRight.latitude,
                                                       longitude: visibleRegion.bottomRight.longitude)
-        let region = MapViewVisibleRegionPoints(topLeft: topLeftPoint, bottomRight: bottomRightPoint)
+        let centerLongitude = (topLeftPoint.longitude + bottomRightPoint.longitude) / 2
+        let centerLatitude = (topLeftPoint.latitude + bottomRightPoint.latitude) / 2
+        let centerPoint = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
+        let region = MapViewVisibleRegionPoints(topLeft: topLeftPoint,
+                                                center: centerPoint,
+                                                bottomRight: bottomRightPoint)
         
         didChangeVisibleRegionSubject.onNext(region)
     }
@@ -125,8 +108,7 @@ final class MapViewController: UIViewController {
         let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
                                                        didTapPoint: didTapPointSubject,
                                                        didTapOnMap: didTapOnMapSubject,
-                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject,
-                                                       didTapAdd: addButton.rx.tap.asObservable()))
+                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject))
         
         input?.moveToPoint
             .observe(on: MainScheduler.asyncInstance)
@@ -138,16 +120,6 @@ final class MapViewController: UIViewController {
             .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)
             .subscribe(onNext: { $0.showPoints($1) })
-            .disposed(by: bag)
-        
-        input?.annotationView
-            .observe(on: MainScheduler.asyncInstance)
-            .bind(to: annotationView.rx.configuration)
-            .disposed(by: bag)
-        
-        input?.addButtonImage
-            .observe(on: MainScheduler.asyncInstance)
-            .bind(to: addButton.rx.icon)
             .disposed(by: bag)
     }
 }
