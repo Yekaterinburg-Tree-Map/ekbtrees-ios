@@ -33,7 +33,7 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
         bag.insert {
             viewOutput.didLoad.subscribe(onNext: { [weak self] in self?.didLoad() })
             viewOutput.didTapAdd.subscribe(onNext: { [weak self] in self?.didTapAdd() })
-            viewOutput.didTapMoreButton.subscribe(onNext: { [weak self] in self?.didTapPoint("id") })
+            viewOutput.didTapMoreButton.subscribe(onNext: { [weak self] in self?.didTapMore() })
         }
         let output = MapObserverInteractorOutput(annotationData: annotationDataSubject,
                                                  authorizationState: authorizationState,
@@ -52,6 +52,10 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
             return factory.build(with: context)
         }
         moduleFactory.onNext(closure)
+    }
+    
+    private func didTapMore() {
+        annotationDataSubject.onNext(nil)
     }
     
     private func didTapPoint(_ id: String) {

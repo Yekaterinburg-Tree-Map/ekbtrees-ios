@@ -44,26 +44,7 @@ final class TreeAnnotationView: UIView {
         button.setTitleColor(UIColor.systemBlue, for: .normal)
         return button
     }()
-    
-    
-    // MARK: Private Properties
-    
-    private lazy var appearAnimator: UIViewPropertyAnimator = {
-        let animator = UIViewPropertyAnimator(duration: .appearanceDuration, curve: .easeIn, animations: nil)
-        animator.addAnimations {
-            self.alpha = 1
-        }
-        return animator
-    }()
-    
-    private lazy var hideAnimator: UIViewPropertyAnimator = {
-        let animator = UIViewPropertyAnimator(duration: .appearanceDuration, curve: .easeOut, animations: nil)
-        animator.addAnimations {
-            self.alpha = 0
-        }
-        return animator
-    }()
-        
+
     
     // MARK: Lifecycle
     
@@ -82,22 +63,21 @@ final class TreeAnnotationView: UIView {
     func configure(with state: TreeAnnotationState) {
         switch state {
         case .hidden:
-            animateAppearance(true)
+            animateAppearance(false)
         case .visible(let data):
+            isHidden = false
             titleLabel.text = data.title
             moreButton.setTitle(data.buttonText, for: .normal)
-            animateAppearance(false)
+            animateAppearance(true)
         }
     }
     
     
     // MARK: Private
     
-    private func animateAppearance(_ hide: Bool) {
-        if hide {
-            hideAnimator.startAnimation()
-        } else {
-            appearAnimator.startAnimation()
+    private func animateAppearance(_ appear: Bool) {
+        UIView.animate(withDuration: .appearanceDuration) {
+            self.alpha = appear ? 1 : 0
         }
     }
     
