@@ -19,6 +19,7 @@ final class MapCoordinator: ParentCoordinator {
     // MARK: Private Properties
     
     private weak var tabBarController: UITabBarController?
+    private weak var rootController: UIViewController?
     
     
     // MARK: Lifecycle
@@ -43,9 +44,37 @@ final class MapCoordinator: ParentCoordinator {
     
     private func appendMapView() {
         let factory = MapObserverModuleFactory()
-        let vc = factory.build(with: ())
+        let vc = factory.build(with: .init(output: self))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.tabBarItem = .init(title: "Map", image: nil, tag: 0)
+        rootController = nvc
         tabBarController?.append(nvc)
+    }
+    
+    private func startPointChooserModule() {
+        guard let rootViewController = rootController else {
+            return
+        }
+        let coordinator = CreateTreeCoordinator(rootViewController: rootViewController, delegate: self)
+        childCoordinators.append(coordinator)
+        coordinator.start(animated: true)
+    }
+}
+
+
+extension MapCoordinator: MapObserverModuleOutput {
+    
+    func didTapAddButton() {
+        startPointChooserModule()
+    }
+}
+
+
+extension MapCoordinator: CoordinatorDelegate {
+    
+    func coordinator(_ coordinator: Coordinator, wantsToFinishAnimated animated: Bool) {
+        let coord = childCoordinators.first(where: { $0 === coordinator })
+        coord?.finish(animated: animated)
+        childCoordinators.removeAll(where: {$0 === coordinator })
     }
 }

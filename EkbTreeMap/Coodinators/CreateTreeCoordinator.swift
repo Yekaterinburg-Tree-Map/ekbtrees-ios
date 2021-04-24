@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 
 final class CreateTreeCoordinator: Coordinator {
@@ -38,7 +39,20 @@ final class CreateTreeCoordinator: Coordinator {
         let factory = MapPointChooserModuleFactory()
         let vc = factory.build(with: ())
         let nvc = UINavigationController(rootViewController: vc)
+        nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
         rootViewController?.present(nvc, animated: animated)
+    }
+    
+    private func pushTreeDetailsForm(animated: Bool) {
+        // TODO:
+    }
+}
+
+
+extension CreateTreeCoordinator: MapPointChooserModuleOutput {
+    
+    func didSelectPoint(with location: CLLocationCoordinate2D) {
+        pushTreeDetailsForm(animated: true)
     }
 }

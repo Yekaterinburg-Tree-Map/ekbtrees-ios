@@ -16,6 +16,7 @@ class MapPointChooserViewController: UIViewController {
     
     private lazy var containerView = UIView()
     private lazy var circleButton = CircleImagedButton(frame: .zero)
+    private lazy var placemarkImageView = UIImageView(image: UIImage(named: "placemark"))
     
     // MARK: Private Properties
     
@@ -54,6 +55,14 @@ class MapPointChooserViewController: UIViewController {
         circleButton.snp.makeConstraints {
             $0.right.equalToSuperview().inset(16)
             $0.bottom.equalTo(view.safeAreaInsets).inset(64)
+        }
+        
+        view.addSubview(placemarkImageView)
+        placemarkImageView.clipsToBounds = true
+        placemarkImageView.snp.makeConstraints {
+            $0.width.height.equalTo(32)
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().inset(32)
         }
     }
     

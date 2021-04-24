@@ -10,10 +10,13 @@ import UIKit
 
 final class MapObserverModuleFactory: Factory {
     
+    struct Context {
+        let output: MapObserverModuleOutput
+    }
     
-    func build(with: Void) -> UIViewController {
+    func build(with context: Context) -> UIViewController {
         let presenter = MapObserverPresenter()
-        let interactor = MapObserverInteractor(presenter: presenter)
+        let interactor = MapObserverInteractor(presenter: presenter, output: context.output)
         let vc = MapObserverViewController.instantiate(with: interactor)
         return vc
     }

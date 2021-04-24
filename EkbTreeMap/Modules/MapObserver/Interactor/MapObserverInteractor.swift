@@ -14,6 +14,7 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
     // MARK: Private Properties
     
     private let presenter: AnyPresenter<MapObserverInteractorOutput, MapObserverViewInput>
+    private weak var output: MapObserverModuleOutput?
     
     private let bag = DisposeBag()
     private let annotationDataSubject = PublishSubject<TreePoint?>()
@@ -24,8 +25,10 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
     
     // MARK: Lifecycle
     
-    init(presenter: AnyPresenter<MapObserverInteractorOutput, MapObserverViewInput>) {
+    init(presenter: AnyPresenter<MapObserverInteractorOutput, MapObserverViewInput>,
+         output: MapObserverModuleOutput) {
         self.presenter = presenter
+        self.output = output
     }
     
     
@@ -63,7 +66,7 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
     }
     
     private func didTapAdd() {
-        
+        output?.didTapAddButton()
     }
 }
 
