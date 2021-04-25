@@ -12,13 +12,16 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     
     // MARK: Private Properties
     
+    private var pendingData: TreeEditorPendingData
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
     
     
     // MARK: Lifecycle
     
-    init(output: TreeEditorModuleOutput) {
+    init(pendingData: TreeEditorPendingData,
+         output: TreeEditorModuleOutput) {
+        self.pendingData = pendingData
         self.output = output
     }
     

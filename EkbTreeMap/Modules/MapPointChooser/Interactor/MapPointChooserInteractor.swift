@@ -16,12 +16,14 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
     private let doneButtonImage = BehaviorSubject<UIImage?>(value: UIImage(named: "checkmark"))
     private let bag = DisposeBag()
     
+    private var pendingData: TreeEditorPendingData
     private weak var output: MapPointChooserModuleOutput?
     
     
     // MARK: Lifecycle
     
-    init(output: MapPointChooserModuleOutput) {
+    init(pendingData: TreeEditorPendingData, output: MapPointChooserModuleOutput) {
+        self.pendingData = pendingData
         self.output = output
     }
 
@@ -70,6 +72,14 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
 extension MapPointChooserInteractor: MapViewConfigurable {
     
     func configureIO(with output: MapViewModuleOutput) -> MapViewModuleInput {
+        output.didChangeVisibleRegion
+            .map(\.center)
+            .subscribe(onNext: { [weak self] point in
+                self?.pendingData.latitude = point.latitude
+                self?.pendingData.longitude = point.longitude
+            })
+            .disposed(by: bag)
+        
         return MapViewModuleInput()
     }
 }

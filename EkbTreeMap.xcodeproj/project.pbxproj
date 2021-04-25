@@ -48,6 +48,7 @@
 		2ED0FC432635B931006A8683 /* TreeEditorViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC422635B930006A8683 /* TreeEditorViewIO.swift */; };
 		2ED0FC482635BAF2006A8683 /* TreeEditorInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC472635BAF2006A8683 /* TreeEditorInteractor.swift */; };
 		2ED0FC4D2635BC08006A8683 /* TreeEditorModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC4C2635BC08006A8683 /* TreeEditorModuleOutput.swift */; };
+		2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC512635D98B006A8683 /* TreeEditorPendingData.swift */; };
 		2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E6E2618D28D00EC9033 /* ApiKeyService.swift */; };
 		2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E762618D29800EC9033 /* ApiKeyParser.swift */; };
 		2ED57E7C2618D37B00EC9033 /* credentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ED57E7B2618D37B00EC9033 /* credentials.json */; };
@@ -133,6 +134,7 @@
 		2ED0FC422635B930006A8683 /* TreeEditorViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorViewIO.swift; sourceTree = "<group>"; };
 		2ED0FC472635BAF2006A8683 /* TreeEditorInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorInteractor.swift; sourceTree = "<group>"; };
 		2ED0FC4C2635BC08006A8683 /* TreeEditorModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorModuleOutput.swift; sourceTree = "<group>"; };
+		2ED0FC512635D98B006A8683 /* TreeEditorPendingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorPendingData.swift; sourceTree = "<group>"; };
 		2ED57E6E2618D28D00EC9033 /* ApiKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyService.swift; sourceTree = "<group>"; };
 		2ED57E762618D29800EC9033 /* ApiKeyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyParser.swift; sourceTree = "<group>"; };
 		2ED57E7B2618D37B00EC9033 /* credentials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = credentials.json; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				2ED0FC472635BAF2006A8683 /* TreeEditorInteractor.swift */,
+				2ED0FC512635D98B006A8683 /* TreeEditorPendingData.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				2ED0FC432635B931006A8683 /* TreeEditorViewIO.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
+				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
