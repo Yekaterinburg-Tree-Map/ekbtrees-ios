@@ -10,7 +10,12 @@ import UIKit
 
 final class TreeEditorModuleFactory: Factory {
     
-    func build(with: Void) -> UIViewController {
-        UIViewController()
+    struct Context {
+        let output: TreeEditorModuleOutput
+    }
+    
+    func build(with context: Context) -> TreeEditorViewController {
+        let interactor = TreeEditorInteractor(output: context.output)
+        return TreeEditorViewController.instantiate(with: interactor)
     }
 }

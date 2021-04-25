@@ -47,7 +47,9 @@ final class CreateTreeCoordinator: Coordinator {
     }
     
     private func pushTreeDetailsForm(animated: Bool) {
-        // TODO:
+        let factory = TreeEditorModuleFactory()
+        let vc = factory.build(with: .init(output: self))
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -59,6 +61,14 @@ extension CreateTreeCoordinator: MapPointChooserModuleOutput {
     }
     
     func didTapClose() {
+        delegate?.coordinator(self, wantsToFinishAnimated: true)
+    }
+}
+
+
+extension CreateTreeCoordinator: TreeEditorModuleOutput {
+    
+    func didSave() {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
 }
