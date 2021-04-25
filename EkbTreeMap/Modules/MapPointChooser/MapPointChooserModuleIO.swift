@@ -11,4 +11,5 @@ import CoreLocation
 protocol MapPointChooserModuleOutput: AnyObject {
     
     func didSelectPoint(with location: CLLocationCoordinate2D)
+    func didTapClose()
 }

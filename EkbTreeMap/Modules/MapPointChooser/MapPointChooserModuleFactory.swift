@@ -10,9 +10,13 @@ import UIKit
 
 class MapPointChooserModuleFactory: Factory {
     
+    struct Context {
+        let output: MapPointChooserModuleOutput
+    }
     
-    func build(with: Void) -> MapPointChooserViewController {
-        let interactor = MapPointChooserInteractor()
+    
+    func build(with context: Context) -> MapPointChooserViewController {
+        let interactor = MapPointChooserInteractor(output: context.output)
         let vc = MapPointChooserViewController.instantiate(interactor)
         return vc
     }
