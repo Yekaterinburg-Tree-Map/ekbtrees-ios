@@ -13,6 +13,7 @@ final class CreateTreeCoordinator: Coordinator {
     
     // MARK: Private Properties
     
+    private var pendingData = TreeEditorPendingData(latitude: 60, longitude: 60)
     private weak var rootViewController: UIViewController?
     private weak var navigationController: UINavigationController?
     private weak var delegate: CoordinatorDelegate?
@@ -39,7 +40,7 @@ final class CreateTreeCoordinator: Coordinator {
     
     private func presentPointChooserModule(animated: Bool) {
         let factory = MapPointChooserModuleFactory()
-        let vc = factory.build(with: .init(output: self))
+        let vc = factory.build(with: .init(output: self, pendingData: pendingData))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
@@ -48,7 +49,7 @@ final class CreateTreeCoordinator: Coordinator {
     
     private func pushTreeDetailsForm(animated: Bool) {
         let factory = TreeEditorModuleFactory()
-        let vc = factory.build(with: .init(output: self))
+        let vc = factory.build(with: .init(output: self, pendingData: pendingData))
         navigationController?.pushViewController(vc, animated: true)
     }
 }
