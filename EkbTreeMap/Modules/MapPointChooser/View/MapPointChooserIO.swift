@@ -20,4 +20,5 @@ struct MapPointChooserViewOutput {
     
     var didLoad: Observable<Void> = .never()
     var didTapDone: Observable<Void> = .never()
+    var didTapClose: Observable<Void> = .never()
 }

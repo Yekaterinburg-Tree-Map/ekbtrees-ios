@@ -21,7 +21,7 @@ protocol ParentCoordinator: Coordinator {
 }
 
 
-protocol CoordinatorDelegate {
+protocol CoordinatorDelegate: AnyObject {
     
     func coordinator(_ coordinator: Coordinator, wantsToFinishAnimated: Bool)
 }

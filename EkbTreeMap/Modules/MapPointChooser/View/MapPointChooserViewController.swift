@@ -24,6 +24,7 @@ class MapPointChooserViewController: UIViewController {
     
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
+    private let didTapCloseSubject = PublishSubject<Void>()
     
     // MARK: Lifecycle
     
@@ -36,14 +37,27 @@ class MapPointChooserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Выбор позиции"
         setupConstraints()
         configureIO()
+        setupNavigationBar()
         
         didLoadSubject.onNext(())
     }
     
     
     // MARK: Private
+    
+    private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                           target: self,
+                                                           action: #selector(didTapClose))
+    }
+    
+    @objc
+    private func didTapClose() {
+        didTapCloseSubject.onNext(())
+    }
     
     private func setupConstraints() {
         view.addSubview(containerView)
@@ -67,7 +81,9 @@ class MapPointChooserViewController: UIViewController {
     }
     
     private func configureIO() {
-        let output = MapPointChooserViewOutput(didLoad: didLoadSubject)
+        let output = MapPointChooserViewOutput(didLoad: didLoadSubject,
+                                               didTapDone: circleButton.rx.tap.asObservable(),
+                                               didTapClose: didTapCloseSubject)
         
         let input = interactor.configureIO(with: output)
         

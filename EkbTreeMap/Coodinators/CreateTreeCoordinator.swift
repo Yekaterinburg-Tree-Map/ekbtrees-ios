@@ -15,6 +15,7 @@ final class CreateTreeCoordinator: Coordinator {
     
     private weak var rootViewController: UIViewController?
     private weak var navigationController: UINavigationController?
+    private weak var delegate: CoordinatorDelegate?
     
     
     // MARK: Lifecycle
@@ -22,6 +23,7 @@ final class CreateTreeCoordinator: Coordinator {
     init(rootViewController: UIViewController,
          delegate: CoordinatorDelegate) {
         self.rootViewController = rootViewController
+        self.delegate = delegate
     }
     
     func start(animated: Bool) {
@@ -37,7 +39,7 @@ final class CreateTreeCoordinator: Coordinator {
     
     private func presentPointChooserModule(animated: Bool) {
         let factory = MapPointChooserModuleFactory()
-        let vc = factory.build(with: ())
+        let vc = factory.build(with: .init(output: self))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
@@ -45,7 +47,9 @@ final class CreateTreeCoordinator: Coordinator {
     }
     
     private func pushTreeDetailsForm(animated: Bool) {
-        // TODO:
+        let factory = TreeEditorModuleFactory()
+        let vc = factory.build(with: .init(output: self))
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -54,5 +58,17 @@ extension CreateTreeCoordinator: MapPointChooserModuleOutput {
     
     func didSelectPoint(with location: CLLocationCoordinate2D) {
         pushTreeDetailsForm(animated: true)
+    }
+    
+    func didTapClose() {
+        delegate?.coordinator(self, wantsToFinishAnimated: true)
+    }
+}
+
+
+extension CreateTreeCoordinator: TreeEditorModuleOutput {
+    
+    func didSave() {
+        delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
 }
