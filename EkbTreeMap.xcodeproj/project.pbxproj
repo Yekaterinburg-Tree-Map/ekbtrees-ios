@@ -38,10 +38,14 @@
 		2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96881A260CD67400574BE2 /* TreePointsRepository.swift */; };
 		2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96882B260CDCBD00574BE2 /* MapViewController.swift */; };
 		2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E968854260CFC5800574BE2 /* CircleImage.swift */; };
+		2E9A5A8D263B30A700C5085F /* TreeEditorPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9A5A8C263B30A700C5085F /* TreeEditorPickerCell.swift */; };
 		2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */; };
 		2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A77261F5E74005E382B /* Interactor.swift */; };
 		2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */; };
 		2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A84261F64F1005E382B /* LoginButtonType.swift */; };
+		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
+		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
+		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
 		2ED0FC282633F702006A8683 /* CreateTreeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC272633F702006A8683 /* CreateTreeCoordinator.swift */; };
 		2ED0FC2D26340A8B006A8683 /* MapObserverModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC2C26340A8B006A8683 /* MapObserverModuleIO.swift */; };
 		2ED0FC3526340ED9006A8683 /* MapPointChooserModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0FC3426340ED9006A8683 /* MapPointChooserModuleIO.swift */; };
@@ -124,10 +128,14 @@
 		2E96881A260CD67400574BE2 /* TreePointsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointsRepository.swift; sourceTree = "<group>"; };
 		2E96882B260CDCBD00574BE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2E968854260CFC5800574BE2 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		2E9A5A8C263B30A700C5085F /* TreeEditorPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorPickerCell.swift; sourceTree = "<group>"; };
 		2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		2EAE5A77261F5E74005E382B /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewIO.swift; sourceTree = "<group>"; };
 		2EAE5A84261F64F1005E382B /* LoginButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonType.swift; sourceTree = "<group>"; };
+		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
+		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
+		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
 		2ED0FC272633F702006A8683 /* CreateTreeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTreeCoordinator.swift; sourceTree = "<group>"; };
 		2ED0FC2C26340A8B006A8683 /* MapObserverModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverModuleIO.swift; sourceTree = "<group>"; };
 		2ED0FC3426340ED9006A8683 /* MapPointChooserModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointChooserModuleIO.swift; sourceTree = "<group>"; };
@@ -269,6 +277,7 @@
 		2E01FF95262DFD5C00DA2EF1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2ED0125526373BD7006A8683 /* Cells */,
 				2E01FF97262DFEFA00DA2EF1 /* TreeEditorViewController.swift */,
 				2ED0FC422635B930006A8683 /* TreeEditorViewIO.swift */,
 			);
@@ -442,6 +451,17 @@
 				2E39463F2621CB310001E5FA /* Presenter.swift */,
 			);
 			path = VIP;
+			sourceTree = "<group>";
+		};
+		2ED0125526373BD7006A8683 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */,
+				2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */,
+				2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */,
+				2E9A5A8C263B30A700C5085F /* TreeEditorPickerCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		2ED57E642618B4F700EC9033 /* Map */ = {
@@ -752,6 +772,7 @@
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
+				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
@@ -760,6 +781,7 @@
 				2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */,
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
 				2ED0FC282633F702006A8683 /* CreateTreeCoordinator.swift in Sources */,
+				2E9A5A8D263B30A700C5085F /* TreeEditorPickerCell.swift in Sources */,
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
 				2E01F74D262A16A300DA2EF1 /* MapObserverInteractor.swift in Sources */,
 				2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */,
@@ -778,6 +800,7 @@
 				2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */,
 				2E01FF80262DE9C300DA2EF1 /* MapPointChooserIO.swift in Sources */,
 				2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */,
+				2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */,
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
@@ -793,6 +816,7 @@
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
+				2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */,
 				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
 				2E01F748262A120A00DA2EF1 /* MapObserverViewIO.swift in Sources */,
 			);
