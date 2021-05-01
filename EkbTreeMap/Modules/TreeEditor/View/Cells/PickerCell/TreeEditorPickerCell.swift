@@ -6,30 +6,42 @@
 //
 
 import UIKit
+import SnapKit
 
 
 final class TreeEditorPickerCell: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
     
     // MARK: Frame
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        if #available(iOS 13.0, *) {
-            label.textColor = UIColor.label
-        } else {
-            label.textColor = UIColor.black
-        }
-        label.text = "Picker"
-        return label
+    private lazy var titleButton: ButtonWithArrowDown = {
+        let button = ButtonWithArrowDown(frame: .zero)
+        button.addTarget(self, action: #selector(didTapTitleButton), for: .touchUpInside)
+        return button
     }()
-    
     private lazy var pickerView: UIPickerView = {
         let picker = UIPickerView()
         picker.delegate = self
         picker.dataSource = self
         return picker
     }()
+    
+    
+    // MARK: Private Properties
+    
+    private var pickerHeightHiddenConstraint: Constraint!
+    private var pickerHeightShownConstraint: Constraint!
+    
+    private var isPickerShown = false {
+        didSet {
+            if isPickerShown {
+                pickerHeightShownConstraint.activate()
+                pickerHeightHiddenConstraint.deactivate()
+            } else {
+                pickerHeightShownConstraint.deactivate()
+                pickerHeightHiddenConstraint.activate()
+            }
+        }
+    }
     
     
     // MARK: Lifecycle
@@ -62,16 +74,24 @@ final class TreeEditorPickerCell: UIView, UIPickerViewDelegate, UIPickerViewData
     
     // MARK: Private
     
+    @objc
+    private func didTapTitleButton() {
+        isPickerShown.toggle()
+    }
+    
     private func setupConstraints() {
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
+        addSubview(titleButton)
+        titleButton.snp.makeConstraints {
             $0.top.left.right.equalToSuperview().inset(16)
         }
         
         addSubview(pickerView)
         pickerView.snp.makeConstraints {
             $0.left.bottom.right.equalToSuperview().inset(16)
-            $0.top.equalTo(titleLabel.snp.bottom).inset(8)
+            $0.top.equalTo(titleButton.snp.bottom).inset(8)
+            pickerHeightHiddenConstraint = $0.height.equalTo(0).constraint
+            pickerHeightShownConstraint = $0.height.greaterThanOrEqualTo(0).constraint
+            pickerHeightShownConstraint.deactivate()
         }
     }
 }

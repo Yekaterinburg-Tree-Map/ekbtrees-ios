@@ -20,7 +20,6 @@ final class TreeEditorViewController: UIViewController {
         let view = UIStackView()
         view.axis = .vertical
         view.spacing = 8
-//        view.distribution = .equalCentering
         return view
     }()
     
