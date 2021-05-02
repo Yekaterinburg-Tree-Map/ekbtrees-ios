@@ -45,10 +45,9 @@ final class MapCoordinator: ParentCoordinator {
     private func appendMapView() {
         let factory = MapObserverModuleFactory()
         let vc = factory.build(with: .init(output: self))
-        let nvc = UINavigationController(rootViewController: vc)
-        nvc.tabBarItem = .init(title: "Map", image: nil, tag: 0)
-        rootController = nvc
-        tabBarController?.append(nvc)
+        vc.tabBarItem = .init(title: "Map", image: nil, tag: 0)
+        rootController = vc
+        tabBarController?.append(vc)
     }
     
     private func startPointChooserModule() {
