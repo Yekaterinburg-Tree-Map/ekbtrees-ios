@@ -1,4 +1,5 @@
 PODS:
+  - IQKeyboardManagerSwift (6.5.6)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
@@ -11,6 +12,7 @@ PODS:
   - YandexMapsMobile (4.0.0-full)
 
 DEPENDENCIES:
+  - IQKeyboardManagerSwift
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -20,6 +22,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - IQKeyboardManagerSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -29,6 +32,7 @@ SPEC REPOS:
     - YandexMapsMobile
 
 SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
@@ -37,6 +41,6 @@ SPEC CHECKSUMS:
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   YandexMapsMobile: 0f3d8c92fad685dc33d07f83eed4eb0166089743
 
-PODFILE CHECKSUM: 4ccf1e540e328ccd283341042003781032343ce0
+PODFILE CHECKSUM: 04b6f46ebf3600869e125f0874eb4373799b98b4
 
 COCOAPODS: 1.10.0

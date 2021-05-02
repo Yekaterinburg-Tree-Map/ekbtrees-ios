@@ -7,6 +7,8 @@
 
 import UIKit
 import YandexMapsMobile
+import IQKeyboardManagerSwift
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         mainCoordinator = MainCoordinator(rootController: tabBar)
         mainCoordinator?.start(animated: false)
+        IQKeyboardManager.shared.enable = true
         return true
     }
     

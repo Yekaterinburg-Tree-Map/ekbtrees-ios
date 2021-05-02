@@ -32,7 +32,6 @@ final class TreeEditorViewController: UIViewController {
     private lazy var addButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = UIColor.systemGreen
-        button.setTitle("Сохранить", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.setTitleColor(UIColor.white, for: .highlighted)
         button.layer.cornerRadius = 16
@@ -59,42 +58,12 @@ final class TreeEditorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Детали"
         setupConstraint()
+        setupView()
         setupIO()
-        fillStackView()
         
         
         didLoadSubject.onNext(())
-    }
-    
-    
-    // MARK: Public
-    
-    func fillStackView() {
-        let model = GenericViewModel<TreeEditorStepperCell>(data: .init(title: "Stepper", value: 2))
-        let view = model.setupView()
-        stackView.addArrangedSubview(view)
-        
-//        let stepper = TreeEditorStepperCell(frame: .zero)
-//        stepper.configure(with: .init(title: "Stepper", value: nil))
-//        stackView.addArrangedSubview(stepper)
-//
-//        let data = TreeEditorDataCell(frame: .zero)
-//        data.configure(title: "Longitude", subtitle: "62.04213")
-//        stackView.addArrangedSubview(data)
-//
-//        let enter = TreeEditorEnterDataCell(frame: .zero)
-//        enter.configure(title: "Enter data", subtitle: nil)
-//        stackView.addArrangedSubview(enter)
-//
-//        let picker = TreeEditorPickerCell(frame: .zero)
-//        stackView.addArrangedSubview(picker)
-//
-//        let stepper2 = TreeEditorStepperCell.instantiate()
-//        stepper2.configure(title: "Stepper", subtitle: nil)
-//        stackView.addArrangedSubview(stepper2)
-
     }
 
     
@@ -104,13 +73,15 @@ final class TreeEditorViewController: UIViewController {
         stackView.updateItems(items)
     }
     
-    private func setupConstraint() {
+    private func setupView() {
         if #available(iOS 13.0, *) {
             view.backgroundColor = UIColor.systemBackground
         } else {
             view.backgroundColor = .white
         }
-        
+    }
+    
+    private func setupConstraint() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
@@ -138,6 +109,14 @@ final class TreeEditorViewController: UIViewController {
             .subscribe(onNext: { obj, items in
                 obj.updateFormItems(items)
             })
+            .disposed(by: bag)
+        
+        input?.saveButtonTitle
+            .bind(to: addButton.rx.title(for: .normal))
+            .disposed(by: bag)
+        
+        input?.title
+            .bind(to: rx.title)
             .disposed(by: bag)
     }
 }

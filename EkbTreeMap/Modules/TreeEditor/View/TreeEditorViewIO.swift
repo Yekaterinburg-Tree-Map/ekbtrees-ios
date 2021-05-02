@@ -16,5 +16,7 @@ struct TreeEditorViewOutput {
 
 struct TreeEditorViewInput {
     
+    var title: Observable<String> = .never()
     var formItems: Observable<[ViewRepresentableModel]> = .never()
+    var saveButtonTitle: Observable<String> = .never()
 }

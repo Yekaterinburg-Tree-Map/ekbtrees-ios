@@ -13,6 +13,8 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     // MARK: Private Properties
     
     private let formItemsSubject = PublishSubject<[ViewRepresentableModel]>()
+    private let saveButtonTitleSubject = BehaviorSubject<String>(value: "Сохранить")
+    private let titleSubject = BehaviorSubject<String>(value: "Детали")
     private var pendingData: TreeEditorPendingData
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
@@ -37,7 +39,9 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
             output.didTapSave
                 .subscribe(onNext: { [weak self] in self?.didTapSave() })
         }
-        return TreeEditorViewInput(formItems: formItemsSubject)
+        return TreeEditorViewInput(title: titleSubject,
+                                   formItems: formItemsSubject,
+                                   saveButtonTitle: saveButtonTitleSubject)
     }
     
     
@@ -65,28 +69,28 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
                                                 self?.pendingData.type = item
                                               }
         )
-        let heightValue = pendingData.treeHeight == nil ? nil : "\(pendingData.treeHeight)"
+        let heightValue = pendingData.treeHeight == nil ? nil : "\(pendingData.treeHeight ?? 0)"
         let heightCell = configureEnterDataCell(title: "Высота(м)",
                                                 value: heightValue,
                                                 placeholder: "Введите высоту в метрах",
                                                 action: { [weak self] height in
                                                     
                                                 })
-        let numberOfTreesValue = pendingData.numberOfTreeTrunks == nil ? nil : "\(pendingData.numberOfTreeTrunks)"
+        let numberOfTreesValue = pendingData.numberOfTreeTrunks == nil ? nil : "\(pendingData.numberOfTreeTrunks ?? 0)"
         let numberOfTreesCell = configureEnterDataCell(title: "Число стволов",
                                                    value: numberOfTreesValue,
                                                    placeholder: "Введите число стволов",
                                                    action: { [weak self] number in
                                                     
                                                    })
-        let girthValue = pendingData.trunkGirth == nil ? nil : "\(pendingData.trunkGirth)"
+        let girthValue = pendingData.trunkGirth == nil ? nil : "\(pendingData.trunkGirth ?? 0)"
         let girthCell = configureEnterDataCell(title: "Обхват дерева(м)",
                                                value: girthValue,
                                                placeholder: "Введите охват дерева",
                                                action: { [weak self] number in
                                                 
                                                })
-        let crownValue = pendingData.diameterOfCrown == nil ? nil : "\(pendingData.diameterOfCrown)"
+        let crownValue = pendingData.diameterOfCrown == nil ? nil : "\(pendingData.diameterOfCrown ?? 0)"
         let crownCell = configureEnterDataCell(title: "Диаметр кроны(м)",
                                                value: crownValue,
                                                placeholder: "Введите диаметр кроны",
@@ -95,14 +99,14 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
                                                })
         let firstBranchHeightValue = pendingData.heightOfTheFirstBranch == nil
             ? nil
-            : "\(pendingData.heightOfTheFirstBranch)"
+            : "\(pendingData.heightOfTheFirstBranch ?? 0)"
         let firstBranchHeightCell = configureEnterDataCell(title: "Высота первой ветви",
                                                            value: firstBranchHeightValue,
                                                            placeholder: "Введите высоту первой ветви",
                                                            action: { [weak self] number in
                                                             
                                                            })
-        let visualRatingValue = pendingData.conditionAssessment == nil ? nil : "\(pendingData.conditionAssessment)"
+        let visualRatingValue = pendingData.conditionAssessment == nil ? nil : "\(pendingData.conditionAssessment ?? 0)"
         let visualRatingCell = configurePickerCell(title: "Визуальное состояние",
                                                    selectedItem: visualRatingValue,
                                                    items: ["1", "2", "3", "4", "5"], // TODO состояния
