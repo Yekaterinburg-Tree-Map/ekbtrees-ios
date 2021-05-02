@@ -7,7 +7,20 @@
 import UIKit
 
 
-final class TreeEditorStepperCell: UIView {
+final class TreeEditorStepperCell: UIView, ViewRepresentable {
+    
+    // MARK: Public Structures
+    
+    struct DisplayData {
+        
+        let title: String
+        let value: Double?
+        var minStepperValue: Double = 0
+        var maxStepperValue: Double = 5
+        
+        var action: (Int) -> () = { _ in return }
+    }
+    
     
     // MARK: Frame
     
@@ -31,7 +44,6 @@ final class TreeEditorStepperCell: UIView {
             label.textColor = UIColor.darkGray
         }
         label.textAlignment = .right
-//        label.text = "0"
         return label
     }()
     
@@ -41,6 +53,11 @@ final class TreeEditorStepperCell: UIView {
         view.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         return view
     }()
+    
+    
+    // MARK: Private Properties
+    
+    private var action: (Int) -> () = { _ in return }
     
     
     // MARK: Lifecycle
@@ -53,14 +70,23 @@ final class TreeEditorStepperCell: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
+
     
     // MARK: Public
     
-    func configure(title: String, subtitle: String?) {
-        titleLabel.text = title
-//        textField.text = subtitle
+    func configure(with data: DisplayData) {
+        titleLabel.text = data.title
+        stepper.minimumValue = data.minStepperValue
+        stepper.maximumValue = data.maxStepperValue
+        if let value = data.value {
+            valueLabel.text = "\(value)"
+            stepper.value = value
+        } else {
+            valueLabel.text = nil
+            stepper.value = data.minStepperValue
+        }
+        action = data.action
     }
     
     
@@ -68,7 +94,9 @@ final class TreeEditorStepperCell: UIView {
     
     @objc
     private func stepperValueChanged(sender: UIStepper) {
-        valueLabel.text = "\(Int(sender.value))"
+        let value = Int(sender.value)
+        valueLabel.text = "\(value)"
+        action(value)
     }
     
     private func setupConstraints() {

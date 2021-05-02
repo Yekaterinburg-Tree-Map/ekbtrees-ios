@@ -8,7 +8,18 @@
 import UIKit
 
 
-final class TreeEditorEnterDataCell: UIView {
+final class TreeEditorEnterDataCell: UIView, ViewRepresentable, UITextFieldDelegate {
+    
+    // MARK: Public Structures
+    
+    struct DisplayData {
+        
+        let title: String
+        let placeholder: String
+        let data: String?
+        
+        var action: (String) -> () = { _ in return }
+    }
     
     // MARK: Frame
     
@@ -26,11 +37,16 @@ final class TreeEditorEnterDataCell: UIView {
     private lazy var textField: UITextField = {
         let field = UITextField()
         field.borderStyle = .none
-        field.font = UIFont.systemFont(ofSize: 14)
+        field.font = UIFont.systemFont(ofSize: 18)
         field.keyboardType = .decimalPad
         field.placeholder = "enter here"
         return field
     }()
+    
+    
+    // MARK: Private Properties
+    
+    private var action: (String) -> () = { _ in return }
     
     
     // MARK: Lifecycle
@@ -38,29 +54,29 @@ final class TreeEditorEnterDataCell: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupView()
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-        
     }
     
     
     // MARK: Public
     
-    func configure(title: String, subtitle: String?) {
-        titleLabel.text = title
-//        textField.text = subtitle
+    func configure(with data: DisplayData) {
+        titleLabel.text = data.title
+        textField.text = data.data
+        textField.placeholder = data.placeholder
+        action = data.action
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        action(textField.text ?? "")
+    }
+
     
     // MARK: Private
-    
-    private func setupView() {
-//        selectionStyle = .none
-    }
     
     private func setupConstraints() {
         addSubview(titleLabel)

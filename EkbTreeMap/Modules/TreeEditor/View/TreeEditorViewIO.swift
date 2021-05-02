@@ -16,5 +16,5 @@ struct TreeEditorViewOutput {
 
 struct TreeEditorViewInput {
     
-    
+    var formItems: Observable<[ViewRepresentableModel]> = .never()
 }

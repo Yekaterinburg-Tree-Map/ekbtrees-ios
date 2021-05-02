@@ -16,8 +16,8 @@ final class TreeEditorViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = UIScrollView()
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
+    private lazy var stackView: ViewRepresentableStackView = {
+        let view = ViewRepresentableStackView()
         view.axis = .vertical
         view.spacing = 8
         return view
@@ -66,24 +66,37 @@ final class TreeEditorViewController: UIViewController {
     // MARK: Public
     
     func fillStackView() {
-        let stepper = TreeEditorStepperCell(frame: .zero)
-        stepper.configure(title: "Stepper", subtitle: nil)
-        stackView.addArrangedSubview(stepper)
+        let model = GenericViewModel<TreeEditorStepperCell>(data: .init(title: "Stepper", value: 2))
+        let view = model.setupView()
+        stackView.addArrangedSubview(view)
         
-        let data = TreeEditorDataCell(frame: .zero)
-        data.configure(title: "Longitude", subtitle: "62.04213")
-        stackView.addArrangedSubview(data)
-        
-        let enter = TreeEditorEnterDataCell(frame: .zero)
-        enter.configure(title: "Enter data", subtitle: nil)
-        stackView.addArrangedSubview(enter)
-        
-        let picker = TreeEditorPickerCell(frame: .zero)
-        stackView.addArrangedSubview(picker)
+//        let stepper = TreeEditorStepperCell(frame: .zero)
+//        stepper.configure(with: .init(title: "Stepper", value: nil))
+//        stackView.addArrangedSubview(stepper)
+//
+//        let data = TreeEditorDataCell(frame: .zero)
+//        data.configure(title: "Longitude", subtitle: "62.04213")
+//        stackView.addArrangedSubview(data)
+//
+//        let enter = TreeEditorEnterDataCell(frame: .zero)
+//        enter.configure(title: "Enter data", subtitle: nil)
+//        stackView.addArrangedSubview(enter)
+//
+//        let picker = TreeEditorPickerCell(frame: .zero)
+//        stackView.addArrangedSubview(picker)
+//
+//        let stepper2 = TreeEditorStepperCell.instantiate()
+//        stepper2.configure(title: "Stepper", subtitle: nil)
+//        stackView.addArrangedSubview(stepper2)
+
     }
 
     
     // MARK: Private
+    
+    private func updateFormItems(_ items: [ViewRepresentableModel]) {
+        stackView.updateItems(items)
+    }
     
     private func setupConstraint() {
         if #available(iOS 13.0, *) {
@@ -113,5 +126,12 @@ final class TreeEditorViewController: UIViewController {
         let output = TreeEditorViewOutput(didLoad: didLoadSubject,
                                           didTapSave: addButton.rx.tap.asObservable())
         let input = interactor.configureIO(with: output)
+        
+        input?.formItems
+            .withUnretained(self)
+            .subscribe(onNext: { obj, items in
+                obj.updateFormItems(items)
+            })
+            .disposed(by: bag)
     }
 }

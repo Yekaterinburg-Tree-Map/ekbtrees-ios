@@ -7,7 +7,15 @@
 
 import UIKit
 
-final class ButtonWithArrowDown: UIButton {
+final class ButtonWithArrowDown: UIButton, ViewRepresentable {
+    
+    // MARK: Public Structures
+    
+    struct DisplayData {
+        let title: String
+        let subtitle: String?
+    }
+    
     
     // MARK: Frame
     
@@ -20,6 +28,19 @@ final class ButtonWithArrowDown: UIButton {
             label.textColor = UIColor.black
         }
         label.text = "Picker"
+        return label
+    }()
+    
+    private lazy var subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 18)
+        if #available(iOS 13.0, *) {
+            label.textColor = UIColor.secondaryLabel
+        } else {
+            label.textColor = UIColor.darkGray
+        }
+        label.textAlignment = .right
+        label.text = "5 - все супер"
         return label
     }()
     
@@ -48,6 +69,18 @@ final class ButtonWithArrowDown: UIButton {
     }
     
     
+    // MARK: Public
+    
+    func configure(with data: DisplayData) {
+        dataLabel.text = data.title
+        subtitleLabel.text = data.subtitle
+    }
+    
+    func updateSubtitle(_ subtitle: String?) {
+        subtitleLabel.text = subtitle
+    }
+    
+    
     // MARK: Private
     
     private func changeTitleColor(isHighlighted: Bool) {
@@ -73,8 +106,14 @@ final class ButtonWithArrowDown: UIButton {
         arrowDown.snp.makeConstraints {
             $0.centerY.equalTo(dataLabel)
             $0.right.equalToSuperview()
-            $0.left.equalTo(dataLabel.snp.right).inset(16)
             $0.width.height.equalTo(16)
+        }
+        
+        addSubview(subtitleLabel)
+        subtitleLabel.snp.makeConstraints {
+            $0.centerY.equalTo(dataLabel)
+            $0.left.equalTo(dataLabel.snp.right).inset(16)
+            $0.right.equalTo(arrowDown.snp.left).inset(-8)
         }
         
         snp.makeConstraints {

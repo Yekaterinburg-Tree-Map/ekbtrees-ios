@@ -45,6 +45,9 @@
 		2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */; };
 		2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A84261F64F1005E382B /* LoginButtonType.swift */; };
 		2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */; };
+		2EB34D58263EBEF4009A2129 /* ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D57263EBEF4009A2129 /* ViewRepresentable.swift */; };
+		2EB34D5D263F013A009A2129 /* ViewRepresentableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D5C263F013A009A2129 /* ViewRepresentableModel.swift */; };
+		2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -137,6 +140,9 @@
 		2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewIO.swift; sourceTree = "<group>"; };
 		2EAE5A84261F64F1005E382B /* LoginButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonType.swift; sourceTree = "<group>"; };
 		2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithArrowDown.swift; sourceTree = "<group>"; };
+		2EB34D57263EBEF4009A2129 /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
+		2EB34D5C263F013A009A2129 /* ViewRepresentableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentableModel.swift; sourceTree = "<group>"; };
+		2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+ViewRepresentable.swift"; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -434,10 +440,9 @@
 		2E968853260CFC4B00574BE2 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				2EB34D56263EBED7009A2129 /* Representable */,
 				2ED57ED52619EF6D00EC9033 /* Extensions */,
-				2E968854260CFC5800574BE2 /* CircleImage.swift */,
 				2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */,
-				2E9A5A91263B3E9000C5085F /* UIImage+Semantics.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -489,6 +494,16 @@
 				2E39463F2621CB310001E5FA /* Presenter.swift */,
 			);
 			path = VIP;
+			sourceTree = "<group>";
+		};
+		2EB34D56263EBED7009A2129 /* Representable */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34D57263EBEF4009A2129 /* ViewRepresentable.swift */,
+				2EB34D5C263F013A009A2129 /* ViewRepresentableModel.swift */,
+				2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */,
+			);
+			path = Representable;
 			sourceTree = "<group>";
 		};
 		2ED0125526373BD7006A8683 /* Cells */ = {
@@ -574,6 +589,8 @@
 		2ED57ED52619EF6D00EC9033 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2E9A5A91263B3E9000C5085F /* UIImage+Semantics.swift */,
+				2E968854260CFC5800574BE2 /* CircleImage.swift */,
 				2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */,
 				2E01F742262A108800DA2EF1 /* UIViewController+Extensions.swift */,
 			);
@@ -801,10 +818,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB34D58263EBEF4009A2129 /* ViewRepresentable.swift in Sources */,
 				2ED0FC2D26340A8B006A8683 /* MapObserverModuleIO.swift in Sources */,
 				2E968815260CD48D00574BE2 /* TreeModels.swift in Sources */,
 				2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */,
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
+				2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */,
 				2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */,
 				2ED0FC432635B931006A8683 /* TreeEditorViewIO.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
@@ -835,6 +854,7 @@
 				2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
+				2EB34D5D263F013A009A2129 /* ViewRepresentableModel.swift in Sources */,
 				2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */,
 				2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */,
 				2E01FF80262DE9C300DA2EF1 /* MapPointChooserIO.swift in Sources */,
