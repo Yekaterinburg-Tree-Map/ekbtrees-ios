@@ -14,7 +14,13 @@ final class TreeEditorViewController: UIViewController {
     
     // MARK: Frame
     
-    private lazy var scrollView: UIScrollView = UIScrollView()
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
+        scroll.showsVerticalScrollIndicator = false
+        scroll.showsHorizontalScrollIndicator = false
+        return scroll
+    }()
     
     private lazy var stackView: ViewRepresentableStackView = {
         let view = ViewRepresentableStackView()

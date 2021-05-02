@@ -56,8 +56,8 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     /// MARK: Form configuration
     
     private func configureForm() {
-        let latCell = configureBaseCell(title: "Долгота", subtitle: "\(pendingData.latitude)")
-        let longCell = configureBaseCell(title: "Широта", subtitle: "\(pendingData.longitude)")
+        let latCell = configureBaseCell(title: "Долгота", subtitle: String(format: "%.5f", pendingData.latitude))
+        let longCell = configureBaseCell(title: "Широта", subtitle: String(format: "%.5f", pendingData.longitude))
         let speciesCell = configurePickerCell(title: "Порода",
                                               selectedItem: pendingData.type,
                                               items: ["Хвойное", "Лиственное"], // TODO список пород
@@ -79,7 +79,45 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
                                                    action: { [weak self] number in
                                                     
                                                    })
-        let items = [latCell, longCell, speciesCell, heightCell, numberOfTreesCell]
+        let girthValue = pendingData.trunkGirth == nil ? nil : "\(pendingData.trunkGirth)"
+        let girthCell = configureEnterDataCell(title: "Обхват дерева(м)",
+                                               value: girthValue,
+                                               placeholder: "Введите охват дерева",
+                                               action: { [weak self] number in
+                                                
+                                               })
+        let crownValue = pendingData.diameterOfCrown == nil ? nil : "\(pendingData.diameterOfCrown)"
+        let crownCell = configureEnterDataCell(title: "Диаметр кроны(м)",
+                                               value: crownValue,
+                                               placeholder: "Введите диаметр кроны",
+                                               action: { [weak self] number in
+                                                
+                                               })
+        let firstBranchHeightValue = pendingData.heightOfTheFirstBranch == nil
+            ? nil
+            : "\(pendingData.heightOfTheFirstBranch)"
+        let firstBranchHeightCell = configureEnterDataCell(title: "Высота первой ветви",
+                                                           value: firstBranchHeightValue,
+                                                           placeholder: "Введите высоту первой ветви",
+                                                           action: { [weak self] number in
+                                                            
+                                                           })
+        let visualRatingValue = pendingData.conditionAssessment == nil ? nil : "\(pendingData.conditionAssessment)"
+        let visualRatingCell = configurePickerCell(title: "Визуальное состояние",
+                                                   selectedItem: visualRatingValue,
+                                                   items: ["1", "2", "3", "4", "5"], // TODO состояния
+                                                   action: { [weak self] number in
+                                                    
+                                                   })
+        
+        let items = [latCell,
+                     longCell,
+                     speciesCell,
+                     heightCell,
+                     numberOfTreesCell,
+                     girthCell,
+                     crownCell,
+                     firstBranchHeightCell, visualRatingCell]
         
         formItemsSubject.onNext(items)
     }

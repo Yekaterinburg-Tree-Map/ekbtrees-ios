@@ -31,6 +31,7 @@ final class TreeEditorEnterDataCell: UIView, ViewRepresentable, UITextFieldDeleg
         } else {
             label.textColor = UIColor.black
         }
+        label.lineBreakMode = .byTruncatingMiddle
         return label
     }()
     
