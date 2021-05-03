@@ -57,6 +57,7 @@
 		2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */; };
 		2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DAA26400F0B009A2129 /* TreeInfoCellType.swift */; };
 		2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */; };
+		2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -161,6 +162,7 @@
 		2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsFormFactory.swift; sourceTree = "<group>"; };
 		2EB34DAA26400F0B009A2129 /* TreeInfoCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeInfoCellType.swift; sourceTree = "<group>"; };
 		2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsModuleOutput.swift; sourceTree = "<group>"; };
+		2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsCoordinator.swift; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -633,6 +635,7 @@
 				2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */,
 				2ED57ED02619E43600EC9033 /* MapCoordinator.swift */,
 				2ED0FC272633F702006A8683 /* CreateTreeCoordinator.swift */,
+				2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */,
 			);
 			path = Coodinators;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
+				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */,
 				2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */,

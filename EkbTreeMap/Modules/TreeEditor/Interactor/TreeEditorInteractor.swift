@@ -22,7 +22,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
     
-    private var unvalidFields: [TreeEditorCellType] = []
+    private var unvalidFields: [TreeInfoCellType] = []
     
     
     // MARK: Lifecycle
@@ -82,7 +82,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
 
 extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
     
-    func didUpdateItem(type: TreeEditorCellType, value: String?) {
+    func didUpdateItem(type: TreeInfoCellType, value: String?) {
         do {
             switch type {
             case .longitude, .latitude:
