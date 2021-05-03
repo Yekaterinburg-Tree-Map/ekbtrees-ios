@@ -50,6 +50,11 @@
 		2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */; };
 		2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */; };
 		2EB34D7B263FDF4E009A2129 /* TreeEditorFormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */; };
+		2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D8E263FE9B8009A2129 /* TreeDetailsModuleFactory.swift */; };
+		2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D93263FE9F9009A2129 /* TreeDetailsViewController.swift */; };
+		2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */; };
+		2EB34DA1263FEF52009A2129 /* TreeDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DA0263FEF52009A2129 /* TreeDetailsInteractor.swift */; };
+		2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -147,6 +152,11 @@
 		2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+ViewRepresentable.swift"; sourceTree = "<group>"; };
 		2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormManager.swift; sourceTree = "<group>"; };
 		2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormValidator.swift; sourceTree = "<group>"; };
+		2EB34D8E263FE9B8009A2129 /* TreeDetailsModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsModuleFactory.swift; sourceTree = "<group>"; };
+		2EB34D93263FE9F9009A2129 /* TreeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsViewController.swift; sourceTree = "<group>"; };
+		2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsViewIO.swift; sourceTree = "<group>"; };
+		2EB34DA0263FEF52009A2129 /* TreeDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsInteractor.swift; sourceTree = "<group>"; };
+		2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsFormFactory.swift; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -434,6 +444,7 @@
 		2E968822260CD7A500574BE2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2EB34D8B263FE99E009A2129 /* TreeDetails */,
 				2E01FF8C262DFB6900DA2EF1 /* TreeEditor */,
 				2E01F72F2629CC1200DA2EF1 /* MapPointChooser */,
 				2E01F72E2629CC0200DA2EF1 /* MapObserver */,
@@ -510,6 +521,34 @@
 				2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */,
 			);
 			path = Representable;
+			sourceTree = "<group>";
+		};
+		2EB34D8B263FE99E009A2129 /* TreeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34D8D263FE9A9009A2129 /* Interactor */,
+				2EB34D8C263FE9A5009A2129 /* View */,
+				2EB34D8E263FE9B8009A2129 /* TreeDetailsModuleFactory.swift */,
+			);
+			path = TreeDetails;
+			sourceTree = "<group>";
+		};
+		2EB34D8C263FE9A5009A2129 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34D93263FE9F9009A2129 /* TreeDetailsViewController.swift */,
+				2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EB34D8D263FE9A9009A2129 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34DA0263FEF52009A2129 /* TreeDetailsInteractor.swift */,
+				2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		2ED0125526373BD7006A8683 /* Cells */ = {
@@ -837,6 +876,8 @@
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
+				2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */,
+				2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */,
 				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
 				2ED0FC482635BAF2006A8683 /* TreeEditorInteractor.swift in Sources */,
@@ -852,11 +893,14 @@
 				2ED0FC4D2635BC08006A8683 /* TreeEditorModuleOutput.swift in Sources */,
 				2ED0FC3526340ED9006A8683 /* MapPointChooserModuleIO.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
+				2EB34DA1263FEF52009A2129 /* TreeDetailsInteractor.swift in Sources */,
 				2E01FF73262DE8EE00DA2EF1 /* MapPointChooserModuleFactory.swift in Sources */,
 				2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
 				2E3946402621CB310001E5FA /* Presenter.swift in Sources */,
+				2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */,
 				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
+				2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */,
 				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
 				2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,

@@ -1,8 +1,8 @@
 //
-//  TreeEditorViewController.swift
+//  TreeDetailsViewController.swift
 //  EkbTreeMap
 //
-//  Created by s.petrov on 19.04.2021.
+//  Created by s.petrov on 03.05.2021.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 
-final class TreeEditorViewController: UIViewController {
+final class TreeDetailsViewController: UIViewController {
     
     // MARK: Frame
     
@@ -29,7 +29,7 @@ final class TreeEditorViewController: UIViewController {
         return view
     }()
     
-    private lazy var addButton: UIButton = {
+    private lazy var editButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = UIColor.systemGreen
         button.setTitleColor(UIColor.black, for: .normal)
@@ -41,16 +41,17 @@ final class TreeEditorViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private var interactor: AnyInteractor<TreeEditorViewOutput, TreeEditorViewInput>!
+    private var interactor: AnyInteractor<TreeDetailsViewOutput, TreeDetailsViewInput>!
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
+    private let didTapCloseSubject = PublishSubject<Void>()
     
     
     // MARK: Lifecycle
     
-    class func instantiate(with interactor: AnyInteractor<TreeEditorViewOutput,
-                                                          TreeEditorViewInput>) -> TreeEditorViewController {
-        let vc = TreeEditorViewController()
+    class func instantiate(with interactor: AnyInteractor<TreeDetailsViewOutput,
+                                                          TreeDetailsViewInput>) -> TreeDetailsViewController {
+        let vc = TreeDetailsViewController()
         vc.interactor = interactor
         return vc
     }
@@ -60,7 +61,6 @@ final class TreeEditorViewController: UIViewController {
         setupConstraint()
         setupView()
         setupIO()
-        
         
         didLoadSubject.onNext(())
     }
@@ -74,6 +74,16 @@ final class TreeEditorViewController: UIViewController {
         } else {
             view.backgroundColor = .white
         }
+        
+        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Закрыть",
+                                                                                 style: .plain,
+                                                                                 target: self,
+                                                                                 action: #selector(didTapClose))
+    }
+    
+    @objc
+    private func didTapClose() {
+        didTapCloseSubject.onNext(())
     }
     
     private func setupConstraint() {
@@ -86,8 +96,8 @@ final class TreeEditorViewController: UIViewController {
             $0.top.bottom.equalToSuperview()
         }
         
-        view.addSubview(addButton)
-        addButton.snp.makeConstraints {
+        view.addSubview(editButton)
+        editButton.snp.makeConstraints {
             $0.bottom.equalToSuperview().inset(16)
             $0.height.equalTo(48)
             $0.left.right.equalToSuperview().inset(16)
@@ -95,20 +105,26 @@ final class TreeEditorViewController: UIViewController {
     }
     
     private func setupIO() {
-        let output = TreeEditorViewOutput(didLoad: didLoadSubject,
-                                          didTapSave: addButton.rx.tap.asObservable())
+        let output = TreeDetailsViewOutput(didLoad: didLoadSubject,
+                                           didTapAction: editButton.rx.tap.asObservable(),
+                                           didTapClose: didTapCloseSubject)
         let input = interactor.configureIO(with: output)
         
-        input?.formItems
+        input?.items
             .bind(to: stackView.rx.items)
             .disposed(by: bag)
         
-        input?.saveButtonTitle
-            .bind(to: addButton.rx.title(for: .normal))
+        input?.buttonTitle
+            .bind(to: editButton.rx.title(for: .normal))
+            .disposed(by: bag)
+        
+        input?.isButtonHidden
+            .bind(to: editButton.rx.isHidden)
             .disposed(by: bag)
         
         input?.title
             .bind(to: rx.title)
             .disposed(by: bag)
     }
+
 }
