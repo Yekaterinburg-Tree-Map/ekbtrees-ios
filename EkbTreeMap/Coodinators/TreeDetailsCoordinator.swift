@@ -66,7 +66,13 @@ class TreeDetailsCoordinator: ParentCoordinator {
 extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     
     func moduleWantsToChangeDetails(input: TreeDetailsModuleInput) {
-        // TODO present editor
+        guard let rootViewController = navigationController else {
+            return
+        }
+        let coordinator = EditTreeDetailsCoordinator(rootViewController: rootViewController,
+                                                     tree: Tree(id: "", latitude: 0, longitude: 0))
+        childCoordinators.append(coordinator)
+        coordinator.start(animated: true)
     }
     
     func moduleWantsToClose(input: TreeDetailsModuleInput) {

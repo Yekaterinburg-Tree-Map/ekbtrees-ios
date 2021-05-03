@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import CoreLocation
 
 
 class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPointChooserViewInput> {
@@ -14,16 +15,16 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
     
     private let moduleFactory = PublishSubject<() -> UIViewController>()
     private let doneButtonImage = BehaviorSubject<UIImage?>(value: UIImage(named: "checkmark"))
+    private let titleSubject = BehaviorSubject<String>(value: "Выбор координат")
     private let bag = DisposeBag()
     
-    private var pendingData: TreeEditorPendingData
+    private var selectedPoint: CLLocationCoordinate2D = .init()
     private weak var output: MapPointChooserModuleOutput?
     
     
     // MARK: Lifecycle
     
-    init(pendingData: TreeEditorPendingData, output: MapPointChooserModuleOutput) {
-        self.pendingData = pendingData
+    init(output: MapPointChooserModuleOutput) {
         self.output = output
     }
 
@@ -43,7 +44,8 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
             .subscribe(onNext: { [weak self] in self?.didTapClose() })
             .disposed(by: bag)
         
-        return MapPointChooserViewInput(mapFactory: moduleFactory,
+        return MapPointChooserViewInput(title: titleSubject,
+                                        mapFactory: moduleFactory,
                                         doneButtonImage: doneButtonImage)
     }
     
@@ -60,7 +62,7 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
     }
     
     private func didTapDone() {
-        output?.didSelectPoint(with: .init())
+        output?.didSelectPoint(with: selectedPoint)
     }
     
     private func didTapClose() {
@@ -75,8 +77,8 @@ extension MapPointChooserInteractor: MapViewConfigurable {
         output.didChangeVisibleRegion
             .map(\.center)
             .subscribe(onNext: { [weak self] point in
-                self?.pendingData.latitude = point.latitude
-                self?.pendingData.longitude = point.longitude
+                self?.selectedPoint.latitude = point.latitude
+                self?.selectedPoint.longitude = point.longitude
             })
             .disposed(by: bag)
         

@@ -11,6 +11,7 @@ import UIKit
 
 struct MapPointChooserViewInput {
     
+    var title: Observable<String> = .never()
     var mapFactory: Observable<() -> UIViewController> = .never()
     var doneButtonImage: Observable<UIImage?> = .never()
 }

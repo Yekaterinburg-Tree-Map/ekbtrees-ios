@@ -87,6 +87,11 @@ class MapPointChooserViewController: UIViewController {
         
         let input = interactor.configureIO(with: output)
         
+        input?.title
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(to: rx.title)
+            .disposed(by: bag)
+        
         input?.mapFactory
             .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)

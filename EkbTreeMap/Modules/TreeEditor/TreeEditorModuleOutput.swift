@@ -8,7 +8,13 @@
 import Foundation
 
 
+protocol TreeEditorModuleInput: AnyObject {
+    
+}
+
+
 protocol TreeEditorModuleOutput: AnyObject {
     
-    func didSave()
+    func moduleDidSave(input: TreeEditorModuleInput)
+    func moduleDidSelectCustomAction(input: TreeEditorModuleInput, type: TreeEditorFormCustomType)
 }

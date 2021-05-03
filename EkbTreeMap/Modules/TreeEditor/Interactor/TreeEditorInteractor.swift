@@ -68,7 +68,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
         }
         // save data
         
-        output?.didSave()
+        output?.moduleDidSave(input: self)
     }
     
     /// MARK: Form configuration
@@ -79,6 +79,9 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
         unvalidFields = []
     }
 }
+
+
+// MARK: - TreeEditorFormManagerDelegate
 
 extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
     
@@ -111,4 +114,15 @@ extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
             unvalidFields.append(type)
         }
     }
+    
+    func didSelectItem(type: TreeEditorFormCustomType) {
+        output?.moduleDidSelectCustomAction(input: self, type: type)
+    }
+}
+
+
+// MARK: - TreeEditorModuleInput
+
+extension TreeEditorInteractor: TreeEditorModuleInput {
+    
 }

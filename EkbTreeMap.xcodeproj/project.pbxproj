@@ -59,6 +59,10 @@
 		2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */; };
 		2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */; };
 		2EB34DBB26402CA4009A2129 /* TreeDetailsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DBA26402CA4009A2129 /* TreeDetailsMapView.swift */; };
+		2EB34DCF264056AB009A2129 /* EditTreeDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */; };
+		2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DD42640598A009A2129 /* TreeEditorFormManagerEdit.swift */; };
+		2EB34DDA26405B39009A2129 /* TreeEditorFormCustomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DD926405B39009A2129 /* TreeEditorFormCustomType.swift */; };
+		2EB34DE326405BC3009A2129 /* TreeEditorActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DE226405BC3009A2129 /* TreeEditorActionCell.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -165,6 +169,10 @@
 		2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsModuleOutput.swift; sourceTree = "<group>"; };
 		2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsCoordinator.swift; sourceTree = "<group>"; };
 		2EB34DBA26402CA4009A2129 /* TreeDetailsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsMapView.swift; sourceTree = "<group>"; };
+		2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTreeDetailsCoordinator.swift; sourceTree = "<group>"; };
+		2EB34DD42640598A009A2129 /* TreeEditorFormManagerEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormManagerEdit.swift; sourceTree = "<group>"; };
+		2EB34DD926405B39009A2129 /* TreeEditorFormCustomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormCustomType.swift; sourceTree = "<group>"; };
+		2EB34DE226405BC3009A2129 /* TreeEditorActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorActionCell.swift; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -319,9 +327,9 @@
 		2E01FF96262DFD6700DA2EF1 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				2EB34DD326405971009A2129 /* FormManager */,
 				2ED0FC472635BAF2006A8683 /* TreeEditorInteractor.swift */,
 				2ED0FC512635D98B006A8683 /* TreeEditorPendingData.swift */,
-				2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */,
 				2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */,
 			);
 			path = Interactor;
@@ -570,9 +578,28 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
+		2EB34DD326405971009A2129 /* FormManager */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */,
+				2EB34DD42640598A009A2129 /* TreeEditorFormManagerEdit.swift */,
+				2EB34DD926405B39009A2129 /* TreeEditorFormCustomType.swift */,
+			);
+			path = FormManager;
+			sourceTree = "<group>";
+		};
+		2EB34DE126405BB1009A2129 /* ActionButton */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34DE226405BC3009A2129 /* TreeEditorActionCell.swift */,
+			);
+			path = ActionButton;
+			sourceTree = "<group>";
+		};
 		2ED0125526373BD7006A8683 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2EB34DE126405BB1009A2129 /* ActionButton */,
 				2E9A5A99263B403700C5085F /* StepperCell */,
 				2E9A5A98263B402C00C5085F /* EnterDataCell */,
 				2E9A5A97263B402200C5085F /* DataCell */,
@@ -647,6 +674,7 @@
 				2ED57ED02619E43600EC9033 /* MapCoordinator.swift */,
 				2ED0FC272633F702006A8683 /* CreateTreeCoordinator.swift */,
 				2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */,
+				2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */,
 			);
 			path = Coodinators;
 			sourceTree = "<group>";
@@ -885,6 +913,7 @@
 			files = (
 				2EB34D58263EBEF4009A2129 /* ViewRepresentable.swift in Sources */,
 				2ED0FC2D26340A8B006A8683 /* MapObserverModuleIO.swift in Sources */,
+				2EB34DE326405BC3009A2129 /* TreeEditorActionCell.swift in Sources */,
 				2EB34DBB26402CA4009A2129 /* TreeDetailsMapView.swift in Sources */,
 				2E968815260CD48D00574BE2 /* TreeModels.swift in Sources */,
 				2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */,
@@ -895,6 +924,7 @@
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
+				2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
 				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
@@ -925,6 +955,7 @@
 				2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */,
 				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
 				2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */,
+				2EB34DDA26405B39009A2129 /* TreeEditorFormCustomType.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
 				2EB34D5D263F013A009A2129 /* ViewRepresentableModel.swift in Sources */,
@@ -948,6 +979,7 @@
 				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
+				2EB34DCF264056AB009A2129 /* EditTreeDetailsCoordinator.swift in Sources */,
 				2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
