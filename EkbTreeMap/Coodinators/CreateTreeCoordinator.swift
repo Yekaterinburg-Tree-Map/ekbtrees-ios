@@ -48,7 +48,8 @@ final class CreateTreeCoordinator: Coordinator {
     }
     
     private func pushTreeDetailsForm(animated: Bool) {
-        let factory = TreeEditorModuleFactory()
+        let factory = TreeEditorModuleFactory(formManager: TreeEditorFormManager(),
+                                              formFormatter: TreeEditorFormFormatter())
         let vc = factory.build(with: .init(output: self, pendingData: pendingData))
         navigationController?.pushViewController(vc, animated: true)
     }

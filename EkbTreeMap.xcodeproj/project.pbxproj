@@ -48,6 +48,8 @@
 		2EB34D58263EBEF4009A2129 /* ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D57263EBEF4009A2129 /* ViewRepresentable.swift */; };
 		2EB34D5D263F013A009A2129 /* ViewRepresentableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D5C263F013A009A2129 /* ViewRepresentableModel.swift */; };
 		2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */; };
+		2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */; };
+		2EB34D7B263FDF4E009A2129 /* TreeEditorFormValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -143,6 +145,8 @@
 		2EB34D57263EBEF4009A2129 /* ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentable.swift; sourceTree = "<group>"; };
 		2EB34D5C263F013A009A2129 /* ViewRepresentableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewRepresentableModel.swift; sourceTree = "<group>"; };
 		2EB34D61263F04D9009A2129 /* StackView+ViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StackView+ViewRepresentable.swift"; sourceTree = "<group>"; };
+		2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormManager.swift; sourceTree = "<group>"; };
+		2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormValidator.swift; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 			children = (
 				2ED0FC472635BAF2006A8683 /* TreeEditorInteractor.swift */,
 				2ED0FC512635D98B006A8683 /* TreeEditorPendingData.swift */,
+				2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */,
+				2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
 				2ED0FC282633F702006A8683 /* CreateTreeCoordinator.swift in Sources */,
 				2E9A5A8D263B30A700C5085F /* TreeEditorPickerCell.swift in Sources */,
+				2EB34D7B263FDF4E009A2129 /* TreeEditorFormValidator.swift in Sources */,
 				2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */,
 				2E01F74D262A16A300DA2EF1 /* MapObserverInteractor.swift in Sources */,
 				2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */,
@@ -871,6 +878,7 @@
 				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
 				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
 				2E01FF98262DFEFA00DA2EF1 /* TreeEditorViewController.swift in Sources */,
+				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,

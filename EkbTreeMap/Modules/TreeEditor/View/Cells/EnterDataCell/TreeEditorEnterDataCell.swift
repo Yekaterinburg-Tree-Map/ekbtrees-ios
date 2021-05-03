@@ -17,6 +17,7 @@ final class TreeEditorEnterDataCell: UIView, ViewRepresentable, UITextFieldDeleg
         let title: String
         let placeholder: String
         let data: String?
+        let isFailed: Bool
         
         var action: (String) -> () = { _ in return }
     }
@@ -41,6 +42,7 @@ final class TreeEditorEnterDataCell: UIView, ViewRepresentable, UITextFieldDeleg
         field.font = UIFont.systemFont(ofSize: 18)
         field.keyboardType = .decimalPad
         field.placeholder = "enter here"
+        field.delegate = self
         return field
     }()
     
@@ -70,6 +72,9 @@ final class TreeEditorEnterDataCell: UIView, ViewRepresentable, UITextFieldDeleg
         textField.text = data.data
         textField.placeholder = data.placeholder
         action = data.action
+        if data.isFailed {
+            titleLabel.textColor = .systemRed
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

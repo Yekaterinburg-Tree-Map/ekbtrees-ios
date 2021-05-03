@@ -15,16 +15,25 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     private let formItemsSubject = PublishSubject<[ViewRepresentableModel]>()
     private let saveButtonTitleSubject = BehaviorSubject<String>(value: "Сохранить")
     private let titleSubject = BehaviorSubject<String>(value: "Детали")
+    
     private var pendingData: TreeEditorPendingData
+    private var formManager: TreeEditorFormManagerProtocol
+    private let formatter: TreeEditorFormFormatterProtocol
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
+    
+    private var unvalidFields: [TreeEditorCellType] = []
     
     
     // MARK: Lifecycle
     
     init(pendingData: TreeEditorPendingData,
+         formManager: TreeEditorFormManagerProtocol,
+         formatter: TreeEditorFormFormatterProtocol,
          output: TreeEditorModuleOutput) {
         self.pendingData = pendingData
+        self.formManager = formManager
+        self.formatter = formatter
         self.output = output
     }
     
@@ -48,10 +57,15 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     // MARK: Private
     
     private func didLoad() {
+        formManager.delegate = self
         configureForm()
     }
     
     private func didTapSave() {
+        if !unvalidFields.isEmpty {
+            configureForm()
+            return
+        }
         // save data
         
         output?.didSave()
@@ -60,95 +74,41 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     /// MARK: Form configuration
     
     private func configureForm() {
-        let latCell = configureBaseCell(title: "Долгота", subtitle: String(format: "%.5f", pendingData.latitude))
-        let longCell = configureBaseCell(title: "Широта", subtitle: String(format: "%.5f", pendingData.longitude))
-        let speciesCell = configurePickerCell(title: "Порода",
-                                              selectedItem: pendingData.type,
-                                              items: ["Хвойное", "Лиственное"], // TODO список пород
-                                              action: { [weak self] item in
-                                                self?.pendingData.type = item
-                                              }
-        )
-        let heightValue = pendingData.treeHeight == nil ? nil : "\(pendingData.treeHeight ?? 0)"
-        let heightCell = configureEnterDataCell(title: "Высота(м)",
-                                                value: heightValue,
-                                                placeholder: "Введите высоту в метрах",
-                                                action: { [weak self] height in
-                                                    
-                                                })
-        let numberOfTreesValue = pendingData.numberOfTreeTrunks == nil ? nil : "\(pendingData.numberOfTreeTrunks ?? 0)"
-        let numberOfTreesCell = configureEnterDataCell(title: "Число стволов",
-                                                   value: numberOfTreesValue,
-                                                   placeholder: "Введите число стволов",
-                                                   action: { [weak self] number in
-                                                    
-                                                   })
-        let girthValue = pendingData.trunkGirth == nil ? nil : "\(pendingData.trunkGirth ?? 0)"
-        let girthCell = configureEnterDataCell(title: "Обхват дерева(м)",
-                                               value: girthValue,
-                                               placeholder: "Введите охват дерева",
-                                               action: { [weak self] number in
-                                                
-                                               })
-        let crownValue = pendingData.diameterOfCrown == nil ? nil : "\(pendingData.diameterOfCrown ?? 0)"
-        let crownCell = configureEnterDataCell(title: "Диаметр кроны(м)",
-                                               value: crownValue,
-                                               placeholder: "Введите диаметр кроны",
-                                               action: { [weak self] number in
-                                                
-                                               })
-        let firstBranchHeightValue = pendingData.heightOfTheFirstBranch == nil
-            ? nil
-            : "\(pendingData.heightOfTheFirstBranch ?? 0)"
-        let firstBranchHeightCell = configureEnterDataCell(title: "Высота первой ветви",
-                                                           value: firstBranchHeightValue,
-                                                           placeholder: "Введите высоту первой ветви",
-                                                           action: { [weak self] number in
-                                                            
-                                                           })
-        let visualRatingValue = pendingData.conditionAssessment == nil ? nil : "\(pendingData.conditionAssessment ?? 0)"
-        let visualRatingCell = configurePickerCell(title: "Визуальное состояние",
-                                                   selectedItem: visualRatingValue,
-                                                   items: ["1", "2", "3", "4", "5"], // TODO состояния
-                                                   action: { [weak self] number in
-                                                    
-                                                   })
-        
-        let items = [latCell,
-                     longCell,
-                     speciesCell,
-                     heightCell,
-                     numberOfTreesCell,
-                     girthCell,
-                     crownCell,
-                     firstBranchHeightCell, visualRatingCell]
-        
+        let items = formManager.configureData(pendingData: pendingData, failedFields: unvalidFields)
         formItemsSubject.onNext(items)
+        unvalidFields = []
     }
+}
+
+extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
     
-    private func configureBaseCell(title: String, subtitle: String) -> ViewRepresentableModel {
-        GenericViewModel<TreeEditorDataCell>(data: .init(title: title, subtitle: subtitle))
-    }
-    
-    private func configurePickerCell(title: String,
-                                     selectedItem: String? = nil,
-                                     items: [String],
-                                     action: @escaping (String?) -> ()) -> ViewRepresentableModel {
-        let data = TreeEditorPickerCell.DisplayData(title: title,
-                                                    value: selectedItem,
-                                                    pickerValues: items,
-                                                    action: action)
-        return GenericViewModel<TreeEditorPickerCell>(data: data)
-    }
-    
-    private func configureEnterDataCell(title: String,
-                                        value: String?,
-                                        placeholder: String,
-                                        action: @escaping (String) -> ()) -> ViewRepresentableModel {
-        let data = TreeEditorEnterDataCell.DisplayData(title: title,
-                                                       placeholder: placeholder,
-                                                       data: value,
-                                                       action: action)
-        return GenericViewModel<TreeEditorEnterDataCell>(data: data)
+    func didUpdateItem(type: TreeEditorCellType, value: String?) {
+        do {
+            switch type {
+            case .longitude, .latitude:
+                return
+            case .species:
+                pendingData.type = value
+            case .height:
+                let height = try formatter.formatDouble(value: value)
+                pendingData.treeHeight = height
+            case .numberOfTrees:
+                let number = try formatter.formatInt(value: value)
+                pendingData.numberOfTreeTrunks = number
+            case .girth:
+                let girth = try formatter.formatDouble(value: value)
+                pendingData.trunkGirth = girth
+            case .crown:
+                let crown = try formatter.formatDouble(value: value)
+                pendingData.diameterOfCrown = crown
+            case .firstBranchHeight:
+                let height = try formatter.formatDouble(value: value)
+                pendingData.heightOfTheFirstBranch = height
+            case .rating:
+                pendingData.conditionAssessment = 0 // TODO mapping
+            }
+        } catch {
+            unvalidFields.append(type)
+        }
     }
 }
