@@ -13,6 +13,8 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
     // MARK: Private Properties
     
     private let tree: Tree
+    private let formFactory: TreeDetailsFormFactoryProtocol
+    private var output: TreeDetailsModuleOutput?
     
     private let bag = DisposeBag()
     private let titleSubject = BehaviorSubject<String>(value: "Детали")
@@ -23,8 +25,12 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
     
     // MARK: Lifecycle
     
-    init(tree: Tree) {
+    init(tree: Tree,
+         formFactory: TreeDetailsFormFactoryProtocol,
+         output: TreeDetailsModuleOutput) {
         self.tree = tree
+        self.formFactory = formFactory
+        self.output = output
     }
     
     
@@ -51,14 +57,22 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
     // MARK: Private
     
     private func didLoad() {
-        
+        let items = formFactory.setupFields(tree: tree)
+        itemsSubject.onNext(items)
     }
     
     private func didTapAction() {
-        
+        output?.moduleWantsToChangeDetails(input: self)
     }
     
     private func didTapClose() {
-        
+        output?.moduleWantsToClose(input: self)
     }
+}
+
+
+// MARK: - TreeDetailsModuleInput
+
+extension TreeDetailsInteractor: TreeDetailsModuleInput {
+    
 }

@@ -55,6 +55,8 @@
 		2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */; };
 		2EB34DA1263FEF52009A2129 /* TreeDetailsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DA0263FEF52009A2129 /* TreeDetailsInteractor.swift */; };
 		2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */; };
+		2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DAA26400F0B009A2129 /* TreeInfoCellType.swift */; };
+		2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -157,6 +159,8 @@
 		2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsViewIO.swift; sourceTree = "<group>"; };
 		2EB34DA0263FEF52009A2129 /* TreeDetailsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsInteractor.swift; sourceTree = "<group>"; };
 		2EB34DA5263FF2D6009A2129 /* TreeDetailsFormFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsFormFactory.swift; sourceTree = "<group>"; };
+		2EB34DAA26400F0B009A2129 /* TreeInfoCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeInfoCellType.swift; sourceTree = "<group>"; };
+		2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsModuleOutput.swift; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 				2E968814260CD48D00574BE2 /* TreeModels.swift */,
 				2E39464A26221EAF0001E5FA /* Tree.swift */,
 				2EEE861D26275D5C002A9429 /* AuthorizationState.swift */,
+				2EB34DAA26400F0B009A2129 /* TreeInfoCellType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -529,6 +534,7 @@
 				2EB34D8D263FE9A9009A2129 /* Interactor */,
 				2EB34D8C263FE9A5009A2129 /* View */,
 				2EB34D8E263FE9B8009A2129 /* TreeDetailsModuleFactory.swift */,
+				2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */,
 			);
 			path = TreeDetails;
 			sourceTree = "<group>";
@@ -916,6 +922,7 @@
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
 				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,
 				2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */,
+				2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */,
 				2E01FF85262DEC6E00DA2EF1 /* MapPointChooserInteractor.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
@@ -925,6 +932,7 @@
 				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
+				2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
 				2E9A5A92263B3E9000C5085F /* UIImage+Semantics.swift in Sources */,
