@@ -58,6 +58,7 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
     }
     
     private func didTapMore() {
+        output?.moduleWantsToOpenDetails(input: self, tree: Tree(id: "", latitude: 60.02, longitude: 60.01))
         annotationDataSubject.onNext(nil)
     }
     
@@ -66,10 +67,12 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
     }
     
     private func didTapAdd() {
-        output?.didTapAddButton()
+        output?.moduleWantsToCreateTree(input: self)
     }
 }
 
+
+// MARK: - MapViewConfigurable
 
 extension MapObserverInteractor: MapViewConfigurable {
     
@@ -84,4 +87,11 @@ extension MapObserverInteractor: MapViewConfigurable {
         
         return MapViewModuleInput()
     }
+}
+
+
+// MARK: - MapObserverModuleInput
+
+extension MapObserverInteractor: MapObserverModuleInput {
+    
 }

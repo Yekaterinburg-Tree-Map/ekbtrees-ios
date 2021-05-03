@@ -20,7 +20,7 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
     private let titleSubject = BehaviorSubject<String>(value: "Детали")
     private let itemsSubject = PublishSubject<[ViewRepresentableModel]>()
     private let buttonTitleSubject = BehaviorSubject<String>(value: "Редактировать")
-    private let authorizationStatus = BehaviorSubject<Bool>(value: true)
+    private let isButtonHiddenSubject = BehaviorSubject<Bool>(value: false)
     
     
     // MARK: Lifecycle
@@ -50,7 +50,7 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
         return TreeDetailsViewInput(title: titleSubject,
                                     items: itemsSubject,
                                     buttonTitle: buttonTitleSubject,
-                                    isButtonHidden: authorizationStatus)
+                                    isButtonHidden: isButtonHiddenSubject)
     }
     
     

@@ -43,9 +43,20 @@ class TreeDetailsCoordinator: ParentCoordinator {
     
     private func presentTreeDetails(animated: Bool) {
         let factory = TreeDetailsModuleFactory(formFactory: TreeDetailsFormFactory())
-        let tree = Tree(id: "", latitude: 60.02, longitude: 50.34)
+        let tree = Tree(id: "", latitude: 56.84306, longitude: 60.6135)
+        tree.age = 5
+        tree.conditionAssessment = 5
+        tree.diameterOfCrown = 10
+        tree.heightOfTheFirstBranch = 2
+        tree.numberOfTreeTrunks = 15
+        tree.treeHeight = 20
+        tree.type = "Хвойное"
+        tree.trunkGirth = 1.5
         let vc = factory.build(with: .init(tree: tree, output: self))
         let nvc = UINavigationController(rootViewController: vc)
+        if #available(iOS 13.0, *) {
+            nvc.isModalInPresentation = true
+        }
         navigationController = nvc
         rootViewController?.present(nvc, animated: animated)
     }

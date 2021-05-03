@@ -75,10 +75,9 @@ final class TreeDetailsViewController: UIViewController {
             view.backgroundColor = .white
         }
         
-        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Закрыть",
-                                                                                 style: .plain,
-                                                                                 target: self,
-                                                                                 action: #selector(didTapClose))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                           target: self,
+                                                           action: #selector(didTapClose))
     }
     
     @objc
@@ -98,7 +97,7 @@ final class TreeDetailsViewController: UIViewController {
         
         view.addSubview(editButton)
         editButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(16)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(48)
             $0.left.right.equalToSuperview().inset(16)
         }

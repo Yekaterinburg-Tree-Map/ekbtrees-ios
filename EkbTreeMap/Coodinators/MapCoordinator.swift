@@ -63,8 +63,17 @@ final class MapCoordinator: ParentCoordinator {
 
 extension MapCoordinator: MapObserverModuleOutput {
     
-    func didTapAddButton() {
+    func moduleWantsToCreateTree(input: MapObserverModuleInput) {
         startPointChooserModule()
+    }
+    
+    func moduleWantsToOpenDetails(input: MapObserverModuleInput, tree: Tree) {
+        guard let rootViewController = rootController else {
+            return
+        }
+        let coordinator = TreeDetailsCoordinator(rootViewController: rootViewController, delegate: self)
+        childCoordinators.append(coordinator)
+        coordinator.start(animated: true)
     }
 }
 

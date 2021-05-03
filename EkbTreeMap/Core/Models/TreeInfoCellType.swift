@@ -34,7 +34,7 @@ extension TreeInfoCellType {
         case .species:
             return "Порода"
         case .height:
-            return "Высота"
+            return "Высота(м)"
         case .numberOfTrees:
             return "Число стволов"
         case .rating:
@@ -42,7 +42,7 @@ extension TreeInfoCellType {
         case .crown:
             return "Диаметр кроны(м)"
         case .firstBranchHeight:
-            return "Высота первой ветви"
+            return "Высота первой ветви(м)"
         case .girth:
             return "Обхват дерева(м)"
         }
