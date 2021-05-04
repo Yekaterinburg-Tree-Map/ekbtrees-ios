@@ -70,6 +70,7 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
             return
         }
         let coordinator = EditTreeDetailsCoordinator(rootViewController: rootViewController,
+                                                     delegate: self,
                                                      tree: Tree(id: "", latitude: 0, longitude: 0))
         childCoordinators.append(coordinator)
         coordinator.start(animated: true)
@@ -77,5 +78,15 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     
     func moduleWantsToClose(input: TreeDetailsModuleInput) {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
+    }
+}
+
+
+extension TreeDetailsCoordinator: CoordinatorDelegate {
+    
+    func coordinator(_ coordinator: Coordinator, wantsToFinishAnimated animated: Bool) {
+        let coord = childCoordinators.first(where: { $0 === coordinator })
+        coord?.finish(animated: animated)
+        childCoordinators.removeAll(where: {$0 === coordinator })
     }
 }

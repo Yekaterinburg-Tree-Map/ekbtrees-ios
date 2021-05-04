@@ -15,13 +15,19 @@ final class EditTreeDetailsCoordinator: Coordinator {
     
     private weak var rootViewController: UIViewController?
     private weak var navigationController: UINavigationController?
+    private weak var editorModuleInput: TreeEditorModuleInput?
+    private weak var delegate: CoordinatorDelegate?
+    
     private let tree: Tree
     
     
     // MARK: Lifecycle
     
-    init(rootViewController: UIViewController, tree: Tree) {
+    init(rootViewController: UIViewController,
+         delegate: CoordinatorDelegate,
+         tree: Tree) {
         self.rootViewController = rootViewController
+        self.delegate = delegate
         self.tree = tree
     }
     
@@ -33,7 +39,7 @@ final class EditTreeDetailsCoordinator: Coordinator {
     }
     
     func finish(animated: Bool) {
-        
+        rootViewController?.dismiss(animated: true)
     }
     
     
@@ -50,14 +56,13 @@ final class EditTreeDetailsCoordinator: Coordinator {
         let context = TreeEditorModuleFactory.Context(output: self,
                                                       pendingData: TreeEditorPendingData(latitude: 0, longitude: 0))
         let vc = factory.build(with: context)
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Закрыть",
+                                                                  style: .plain,
+                                                                  target: self,
+                                                                  action: #selector(self.closeTreeEditor))
         let nvc = UINavigationController(rootViewController: vc)
-        if #available(iOS 13.0, *) {
-            nvc.isModalInPresentation = true
-        }
-        nvc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Close",
-                                                               style: .plain,
-                                                               target: nil, action: nil)
-        rootViewController.present(nvc, animated: animated, completion: {   vc.presentationController?.presentedView?.gestureRecognizers?[0].isEnabled = false
+        nvc.modalPresentationStyle = .fullScreen
+        rootViewController.present(nvc, animated: animated, completion: {
         })
         navigationController = nvc
     }
@@ -69,6 +74,11 @@ final class EditTreeDetailsCoordinator: Coordinator {
         
         let factory = MapPointChooserModuleFactory()
         let vc = factory.build(with: .init(output: self))
+        nvc.pushViewController(vc, animated: true)
+    }
+    
+    @objc private func closeTreeEditor() {
+        delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
 }
 
@@ -77,14 +87,18 @@ final class EditTreeDetailsCoordinator: Coordinator {
 
 extension EditTreeDetailsCoordinator: TreeEditorModuleOutput {
     
+    func moduleDidLoad(input: TreeEditorModuleInput) {
+        editorModuleInput = input
+    }
+    
     func moduleDidSave(input: TreeEditorModuleInput) {
-        
+        delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
     
     func moduleDidSelectCustomAction(input: TreeEditorModuleInput, type: TreeEditorFormCustomType) {
         switch type {
         case .changeLocation:
-            return // TODO
+            pushCoordinatesChooser()
         }
     }
 }
@@ -95,7 +109,7 @@ extension EditTreeDetailsCoordinator: TreeEditorModuleOutput {
 extension EditTreeDetailsCoordinator: MapPointChooserModuleOutput {
     
     func didSelectPoint(with location: CLLocationCoordinate2D) {
-        // TODO: save location
+        editorModuleInput?.didUpdateLocation(location)
         navigationController?.popViewController(animated: true)
     }
     

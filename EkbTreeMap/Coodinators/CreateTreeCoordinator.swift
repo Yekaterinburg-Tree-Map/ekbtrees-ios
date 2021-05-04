@@ -72,6 +72,10 @@ extension CreateTreeCoordinator: MapPointChooserModuleOutput {
 
 extension CreateTreeCoordinator: TreeEditorModuleOutput {
     
+    func moduleDidLoad(input: TreeEditorModuleInput) {
+        // unused
+    }
+    
     func moduleDidSave(input: TreeEditorModuleInput) {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
