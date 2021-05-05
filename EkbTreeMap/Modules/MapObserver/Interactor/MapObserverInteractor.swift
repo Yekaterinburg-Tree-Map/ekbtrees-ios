@@ -9,11 +9,11 @@ import UIKit
 import RxSwift
 
 
-final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObserverViewInput> {
+final class MapObserverInteractor: MapObserverViewConfigurable {
     
     // MARK: Private Properties
     
-    private let presenter: AnyPresenter<MapObserverInteractorOutput, MapObserverViewInput>
+    private let presenter: MapObserverViewInteractorConfigurable
     private weak var output: MapObserverModuleOutput?
     
     private let bag = DisposeBag()
@@ -25,24 +25,24 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
     
     // MARK: Lifecycle
     
-    init(presenter: AnyPresenter<MapObserverInteractorOutput, MapObserverViewInput>,
+    init(presenter: MapObserverViewInteractorConfigurable,
          output: MapObserverModuleOutput) {
         self.presenter = presenter
         self.output = output
     }
     
     
-    override func configureIO(with viewOutput: MapObserverViewOutput) -> MapObserverViewInput? {
+    func configure(with viewOutput: MapObserverView.Output) -> MapObserverView.Input {
         bag.insert {
             viewOutput.didLoad.subscribe(onNext: { [weak self] in self?.didLoad() })
             viewOutput.didTapAdd.subscribe(onNext: { [weak self] in self?.didTapAdd() })
             viewOutput.didTapMoreButton.subscribe(onNext: { [weak self] in self?.didTapMore() })
         }
-        let output = MapObserverInteractorOutput(annotationData: annotationDataSubject,
-                                                 authorizationState: authorizationState,
-                                                 embedVCFromFactory: moduleFactory)
+        let output = MapObserverView.InteractorOutput(annotationData: annotationDataSubject,
+                                                      authorizationState: authorizationState,
+                                                      embedVCFromFactory: moduleFactory)
         
-        return presenter.configureIO(with: output)
+        return presenter.configure(with: output)
     }
     
     
@@ -74,18 +74,18 @@ final class MapObserverInteractor: AnyInteractor<MapObserverViewOutput, MapObser
 
 // MARK: - MapViewConfigurable
 
-extension MapObserverInteractor: MapViewConfigurable {
+extension MapObserverInteractor: MapViewModuleConfigurable {
     
-    func configureIO(with output: MapViewModuleOutput) -> MapViewModuleInput {
+    func configure(with output: MapViewModule.Output) -> MapViewModule.Input {
+        bag.insert {
         output.didTapPoint
             .subscribe(onNext: { [weak self] id in self?.didTapPoint(id) })
-            .disposed(by: bag)
         
         output.didChangeVisibleRegion
             .subscribe()
-            .disposed(by: bag)
+        }
         
-        return MapViewModuleInput()
+        return MapViewModule.Input()
     }
 }
 

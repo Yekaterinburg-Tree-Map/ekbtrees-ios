@@ -25,16 +25,15 @@ final class MapObserverViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private var interactor: AnyInteractor<MapObserverViewOutput, MapObserverViewInput>!
+    private var interactor: MapObserverViewConfigurable!
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapAddSubject = PublishSubject<Void>()
-
+    
     
     // MARK: Lifecycle
     
-    class func instantiate(with interactor: AnyInteractor<MapObserverViewOutput,
-                                                          MapObserverViewInput>) -> MapObserverViewController {
+    class func instantiate(with interactor: MapObserverViewConfigurable) -> MapObserverViewController {
         let vc = MapObserverViewController()
         vc.interactor = interactor
         return vc
@@ -52,29 +51,28 @@ final class MapObserverViewController: UIViewController {
     // MARK: Private
     
     private func configureIO() {
-        let output = MapObserverViewOutput(didLoad: didLoadSubject,
-                                           didTapMoreButton: annotationView.rx.tap.asObservable(),
-                                           didTapAdd: addButton.rx.tap.asObservable())
-        let input = interactor.configureIO(with: output)
+        let output = MapObserverView.Output(didLoad: didLoadSubject,
+                                            didTapMoreButton: annotationView.rx.tap.asObservable(),
+                                            didTapAdd: addButton.rx.tap.asObservable())
+        let input = interactor.configure(with: output)
         
-        input?.annotationView
-            .observe(on: MainScheduler.asyncInstance)
-            .bind(to: annotationView.rx.configuration)
-            .disposed(by: bag)
-        
-        input?.addButtonImage
-            .observe(on: MainScheduler.asyncInstance)
-            .bind(to: addButton.rx.icon)
-            .disposed(by: bag)
-        
-        input?.embedVCFromFactory
-            .observe(on: MainScheduler.asyncInstance)
-            .withUnretained(self)
-            .subscribe(onNext: { obj, factory in
-                let vc = factory()
-                obj.embedViewController(vc, to: obj.containerView)
-            })
-            .disposed(by: bag)
+        bag.insert {
+            input.annotationView
+                .observe(on: MainScheduler.asyncInstance)
+                .bind(to: annotationView.rx.configuration)
+            
+            input.addButtonImage
+                .observe(on: MainScheduler.asyncInstance)
+                .bind(to: addButton.rx.icon)
+            
+            input.embedVCFromFactory
+                .observe(on: MainScheduler.asyncInstance)
+                .withUnretained(self)
+                .subscribe(onNext: { obj, factory in
+                    let vc = factory()
+                    obj.embedViewController(vc, to: obj.containerView)
+                })
+        }
     }
     
     private func setupConstraints() {

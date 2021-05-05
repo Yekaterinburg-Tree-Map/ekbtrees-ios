@@ -14,7 +14,7 @@ class MapViewModuleFactory: Factory {
     
     struct Context {
         let repository: TreePointsRepositoryProtocol
-        let output: MapViewConfigurable
+        let output: MapViewModuleConfigurable
     }
     
     

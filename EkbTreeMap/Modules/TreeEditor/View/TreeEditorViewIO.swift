@@ -7,16 +7,24 @@
 
 import RxSwift
 
-
-struct TreeEditorViewOutput {
+struct TreeEditorView {
     
-    var didLoad: Observable<Void> = .never()
-    var didTapSave: Observable<Void> = .never()
+    struct Input {
+        
+        var title: Observable<String> = .never()
+        var formItems: Observable<[ViewRepresentableModel]> = .never()
+        var saveButtonTitle: Observable<String> = .never()
+    }
+    
+    struct Output {
+        
+        var didLoad: Observable<Void> = .never()
+        var didTapSave: Observable<Void> = .never()
+    }
 }
 
-struct TreeEditorViewInput {
+
+protocol TreeEditorConfigurable {
     
-    var title: Observable<String> = .never()
-    var formItems: Observable<[ViewRepresentableModel]> = .never()
-    var saveButtonTitle: Observable<String> = .never()
+    func configure(with output: TreeEditorView.Output) -> TreeEditorView.Input
 }

@@ -9,21 +9,23 @@ import CoreLocation
 import RxSwift
 
 
-struct MapViewModuleInput {
+struct MapViewModule {
     
-    var moveToPoint: Observable<CLLocationCoordinate2D> = .never()
+    struct Input {
+        
+        var moveToPoint: Observable<CLLocationCoordinate2D> = .never()
+    }
+    
+    struct Output {
+        
+        var didTapPoint: Observable<String> = .never()
+        var didTapOnMap: Observable<CLLocationCoordinate2D> = .never()
+        var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
+    }
 }
 
 
-struct MapViewModuleOutput {
+protocol MapViewModuleConfigurable: AnyObject {
     
-    var didTapPoint: Observable<String> = .never()
-    var didTapOnMap: Observable<CLLocationCoordinate2D> = .never()
-    var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
-}
-
-
-protocol MapViewConfigurable: AnyObject {
-    
-    func configureIO(with: MapViewModuleOutput) -> MapViewModuleInput
+    func configure(with: MapViewModule.Output) -> MapViewModule.Input
 }

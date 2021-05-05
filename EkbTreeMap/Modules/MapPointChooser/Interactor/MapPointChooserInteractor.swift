@@ -9,7 +9,7 @@ import RxSwift
 import CoreLocation
 
 
-class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPointChooserViewInput> {
+class MapPointChooserInteractor: MapPointChooserConfigurable {
     
     // MARK: Private Properties
     
@@ -27,11 +27,11 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
     init(output: MapPointChooserModuleOutput) {
         self.output = output
     }
-
+    
     
     // MARK: Public
     
-    override func configureIO(with output: MapPointChooserViewOutput) -> MapPointChooserViewInput? {
+    func configure(with output: MapPointChooserView.Output) -> MapPointChooserView.Input {
         output.didLoad
             .subscribe(onNext: { [weak self] in self?.didLoad() })
             .disposed(by: bag)
@@ -44,9 +44,9 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
             .subscribe(onNext: { [weak self] in self?.didTapClose() })
             .disposed(by: bag)
         
-        return MapPointChooserViewInput(title: titleSubject,
-                                        mapFactory: moduleFactory,
-                                        doneButtonImage: doneButtonImage)
+        return MapPointChooserView.Input(title: titleSubject,
+                                         mapFactory: moduleFactory,
+                                         doneButtonImage: doneButtonImage)
     }
     
     
@@ -71,9 +71,9 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
 }
 
 
-extension MapPointChooserInteractor: MapViewConfigurable {
+extension MapPointChooserInteractor: MapViewModuleConfigurable {
     
-    func configureIO(with output: MapViewModuleOutput) -> MapViewModuleInput {
+    func configure(with output: MapViewModule.Output) -> MapViewModule.Input {
         output.didChangeVisibleRegion
             .map(\.center)
             .subscribe(onNext: { [weak self] point in
@@ -82,6 +82,6 @@ extension MapPointChooserInteractor: MapViewConfigurable {
             })
             .disposed(by: bag)
         
-        return MapViewModuleInput()
+        return MapViewModule.Input()
     }
 }

@@ -10,13 +10,13 @@ import RxSwift
 import CoreLocation
 
 
-final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
+final class MapViewInteractor: MapViewConfigurable {
     
     // MARK: Private Properties
     
-    private weak var output: MapViewConfigurable?
+    private weak var output: MapViewModuleConfigurable?
     
-    private let presenter: AnyPresenter<MapViewInteractorOutput, MapViewInput>
+    private let presenter: MapViewInteractorConfigurable
     private let treeRepository: TreePointsRepositoryProtocol
     
     private let startPointSubject = BehaviorSubject<CLLocationCoordinate2D>(value: .init(latitude: 56.82,
@@ -33,9 +33,9 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     // MARK: Lifecycle
     
-    init(presenter: AnyPresenter<MapViewInteractorOutput, MapViewInput>,
+    init(presenter: MapViewInteractorConfigurable,
          treeRepository: TreePointsRepositoryProtocol,
-         output: MapViewConfigurable?) {
+         output: MapViewModuleConfigurable?) {
         self.presenter = presenter
         self.treeRepository = treeRepository
         self.output = output
@@ -44,23 +44,28 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     
     // MARK: Public
     
-    override func configureIO(with output: MapViewOutput) -> MapViewInput? {
+    func configure(with output: MapView.Output) -> MapView.Input {
+        let visibleRegion = output.didChangeVisibleRegion.share()
         bag.insert {
             output.didLoad
                 .subscribe(onNext: { [weak self] in self?.didLoad() })
             
-            output.didTapPoint.bind(to: didTapPointSubject)
-            let visibleRegion = output.didChangeVisibleRegion.share()
-            visibleRegion.subscribe(onNext: { [weak self] region in self?.didChangeVisibleRegion(region) })
-            visibleRegion.bind(to: didChangeVisibleRegionSubject)
+            output.didTapPoint
+                .bind(to: didTapPointSubject)
+            
+            visibleRegion
+                .subscribe(onNext: { [weak self] region in self?.didChangeVisibleRegion(region) })
+            
+            visibleRegion
+                .bind(to: didChangeVisibleRegionSubject)
             
             output.didTapOnMap
                 .subscribe(onNext: { [weak self] point in self?.didTapOnMap(point) })
         }
         
-        let interactorOutput = MapViewInteractorOutput(startPoint: startPointSubject,
-                                                       visiblePoints: visiblePointsSubject)
-        return presenter.configureIO(with: interactorOutput)
+        let interactorOutput = MapView.InteractorOutput(startPoint: startPointSubject,
+                                                        visiblePoints: visiblePointsSubject)
+        return presenter.configure(with: interactorOutput)
     }
     
     
@@ -81,11 +86,11 @@ final class MapViewInteractor: AnyInteractor<MapViewOutput, MapViewInput> {
     }
     
     private func configureOutputIO() {
-        let moduleOutput = MapViewModuleOutput(didTapPoint: didTapPointSubject,
-                                               didChangeVisibleRegion: didChangeVisibleRegionSubject)
-        let input = output?.configureIO(with: moduleOutput)
+        let moduleOutput = MapViewModule.Output(didTapPoint: didTapPointSubject,
+                                                didChangeVisibleRegion: didChangeVisibleRegionSubject)
+        let input = output?.configure(with: moduleOutput)
         
-//        input?.moveToPoint
-//            .subscribe(onNext: { [weak self] point in self?.} )
+        //        input?.moveToPoint
+        //            .subscribe(onNext: { [weak self] point in self?.} )
     }
 }

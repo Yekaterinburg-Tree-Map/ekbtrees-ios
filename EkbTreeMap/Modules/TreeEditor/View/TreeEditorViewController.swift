@@ -30,7 +30,7 @@ final class TreeEditorViewController: UIViewController {
     }()
     
     private lazy var addButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.backgroundColor = UIColor.systemGreen
         button.setTitleColor(UIColor.black, for: .normal)
         button.setTitleColor(UIColor.white, for: .highlighted)
@@ -41,15 +41,14 @@ final class TreeEditorViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private var interactor: AnyInteractor<TreeEditorViewOutput, TreeEditorViewInput>!
+    private var interactor: TreeEditorConfigurable!
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
     
     
     // MARK: Lifecycle
     
-    class func instantiate(with interactor: AnyInteractor<TreeEditorViewOutput,
-                                                          TreeEditorViewInput>) -> TreeEditorViewController {
+    class func instantiate(with interactor: TreeEditorConfigurable) -> TreeEditorViewController {
         let vc = TreeEditorViewController()
         vc.interactor = interactor
         return vc
@@ -64,7 +63,7 @@ final class TreeEditorViewController: UIViewController {
         
         didLoadSubject.onNext(())
     }
-
+    
     
     // MARK: Private
     
@@ -95,20 +94,19 @@ final class TreeEditorViewController: UIViewController {
     }
     
     private func setupIO() {
-        let output = TreeEditorViewOutput(didLoad: didLoadSubject,
-                                          didTapSave: addButton.rx.tap.asObservable())
-        let input = interactor.configureIO(with: output)
+        let output = TreeEditorView.Output(didLoad: didLoadSubject,
+                                           didTapSave: addButton.rx.tap.asObservable())
+        let input = interactor.configure(with: output)
         
-        input?.formItems
-            .bind(to: stackView.rx.items)
-            .disposed(by: bag)
-        
-        input?.saveButtonTitle
-            .bind(to: addButton.rx.title(for: .normal))
-            .disposed(by: bag)
-        
-        input?.title
-            .bind(to: rx.title)
-            .disposed(by: bag)
+        bag.insert {
+            input.formItems
+                .bind(to: stackView.rx.items)
+            
+            input.saveButtonTitle
+                .bind(to: addButton.rx.title(for: .normal))
+            
+            input.title
+                .bind(to: rx.title)
+        }
     }
 }

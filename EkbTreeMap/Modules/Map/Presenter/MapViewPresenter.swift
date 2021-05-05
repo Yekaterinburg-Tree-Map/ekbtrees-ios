@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 
-final class MapViewPresenter: AnyPresenter<MapViewInteractorOutput, MapViewInput> {
+final class MapViewPresenter: MapViewInteractorConfigurable {
     
     // MARK: Private Properties
     
@@ -20,15 +20,15 @@ final class MapViewPresenter: AnyPresenter<MapViewInteractorOutput, MapViewInput
     
     // MARK: Public
     
-    override func configureIO(with output: MapViewInteractorOutput) -> MapViewInput {
+    func configure(with output: MapView.InteractorOutput) -> MapView.Input {
         bag.insert {
             output.visiblePoints
                 .map { [unowned self] points in self.mapTreeToRepresentable(points) }
                 .bind(to: visiblePoints)
         }
         
-        return MapViewInput(moveToPoint: output.startPoint,
-                            visiblePoints: visiblePoints)
+        return MapView.Input(moveToPoint: output.startPoint,
+                             visiblePoints: visiblePoints)
     }
     
     
