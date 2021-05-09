@@ -10,7 +10,6 @@ import SnapKit
 import YandexMapsMobile
 import RxSwift
 import RxCocoa
-import CoreLocation
 
 
 final class MapViewController: UIViewController {
@@ -22,7 +21,7 @@ final class MapViewController: UIViewController {
     
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapPointSubject = PublishSubject<String>()
-    private let didTapOnMapSubject = PublishSubject<CLLocationCoordinate2D>()
+    private let didTapOnMapSubject = PublishSubject<TreePosition>()
     private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     private let bag = DisposeBag()
     
@@ -66,7 +65,7 @@ final class MapViewController: UIViewController {
         mapView.mapWindow.map.addCameraListener(with: self)
     }
     
-    private func moveToPoint(_ point: CLLocationCoordinate2D) {
+    private func moveToPoint(_ point: TreePosition) {
         let target = YMKPoint(latitude: point.latitude, longitude: point.longitude)
         mapView.mapWindow.map.move(
             with: YMKCameraPosition.init(target: target, zoom: 15, azimuth: 0, tilt: 0),
@@ -90,13 +89,13 @@ final class MapViewController: UIViewController {
     
     private func handleCameraPositionChanged(map: YMKMap) {
         let visibleRegion = map.visibleRegion
-        let topLeftPoint = CLLocationCoordinate2D(latitude: visibleRegion.topLeft.latitude,
-                                                  longitude: visibleRegion.topLeft.longitude)
-        let bottomRightPoint = CLLocationCoordinate2D(latitude: visibleRegion.bottomRight.latitude,
-                                                      longitude: visibleRegion.bottomRight.longitude)
+        let topLeftPoint = TreePosition(latitude: visibleRegion.topLeft.latitude,
+                                        longitude: visibleRegion.topLeft.longitude)
+        let bottomRightPoint = TreePosition(latitude: visibleRegion.bottomRight.latitude,
+                                            longitude: visibleRegion.bottomRight.longitude)
         let centerLongitude = (topLeftPoint.longitude + bottomRightPoint.longitude) / 2
         let centerLatitude = (topLeftPoint.latitude + bottomRightPoint.latitude) / 2
-        let centerPoint = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
+        let centerPoint = TreePosition(latitude: centerLatitude, longitude: centerLongitude)
         let region = MapViewVisibleRegionPoints(topLeft: topLeftPoint,
                                                 center: centerPoint,
                                                 bottomRight: bottomRightPoint)

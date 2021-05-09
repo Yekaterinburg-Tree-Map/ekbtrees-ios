@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 
 final class CreateTreeCoordinator: Coordinator {
@@ -61,7 +60,7 @@ final class CreateTreeCoordinator: Coordinator {
 
 extension CreateTreeCoordinator: MapPointChooserModuleOutput {
     
-    func didSelectPoint(with location: CLLocationCoordinate2D) {
+    func didSelectPoint(with location: TreePosition) {
         pendingData.longitude = location.longitude
         pendingData.latitude = location.latitude
         pushTreeDetailsForm(animated: true)

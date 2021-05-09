@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 
 final class EditTreeDetailsCoordinator: Coordinator {
@@ -111,7 +110,7 @@ extension EditTreeDetailsCoordinator: TreeEditorModuleOutput {
 
 extension EditTreeDetailsCoordinator: MapPointChooserModuleOutput {
     
-    func didSelectPoint(with location: CLLocationCoordinate2D) {
+    func didSelectPoint(with location: TreePosition) {
         editorModuleInput?.didUpdateLocation(location)
         navigationController?.popViewController(animated: true)
     }

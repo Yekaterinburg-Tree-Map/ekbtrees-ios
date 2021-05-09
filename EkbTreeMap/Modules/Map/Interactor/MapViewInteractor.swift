@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import CoreLocation
 
 
 final class MapViewInteractor: MapViewConfigurable {
@@ -19,8 +18,8 @@ final class MapViewInteractor: MapViewConfigurable {
     private let presenter: MapViewInteractorConfigurable
     private let treeRepository: TreePointsRepositoryProtocol
     
-    private let startPointSubject = BehaviorSubject<CLLocationCoordinate2D>(value: .init(latitude: 56.82,
-                                                                                         longitude: 60.62))
+    private let startPointSubject = BehaviorSubject<TreePosition>(value: .init(latitude: 56.82,
+                                                                               longitude: 60.62))
     private let visiblePointsSubject = PublishSubject<[TreePoint]>()
     private let bag = DisposeBag()
     
@@ -77,7 +76,7 @@ final class MapViewInteractor: MapViewConfigurable {
         visiblePointsSubject.onNext(points)
     }
     
-    private func didTapOnMap(_ point: CLLocationCoordinate2D) {
+    private func didTapOnMap(_ point: TreePosition) {
         // TODO: check state
     }
     

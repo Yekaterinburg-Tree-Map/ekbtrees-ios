@@ -6,7 +6,6 @@
 //
 
 import RxSwift
-import CoreLocation
 
 
 class MapPointChooserInteractor: MapPointChooserConfigurable {
@@ -19,7 +18,7 @@ class MapPointChooserInteractor: MapPointChooserConfigurable {
     private let titleSubject = BehaviorSubject<String>(value: "Выбор координат")
     private let bag = DisposeBag()
     
-    private var selectedPoint: CLLocationCoordinate2D = .init()
+    private var selectedPoint: TreePosition = .init()
     private weak var output: MapPointChooserModuleOutput?
     
     
