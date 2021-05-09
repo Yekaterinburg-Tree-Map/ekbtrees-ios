@@ -13,6 +13,7 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
     
     // MARK: Private Properties
     
+    private let mapViewFactory: MapViewModuleFactory
     private let presenter: MapObserverViewInteractorConfigurable
     private weak var output: MapObserverModuleOutput?
     
@@ -26,8 +27,10 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
     // MARK: Lifecycle
     
     init(presenter: MapObserverViewInteractorConfigurable,
+         mapViewFactory: MapViewModuleFactory,
          output: MapObserverModuleOutput) {
         self.presenter = presenter
+        self.mapViewFactory = mapViewFactory
         self.output = output
     }
     
@@ -49,10 +52,9 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
     // MARK: Private
     
     private func didLoad() {
-        let factory = MapViewModuleFactory()
         let closure: () -> UIViewController = { [unowned self] in
-            let context = MapViewModuleFactory.Context(repository: TreePointsRepository(), output: self)
-            return factory.build(with: context)
+            let context = MapViewModuleFactory.Context(output: self)
+            return self.mapViewFactory.build(with: context)
         }
         moduleFactory.onNext(closure)
     }

@@ -13,6 +13,7 @@ class MapPointChooserInteractor: MapPointChooserConfigurable {
     
     // MARK: Private Properties
     
+    private let mapViewFactory: MapViewModuleFactory
     private let moduleFactory = PublishSubject<() -> UIViewController>()
     private let doneButtonImage = BehaviorSubject<UIImage?>(value: UIImage(named: "checkmark"))
     private let titleSubject = BehaviorSubject<String>(value: "Выбор координат")
@@ -24,8 +25,10 @@ class MapPointChooserInteractor: MapPointChooserConfigurable {
     
     // MARK: Lifecycle
     
-    init(output: MapPointChooserModuleOutput) {
+    init(output: MapPointChooserModuleOutput,
+         mapViewFactory: MapViewModuleFactory) {
         self.output = output
+        self.mapViewFactory = mapViewFactory
     }
     
     
@@ -53,10 +56,9 @@ class MapPointChooserInteractor: MapPointChooserConfigurable {
     // MARK: Private
     
     private func didLoad() {
-        let factory = MapViewModuleFactory()
         let closure: () -> UIViewController = { [unowned self] in
-            let context = MapViewModuleFactory.Context(repository: TreePointsRepository(), output: self)
-            return factory.build(with: context)
+            let context = MapViewModuleFactory.Context(output: self)
+            return self.mapViewFactory.build(with: context)
         }
         moduleFactory.onNext(closure)
     }

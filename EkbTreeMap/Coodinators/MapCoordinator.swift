@@ -20,12 +20,14 @@ final class MapCoordinator: ParentCoordinator {
     
     private weak var tabBarController: UITabBarController?
     private weak var rootController: UIViewController?
+    private let resolver: IResolver
     
     
     // MARK: Lifecycle
     
-    init(tabBarController: UITabBarController) {
+    init(tabBarController: UITabBarController, resolver: IResolver) {
         self.tabBarController = tabBarController
+        self.resolver = resolver
     }
     
     
@@ -43,7 +45,7 @@ final class MapCoordinator: ParentCoordinator {
     // MARK: Private
     
     private func appendMapView() {
-        let factory = MapObserverModuleFactory()
+        let factory: MapObserverModuleFactory = resolver.resolve()
         let vc = factory.build(with: .init(output: self))
         vc.tabBarItem = .init(title: "Map", image: nil, tag: 0)
         rootController = vc
@@ -54,7 +56,9 @@ final class MapCoordinator: ParentCoordinator {
         guard let rootViewController = rootController else {
             return
         }
-        let coordinator = CreateTreeCoordinator(rootViewController: rootViewController, delegate: self)
+        let coordinator = CreateTreeCoordinator(rootViewController: rootViewController,
+                                                resolver: resolver,
+                                                delegate: self)
         childCoordinators.append(coordinator)
         coordinator.start(animated: true)
     }
@@ -71,7 +75,9 @@ extension MapCoordinator: MapObserverModuleOutput {
         guard let rootViewController = rootController else {
             return
         }
-        let coordinator = TreeDetailsCoordinator(rootViewController: rootViewController, delegate: self)
+        let coordinator = TreeDetailsCoordinator(rootViewController: rootViewController,
+                                                 resolver: resolver,
+                                                 delegate: self)
         childCoordinators.append(coordinator)
         coordinator.start(animated: true)
     }

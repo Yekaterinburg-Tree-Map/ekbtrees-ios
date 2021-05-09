@@ -18,12 +18,16 @@ final class CreateTreeCoordinator: Coordinator {
     private weak var navigationController: UINavigationController?
     private weak var delegate: CoordinatorDelegate?
     
+    private let resolver: IResolver
+    
     
     // MARK: Lifecycle
     
     init(rootViewController: UIViewController,
+         resolver: IResolver,
          delegate: CoordinatorDelegate) {
         self.rootViewController = rootViewController
+        self.resolver = resolver
         self.delegate = delegate
     }
     
@@ -39,7 +43,7 @@ final class CreateTreeCoordinator: Coordinator {
     // MARK: Private
     
     private func presentPointChooserModule(animated: Bool) {
-        let factory = MapPointChooserModuleFactory()
+        let factory: MapPointChooserModuleFactory = resolver.resolve()
         let vc = factory.build(with: .init(output: self))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
@@ -48,8 +52,7 @@ final class CreateTreeCoordinator: Coordinator {
     }
     
     private func pushTreeDetailsForm(animated: Bool) {
-        let factory = TreeEditorModuleFactory(formManager: TreeEditorFormManager(),
-                                              formFormatter: TreeEditorFormFormatter())
+        let factory: TreeEditorModuleFactory = resolver.resolve(name: TreeEditorFormName.new.rawValue)
         let vc = factory.build(with: .init(output: self, pendingData: pendingData))
         navigationController?.pushViewController(vc, animated: true)
     }

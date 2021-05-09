@@ -9,7 +9,9 @@ PODS:
   - SnapKit (5.0.1)
   - SwiftyJSON (5.0.1)
   - Swinject (2.7.1)
-  - YandexMapsMobile (4.0.0-full)
+  - SwinjectAutoregistration (2.7.0):
+    - Swinject (~> 2.7)
+  - YandexMapsMobile (4.0.0-lite)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
@@ -18,7 +20,8 @@ DEPENDENCIES:
   - SnapKit
   - SwiftyJSON
   - Swinject
-  - YandexMapsMobile (= 4.0.0-full)
+  - SwinjectAutoregistration
+  - YandexMapsMobile (= 4.0.0-lite)
 
 SPEC REPOS:
   trunk:
@@ -29,6 +32,7 @@ SPEC REPOS:
     - SnapKit
     - SwiftyJSON
     - Swinject
+    - SwinjectAutoregistration
     - YandexMapsMobile
 
 SPEC CHECKSUMS:
@@ -39,8 +43,9 @@ SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
-  YandexMapsMobile: 0f3d8c92fad685dc33d07f83eed4eb0166089743
+  SwinjectAutoregistration: 330f5012642a8b5c89a8a4adb0c5e52df07382c0
+  YandexMapsMobile: d7d7f3b452209b4c2787beb53bb2dfcea259c70c
 
-PODFILE CHECKSUM: 04b6f46ebf3600869e125f0874eb4373799b98b4
+PODFILE CHECKSUM: be47a109629dda7b0abaeca16e3e4bd89a2d7f35
 
 COCOAPODS: 1.10.0

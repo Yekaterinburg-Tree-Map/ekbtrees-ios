@@ -18,15 +18,18 @@ final class EditTreeDetailsCoordinator: Coordinator {
     private weak var editorModuleInput: TreeEditorModuleInput?
     private weak var delegate: CoordinatorDelegate?
     
+    private let resolver: IResolver
     private let tree: Tree
     
     
     // MARK: Lifecycle
     
     init(rootViewController: UIViewController,
+         resolver: IResolver,
          delegate: CoordinatorDelegate,
          tree: Tree) {
         self.rootViewController = rootViewController
+        self.resolver = resolver
         self.delegate = delegate
         self.tree = tree
     }
@@ -72,7 +75,7 @@ final class EditTreeDetailsCoordinator: Coordinator {
             return
         }
         
-        let factory = MapPointChooserModuleFactory()
+        let factory: MapPointChooserModuleFactory = resolver.resolve()
         let vc = factory.build(with: .init(output: self))
         nvc.pushViewController(vc, animated: true)
     }
