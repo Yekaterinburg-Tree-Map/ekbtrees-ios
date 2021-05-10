@@ -5,7 +5,6 @@
 //  Created by s.petrov on 16.04.2021.
 //
 
-import CoreLocation
 import RxSwift
 
 
@@ -13,13 +12,13 @@ struct MapViewModule {
     
     struct Input {
         
-        var moveToPoint: Observable<CLLocationCoordinate2D> = .never()
+        var moveToPoint: Observable<TreePosition> = .never()
     }
     
     struct Output {
         
         var didTapPoint: Observable<String> = .never()
-        var didTapOnMap: Observable<CLLocationCoordinate2D> = .never()
+        var didTapOnMap: Observable<TreePosition> = .never()
         var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
     }
 }

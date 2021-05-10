@@ -14,9 +14,20 @@ class MapPointChooserModuleFactory: Factory {
         let output: MapPointChooserModuleOutput
     }
     
+    // MARK: Private Properties
+    
+    private let mapViewFactory: MapViewModuleFactory
+    
+    
+    // MARK: Lifecycle
+    
+    init(mapViewFactory: MapViewModuleFactory) {
+        self.mapViewFactory = mapViewFactory
+    }
+    
     
     func build(with context: Context) -> MapPointChooserViewController {
-        let interactor = MapPointChooserInteractor(output: context.output)
+        let interactor = MapPointChooserInteractor(output: context.output, mapViewFactory: mapViewFactory)
         let vc = MapPointChooserViewController.instantiate(interactor)
         return vc
     }

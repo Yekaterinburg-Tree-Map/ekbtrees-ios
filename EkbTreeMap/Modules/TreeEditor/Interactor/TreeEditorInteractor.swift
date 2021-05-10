@@ -6,7 +6,6 @@
 //
 
 import RxSwift
-import CoreLocation
 
 
 final class TreeEditorInteractor: TreeEditorConfigurable {
@@ -128,7 +127,7 @@ extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
 
 extension TreeEditorInteractor: TreeEditorModuleInput {
     
-    func didUpdateLocation(_ location: CLLocationCoordinate2D) {
+    func didUpdateLocation(_ location: TreePosition) {
         pendingData.latitude = location.latitude
         pendingData.longitude = location.longitude
         configureForm()

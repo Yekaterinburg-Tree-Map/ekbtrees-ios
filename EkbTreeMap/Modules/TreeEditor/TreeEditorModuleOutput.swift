@@ -5,12 +5,10 @@
 //  Created by s.petrov on 25.04.2021.
 //
 
-import CoreLocation
-
 
 protocol TreeEditorModuleInput: AnyObject {
     
-    func didUpdateLocation(_ location: CLLocationCoordinate2D)
+    func didUpdateLocation(_ location: TreePosition)
 }
 
 

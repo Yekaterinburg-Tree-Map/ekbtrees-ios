@@ -7,7 +7,6 @@
 
 import YandexMapsMobile
 import UIKit
-import CoreLocation
 
 
 final class TreeDetailsMapView: UIView, ViewRepresentable {
@@ -16,7 +15,7 @@ final class TreeDetailsMapView: UIView, ViewRepresentable {
     
     struct DisplayData {
         
-        let treePoint: CLLocationCoordinate2D
+        let treePoint: TreePosition
     }
     
     
