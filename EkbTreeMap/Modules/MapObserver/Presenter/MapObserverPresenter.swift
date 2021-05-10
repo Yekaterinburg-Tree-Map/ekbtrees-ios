@@ -9,18 +9,18 @@ import RxSwift
 import RxRelay
 
 
-final class MapObserverPresenter: AnyPresenter<MapObserverInteractorOutput, MapObserverViewInput> {
+final class MapObserverPresenter: MapObserverViewInteractorConfigurable {
     
     // MARK: Private Properties
     
     private let bag = DisposeBag()
     private let annotationViewState = BehaviorSubject<TreeAnnotationState>(value: .hidden)
     private let addButtonImage = ReplayRelay<UIImage?>.create(bufferSize: 1)
-
+    
     
     // MARK: Public
     
-    override func configureIO(with output: MapObserverInteractorOutput) -> MapObserverViewInput? {
+    func configure(with output: MapObserverView.InteractorOutput) -> MapObserverView.Input {
         bag.insert {
             output.annotationData
                 .subscribe(onNext: { [weak self] point in self?.proceesAnnotationData(point) })
@@ -29,9 +29,9 @@ final class MapObserverPresenter: AnyPresenter<MapObserverInteractorOutput, MapO
                 .subscribe(onNext: { [weak self] state in self?.didChangeAuthState(state) })
         }
         
-        return MapObserverViewInput(annotationView: annotationViewState,
-                                    addButtonImage: addButtonImage.asObservable(),
-                                    embedVCFromFactory: output.embedVCFromFactory)
+        return MapObserverView.Input(annotationView: annotationViewState,
+                                     addButtonImage: addButtonImage.asObservable(),
+                                     embedVCFromFactory: output.embedVCFromFactory)
     }
     
     

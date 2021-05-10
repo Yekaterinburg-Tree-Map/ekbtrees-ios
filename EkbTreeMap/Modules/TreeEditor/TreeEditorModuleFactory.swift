@@ -8,6 +8,12 @@
 import UIKit
 
 
+enum TreeEditorFormName: String, CaseIterable {
+    case new
+    case edit
+}
+
+
 final class TreeEditorModuleFactory: Factory {
     
     struct Context {

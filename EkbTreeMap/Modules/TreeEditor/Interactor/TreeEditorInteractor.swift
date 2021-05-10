@@ -6,10 +6,9 @@
 //
 
 import RxSwift
-import CoreLocation
 
 
-final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditorViewInput> {
+final class TreeEditorInteractor: TreeEditorConfigurable {
     
     // MARK: Private Properties
     
@@ -41,7 +40,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     
     // MARK: Public
     
-    override func configureIO(with output: TreeEditorViewOutput) -> TreeEditorViewInput? {
+    func configure(with output: TreeEditorView.Output) -> TreeEditorView.Input {
         bag.insert {
             output.didLoad
                 .subscribe(onNext: { [weak self] in self?.didLoad() })
@@ -49,9 +48,9 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
             output.didTapSave
                 .subscribe(onNext: { [weak self] in self?.didTapSave() })
         }
-        return TreeEditorViewInput(title: titleSubject,
-                                   formItems: formItemsSubject,
-                                   saveButtonTitle: saveButtonTitleSubject)
+        return TreeEditorView.Input(title: titleSubject,
+                                    formItems: formItemsSubject,
+                                    saveButtonTitle: saveButtonTitleSubject)
     }
     
     
@@ -128,7 +127,7 @@ extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
 
 extension TreeEditorInteractor: TreeEditorModuleInput {
     
-    func didUpdateLocation(_ location: CLLocationCoordinate2D) {
+    func didUpdateLocation(_ location: TreePosition) {
         pendingData.latitude = location.latitude
         pendingData.longitude = location.longitude
         configureForm()

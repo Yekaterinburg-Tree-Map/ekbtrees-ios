@@ -6,32 +6,34 @@
 //
 
 import RxSwift
-import CoreLocation
 
 
-class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPointChooserViewInput> {
+class MapPointChooserInteractor: MapPointChooserConfigurable {
     
     // MARK: Private Properties
     
+    private let mapViewFactory: MapViewModuleFactory
     private let moduleFactory = PublishSubject<() -> UIViewController>()
     private let doneButtonImage = BehaviorSubject<UIImage?>(value: UIImage(named: "checkmark"))
     private let titleSubject = BehaviorSubject<String>(value: "Выбор координат")
     private let bag = DisposeBag()
     
-    private var selectedPoint: CLLocationCoordinate2D = .init()
+    private var selectedPoint: TreePosition = .init()
     private weak var output: MapPointChooserModuleOutput?
     
     
     // MARK: Lifecycle
     
-    init(output: MapPointChooserModuleOutput) {
+    init(output: MapPointChooserModuleOutput,
+         mapViewFactory: MapViewModuleFactory) {
         self.output = output
+        self.mapViewFactory = mapViewFactory
     }
-
+    
     
     // MARK: Public
     
-    override func configureIO(with output: MapPointChooserViewOutput) -> MapPointChooserViewInput? {
+    func configure(with output: MapPointChooserView.Output) -> MapPointChooserView.Input {
         output.didLoad
             .subscribe(onNext: { [weak self] in self?.didLoad() })
             .disposed(by: bag)
@@ -44,19 +46,18 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
             .subscribe(onNext: { [weak self] in self?.didTapClose() })
             .disposed(by: bag)
         
-        return MapPointChooserViewInput(title: titleSubject,
-                                        mapFactory: moduleFactory,
-                                        doneButtonImage: doneButtonImage)
+        return MapPointChooserView.Input(title: titleSubject,
+                                         mapFactory: moduleFactory,
+                                         doneButtonImage: doneButtonImage)
     }
     
     
     // MARK: Private
     
     private func didLoad() {
-        let factory = MapViewModuleFactory()
         let closure: () -> UIViewController = { [unowned self] in
-            let context = MapViewModuleFactory.Context(repository: TreePointsRepository(), output: self)
-            return factory.build(with: context)
+            let context = MapViewModuleFactory.Context(output: self)
+            return self.mapViewFactory.build(with: context)
         }
         moduleFactory.onNext(closure)
     }
@@ -71,9 +72,9 @@ class MapPointChooserInteractor: AnyInteractor<MapPointChooserViewOutput, MapPoi
 }
 
 
-extension MapPointChooserInteractor: MapViewConfigurable {
+extension MapPointChooserInteractor: MapViewModuleConfigurable {
     
-    func configureIO(with output: MapViewModuleOutput) -> MapViewModuleInput {
+    func configure(with output: MapViewModule.Output) -> MapViewModule.Input {
         output.didChangeVisibleRegion
             .map(\.center)
             .subscribe(onNext: { [weak self] point in
@@ -82,6 +83,6 @@ extension MapPointChooserInteractor: MapViewConfigurable {
             })
             .disposed(by: bag)
         
-        return MapViewModuleInput()
+        return MapViewModule.Input()
     }
 }

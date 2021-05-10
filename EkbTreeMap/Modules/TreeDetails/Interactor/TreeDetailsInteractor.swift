@@ -8,7 +8,7 @@
 import RxSwift
 
 
-final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDetailsViewInput> {
+final class TreeDetailsInteractor: TreeDetailsConfigurable {
     
     // MARK: Private Properties
     
@@ -36,7 +36,7 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
     
     // MARK: Public
     
-    override func configureIO(with output: TreeDetailsViewOutput) -> TreeDetailsViewInput? {
+    func configure(with output: TreeDetailsView.Output) -> TreeDetailsView.Input {
         bag.insert {
             output.didLoad
                 .subscribe(onNext: { [weak self] in self?.didLoad() })
@@ -47,10 +47,10 @@ final class TreeDetailsInteractor: AnyInteractor<TreeDetailsViewOutput, TreeDeta
             output.didTapClose
                 .subscribe(onNext: { [weak self] in self?.didTapClose() })
         }
-        return TreeDetailsViewInput(title: titleSubject,
-                                    items: itemsSubject,
-                                    buttonTitle: buttonTitleSubject,
-                                    isButtonHidden: isButtonHiddenSubject)
+        return TreeDetailsView.Input(title: titleSubject,
+                                     items: itemsSubject,
+                                     buttonTitle: buttonTitleSubject,
+                                     isButtonHidden: isButtonHiddenSubject)
     }
     
     

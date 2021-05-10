@@ -8,24 +8,37 @@
 import RxSwift
 
 
-struct MapObserverViewInput {
+struct MapObserverView {
     
-    var annotationView: Observable<TreeAnnotationState> = .never()
-    var addButtonImage: Observable<UIImage?> = .never()
-    var embedVCFromFactory: Observable<() -> (UIViewController)> = .never()
+    struct Input {
+        
+        var annotationView: Observable<TreeAnnotationState> = .never()
+        var addButtonImage: Observable<UIImage?> = .never()
+        var embedVCFromFactory: Observable<() -> (UIViewController)> = .never()
+    }
+    
+    struct Output {
+        
+        var didLoad: Observable<Void> = .never()
+        var didTapMoreButton: Observable<Void> = .never()
+        var didTapAdd: Observable<Void> = .never()
+    }
+    
+    struct InteractorOutput {
+        
+        var annotationData: Observable<TreePoint?> = .never()
+        var authorizationState: Observable<AuthorizationState> = .never()
+        var embedVCFromFactory: Observable<() -> (UIViewController)> = .never()
+    }
 }
 
 
-struct MapObserverViewOutput {
+protocol MapObserverViewConfigurable {
     
-    var didLoad: Observable<Void> = .never()
-    var didTapMoreButton: Observable<Void> = .never()
-    var didTapAdd: Observable<Void> = .never()
+    func configure(with output: MapObserverView.Output) -> MapObserverView.Input
 }
 
-struct MapObserverInteractorOutput {
+protocol MapObserverViewInteractorConfigurable {
     
-    var annotationData: Observable<TreePoint?> = .never()
-    var authorizationState: Observable<AuthorizationState> = .never()
-    var embedVCFromFactory: Observable<() -> (UIViewController)> = .never()
+    func configure(with output: MapObserverView.InteractorOutput) -> MapObserverView.Input
 }

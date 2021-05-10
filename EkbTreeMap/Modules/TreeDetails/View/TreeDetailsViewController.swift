@@ -41,7 +41,7 @@ final class TreeDetailsViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private var interactor: AnyInteractor<TreeDetailsViewOutput, TreeDetailsViewInput>!
+    private var interactor: TreeDetailsConfigurable!
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapCloseSubject = PublishSubject<Void>()
@@ -49,8 +49,7 @@ final class TreeDetailsViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    class func instantiate(with interactor: AnyInteractor<TreeDetailsViewOutput,
-                                                          TreeDetailsViewInput>) -> TreeDetailsViewController {
+    class func instantiate(with interactor: TreeDetailsConfigurable) -> TreeDetailsViewController {
         let vc = TreeDetailsViewController()
         vc.interactor = interactor
         return vc
@@ -104,26 +103,24 @@ final class TreeDetailsViewController: UIViewController {
     }
     
     private func setupIO() {
-        let output = TreeDetailsViewOutput(didLoad: didLoadSubject,
+        let output = TreeDetailsView.Output(didLoad: didLoadSubject,
                                            didTapAction: editButton.rx.tap.asObservable(),
                                            didTapClose: didTapCloseSubject)
-        let input = interactor.configureIO(with: output)
+        let input = interactor.configure(with: output)
         
-        input?.items
-            .bind(to: stackView.rx.items)
-            .disposed(by: bag)
-        
-        input?.buttonTitle
-            .bind(to: editButton.rx.title(for: .normal))
-            .disposed(by: bag)
-        
-        input?.isButtonHidden
-            .bind(to: editButton.rx.isHidden)
-            .disposed(by: bag)
-        
-        input?.title
-            .bind(to: rx.title)
-            .disposed(by: bag)
+        bag.insert {
+            input.items
+                .bind(to: stackView.rx.items)
+            
+            input.buttonTitle
+                .bind(to: editButton.rx.title(for: .normal))
+            
+            input.isButtonHidden
+                .bind(to: editButton.rx.isHidden)
+            
+            input.title
+                .bind(to: rx.title)
+        }
     }
 
 }
