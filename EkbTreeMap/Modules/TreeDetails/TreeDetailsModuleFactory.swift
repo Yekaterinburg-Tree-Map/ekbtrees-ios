@@ -19,12 +19,15 @@ final class TreeDetailsModuleFactory: Factory {
     // MARK: Private Properties
     
     private let formFactory: TreeDetailsFormFactoryProtocol
+    private let flowLayout: TreeDetailsFlowLayoutDelegate
     
     
     // MARK: Lifecycle
     
-    init(formFactory: TreeDetailsFormFactoryProtocol) {
+    init(formFactory: TreeDetailsFormFactoryProtocol,
+         flowLayout: TreeDetailsFlowLayoutDelegate) {
         self.formFactory = formFactory
+        self.flowLayout = flowLayout
     }
     
     
@@ -34,7 +37,7 @@ final class TreeDetailsModuleFactory: Factory {
         let interactor = TreeDetailsInteractor(tree: context.tree,
                                                formFactory: formFactory,
                                                output: context.output)
-        let vc = TreeDetailsViewController.instantiate(with: interactor)
+        let vc = TreeDetailsViewController.instantiate(with: interactor, flowLayout: flowLayout)
         return vc
     }
 }

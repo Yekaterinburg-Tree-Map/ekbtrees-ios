@@ -48,7 +48,7 @@ final class TreeDetailsMapView: UIView, ViewRepresentable {
     
     func configure(with data: DisplayData) {
         let point = YMKPoint(latitude: data.treePoint.latitude, longitude: data.treePoint.longitude)
-        let cameraPosition = YMKCameraPosition(target: point, zoom: 15, azimuth: 0, tilt: 0)
+        let cameraPosition = YMKCameraPosition(target: point, zoom: 17, azimuth: 0, tilt: 0)
         mapView.mapWindow.map.move(with: cameraPosition)
         
         mapView.mapWindow.map.mapObjects.addPlacemark(with: point)
