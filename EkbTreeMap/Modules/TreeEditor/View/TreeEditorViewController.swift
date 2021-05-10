@@ -10,21 +10,28 @@ import RxSwift
 import RxCocoa
 
 
-final class TreeEditorViewController: UIViewController, UITableViewDelegate {
+final class TreeEditorViewController: UIViewController {
     
     // MARK: Frame
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.rowHeight = 64
-        table.delegate = self
-        return table
+    private lazy var scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
+        scroll.showsVerticalScrollIndicator = false
+        scroll.showsHorizontalScrollIndicator = false
+        return scroll
+    }()
+    
+    private lazy var stackView: ViewRepresentableStackView = {
+        let view = ViewRepresentableStackView()
+        view.axis = .vertical
+        view.spacing = 8
+        return view
     }()
     
     private lazy var addButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.backgroundColor = UIColor.systemGreen
-        button.setTitle("Сохранить", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.setTitleColor(UIColor.white, for: .highlighted)
         button.layer.cornerRadius = 16
@@ -34,16 +41,14 @@ final class TreeEditorViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Private Properties
     
-    private var interactor: AnyInteractor<TreeEditorViewOutput, TreeEditorViewInput>!
-    
+    private var interactor: TreeEditorConfigurable!
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
     
     
     // MARK: Lifecycle
     
-    class func instantiate(with interactor: AnyInteractor<TreeEditorViewOutput,
-                                                          TreeEditorViewInput>) -> TreeEditorViewController {
+    class func instantiate(with interactor: TreeEditorConfigurable) -> TreeEditorViewController {
         let vc = TreeEditorViewController()
         vc.interactor = interactor
         return vc
@@ -51,9 +56,10 @@ final class TreeEditorViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Детали"
         setupConstraint()
+        setupView()
         setupIO()
+        
         
         didLoadSubject.onNext(())
     }
@@ -61,9 +67,23 @@ final class TreeEditorViewController: UIViewController, UITableViewDelegate {
     
     // MARK: Private
     
+    private func setupView() {
+        if #available(iOS 13.0, *) {
+            view.backgroundColor = UIColor.systemBackground
+        } else {
+            view.backgroundColor = .white
+        }
+    }
+    
     private func setupConstraint() {
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        scrollView.addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.left.right.equalTo(view)
+            $0.top.bottom.equalToSuperview()
+        }
         
         view.addSubview(addButton)
         addButton.snp.makeConstraints {
@@ -74,10 +94,19 @@ final class TreeEditorViewController: UIViewController, UITableViewDelegate {
     }
     
     private func setupIO() {
-        let output = TreeEditorViewOutput(didLoad: didLoadSubject,
-                                          didTapSave: addButton.rx.tap.asObservable())
-        let input = interactor.configureIO(with: output)
+        let output = TreeEditorView.Output(didLoad: didLoadSubject,
+                                           didTapSave: addButton.rx.tap.asObservable())
+        let input = interactor.configure(with: output)
         
-        
+        bag.insert {
+            input.formItems
+                .bind(to: stackView.rx.items)
+            
+            input.saveButtonTitle
+                .bind(to: addButton.rx.title(for: .normal))
+            
+            input.title
+                .bind(to: rx.title)
+        }
     }
 }

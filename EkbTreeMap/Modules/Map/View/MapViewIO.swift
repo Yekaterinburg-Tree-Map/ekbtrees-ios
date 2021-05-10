@@ -7,25 +7,37 @@
 
 import Foundation
 import RxSwift
-import CoreLocation
 
 
-struct MapViewOutput {
+struct MapView {
     
-    var didLoad: Observable<Void> = .never()
-    var didTapPoint: Observable<String> = .never()
-    var didTapOnMap: Observable<CLLocationCoordinate2D> = .never()
-    var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
+    struct Input {
+        
+        var moveToPoint: Observable<TreePosition> = .never()
+        var visiblePoints: Observable<[TreePointRepresentable]> = .never()
+    }
+    
+    struct Output {
+        
+        var didLoad: Observable<Void> = .never()
+        var didTapPoint: Observable<String> = .never()
+        var didTapOnMap: Observable<TreePosition> = .never()
+        var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
+    }
+    
+    struct InteractorOutput {
+        
+        var startPoint: Observable<TreePosition> = .never()
+        var visiblePoints: Observable<[TreePoint]> = .never()
+    }
 }
 
-struct MapViewInput {
+protocol MapViewConfigurable {
     
-    var moveToPoint: Observable<CLLocationCoordinate2D> = .never()
-    var visiblePoints: Observable<[TreePointRepresentable]> = .never()
+    func configure(with output: MapView.Output) -> MapView.Input
 }
 
-struct MapViewInteractorOutput {
+protocol MapViewInteractorConfigurable {
     
-    var startPoint: Observable<CLLocationCoordinate2D> = .never()
-    var visiblePoints: Observable<[TreePoint]> = .never()
+    func configure(with output: MapView.InteractorOutput) -> MapView.Input
 }

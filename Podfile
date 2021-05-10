@@ -8,7 +8,10 @@ target 'EkbTreeMap' do
   pod 'SwiftyJSON'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'Swinject'
+  pod 'SwinjectAutoregistration'  
+  pod 'IQKeyboardManagerSwift'
 
   # maps
-  pod 'YandexMapsMobile', ’4.0.0-full’
+  pod 'YandexMapsMobile', ’4.0.0-lite’
 end

@@ -8,7 +8,7 @@
 import RxSwift
 
 
-class LoginInteractor: AnyInteractor<LoginViewOutput, LoginViewInput> {
+class LoginInteractor: LoginViewConfigurable {
     
     // MARK: Private Properties
     
@@ -20,7 +20,7 @@ class LoginInteractor: AnyInteractor<LoginViewOutput, LoginViewInput> {
     
     // MARK: Public
     
-    override func configureIO(with output: LoginViewOutput) -> LoginViewInput? {
+    func configure(with output: LoginView.Output) -> LoginView.Input {
         
         output.didLoad
             .subscribe(onNext: { [weak self] in self?.didLoad() })
@@ -32,7 +32,7 @@ class LoginInteractor: AnyInteractor<LoginViewOutput, LoginViewInput> {
             })
             .disposed(by: bag)
         
-        return LoginViewInput(title: titleSubject, availableButton: availableButtons)
+        return LoginView.Input(title: titleSubject, availableButton: availableButtons)
     }
     
     

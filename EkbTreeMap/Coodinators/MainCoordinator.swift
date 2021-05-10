@@ -18,12 +18,14 @@ final class MainCoordinator: ParentCoordinator {
     // MARK: Private Properties
     
     private weak var rootController: UITabBarController?
+    private let resolver: IResolver
     
     
     // MARK: Lifecycle
     
-    init(rootController: UITabBarController) {
+    init(rootController: UITabBarController, resolver: IResolver) {
         self.rootController = rootController
+        self.resolver = resolver
     }
     
     
@@ -44,7 +46,7 @@ final class MainCoordinator: ParentCoordinator {
         guard let tabBar = rootController else {
             return
         }
-        let coordinator = MapCoordinator(tabBarController: tabBar)
+        let coordinator = MapCoordinator(tabBarController: tabBar, resolver: resolver)
         childCoordinators.append(coordinator)
         coordinator.start(animated: false)
     }

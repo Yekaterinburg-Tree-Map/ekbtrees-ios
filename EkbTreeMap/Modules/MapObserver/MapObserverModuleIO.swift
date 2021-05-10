@@ -8,7 +8,12 @@
 import Foundation
 
 
+protocol MapObserverModuleInput: AnyObject {
+    
+}
+
 protocol MapObserverModuleOutput: AnyObject {
     
-    func didTapAddButton()
+    func moduleWantsToCreateTree(input: MapObserverModuleInput)
+    func moduleWantsToOpenDetails(input: MapObserverModuleInput, tree: Tree)
 }

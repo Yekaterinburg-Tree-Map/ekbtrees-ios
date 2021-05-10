@@ -1,5 +1,5 @@
 //
-//  MapViewControllerFactory.swift
+//  MapViewModuleFactory.swift
 //  EkbTreeMap
 //
 //  Created by s.petrov on 03.04.2021.
@@ -13,8 +13,18 @@ class MapViewModuleFactory: Factory {
     // MARK: Public Structures
     
     struct Context {
-        let repository: TreePointsRepositoryProtocol
-        let output: MapViewConfigurable
+        let output: MapViewModuleConfigurable
+    }
+    
+    // MARK: Private Properties
+    
+    private let repository: TreePointsRepositoryProtocol
+    
+    
+    // MARK: Lifecycle
+    
+    init(repository: TreePointsRepositoryProtocol) {
+        self.repository = repository
     }
     
     
@@ -23,7 +33,7 @@ class MapViewModuleFactory: Factory {
     func build(with context: Context) -> UIViewController {
         let presenter = MapViewPresenter()
         let interactor = MapViewInteractor(presenter: presenter,
-                                           treeRepository: context.repository,
+                                           treeRepository: repository,
                                            output: context.output)
         let vc = MapViewController.instantiate(interactor: interactor)
         return vc
