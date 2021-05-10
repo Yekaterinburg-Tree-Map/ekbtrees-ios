@@ -21,12 +21,16 @@ class TreeDetailsCoordinator: ParentCoordinator {
     private weak var navigationController: UINavigationController?
     private weak var delegate: CoordinatorDelegate?
     
+    private let resolver: IResolver
+    
     
     // MARK: Lifecycle
     
     init(rootViewController: UIViewController,
+         resolver: IResolver,
          delegate: CoordinatorDelegate) {
         self.rootViewController = rootViewController
+        self.resolver = resolver
         self.delegate = delegate
     }
     
@@ -42,7 +46,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
     // MARK: Private
     
     private func presentTreeDetails(animated: Bool) {
-        let factory = TreeDetailsModuleFactory(formFactory: TreeDetailsFormFactory())
+        let factory: TreeDetailsModuleFactory = resolver.resolve()
         let tree = Tree(id: "", latitude: 56.84306, longitude: 60.6135)
         tree.age = 5
         tree.conditionAssessment = 5
@@ -66,10 +70,28 @@ class TreeDetailsCoordinator: ParentCoordinator {
 extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     
     func moduleWantsToChangeDetails(input: TreeDetailsModuleInput) {
-        // TODO present editor
+        guard let rootViewController = navigationController else {
+            return
+        }
+        let coordinator = EditTreeDetailsCoordinator(rootViewController: rootViewController,
+                                                     resolver: resolver,
+                                                     delegate: self,
+                                                     tree: Tree(id: "", latitude: 0, longitude: 0))
+        childCoordinators.append(coordinator)
+        coordinator.start(animated: true)
     }
     
     func moduleWantsToClose(input: TreeDetailsModuleInput) {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
+    }
+}
+
+
+extension TreeDetailsCoordinator: CoordinatorDelegate {
+    
+    func coordinator(_ coordinator: Coordinator, wantsToFinishAnimated animated: Bool) {
+        let coord = childCoordinators.first(where: { $0 === coordinator })
+        coord?.finish(animated: animated)
+        childCoordinators.removeAll(where: {$0 === coordinator })
     }
 }

@@ -21,7 +21,6 @@
 		2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01FF8D262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift */; };
 		2E01FF98262DFEFA00DA2EF1 /* TreeEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01FF97262DFEFA00DA2EF1 /* TreeEditorViewController.swift */; };
 		2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */; };
-		2E3946402621CB310001E5FA /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39463F2621CB310001E5FA /* Presenter.swift */; };
 		2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */; };
 		2E39464B26221EAF0001E5FA /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39464A26221EAF0001E5FA /* Tree.swift */; };
 		2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */; };
@@ -38,10 +37,13 @@
 		2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96881A260CD67400574BE2 /* TreePointsRepository.swift */; };
 		2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96882B260CDCBD00574BE2 /* MapViewController.swift */; };
 		2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E968854260CFC5800574BE2 /* CircleImage.swift */; };
+		2E9831812647DADE0088193B /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9831802647DADE0088193B /* ServiceAssembly.swift */; };
+		2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9831882647DBEB0088193B /* FactoryAssembly.swift */; };
+		2E9831912647DEBB0088193B /* UIConfiguratorsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9831902647DEBB0088193B /* UIConfiguratorsAssembly.swift */; };
+		2E9831C62647E5920088193B /* IResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9831C52647E5920088193B /* IResolver.swift */; };
 		2E9A5A8D263B30A700C5085F /* TreeEditorPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9A5A8C263B30A700C5085F /* TreeEditorPickerCell.swift */; };
 		2E9A5A92263B3E9000C5085F /* UIImage+Semantics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9A5A91263B3E9000C5085F /* UIImage+Semantics.swift */; };
 		2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */; };
-		2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A77261F5E74005E382B /* Interactor.swift */; };
 		2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */; };
 		2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAE5A84261F64F1005E382B /* LoginButtonType.swift */; };
 		2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */; };
@@ -59,6 +61,10 @@
 		2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */; };
 		2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */; };
 		2EB34DBB26402CA4009A2129 /* TreeDetailsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DBA26402CA4009A2129 /* TreeDetailsMapView.swift */; };
+		2EB34DCF264056AB009A2129 /* EditTreeDetailsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */; };
+		2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DD42640598A009A2129 /* TreeEditorFormManagerEdit.swift */; };
+		2EB34DDA26405B39009A2129 /* TreeEditorFormCustomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DD926405B39009A2129 /* TreeEditorFormCustomType.swift */; };
+		2EB34DE326405BC3009A2129 /* TreeEditorActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB34DE226405BC3009A2129 /* TreeEditorActionCell.swift */; };
 		2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */; };
 		2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */; };
 		2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */; };
@@ -73,7 +79,7 @@
 		2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E762618D29800EC9033 /* ApiKeyParser.swift */; };
 		2ED57E7C2618D37B00EC9033 /* credentials.json in Resources */ = {isa = PBXBuildFile; fileRef = 2ED57E7B2618D37B00EC9033 /* credentials.json */; };
 		2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E8C2618E79700EC9033 /* Factory.swift */; };
-		2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E912618E82C00EC9033 /* MapViewControllerFactory.swift */; };
+		2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E912618E82C00EC9033 /* MapViewModuleFactory.swift */; };
 		2ED57EB12619CD5900EC9033 /* MapViewIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57EB02619CD5900EC9033 /* MapViewIO.swift */; };
 		2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57EBB2619D0B100EC9033 /* MapViewInteractor.swift */; };
 		2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57EC02619D4C700EC9033 /* MapViewPresenter.swift */; };
@@ -121,7 +127,6 @@
 		2E01FF8D262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorModuleFactory.swift; sourceTree = "<group>"; };
 		2E01FF97262DFEFA00DA2EF1 /* TreeEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorViewController.swift; sourceTree = "<group>"; };
 		2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointRepresentable.swift; sourceTree = "<group>"; };
-		2E39463F2621CB310001E5FA /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVisibleRegionPoints.swift; sourceTree = "<group>"; };
 		2E39464A26221EAF0001E5FA /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeAnnotationView.swift; sourceTree = "<group>"; };
@@ -144,10 +149,13 @@
 		2E96881A260CD67400574BE2 /* TreePointsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreePointsRepository.swift; sourceTree = "<group>"; };
 		2E96882B260CDCBD00574BE2 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2E968854260CFC5800574BE2 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		2E9831802647DADE0088193B /* ServiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		2E9831882647DBEB0088193B /* FactoryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryAssembly.swift; sourceTree = "<group>"; };
+		2E9831902647DEBB0088193B /* UIConfiguratorsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfiguratorsAssembly.swift; sourceTree = "<group>"; };
+		2E9831C52647E5920088193B /* IResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IResolver.swift; sourceTree = "<group>"; };
 		2E9A5A8C263B30A700C5085F /* TreeEditorPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorPickerCell.swift; sourceTree = "<group>"; };
 		2E9A5A91263B3E9000C5085F /* UIImage+Semantics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Semantics.swift"; sourceTree = "<group>"; };
 		2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
-		2EAE5A77261F5E74005E382B /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		2EAE5A7F261F62F6005E382B /* LoginViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewIO.swift; sourceTree = "<group>"; };
 		2EAE5A84261F64F1005E382B /* LoginButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonType.swift; sourceTree = "<group>"; };
 		2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithArrowDown.swift; sourceTree = "<group>"; };
@@ -165,6 +173,10 @@
 		2EB34DAF264012B4009A2129 /* TreeDetailsModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsModuleOutput.swift; sourceTree = "<group>"; };
 		2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsCoordinator.swift; sourceTree = "<group>"; };
 		2EB34DBA26402CA4009A2129 /* TreeDetailsMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsMapView.swift; sourceTree = "<group>"; };
+		2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTreeDetailsCoordinator.swift; sourceTree = "<group>"; };
+		2EB34DD42640598A009A2129 /* TreeEditorFormManagerEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormManagerEdit.swift; sourceTree = "<group>"; };
+		2EB34DD926405B39009A2129 /* TreeEditorFormCustomType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorFormCustomType.swift; sourceTree = "<group>"; };
+		2EB34DE226405BC3009A2129 /* TreeEditorActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorActionCell.swift; sourceTree = "<group>"; };
 		2ED0125626373BEA006A8683 /* TreeEditorDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorDataCell.swift; sourceTree = "<group>"; };
 		2ED0175F263843DD006A8683 /* TreeEditorEnterDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorEnterDataCell.swift; sourceTree = "<group>"; };
 		2ED01764263846E7006A8683 /* TreeEditorStepperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeEditorStepperCell.swift; sourceTree = "<group>"; };
@@ -179,7 +191,7 @@
 		2ED57E762618D29800EC9033 /* ApiKeyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyParser.swift; sourceTree = "<group>"; };
 		2ED57E7B2618D37B00EC9033 /* credentials.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = credentials.json; sourceTree = "<group>"; };
 		2ED57E8C2618E79700EC9033 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
-		2ED57E912618E82C00EC9033 /* MapViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewControllerFactory.swift; sourceTree = "<group>"; };
+		2ED57E912618E82C00EC9033 /* MapViewModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModuleFactory.swift; sourceTree = "<group>"; };
 		2ED57EB02619CD5900EC9033 /* MapViewIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewIO.swift; sourceTree = "<group>"; };
 		2ED57EBB2619D0B100EC9033 /* MapViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewInteractor.swift; sourceTree = "<group>"; };
 		2ED57EC02619D4C700EC9033 /* MapViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewPresenter.swift; sourceTree = "<group>"; };
@@ -319,9 +331,9 @@
 		2E01FF96262DFD6700DA2EF1 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
+				2EB34DD326405971009A2129 /* FormManager */,
 				2ED0FC472635BAF2006A8683 /* TreeEditorInteractor.swift */,
 				2ED0FC512635D98B006A8683 /* TreeEditorPendingData.swift */,
-				2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */,
 				2EB34D7A263FDF4E009A2129 /* TreeEditorFormValidator.swift */,
 			);
 			path = Interactor;
@@ -420,7 +432,7 @@
 		2E96880B260CD41900574BE2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				2EAE5A76261F5E69005E382B /* VIP */,
+				2E98317F2647DACD0088193B /* Assemblies */,
 				2E7FDAFC26105A620065E5C0 /* Parsers */,
 				2E968853260CFC4B00574BE2 /* UI */,
 				2E968819260CD5C500574BE2 /* Services */,
@@ -473,6 +485,25 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		2E98317F2647DACD0088193B /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				2E9831B92647E3D00088193B /* Resolver */,
+				2E9831802647DADE0088193B /* ServiceAssembly.swift */,
+				2E9831882647DBEB0088193B /* FactoryAssembly.swift */,
+				2E9831902647DEBB0088193B /* UIConfiguratorsAssembly.swift */,
+			);
+			path = Assemblies;
+			sourceTree = "<group>";
+		};
+		2E9831B92647E3D00088193B /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				2E9831C52647E5920088193B /* IResolver.swift */,
+			);
+			path = Resolver;
+			sourceTree = "<group>";
+		};
 		2E9A5A96263B401500C5085F /* PickerCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,15 +542,6 @@
 				2EAE5A71261F5E5B005E382B /* LoginInteractor.swift */,
 			);
 			path = Interactor;
-			sourceTree = "<group>";
-		};
-		2EAE5A76261F5E69005E382B /* VIP */ = {
-			isa = PBXGroup;
-			children = (
-				2EAE5A77261F5E74005E382B /* Interactor.swift */,
-				2E39463F2621CB310001E5FA /* Presenter.swift */,
-			);
-			path = VIP;
 			sourceTree = "<group>";
 		};
 		2EB34D56263EBED7009A2129 /* Representable */ = {
@@ -570,9 +592,28 @@
 			path = MapView;
 			sourceTree = "<group>";
 		};
+		2EB34DD326405971009A2129 /* FormManager */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34D72263FD6F5009A2129 /* TreeEditorFormManager.swift */,
+				2EB34DD42640598A009A2129 /* TreeEditorFormManagerEdit.swift */,
+				2EB34DD926405B39009A2129 /* TreeEditorFormCustomType.swift */,
+			);
+			path = FormManager;
+			sourceTree = "<group>";
+		};
+		2EB34DE126405BB1009A2129 /* ActionButton */ = {
+			isa = PBXGroup;
+			children = (
+				2EB34DE226405BC3009A2129 /* TreeEditorActionCell.swift */,
+			);
+			path = ActionButton;
+			sourceTree = "<group>";
+		};
 		2ED0125526373BD7006A8683 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				2EB34DE126405BB1009A2129 /* ActionButton */,
 				2E9A5A99263B403700C5085F /* StepperCell */,
 				2E9A5A98263B402C00C5085F /* EnterDataCell */,
 				2E9A5A97263B402200C5085F /* DataCell */,
@@ -584,7 +625,7 @@
 		2ED57E642618B4F700EC9033 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				2ED57E912618E82C00EC9033 /* MapViewControllerFactory.swift */,
+				2ED57E912618E82C00EC9033 /* MapViewModuleFactory.swift */,
 				2ED57EAF2619CD0B00EC9033 /* Presenter */,
 				2ED57EAE2619CD0300EC9033 /* Interactor */,
 				2ED57E962618E87F00EC9033 /* View */,
@@ -647,6 +688,7 @@
 				2ED57ED02619E43600EC9033 /* MapCoordinator.swift */,
 				2ED0FC272633F702006A8683 /* CreateTreeCoordinator.swift */,
 				2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */,
+				2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */,
 			);
 			path = Coodinators;
 			sourceTree = "<group>";
@@ -885,18 +927,21 @@
 			files = (
 				2EB34D58263EBEF4009A2129 /* ViewRepresentable.swift in Sources */,
 				2ED0FC2D26340A8B006A8683 /* MapObserverModuleIO.swift in Sources */,
+				2EB34DE326405BC3009A2129 /* TreeEditorActionCell.swift in Sources */,
 				2EB34DBB26402CA4009A2129 /* TreeDetailsMapView.swift in Sources */,
 				2E968815260CD48D00574BE2 /* TreeModels.swift in Sources */,
 				2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */,
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
 				2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */,
-				2EAE5A78261F5E74005E382B /* Interactor.swift in Sources */,
 				2ED0FC432635B931006A8683 /* TreeEditorViewIO.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
+				2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */,
+				2E9831C62647E5920088193B /* IResolver.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
 				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
+				2E9831812647DADE0088193B /* ServiceAssembly.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */,
 				2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */,
@@ -919,12 +964,13 @@
 				2E01FF73262DE8EE00DA2EF1 /* MapPointChooserModuleFactory.swift in Sources */,
 				2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
-				2E3946402621CB310001E5FA /* Presenter.swift in Sources */,
+				2E9831912647DEBB0088193B /* UIConfiguratorsAssembly.swift in Sources */,
 				2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */,
 				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
 				2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */,
 				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
 				2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */,
+				2EB34DDA26405B39009A2129 /* TreeEditorFormCustomType.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
 				2EB34D5D263F013A009A2129 /* ViewRepresentableModel.swift in Sources */,
@@ -941,13 +987,15 @@
 				2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */,
 				2E01FF85262DEC6E00DA2EF1 /* MapPointChooserInteractor.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
+				2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */,
 				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
-				2ED57E922618E82C00EC9033 /* MapViewControllerFactory.swift in Sources */,
+				2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */,
 				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
 				2E01FF98262DFEFA00DA2EF1 /* TreeEditorViewController.swift in Sources */,
 				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
+				2EB34DCF264056AB009A2129 /* EditTreeDetailsCoordinator.swift in Sources */,
 				2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,

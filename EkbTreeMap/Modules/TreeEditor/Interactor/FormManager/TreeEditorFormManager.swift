@@ -11,6 +11,7 @@ import Foundation
 protocol TreeEditorFormManagerDelegate: AnyObject {
     
     func didUpdateItem(type: TreeInfoCellType, value: String?)
+    func didSelectItem(type: TreeEditorFormCustomType)
 }
 
 

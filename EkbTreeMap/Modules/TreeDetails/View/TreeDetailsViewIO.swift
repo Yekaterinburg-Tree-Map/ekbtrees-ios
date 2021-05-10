@@ -8,18 +8,27 @@
 import RxSwift
 
 
-struct TreeDetailsViewOutput {
+struct TreeDetailsView {
     
-    var didLoad: Observable<Void> = .never()
-    var didTapAction: Observable<Void> = .never()
-    var didTapClose: Observable<Void> = .never()
+    struct Input {
+        
+        var title: Observable<String> = .never()
+        var items: Observable<[ViewRepresentableModel]> = .never()
+        var buttonTitle: Observable<String> = .never()
+        var isButtonHidden: Observable<Bool> = .never()
+    }
+    
+    struct Output {
+        
+        var didLoad: Observable<Void> = .never()
+        var didTapAction: Observable<Void> = .never()
+        var didTapClose: Observable<Void> = .never()
+
+    }
 }
 
 
-struct TreeDetailsViewInput {
+protocol TreeDetailsConfigurable {
     
-    var title: Observable<String> = .never()
-    var items: Observable<[ViewRepresentableModel]> = .never()
-    var buttonTitle: Observable<String> = .never()
-    var isButtonHidden: Observable<Bool> = .never()
+    func configure(with output: TreeDetailsView.Output) -> TreeDetailsView.Input
 }

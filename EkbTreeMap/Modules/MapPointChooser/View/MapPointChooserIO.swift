@@ -9,16 +9,25 @@ import RxSwift
 import UIKit
 
 
-struct MapPointChooserViewInput {
+struct MapPointChooserView {
     
-    var mapFactory: Observable<() -> UIViewController> = .never()
-    var doneButtonImage: Observable<UIImage?> = .never()
+    struct Input {
+        
+        var title: Observable<String> = .never()
+        var mapFactory: Observable<() -> UIViewController> = .never()
+        var doneButtonImage: Observable<UIImage?> = .never()
+    }
+    
+    struct Output {
+        
+        var didLoad: Observable<Void> = .never()
+        var didTapDone: Observable<Void> = .never()
+        var didTapClose: Observable<Void> = .never()
+    }
 }
 
 
-struct MapPointChooserViewOutput {
+protocol MapPointChooserConfigurable {
     
-    var didLoad: Observable<Void> = .never()
-    var didTapDone: Observable<Void> = .never()
-    var didTapClose: Observable<Void> = .never()
+    func configure(with output: MapPointChooserView.Output) -> MapPointChooserView.Input
 }
