@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 
 final class ViewRepresentableStackView: UIStackView {
@@ -27,6 +29,16 @@ final class ViewRepresentableStackView: UIStackView {
         arrangedSubviews.forEach {
             removeArrangedSubview($0)
             $0.removeFromSuperview()
+        }
+    }
+}
+
+
+extension Reactive where Base == ViewRepresentableStackView {
+    
+    var items: Binder<[ViewRepresentableModel]> {
+        Binder(self.base) { stackView, elements in
+            stackView.updateItems(elements)
         }
     }
 }

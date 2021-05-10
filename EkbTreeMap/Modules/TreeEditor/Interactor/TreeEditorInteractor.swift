@@ -8,7 +8,7 @@
 import RxSwift
 
 
-final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditorViewInput> {
+final class TreeEditorInteractor: TreeEditorConfigurable {
     
     // MARK: Private Properties
     
@@ -22,7 +22,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
     
-    private var unvalidFields: [TreeEditorCellType] = []
+    private var unvalidFields: [TreeInfoCellType] = []
     
     
     // MARK: Lifecycle
@@ -40,7 +40,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     
     // MARK: Public
     
-    override func configureIO(with output: TreeEditorViewOutput) -> TreeEditorViewInput? {
+    func configure(with output: TreeEditorView.Output) -> TreeEditorView.Input {
         bag.insert {
             output.didLoad
                 .subscribe(onNext: { [weak self] in self?.didLoad() })
@@ -48,9 +48,9 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
             output.didTapSave
                 .subscribe(onNext: { [weak self] in self?.didTapSave() })
         }
-        return TreeEditorViewInput(title: titleSubject,
-                                   formItems: formItemsSubject,
-                                   saveButtonTitle: saveButtonTitleSubject)
+        return TreeEditorView.Input(title: titleSubject,
+                                    formItems: formItemsSubject,
+                                    saveButtonTitle: saveButtonTitleSubject)
     }
     
     
@@ -58,6 +58,8 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     
     private func didLoad() {
         formManager.delegate = self
+        output?.moduleDidLoad(input: self)
+        
         configureForm()
     }
     
@@ -68,7 +70,7 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
         }
         // save data
         
-        output?.didSave()
+        output?.moduleDidSave(input: self)
     }
     
     /// MARK: Form configuration
@@ -80,9 +82,12 @@ final class TreeEditorInteractor: AnyInteractor<TreeEditorViewOutput, TreeEditor
     }
 }
 
+
+// MARK: - TreeEditorFormManagerDelegate
+
 extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
     
-    func didUpdateItem(type: TreeEditorCellType, value: String?) {
+    func didUpdateItem(type: TreeInfoCellType, value: String?) {
         do {
             switch type {
             case .longitude, .latitude:
@@ -110,5 +115,21 @@ extension TreeEditorInteractor: TreeEditorFormManagerDelegate {
         } catch {
             unvalidFields.append(type)
         }
+    }
+    
+    func didSelectItem(type: TreeEditorFormCustomType) {
+        output?.moduleDidSelectCustomAction(input: self, type: type)
+    }
+}
+
+
+// MARK: - TreeEditorModuleInput
+
+extension TreeEditorInteractor: TreeEditorModuleInput {
+    
+    func didUpdateLocation(_ location: TreePosition) {
+        pendingData.latitude = location.latitude
+        pendingData.longitude = location.longitude
+        configureForm()
     }
 }

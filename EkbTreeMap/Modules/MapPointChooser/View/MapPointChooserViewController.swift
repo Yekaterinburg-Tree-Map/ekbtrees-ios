@@ -20,7 +20,7 @@ class MapPointChooserViewController: UIViewController {
     
     // MARK: Private Properties
     
-    private var interactor: AnyInteractor<MapPointChooserViewOutput, MapPointChooserViewInput>!
+    private var interactor: MapPointChooserConfigurable!
     
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
@@ -28,8 +28,7 @@ class MapPointChooserViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    class func instantiate(_ interactor: AnyInteractor<MapPointChooserViewOutput,
-                                                       MapPointChooserViewInput>) -> MapPointChooserViewController {
+    class func instantiate(_ interactor: MapPointChooserConfigurable) -> MapPointChooserViewController {
         let vc = MapPointChooserViewController()
         vc.interactor = interactor
         return vc
@@ -81,24 +80,28 @@ class MapPointChooserViewController: UIViewController {
     }
     
     private func configureIO() {
-        let output = MapPointChooserViewOutput(didLoad: didLoadSubject,
-                                               didTapDone: circleButton.rx.tap.asObservable(),
-                                               didTapClose: didTapCloseSubject)
+        let output = MapPointChooserView.Output(didLoad: didLoadSubject,
+                                                didTapDone: circleButton.rx.tap.asObservable(),
+                                                didTapClose: didTapCloseSubject)
         
-        let input = interactor.configureIO(with: output)
+        let input = interactor.configure(with: output)
         
-        input?.mapFactory
-            .observe(on: MainScheduler.asyncInstance)
-            .withUnretained(self)
-            .subscribe(onNext: { obj, factory in
-                let vc = factory()
-                obj.embedViewController(vc, to: obj.containerView)
-            })
-            .disposed(by: bag)
-        
-        input?.doneButtonImage
-            .observe(on: MainScheduler.asyncInstance)
-            .bind(to: circleButton.rx.icon)
-            .disposed(by: bag)
+        bag.insert {
+            input.title
+                .observe(on: MainScheduler.asyncInstance)
+                .bind(to: rx.title)
+            
+            input.mapFactory
+                .observe(on: MainScheduler.asyncInstance)
+                .withUnretained(self)
+                .subscribe(onNext: { obj, factory in
+                    let vc = factory()
+                    obj.embedViewController(vc, to: obj.containerView)
+                })
+            
+            input.doneButtonImage
+                .observe(on: MainScheduler.asyncInstance)
+                .bind(to: circleButton.rx.icon)
+        }
     }
 }

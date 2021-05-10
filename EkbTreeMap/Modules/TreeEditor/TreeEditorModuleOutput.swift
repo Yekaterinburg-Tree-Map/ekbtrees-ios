@@ -5,10 +5,16 @@
 //  Created by s.petrov on 25.04.2021.
 //
 
-import Foundation
+
+protocol TreeEditorModuleInput: AnyObject {
+    
+    func didUpdateLocation(_ location: TreePosition)
+}
 
 
 protocol TreeEditorModuleOutput: AnyObject {
     
-    func didSave()
+    func moduleDidLoad(input: TreeEditorModuleInput)
+    func moduleDidSave(input: TreeEditorModuleInput)
+    func moduleDidSelectCustomAction(input: TreeEditorModuleInput, type: TreeEditorFormCustomType)
 }

@@ -81,7 +81,7 @@ final class LoginViewController: UIViewController {
     
     // MARK: Public Properties
     
-    var interactor: AnyInteractor<LoginViewOutput, LoginViewInput>!
+    var interactor: LoginViewConfigurable!
     
     
     // MARK: Private Properties
@@ -129,14 +129,14 @@ final class LoginViewController: UIViewController {
     }
     
     private func configureIO() {
-        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
-                                                       didTapEnter: didTapEnter))
+        let input = interactor.configure(with: .init(didLoad: didLoadSubject,
+                                                     didTapEnter: didTapEnter))
         
-        input?.title
+        input.title
             .bind(to: loginTitle.rx.text)
             .disposed(by: bag)
         
-        input?.availableButton
+        input.availableButton
             .withUnretained(self)
             .subscribe(onNext: { $0.addEntryButtons($1) })
             .disposed(by: bag)

@@ -10,26 +10,25 @@ import SnapKit
 import YandexMapsMobile
 import RxSwift
 import RxCocoa
-import CoreLocation
 
 
 final class MapViewController: UIViewController {
     
     // MARK: Private
     
-    private var interactor: AnyInteractor<MapViewOutput, MapViewInput>!
+    private var interactor: MapViewConfigurable!
     private var mapView: YMKMapView!
     
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapPointSubject = PublishSubject<String>()
-    private let didTapOnMapSubject = PublishSubject<CLLocationCoordinate2D>()
+    private let didTapOnMapSubject = PublishSubject<TreePosition>()
     private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     private let bag = DisposeBag()
     
     
     // MARK: Lifecycle
     
-    class func instantiate(interactor: AnyInteractor<MapViewOutput, MapViewInput>) -> MapViewController {
+    class func instantiate(interactor: MapViewConfigurable) -> MapViewController {
         let vc = MapViewController()
         vc.interactor = interactor
         return vc
@@ -66,7 +65,7 @@ final class MapViewController: UIViewController {
         mapView.mapWindow.map.addCameraListener(with: self)
     }
     
-    private func moveToPoint(_ point: CLLocationCoordinate2D) {
+    private func moveToPoint(_ point: TreePosition) {
         let target = YMKPoint(latitude: point.latitude, longitude: point.longitude)
         mapView.mapWindow.map.move(
             with: YMKCameraPosition.init(target: target, zoom: 15, azimuth: 0, tilt: 0),
@@ -81,22 +80,22 @@ final class MapViewController: UIViewController {
                                    radius: Float(point.radius / 2))
             let stroke = UIColor.clear
             let obj = objects.addCircle(with: circle,
-                              stroke: stroke,
-                              strokeWidth: 0,
-                              fill: point.circleColor.withAlphaComponent(0.5))
+                                        stroke: stroke,
+                                        strokeWidth: 0,
+                                        fill: point.circleColor.withAlphaComponent(0.5))
             obj.userData = point.id
         }
     }
     
     private func handleCameraPositionChanged(map: YMKMap) {
         let visibleRegion = map.visibleRegion
-        let topLeftPoint = CLLocationCoordinate2D(latitude: visibleRegion.topLeft.latitude,
-                                                  longitude: visibleRegion.topLeft.longitude)
-        let bottomRightPoint = CLLocationCoordinate2D(latitude: visibleRegion.bottomRight.latitude,
-                                                      longitude: visibleRegion.bottomRight.longitude)
+        let topLeftPoint = TreePosition(latitude: visibleRegion.topLeft.latitude,
+                                        longitude: visibleRegion.topLeft.longitude)
+        let bottomRightPoint = TreePosition(latitude: visibleRegion.bottomRight.latitude,
+                                            longitude: visibleRegion.bottomRight.longitude)
         let centerLongitude = (topLeftPoint.longitude + bottomRightPoint.longitude) / 2
         let centerLatitude = (topLeftPoint.latitude + bottomRightPoint.latitude) / 2
-        let centerPoint = CLLocationCoordinate2D(latitude: centerLatitude, longitude: centerLongitude)
+        let centerPoint = TreePosition(latitude: centerLatitude, longitude: centerLongitude)
         let region = MapViewVisibleRegionPoints(topLeft: topLeftPoint,
                                                 center: centerPoint,
                                                 bottomRight: bottomRightPoint)
@@ -105,18 +104,18 @@ final class MapViewController: UIViewController {
     }
     
     private func setupIO() {
-        let input = interactor.configureIO(with: .init(didLoad: didLoadSubject,
-                                                       didTapPoint: didTapPointSubject,
-                                                       didTapOnMap: didTapOnMapSubject,
-                                                       didChangeVisibleRegion: didChangeVisibleRegionSubject))
+        let input = interactor.configure(with: .init(didLoad: didLoadSubject,
+                                                     didTapPoint: didTapPointSubject,
+                                                     didTapOnMap: didTapOnMapSubject,
+                                                     didChangeVisibleRegion: didChangeVisibleRegionSubject))
         
-        input?.moveToPoint
+        input.moveToPoint
             .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)
             .subscribe(onNext: { $0.moveToPoint($1) })
             .disposed(by: bag)
         
-        input?.visiblePoints
+        input.visiblePoints
             .observe(on: MainScheduler.asyncInstance)
             .withUnretained(self)
             .subscribe(onNext: { $0.showPoints($1) })

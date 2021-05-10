@@ -12,12 +12,22 @@ class MapPointChooserModuleFactory: Factory {
     
     struct Context {
         let output: MapPointChooserModuleOutput
-        let pendingData: TreeEditorPendingData
+    }
+    
+    // MARK: Private Properties
+    
+    private let mapViewFactory: MapViewModuleFactory
+    
+    
+    // MARK: Lifecycle
+    
+    init(mapViewFactory: MapViewModuleFactory) {
+        self.mapViewFactory = mapViewFactory
     }
     
     
     func build(with context: Context) -> MapPointChooserViewController {
-        let interactor = MapPointChooserInteractor(pendingData: context.pendingData, output: context.output)
+        let interactor = MapPointChooserInteractor(output: context.output, mapViewFactory: mapViewFactory)
         let vc = MapPointChooserViewController.instantiate(interactor)
         return vc
     }

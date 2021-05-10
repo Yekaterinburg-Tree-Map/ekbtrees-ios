@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreLocation
 
 
 final class CreateTreeCoordinator: Coordinator {
@@ -18,12 +17,16 @@ final class CreateTreeCoordinator: Coordinator {
     private weak var navigationController: UINavigationController?
     private weak var delegate: CoordinatorDelegate?
     
+    private let resolver: IResolver
+    
     
     // MARK: Lifecycle
     
     init(rootViewController: UIViewController,
+         resolver: IResolver,
          delegate: CoordinatorDelegate) {
         self.rootViewController = rootViewController
+        self.resolver = resolver
         self.delegate = delegate
     }
     
@@ -39,8 +42,8 @@ final class CreateTreeCoordinator: Coordinator {
     // MARK: Private
     
     private func presentPointChooserModule(animated: Bool) {
-        let factory = MapPointChooserModuleFactory()
-        let vc = factory.build(with: .init(output: self, pendingData: pendingData))
+        let factory: MapPointChooserModuleFactory = resolver.resolve()
+        let vc = factory.build(with: .init(output: self))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
@@ -48,8 +51,7 @@ final class CreateTreeCoordinator: Coordinator {
     }
     
     private func pushTreeDetailsForm(animated: Bool) {
-        let factory = TreeEditorModuleFactory(formManager: TreeEditorFormManager(),
-                                              formFormatter: TreeEditorFormFormatter())
+        let factory: TreeEditorModuleFactory = resolver.resolve(name: TreeEditorFormName.new.rawValue)
         let vc = factory.build(with: .init(output: self, pendingData: pendingData))
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -58,7 +60,9 @@ final class CreateTreeCoordinator: Coordinator {
 
 extension CreateTreeCoordinator: MapPointChooserModuleOutput {
     
-    func didSelectPoint(with location: CLLocationCoordinate2D) {
+    func didSelectPoint(with location: TreePosition) {
+        pendingData.longitude = location.longitude
+        pendingData.latitude = location.latitude
         pushTreeDetailsForm(animated: true)
     }
     
@@ -70,7 +74,15 @@ extension CreateTreeCoordinator: MapPointChooserModuleOutput {
 
 extension CreateTreeCoordinator: TreeEditorModuleOutput {
     
-    func didSave() {
+    func moduleDidLoad(input: TreeEditorModuleInput) {
+        // unused
+    }
+    
+    func moduleDidSave(input: TreeEditorModuleInput) {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
+    }
+    
+    func moduleDidSelectCustomAction(input: TreeEditorModuleInput, type: TreeEditorFormCustomType) {
+        // unused
     }
 }

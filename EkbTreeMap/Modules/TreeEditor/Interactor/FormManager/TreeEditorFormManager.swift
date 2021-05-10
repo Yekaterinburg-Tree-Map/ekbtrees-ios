@@ -8,29 +8,17 @@
 import Foundation
 
 
-enum TreeEditorCellType: CaseIterable {
-    case longitude
-    case latitude
-    case species
-    case height
-    case numberOfTrees
-    case girth
-    case crown
-    case firstBranchHeight
-    case rating
-}
-
-
 protocol TreeEditorFormManagerDelegate: AnyObject {
     
-    func didUpdateItem(type: TreeEditorCellType, value: String?)
+    func didUpdateItem(type: TreeInfoCellType, value: String?)
+    func didSelectItem(type: TreeEditorFormCustomType)
 }
 
 
 protocol TreeEditorFormManagerProtocol {
     
     var delegate: TreeEditorFormManagerDelegate? { get set }
-    func configureData(pendingData: TreeEditorPendingData, failedFields: [TreeEditorCellType]) -> [ViewRepresentableModel]
+    func configureData(pendingData: TreeEditorPendingData, failedFields: [TreeInfoCellType]) -> [ViewRepresentableModel]
 }
 
 
@@ -43,12 +31,12 @@ class TreeEditorFormManager: TreeEditorFormManagerProtocol {
     
     // MARK: Private Properties
     
-    private var failedFields: [TreeEditorCellType] = []
+    private var failedFields: [TreeInfoCellType] = []
     
 
     // MARK: Private Properties
     
-    private lazy var cellMapping: [TreeEditorCellType: (TreeEditorPendingData) -> (ViewRepresentableModel)] = [
+    private lazy var cellMapping: [TreeInfoCellType: (TreeEditorPendingData) -> (ViewRepresentableModel)] = [
         .latitude: setupLatitudeCell(_:),
         .longitude: setupLongitudeCell(_:),
         .species: setupSpeciesCell(_:),
@@ -64,9 +52,9 @@ class TreeEditorFormManager: TreeEditorFormManagerProtocol {
     // MARK: Public
     
     func configureData(pendingData: TreeEditorPendingData,
-                       failedFields: [TreeEditorCellType]) -> [ViewRepresentableModel] {
+                       failedFields: [TreeInfoCellType]) -> [ViewRepresentableModel] {
         self.failedFields = failedFields
-        return TreeEditorCellType.allCases
+        return TreeInfoCellType.allCases
             .compactMap { cellMapping[$0] }
             .map { $0(pendingData) }
     }
@@ -171,11 +159,11 @@ class TreeEditorFormManager: TreeEditorFormManagerProtocol {
     
     // MARK: - Base configuration
     
-    private func configureBaseCell(type: TreeEditorCellType, subtitle: String) -> ViewRepresentableModel {
+    private func configureBaseCell(type: TreeInfoCellType, subtitle: String) -> ViewRepresentableModel {
         GenericViewModel<TreeEditorDataCell>(data: .init(title: type.title, subtitle: subtitle))
     }
     
-    private func configurePickerCell(type: TreeEditorCellType,
+    private func configurePickerCell(type: TreeInfoCellType,
                                      selectedItem: String? = nil,
                                      items: [String],
                                      action: @escaping (String?) -> ()) -> ViewRepresentableModel {
@@ -186,7 +174,7 @@ class TreeEditorFormManager: TreeEditorFormManagerProtocol {
         return GenericViewModel<TreeEditorPickerCell>(data: data)
     }
     
-    private func configureEnterDataCell(type: TreeEditorCellType,
+    private func configureEnterDataCell(type: TreeInfoCellType,
                                         value: String?,
                                         placeholder: String,
                                         action: @escaping (String) -> ()) -> ViewRepresentableModel {
@@ -196,35 +184,5 @@ class TreeEditorFormManager: TreeEditorFormManagerProtocol {
                                                        isFailed: failedFields.contains(type),
                                                        action: action)
         return GenericViewModel<TreeEditorEnterDataCell>(data: data)
-    }
-}
-
-
-
-// MARK: - TreeEditorFormType + Localization
-
-private extension TreeEditorCellType {
-    
-    var title: String {
-        switch self {
-        case .latitude:
-            return "Широта"
-        case .longitude:
-            return "Долгота"
-        case .species:
-            return "Порода"
-        case .height:
-            return "Высота"
-        case .numberOfTrees:
-            return "Число стволов"
-        case .rating:
-            return "Визуальное состояние"
-        case .crown:
-            return "Диаметр кроны(м)"
-        case .firstBranchHeight:
-            return "Высота первой ветви"
-        case .girth:
-            return "Обхват дерева(м)"
-        }
     }
 }
