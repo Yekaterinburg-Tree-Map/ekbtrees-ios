@@ -24,6 +24,5 @@ final class UIConfiguratorsAssembly: Assembly {
         
         container.autoregister(TreeEditorFormFormatterProtocol.self, initializer: TreeEditorFormFormatter.init)
         container.autoregister(TreeDetailsFormFactoryProtocol.self, initializer: TreeDetailsFormFactory.init)
-        container.autoregister(TreeDetailsFlowLayoutDelegate.self, initializer: TreeDetailsFlowLayoutDelegate.init)
     }
 }

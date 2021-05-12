@@ -14,14 +14,6 @@ final class TreeDetailsViewController: UIViewController {
     
     // MARK: Frame
     
-    private lazy var collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
-        view.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
-        return view
-    }()
-    
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
@@ -57,11 +49,9 @@ final class TreeDetailsViewController: UIViewController {
     
     // MARK: Lifecycle
     
-    class func instantiate(with interactor: TreeDetailsConfigurable,
-                           flowLayout: TreeDetailsFlowLayoutDelegate) -> TreeDetailsViewController {
+    class func instantiate(with interactor: TreeDetailsConfigurable) -> TreeDetailsViewController {
         let vc = TreeDetailsViewController()
         vc.interactor = interactor
-        vc.collectionView.delegate = flowLayout
         return vc
     }
     
