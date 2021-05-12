@@ -13,6 +13,7 @@ extension UIImage {
     enum general {
         static var checkmark: UIImage? { UIImage(named: "checkmark") }
         static var plus: UIImage? { UIImage(named: "plus") }
+        static var plus_colored: UIImage? { UIImage(named: "plus_colored") }
         static var arrowDown: UIImage? { UIImage(named: "arrow_down") }
         static var userMale: UIImage? { UIImage(named: "user-male") }
     }

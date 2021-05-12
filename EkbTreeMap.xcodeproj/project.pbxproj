@@ -89,6 +89,8 @@
 		2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */; };
 		2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */; };
 		2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */; };
+		2EE2BC53264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */; };
+		2EE2BC5E264C502800DC069F /* TreeDetailsAddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */; };
 		2EE3673A620F3B7DCBA72998 /* Pods_EkbTreeMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */; };
 		2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE86182627579C002A9429 /* CircleImagedButton.swift */; };
 		2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE861D26275D5C002A9429 /* AuthorizationState.swift */; };
@@ -201,6 +203,8 @@
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModuleFactory.swift; sourceTree = "<group>"; };
 		2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoContainerView.swift; sourceTree = "<group>"; };
+		2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsAddPhotoView.swift; sourceTree = "<group>"; };
 		2EEE86182627579C002A9429 /* CircleImagedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImagedButton.swift; sourceTree = "<group>"; };
 		2EEE861D26275D5C002A9429 /* AuthorizationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationState.swift; sourceTree = "<group>"; };
 		4B42923BC04993C8BA07528D /* Pods-EkbTreeMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.debug.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.debug.xcconfig"; sourceTree = "<group>"; };
@@ -568,6 +572,7 @@
 		2EB34D8C263FE9A5009A2129 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2EE2BC51264C4CC300DC069F /* Photos */,
 				2EB34DB926402C91009A2129 /* MapView */,
 				2EB34D93263FE9F9009A2129 /* TreeDetailsViewController.swift */,
 				2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */,
@@ -722,6 +727,15 @@
 				2EAE5A84261F64F1005E382B /* LoginButtonType.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2EE2BC51264C4CC300DC069F /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */,
+				2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */,
+			);
+			path = Photos;
 			sourceTree = "<group>";
 		};
 		96DAE8556E6A8CB20BE4A1C5 /* Frameworks */ = {
@@ -937,6 +951,7 @@
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
+				2EE2BC5E264C502800DC069F /* TreeDetailsAddPhotoView.swift in Sources */,
 				2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */,
 				2E9831C62647E5920088193B /* IResolver.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
@@ -992,6 +1007,7 @@
 				2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */,
 				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
 				2E01FF98262DFEFA00DA2EF1 /* TreeEditorViewController.swift in Sources */,
+				2EE2BC53264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift in Sources */,
 				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
