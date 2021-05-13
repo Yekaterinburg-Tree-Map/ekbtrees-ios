@@ -41,7 +41,7 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -69,9 +69,8 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
             $0.top.bottom.equalTo(self)
             $0.left.right.equalToSuperview()
         }
-        
-        snp.makeConstraints {
-            $0.height.equalTo(80)
-        }
+        let view = TreeDetailsAddPhotoView.instantiate()
+        view.configure(with: { print("add photo")})
+        stackView.addArrangedSubview(view)
     }
 }

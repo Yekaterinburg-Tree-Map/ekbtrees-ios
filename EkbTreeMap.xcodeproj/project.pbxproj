@@ -87,6 +87,7 @@
 		2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */; };
 		2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED02619E43600EC9033 /* MapCoordinator.swift */; };
 		2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */; };
+		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */; };
 		2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */; };
 		2EE2BC53264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */; };
@@ -201,6 +202,7 @@
 		2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED02619E43600EC9033 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
+		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModuleFactory.swift; sourceTree = "<group>"; };
 		2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoContainerView.swift; sourceTree = "<group>"; };
@@ -709,6 +711,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2EDAA70B264D84F200D7F6BE /* PhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */,
+				2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */,
+			);
+			path = PhotoView;
+			sourceTree = "<group>";
+		};
 		2EDC6C17261CC19000BB7F5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -732,8 +743,8 @@
 		2EE2BC51264C4CC300DC069F /* Photos */ = {
 			isa = PBXGroup;
 			children = (
+				2EDAA70B264D84F200D7F6BE /* PhotoView */,
 				2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */,
-				2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */,
 			);
 			path = Photos;
 			sourceTree = "<group>";
@@ -995,6 +1006,7 @@
 				2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */,
 				2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */,
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
+				2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
 				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,

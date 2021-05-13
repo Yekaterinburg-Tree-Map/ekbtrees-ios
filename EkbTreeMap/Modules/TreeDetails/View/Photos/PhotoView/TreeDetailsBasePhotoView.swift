@@ -1,22 +1,14 @@
 //
-//  TreeDetailsAddPhotoView.swift
+//  TreeDetailsBasePhotoView.swift
 //  EkbTreeMap
 //
-//  Created by s.petrov on 12.05.2021.
+//  Created by s.petrov on 13.05.2021.
 //
 
 import UIKit
 
 
-final class TreeDetailsAddPhotoView: UIButton, ViewRepresentable {
-    
-    // MARK: Public Structures
-    
-    struct DisplayData {
-        let image: UIImage?
-        let action: () -> ()
-    }
-    
+class TreeDetailsBasePhotoView: UIButton {
     
     // MARK: Private Properties
     
@@ -31,10 +23,6 @@ final class TreeDetailsAddPhotoView: UIButton, ViewRepresentable {
     
     // MARK: Lifecycle
     
-    class func instantiate() -> TreeDetailsAddPhotoView {
-        TreeDetailsAddPhotoView(frame: .zero)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -47,9 +35,8 @@ final class TreeDetailsAddPhotoView: UIButton, ViewRepresentable {
     
     // MARK: Public
     
-    func configure(with data: DisplayData) {
-        iconView.image = data.image
-        action = data.action
+    func configure(with action: @escaping () -> ()) {
+        self.action = action
     }
     
     
@@ -62,16 +49,14 @@ final class TreeDetailsAddPhotoView: UIButton, ViewRepresentable {
     
     private func setupView() {
         layer.cornerRadius = 8
-        backgroundColor = UIColor.systemGray
+        backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 0.95, alpha: 1)
         setupConstraints()
         addTarget(self, action: #selector(didTap), for: .touchUpInside)
     }
     
     private func setupConstraints() {
-        addSubview(iconView)
-        iconView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(32)
+        snp.makeConstraints {
+            $0.width.height.equalTo(80)
         }
     }
 }

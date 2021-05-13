@@ -38,6 +38,8 @@ class TreeDetailsFormFactory: TreeDetailsFormFactoryProtocol {
             .compactMap { cellMapping[$0] }
             .compactMap { $0(tree) }
         infoCells.insert(setupMapCell(tree), at: 0)
+        let photos = GenericViewModel<TreeDetailsPhotoContainerView>(data: .init())
+        infoCells.insert(photos, at: 1)
         
         return infoCells
     }
