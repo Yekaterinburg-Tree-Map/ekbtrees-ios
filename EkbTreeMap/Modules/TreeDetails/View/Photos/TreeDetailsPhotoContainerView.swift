@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 
 final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
@@ -14,6 +15,7 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     
     struct DisplayData {
         
+        let photoItems: [ViewRepresentableModel]
     }
     
     
@@ -52,7 +54,9 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     // MARK: Public
     
     func configure(with data: DisplayData) {
-        
+        data.photoItems.forEach {
+            stackView.addArrangedSubview($0.setupView())
+        }
     }
     
     
@@ -69,8 +73,15 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
             $0.top.bottom.equalTo(self)
             $0.left.right.equalToSuperview()
         }
-        let view = TreeDetailsAddPhotoView.instantiate()
-        view.configure(with: { print("add photo")})
-        stackView.addArrangedSubview(view)
+    }
+}
+
+
+extension Reactive where Base == TreeDetailsPhotoContainerView {
+    
+    var data: Binder<TreeDetailsPhotoContainerView.DisplayData> {
+        Binder(self.base) { view, data in
+            view.configure(with: data)
+        }
     }
 }

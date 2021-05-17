@@ -11,6 +11,8 @@ target 'EkbTreeMap' do
   pod 'Swinject'
   pod 'SwinjectAutoregistration'  
   pod 'IQKeyboardManagerSwift'
+  pod 'UCZProgressView'
+  pod 'YPImagePicker'
 
   # maps
   pod 'YandexMapsMobile', ’4.0.0-lite’

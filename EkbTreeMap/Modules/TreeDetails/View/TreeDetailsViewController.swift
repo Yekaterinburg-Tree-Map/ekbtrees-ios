@@ -16,7 +16,7 @@ final class TreeDetailsViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
+        scroll.contentInset = .init(top: 0, left: 0, bottom: 80, right: 0)
         scroll.showsVerticalScrollIndicator = false
         scroll.showsHorizontalScrollIndicator = false
         return scroll
@@ -28,6 +28,8 @@ final class TreeDetailsViewController: UIViewController {
         view.spacing = 8
         return view
     }()
+    
+    private lazy var photosContainer = TreeDetailsPhotoContainerView(frame: .zero)
     
     private lazy var editButton: UIButton = {
        let button = UIButton()
@@ -91,7 +93,14 @@ final class TreeDetailsViewController: UIViewController {
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints {
             $0.left.right.equalTo(view)
-            $0.top.bottom.equalToSuperview()
+            $0.top.equalToSuperview()
+        }
+        
+        scrollView.addSubview(photosContainer)
+        photosContainer.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom)
+            $0.left.right.equalTo(stackView)
+            $0.bottom.equalToSuperview()
         }
         
         view.addSubview(editButton)
@@ -120,6 +129,9 @@ final class TreeDetailsViewController: UIViewController {
             
             input.title
                 .bind(to: rx.title)
+            
+            input.photos
+                .bind(to: photosContainer.rx.data)
         }
     }
 

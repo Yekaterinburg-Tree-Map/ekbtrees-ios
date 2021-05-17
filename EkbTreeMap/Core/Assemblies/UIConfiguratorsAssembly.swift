@@ -7,6 +7,7 @@
 
 import Swinject
 import SwinjectAutoregistration
+import YPImagePicker
 
 
 final class UIConfiguratorsAssembly: Assembly {
@@ -24,5 +25,16 @@ final class UIConfiguratorsAssembly: Assembly {
         
         container.autoregister(TreeEditorFormFormatterProtocol.self, initializer: TreeEditorFormFormatter.init)
         container.autoregister(TreeDetailsFormFactoryProtocol.self, initializer: TreeDetailsFormFactory.init)
+        
+        container.register(YPImagePickerConfiguration.self) { _ in
+            var configuration = YPImagePickerConfiguration()
+            configuration.showsPhotoFilters = false
+            configuration.shouldSaveNewPicturesToAlbum = false
+            configuration.startOnScreen = .library
+            configuration.library.defaultMultipleSelection = true
+            configuration.library.maxNumberOfItems = 10
+            return configuration
+        }
+        .inObjectScope(.container)
     }
 }

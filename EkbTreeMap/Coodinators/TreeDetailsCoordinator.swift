@@ -20,6 +20,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
     private weak var rootViewController: UIViewController?
     private weak var navigationController: UINavigationController?
     private weak var delegate: CoordinatorDelegate?
+    private weak var detailsInput: TreeDetailsModuleInput?
     
     private let resolver: IResolver
     
@@ -69,6 +70,10 @@ class TreeDetailsCoordinator: ParentCoordinator {
 
 extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     
+    func moduleDidLoad(input: TreeDetailsModuleInput) {
+        detailsInput = input
+    }
+    
     func moduleWantsToChangeDetails(input: TreeDetailsModuleInput) {
         guard let rootViewController = navigationController else {
             return
@@ -84,6 +89,21 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     func moduleWantsToClose(input: TreeDetailsModuleInput) {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
+    
+    func moduleWantsToAddPhotos(input: TreeDetailsModuleInput) {
+        let factory: PhotoPickerFactory = resolver.resolve()
+        let vc = factory.build(with: self)
+        navigationController?.present(vc, animated: true)
+    }
+}
+
+
+extension TreeDetailsCoordinator: PhotoPickerOutput {
+    
+    func didSelectPhotos(photos: [UIImage]) {
+        detailsInput?.addPhotos(photos)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
 }
 
 
@@ -95,3 +115,5 @@ extension TreeDetailsCoordinator: CoordinatorDelegate {
         childCoordinators.removeAll(where: {$0 === coordinator })
     }
 }
+
+

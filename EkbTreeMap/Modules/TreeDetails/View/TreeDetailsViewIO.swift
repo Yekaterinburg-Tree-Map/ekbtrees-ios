@@ -16,6 +16,7 @@ struct TreeDetailsView {
         var items: Observable<[ViewRepresentableModel]> = .never()
         var buttonTitle: Observable<String> = .never()
         var isButtonHidden: Observable<Bool> = .never()
+        var photos: Observable<TreeDetailsPhotoContainerView.DisplayData> = .never()
     }
     
     struct Output {

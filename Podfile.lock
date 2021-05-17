@@ -1,5 +1,6 @@
 PODS:
   - IQKeyboardManagerSwift (6.5.6)
+  - PryntTrimmerView (4.0.2)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
@@ -7,11 +8,16 @@ PODS:
     - RxSwift (= 6.1.0)
   - RxSwift (6.1.0)
   - SnapKit (5.0.1)
+  - SteviaLayout (4.7.3)
   - SwiftyJSON (5.0.1)
   - Swinject (2.7.1)
   - SwinjectAutoregistration (2.7.0):
     - Swinject (~> 2.7)
+  - UCZProgressView (1.0.2)
   - YandexMapsMobile (4.0.0-lite)
+  - YPImagePicker (4.5.0):
+    - PryntTrimmerView (~> 4.0.2)
+    - SteviaLayout (~> 4.7.3)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
@@ -21,31 +27,41 @@ DEPENDENCIES:
   - SwiftyJSON
   - Swinject
   - SwinjectAutoregistration
+  - UCZProgressView
   - YandexMapsMobile (= 4.0.0-lite)
+  - YPImagePicker
 
 SPEC REPOS:
   trunk:
     - IQKeyboardManagerSwift
+    - PryntTrimmerView
     - RxCocoa
     - RxRelay
     - RxSwift
     - SnapKit
+    - SteviaLayout
     - SwiftyJSON
     - Swinject
     - SwinjectAutoregistration
+    - UCZProgressView
     - YandexMapsMobile
+    - YPImagePicker
 
 SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
   SwinjectAutoregistration: 330f5012642a8b5c89a8a4adb0c5e52df07382c0
+  UCZProgressView: 55836987c15ee6efb7cd6dfe297556602ee46c94
   YandexMapsMobile: d7d7f3b452209b4c2787beb53bb2dfcea259c70c
+  YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: be47a109629dda7b0abaeca16e3e4bd89a2d7f35
+PODFILE CHECKSUM: 5550ba5f3390414da345c7ecc6d50d4355552053
 
 COCOAPODS: 1.10.0

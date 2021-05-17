@@ -17,8 +17,14 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
     private var output: TreeDetailsModuleOutput?
     
     private let bag = DisposeBag()
+    private lazy var photoManager: TreeDetailsPhotoManager = {
+        let manager = TreeDetailsPhotoManager()
+        manager.delegate = self
+        return manager
+    }()
     private let titleSubject = BehaviorSubject<String>(value: "Детали")
     private let itemsSubject = PublishSubject<[ViewRepresentableModel]>()
+    private let photosSubject = PublishSubject<TreeDetailsPhotoContainerView.DisplayData>()
     private let buttonTitleSubject = BehaviorSubject<String>(value: "Редактировать")
     private let isButtonHiddenSubject = BehaviorSubject<Bool>(value: false)
     
@@ -31,6 +37,8 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
         self.tree = tree
         self.formFactory = formFactory
         self.output = output
+        
+        photoManager.delegate = self
     }
     
     
@@ -50,7 +58,8 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
         return TreeDetailsView.Input(title: titleSubject,
                                      items: itemsSubject,
                                      buttonTitle: buttonTitleSubject,
-                                     isButtonHidden: isButtonHiddenSubject)
+                                     isButtonHidden: isButtonHiddenSubject,
+                                     photos: photosSubject)
     }
     
     
@@ -59,6 +68,13 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
     private func didLoad() {
         let items = formFactory.setupFields(tree: tree)
         itemsSubject.onNext(items)
+        setupPhotos()
+        output?.moduleDidLoad(input: self)
+    }
+    
+    private func setupPhotos() {
+        let photos = photoManager.prepareImages(isEditAvailable: true)
+        photosSubject.onNext(.init(photoItems: photos))
     }
     
     private func didTapAction() {
@@ -75,4 +91,17 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
 
 extension TreeDetailsInteractor: TreeDetailsModuleInput {
     
+    func addPhotos(_ photos: [UIImage]) {
+        photoManager.addPhotos(photos)
+    }
+}
+
+
+// MARK: - TreeDetailsPhotoManagerDelegate
+
+extension TreeDetailsInteractor: TreeDetailsPhotoManagerDelegate {
+    
+    func openAddPhoto() {
+        output?.moduleWantsToAddPhotos(input: self)
+    }
 }
