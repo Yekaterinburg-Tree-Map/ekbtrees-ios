@@ -49,6 +49,7 @@ class TreeDetailsBasePhotoView: UIButton {
     
     private func setupView() {
         layer.cornerRadius = 8
+        clipsToBounds = true
         backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 0.95, alpha: 1)
         setupConstraints()
         addTarget(self, action: #selector(didTap), for: .touchUpInside)

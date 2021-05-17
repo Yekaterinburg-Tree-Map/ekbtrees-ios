@@ -11,6 +11,7 @@ import UIKit
 protocol TreeDetailsPhotoManagerDelegate: AnyObject {
     
     func openAddPhoto()
+    func openPhotoPreview(startingIndex: Int, photos: [UIImage])
 }
 
 
@@ -42,7 +43,7 @@ final class TreeDetailsPhotoManager: TreeDetailsPhotoManagerProtocol {
     }
     
     func prepareImages(isEditAvailable: Bool) -> [ViewRepresentableModel] {
-        var images: [ViewRepresentableModel] = []
+        var images: [ViewRepresentableModel] = setupPhotos()
         if isEditAvailable {
             let add = setupAddPhotoView()
             images.insert(add, at: 0)
@@ -52,6 +53,22 @@ final class TreeDetailsPhotoManager: TreeDetailsPhotoManagerProtocol {
     
     
     // MARK: Private
+    
+    private func setupPhotos() -> [ViewRepresentableModel] {
+        var models: [ViewRepresentableModel] = []
+        for (index, photo) in photos.enumerated() {
+            let action: () -> () = { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.delegate?.openPhotoPreview(startingIndex: index, photos: self.photos)
+            }
+            let data = TreeDetailsPhotoView.DisplayData(image: photo, action: action)
+            let model = GenericViewModel<TreeDetailsPhotoView>(data: data)
+            models.append(model)
+        }
+        return models
+    }
     
     private func setupAddPhotoView() -> ViewRepresentableModel {
         let data = TreeDetailsAddPhotoView.DisplayData(action: { [weak delegate] in

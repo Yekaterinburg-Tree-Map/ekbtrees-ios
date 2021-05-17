@@ -93,6 +93,8 @@ extension TreeDetailsInteractor: TreeDetailsModuleInput {
     
     func addPhotos(_ photos: [UIImage]) {
         photoManager.addPhotos(photos)
+        let newPhotos = photoManager.prepareImages(isEditAvailable: true)
+        photosSubject.onNext(.init(photoItems: newPhotos))
     }
 }
 
@@ -103,5 +105,9 @@ extension TreeDetailsInteractor: TreeDetailsPhotoManagerDelegate {
     
     func openAddPhoto() {
         output?.moduleWantsToAddPhotos(input: self)
+    }
+    
+    func openPhotoPreview(startingIndex: Int, photos: [UIImage]) {
+        output?.moduleWantToShowPreview(input: self, startingIndex: startingIndex, photos: photos)
     }
 }

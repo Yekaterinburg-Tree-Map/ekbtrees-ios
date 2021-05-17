@@ -95,6 +95,10 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
         let vc = factory.build(with: self)
         navigationController?.present(vc, animated: true)
     }
+    
+    func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [UIImage]) {
+        // TODO
+    }
 }
 
 

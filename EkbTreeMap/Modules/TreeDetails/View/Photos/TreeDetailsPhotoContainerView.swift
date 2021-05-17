@@ -24,6 +24,7 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
         view.contentInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        view.showsHorizontalScrollIndicator = false
         return view
     }()
     
@@ -54,6 +55,7 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     // MARK: Public
     
     func configure(with data: DisplayData) {
+        removeArrangedSubviews()
         data.photoItems.forEach {
             stackView.addArrangedSubview($0.setupView())
         }
@@ -61,6 +63,13 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     
     
     // MARK: Private
+    
+    private func removeArrangedSubviews() {
+        stackView.arrangedSubviews.forEach {
+            stackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
+    }
     
     private func setupConstraints() {
         addSubview(scrollView)

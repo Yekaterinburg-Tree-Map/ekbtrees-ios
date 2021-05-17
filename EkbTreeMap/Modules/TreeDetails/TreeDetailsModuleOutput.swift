@@ -19,4 +19,5 @@ protocol TreeDetailsModuleOutput: AnyObject {
     func moduleWantsToChangeDetails(input: TreeDetailsModuleInput)
     func moduleWantsToClose(input: TreeDetailsModuleInput)
     func moduleWantsToAddPhotos(input: TreeDetailsModuleInput)
+    func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [UIImage])
 }
