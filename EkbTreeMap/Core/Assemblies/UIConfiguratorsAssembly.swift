@@ -33,6 +33,7 @@ final class UIConfiguratorsAssembly: Assembly {
             configuration.startOnScreen = .library
             configuration.library.defaultMultipleSelection = true
             configuration.library.maxNumberOfItems = 10
+            configuration.library.isSquareByDefault = false
             return configuration
         }
         .inObjectScope(.container)

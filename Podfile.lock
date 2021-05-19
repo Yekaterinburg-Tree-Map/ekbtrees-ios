@@ -1,5 +1,10 @@
 PODS:
+  - Cache (6.0.0)
+  - Imaginary (5.0.0):
+    - Cache (~> 6.0.0)
   - IQKeyboardManagerSwift (6.5.6)
+  - Lightbox (2.5.0):
+    - Imaginary (~> 5.0.0)
   - PryntTrimmerView (4.0.2)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
@@ -21,6 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - Lightbox
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -33,7 +39,10 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Cache
+    - Imaginary
     - IQKeyboardManagerSwift
+    - Lightbox
     - PryntTrimmerView
     - RxCocoa
     - RxRelay
@@ -48,7 +57,10 @@ SPEC REPOS:
     - YPImagePicker
 
 SPEC CHECKSUMS:
+  Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
+  Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
@@ -62,6 +74,6 @@ SPEC CHECKSUMS:
   YandexMapsMobile: d7d7f3b452209b4c2787beb53bb2dfcea259c70c
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 5550ba5f3390414da345c7ecc6d50d4355552053
+PODFILE CHECKSUM: 3c1d29585be95cde3479bb7187943da31062d99d
 
 COCOAPODS: 1.10.0

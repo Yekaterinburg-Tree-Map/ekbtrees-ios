@@ -27,5 +27,6 @@ final class FactoryAssembly: Assembly {
         
         container.autoregister(TreeDetailsModuleFactory.self, initializer: TreeDetailsModuleFactory.init)
         container.autoregister(PhotoPickerFactory.self, initializer: PhotoPickerFactory.init)
+        container.autoregister(PhotoViewerFactory.self, initializer: PhotoViewerFactory.init)
     }
 }

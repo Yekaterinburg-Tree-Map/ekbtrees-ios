@@ -59,9 +59,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
         tree.trunkGirth = 1.5
         let vc = factory.build(with: .init(tree: tree, output: self))
         let nvc = UINavigationController(rootViewController: vc)
-        if #available(iOS 13.0, *) {
-            nvc.isModalInPresentation = true
-        }
+        nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
         rootViewController?.present(nvc, animated: animated)
     }
@@ -97,7 +95,10 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     }
     
     func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [UIImage]) {
-        // TODO
+        let factory: PhotoViewerFactory = resolver.resolve()
+        let vc = factory.build(with: .init(images: photos, startIndex: startingIndex))
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true)
     }
 }
 

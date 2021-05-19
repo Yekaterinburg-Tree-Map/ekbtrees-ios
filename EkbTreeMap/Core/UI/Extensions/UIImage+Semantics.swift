@@ -16,6 +16,8 @@ extension UIImage {
         static var plus_colored: UIImage? { UIImage(named: "plus_colored") }
         static var arrowDown: UIImage? { UIImage(named: "arrow_down") }
         static var userMale: UIImage? { UIImage(named: "user-male") }
+        static var closeCircle: UIImage? { UIImage(named: "close_circle") }
+        static var retry: UIImage? { UIImage(named: "retryIcon") }
     }
     
     enum map {

@@ -13,6 +13,7 @@ target 'EkbTreeMap' do
   pod 'IQKeyboardManagerSwift'
   pod 'UCZProgressView'
   pod 'YPImagePicker'
+  pod 'Lightbox'
 
   # maps
   pod 'YandexMapsMobile', ’4.0.0-lite’
