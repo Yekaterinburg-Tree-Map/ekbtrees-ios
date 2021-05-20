@@ -8,17 +8,20 @@
 import UIKit
 
 
-class TreeDetailsBasePhotoView: UIButton {
+class TreeDetailsBasePhotoView: UIView {
     
     // MARK: Private Properties
     
     private lazy var iconView: UIImageView = {
         let view = UIImageView()
-        view.clipsToBounds = true
         return view
     }()
     
-    private var action: () -> () = {}
+    
+    // MARK: Public Properties
+    
+    lazy var containerView = UIButton()
+    weak var delegate: TreeDetailsPhotoViewDelegate?
     
     
     // MARK: Lifecycle
@@ -35,8 +38,8 @@ class TreeDetailsBasePhotoView: UIButton {
     
     // MARK: Public
     
-    func configure(with action: @escaping () -> ()) {
-        self.action = action
+    func didTapAction() {
+        
     }
     
     
@@ -44,20 +47,28 @@ class TreeDetailsBasePhotoView: UIButton {
     
     @objc
     private func didTap() {
-        action()
+        didTapAction()
     }
     
     private func setupView() {
-        layer.cornerRadius = 8
-        clipsToBounds = true
-        backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 0.95, alpha: 1)
+        containerView.layer.cornerRadius = 8
+        backgroundColor = .clear
+        containerView.clipsToBounds = true
+        containerView.backgroundColor = UIColor(red: 0.95, green: 0.97, blue: 0.95, alpha: 1)
         setupConstraints()
-        addTarget(self, action: #selector(didTap), for: .touchUpInside)
+        containerView.addTarget(self, action: #selector(didTap), for: .touchUpInside)
     }
     
     private func setupConstraints() {
-        snp.makeConstraints {
+        addSubview(containerView)
+        containerView.snp.makeConstraints {
+            $0.center.equalToSuperview()
             $0.width.height.equalTo(80)
+        }
+        
+        snp.makeConstraints {
+            $0.width.equalTo(90)
+            $0.height.equalTo(96)
         }
     }
 }

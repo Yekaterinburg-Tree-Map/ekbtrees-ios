@@ -63,10 +63,22 @@ final class TreeDetailsPhotoManager: TreeDetailsPhotoManagerProtocol {
                 }
                 self.delegate?.openPhotoPreview(startingIndex: index, photos: self.photos)
             }
-            let data = TreeDetailsPhotoView.DisplayData(image: photo, action: action)
+            let data = TreeDetailsPhotoView.DisplayData(image: photo, action: action, state: .ready(isDeleteButtonEnabled: true))
             let model = GenericViewModel<TreeDetailsPhotoView>(data: data)
             models.append(model)
         }
+        models.append(GenericViewModel<TreeDetailsPhotoView>(data: .init(image: nil,
+                                                                        action: {},
+                                                                        state: .error)))
+        models.append(GenericViewModel<TreeDetailsPhotoView>(data: .init(image: nil,
+                                                                        action: {},
+                                                                        state: .ready(isDeleteButtonEnabled: true))))
+        models.append(GenericViewModel<TreeDetailsPhotoView>(data: .init(image: nil,
+                                                                        action: {},
+                                                                        state: .uploading)))
+        models.append(GenericViewModel<TreeDetailsPhotoView>(data: .init(image: nil,
+                                                                        action: {},
+                                                                        state: .downloading)))
         return models
     }
     

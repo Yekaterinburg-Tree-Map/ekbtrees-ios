@@ -9,7 +9,7 @@ import UIKit
 import UCZProgressView
 
 
-final class TreeDetailsPhotoView: TreeDetailsBasePhotoView, ViewRepresentable {
+final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     // MARK: Public Structures
     
@@ -77,12 +77,15 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView, ViewRepresentable {
     
     func configure(with data: DisplayData) {
         _imageView.image = data.image
-        configure(with: data.action)
         processState(data.state)
     }
     
     func updateProgress(_ progress: CGFloat) {
-        progressView.progress = progress
+        progressView.setProgress(progress, animated: true)
+    }
+    
+    override func didTapAction() {
+        delegate?.photoViewDidTriggerAction(self, type: .photo)
     }
         
     
@@ -91,41 +94,45 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView, ViewRepresentable {
     private func processState(_ state: DisplayData.State) {
         switch state {
         case .downloading:
-            return
+            progressView.isHidden = false
         case .error:
+            progressView.isHidden = true
             accessoryView.image = UIImage.general.retry
         case .ready(let isDeleteButtonEnabled):
+            progressView.isHidden = true
             if isDeleteButtonEnabled {
                 closeButton.setImage(UIImage.general.closeCircle, for: .normal)
             }
         case .uploading:
-            return
+            progressView.isHidden = false
         }
     }
     
     @objc
     private func didTapClose() {
-        
+        delegate?.photoViewDidTriggerClose(self, type: .photo)
+
     }
     
     private func setupView() {
-        addSubview(_imageView)
+        containerView.addSubview(_imageView)
         _imageView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        addSubview(progressView)
+        containerView.addSubview(progressView)
         progressView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
         
         addSubview(closeButton)
         closeButton.snp.makeConstraints {
-            $0.top.right.equalToSuperview()
-            $0.width.height.equalTo(16)
+            $0.top.equalTo(containerView.snp.top).inset(-8)
+            $0.right.equalTo(containerView.snp.right).inset(-8)
+            $0.width.height.equalTo(24)
         }
         
-        addSubview(accessoryView)
+        containerView.addSubview(accessoryView)
         accessoryView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(32)

@@ -8,14 +8,7 @@
 import UIKit
 
 
-final class TreeDetailsAddPhotoView: TreeDetailsBasePhotoView, ViewRepresentable {
-    
-    // MARK: Public Structures
-    
-    struct DisplayData {
-        let action: () -> ()
-    }
-    
+final class TreeDetailsAddPhotoView: TreeDetailsBasePhotoView {
     
     // MARK: Private Properties
     
@@ -24,8 +17,6 @@ final class TreeDetailsAddPhotoView: TreeDetailsBasePhotoView, ViewRepresentable
         view.clipsToBounds = true
         return view
     }()
-    
-    private var action: () -> () = {}
     
     
     // MARK: Lifecycle
@@ -47,15 +38,15 @@ final class TreeDetailsAddPhotoView: TreeDetailsBasePhotoView, ViewRepresentable
     
     // MARK: Public
     
-    func configure(with data: DisplayData) {
-        configure(with: data.action)
+    override func didTapAction() {
+        delegate?.photoViewDidTriggerAction(self, type: .photo)
     }
     
     
     // MARK: Private
     
     private func setupConstraints() {
-        addSubview(iconView)
+        containerView.addSubview(iconView)
         iconView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(32)

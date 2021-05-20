@@ -97,6 +97,7 @@
 		2EE3673A620F3B7DCBA72998 /* Pods_EkbTreeMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */; };
 		2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE86182627579C002A9429 /* CircleImagedButton.swift */; };
 		2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE861D26275D5C002A9429 /* AuthorizationState.swift */; };
+		2EF9F12626563C5000972189 /* TreeDetailsPhotoViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF9F12526563C5000972189 /* TreeDetailsPhotoViewDelegate.swift */; };
 		2EFD90142652DCBF0091D986 /* PhotoPickerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFD90132652DCBF0091D986 /* PhotoPickerFactory.swift */; };
 		2EFD9031265396C50091D986 /* PhotoViewerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFD9030265396C50091D986 /* PhotoViewerFactory.swift */; };
 /* End PBXBuildFile section */
@@ -215,6 +216,7 @@
 		2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsAddPhotoView.swift; sourceTree = "<group>"; };
 		2EEE86182627579C002A9429 /* CircleImagedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImagedButton.swift; sourceTree = "<group>"; };
 		2EEE861D26275D5C002A9429 /* AuthorizationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationState.swift; sourceTree = "<group>"; };
+		2EF9F12526563C5000972189 /* TreeDetailsPhotoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoViewDelegate.swift; sourceTree = "<group>"; };
 		2EFD90132652DCBF0091D986 /* PhotoPickerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerFactory.swift; sourceTree = "<group>"; };
 		2EFD9030265396C50091D986 /* PhotoViewerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerFactory.swift; sourceTree = "<group>"; };
 		4B42923BC04993C8BA07528D /* Pods-EkbTreeMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.debug.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.debug.xcconfig"; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */,
 				2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */,
 				2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */,
+				2EF9F12526563C5000972189 /* TreeDetailsPhotoViewDelegate.swift */,
 			);
 			path = PhotoView;
 			sourceTree = "<group>";
@@ -1037,6 +1040,7 @@
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
 				2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
+				2EF9F12626563C5000972189 /* TreeDetailsPhotoViewDelegate.swift in Sources */,
 				2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
 				2EDAA727264DA75E00D7F6BE /* TreeDetailsPhotoManager.swift in Sources */,
