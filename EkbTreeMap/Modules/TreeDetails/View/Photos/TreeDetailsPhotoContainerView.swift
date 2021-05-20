@@ -9,7 +9,22 @@ import UIKit
 import RxSwift
 
 
-final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
+protocol TreeDetailsPhotoContainerDelegate: AnyObject {
+    
+    func photoContainer(_ view: TreeDetailsPhotoContainerView, configureView: TreeDetailsPhotoView, at index: Int)
+    func photoContainerDidTapAdd(_ view: TreeDetailsPhotoContainerView)
+    func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapItem index: Int)
+    func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapClose index: Int)
+}
+
+protocol TreeDetailsPhotoContainerDataSource: AnyObject {
+    
+    func isAddButtonEnabled() -> Bool
+    func numberOfItems() -> Int
+}
+
+
+final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate {
     
     // MARK: Public Structures
     
@@ -35,6 +50,18 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
         return view
     }()
     
+    private var views: [TreeDetailsBasePhotoView] = []
+    
+    
+    // MARK: Public Properties
+    
+    weak var delegate: TreeDetailsPhotoContainerDelegate?
+    weak var dataSource: TreeDetailsPhotoContainerDataSource?
+    
+    var isAddButtonEnabled: Bool {
+        dataSource?.isAddButtonEnabled() ?? false
+    }
+    
     
     // MARK: Lifecycle
     
@@ -54,15 +81,47 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
     
     // MARK: Public
     
-    func configure(with data: DisplayData) {
-        removeArrangedSubviews()
-        data.photoItems.forEach {
-            stackView.addArrangedSubview($0.setupView())
+    func reloadData() {
+        setupViews()
+    }
+    
+    func photoViewDidTriggerAction(_ view: TreeDetailsBasePhotoView, type: TreeDetailsPhotoViewType) {
+        if let _ = view as? TreeDetailsAddPhotoView {
+            delegate?.photoContainerDidTapAdd(self)
+        }
+        if let index = views.firstIndex(of: view) {
+            delegate?.photoContainer(self, didTapItem: index)
+        }
+    }
+    
+    func photoViewDidTriggerClose(_ view: TreeDetailsBasePhotoView, type: TreeDetailsPhotoViewType) {
+        if let index = views.firstIndex(of: view) {
+            delegate?.photoContainer(self, didTapClose: index)
         }
     }
     
     
     // MARK: Private
+    
+    private func setupViews() {
+        views = []
+        removeArrangedSubviews()
+        if isAddButtonEnabled {
+            let view = TreeDetailsAddPhotoView(frame: .zero)
+            view.delegate = self
+            stackView.addArrangedSubview(view)
+        }
+        let count = dataSource?.numberOfItems() ?? 0
+        if count < 1 {
+            return
+        }
+        (0..<count).forEach { _ in
+            let view = TreeDetailsPhotoView(frame: .zero)
+            view.delegate = self
+            stackView.addArrangedSubview(view)
+            views.append(view)
+        }
+    }
     
     private func removeArrangedSubviews() {
         stackView.arrangedSubviews.forEach {
@@ -81,16 +140,6 @@ final class TreeDetailsPhotoContainerView: UIView, ViewRepresentable {
         stackView.snp.makeConstraints {
             $0.top.bottom.equalTo(self)
             $0.left.right.equalToSuperview()
-        }
-    }
-}
-
-
-extension Reactive where Base == TreeDetailsPhotoContainerView {
-    
-    var data: Binder<TreeDetailsPhotoContainerView.DisplayData> {
-        Binder(self.base) { view, data in
-            view.configure(with: data)
         }
     }
 }

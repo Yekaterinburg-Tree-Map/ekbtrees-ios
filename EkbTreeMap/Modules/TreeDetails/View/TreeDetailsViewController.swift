@@ -22,6 +22,8 @@ final class TreeDetailsViewController: UIViewController {
         return scroll
     }()
     
+    private lazy var mapView: TreeDetailsMapView = TreeDetailsMapView(frame: .zero)
+    private lazy var photoCollectionView = TreeDetailsPhotoContainerView(frame: .zero)
     private lazy var stackView: ViewRepresentableStackView = {
         let view = ViewRepresentableStackView()
         view.axis = .vertical
@@ -47,6 +49,12 @@ final class TreeDetailsViewController: UIViewController {
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapCloseSubject = PublishSubject<Void>()
+    private let didTapAddPhotoSubject = PublishSubject<Void>()
+    private let didTapPhotoSubject = PublishSubject<Int>()
+    private let didTapClosePhotoSubject = PublishSubject<Int>()
+    
+    private var isAddAvailable: Bool = false
+    private var photosData: [TreeDetailsPhotoView.DisplayData] = []
     
     
     // MARK: Lifecycle
@@ -90,16 +98,21 @@ final class TreeDetailsViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { $0.edges.equalToSuperview() }
         
-        scrollView.addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.left.right.equalTo(view)
-            $0.top.equalToSuperview()
+        scrollView.addSubview(mapView)
+        mapView.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
         }
         
         scrollView.addSubview(photosContainer)
         photosContainer.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom)
+            $0.top.equalTo(mapView.snp.bottom)
             $0.left.right.equalTo(stackView)
+        }
+
+        scrollView.addSubview(stackView)
+        stackView.snp.makeConstraints {
+            $0.left.right.equalTo(view)
+            $0.top.equalTo(photosContainer.snp.bottom)
             $0.bottom.equalToSuperview()
         }
         
@@ -114,7 +127,10 @@ final class TreeDetailsViewController: UIViewController {
     private func setupIO() {
         let output = TreeDetailsView.Output(didLoad: didLoadSubject,
                                            didTapAction: editButton.rx.tap.asObservable(),
-                                           didTapClose: didTapCloseSubject)
+                                           didTapClose: didTapCloseSubject,
+                                           didTapAddPhoto: didTapAddPhotoSubject,
+                                           didTapPhoto: didTapPhotoSubject,
+                                           didTapClosePhoto: didTapClosePhotoSubject)
         let input = interactor.configure(with: output)
         
         bag.insert {
@@ -130,9 +146,53 @@ final class TreeDetailsViewController: UIViewController {
             input.title
                 .bind(to: rx.title)
             
+            input.mapData
+                .withUnretained(self)
+                .subscribe(onNext: { obj, data in
+                    obj.mapView.configure(with: data)
+                })
+            
             input.photos
-                .bind(to: photosContainer.rx.data)
+                .subscribe(onNext: { [weak self] (isAddAvailable, data) in
+                    self?.isAddAvailable = isAddAvailable
+                    self?.photosData = data
+                    self?.photosContainer.reloadData()
+                })
         }
     }
+}
 
+
+// MARK: - TreeDetailsPhotoContainerDelegate, TreeDetailsPhotoContainerDataSource
+
+extension TreeDetailsViewController: TreeDetailsPhotoContainerDataSource, TreeDetailsPhotoContainerDelegate {
+    
+    func isAddButtonEnabled() -> Bool {
+        isAddAvailable
+    }
+    
+    func numberOfItems() -> Int {
+        photosData.count
+    }
+    
+    func photoContainer(_ view: TreeDetailsPhotoContainerView,
+                        configureView photoView: TreeDetailsPhotoView,
+                        at index: Int) {
+        guard index < photosData.count else {
+            return
+        }
+        photoView.configure(with: photosData[index])
+    }
+    
+    func photoContainerDidTapAdd(_ view: TreeDetailsPhotoContainerView) {
+        didTapAddPhotoSubject.onNext(())
+    }
+    
+    func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapItem index: Int) {
+        didTapPhotoSubject.onNext(index)
+    }
+    
+    func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapClose index: Int) {
+        didTapClosePhotoSubject.onNext(index)
+    }
 }
