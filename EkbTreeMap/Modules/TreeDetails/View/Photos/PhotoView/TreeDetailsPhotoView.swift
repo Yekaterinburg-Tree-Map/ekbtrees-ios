@@ -7,6 +7,15 @@
 
 import UIKit
 import UCZProgressView
+import Imaginary
+
+
+enum PhotoViewState {
+    case error
+    case ready
+    case uploading
+    case downloading
+}
 
 
 final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
@@ -15,17 +24,20 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     struct DisplayData {
         
-        enum State {
-            case error
-            case ready(isDeleteButtonEnabled: Bool)
-            case uploading
-            case downloading
-        }
-        
         let image: UIImage?
         let action: () -> ()
-        let state: State
+        let state: PhotoViewState
     }
+    
+    
+    // MARK: Public Properties
+    
+    var isCloseButtonShown: Bool = false {
+        didSet {
+            updateCloseButton()
+        }
+    }
+    
     
     // MARK: Private Properties
     
@@ -46,12 +58,13 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     private lazy var closeButton: UIButton = {
         let button = UIButton(type: .custom)
+        button.setImage(UIImage.general.closeCircle, for: .normal)
         button.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
         return button
     }()
     
     private lazy var accessoryView: UIImageView = {
-        let view = UIImageView()
+        let view = UIImageView(image: UIImage.general.retry)
         view.contentMode = .scaleAspectFill
         return view
     }()
@@ -75,9 +88,14 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     // MARK: Public
     
-    func configure(with data: DisplayData) {
-        _imageView.image = data.image
-        processState(data.state)
+    func configure(with data: PhotoModelProtocol) {
+        if let model = data as? LocalPhotoModel {
+            updateView(data: model)
+        }
+        
+        if let model = data as? RemotePhotoModel {
+            updateView(data: model)
+        }
     }
     
     func updateProgress(_ progress: CGFloat) {
@@ -91,27 +109,26 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     // MARK: Private
     
-    private func processState(_ state: DisplayData.State) {
-        switch state {
-        case .downloading:
-            progressView.isHidden = false
-        case .error:
-            progressView.isHidden = true
-            accessoryView.image = UIImage.general.retry
-        case .ready(let isDeleteButtonEnabled):
-            progressView.isHidden = true
-            if isDeleteButtonEnabled {
-                closeButton.setImage(UIImage.general.closeCircle, for: .normal)
-            }
-        case .uploading:
-            progressView.isHidden = false
-        }
+    private func updateCloseButton() {
+        closeButton.isHidden = !isCloseButtonShown
+    }
+    
+    private func updateView(data: RemotePhotoModel) {
+        _imageView.setImage(url: data.url)
+    }
+    
+    private func updateView(data: LocalPhotoModel) {
+        _imageView.image = data.image
+    }
+    
+    private func processState(_ state: PhotoViewState) {
+        progressView.isHidden = ![.downloading, .uploading].contains(state)
+        accessoryView.isHidden = ![.error].contains(state)
     }
     
     @objc
     private func didTapClose() {
         delegate?.photoViewDidTriggerClose(self, type: .photo)
-
     }
     
     private func setupView() {

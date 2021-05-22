@@ -93,13 +93,14 @@ final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate 
     }
     
     func updateView(at index: Int, data: PhotoModelProtocol) {
-        if let model = data as? LocalPhotoModel {
-            updateView(index: index, data: model)
+        guard
+            index < views.count,
+            let view = views[index] as? TreeDetailsPhotoView else
+        {
+            return
         }
         
-        if let model = data as? RemotePhotoModel {
-            updateView(index: index, data: model)
-        }
+        view.configure(with: data)
     }
     
     
@@ -121,25 +122,19 @@ final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate 
     
     private func setupPhotoViews() {
         views = []
-        guard let count = dataSource?.numberOfItems(), count >= 1 else {
+        guard let count = dataSource?.numberOfItems(), count > 0 else {
             return
         }
 
-        (0..<count).forEach { index in
-            let view = TreeDetailsPhotoView(frame: .zero)
-            view.delegate = self
-            stackView.addArrangedSubview(view)
-            views.append(view)
-            delegate?.photoContainer(self, configureView: view, at: index)
-        }
+        (0..<count).forEach(addPhotoView)
     }
     
-    private func updateView(index: Int, data: RemotePhotoModel) {
-        
-    }
-    
-    private func updateView(index: Int, data: LocalPhotoModel) {
-        
+    private func addPhotoView(at index: Int) {
+        let view = TreeDetailsPhotoView(frame: .zero)
+        view.delegate = self
+        stackView.addArrangedSubview(view)
+        views.append(view)
+        delegate?.photoContainer(self, configureView: view, at: index)
     }
     
     private func removeArrangedSubviews() {
