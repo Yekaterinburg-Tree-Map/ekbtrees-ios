@@ -17,8 +17,8 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
     private var output: TreeDetailsModuleOutput?
     
     private let bag = DisposeBag()
-    private lazy var photoManager: TreeDetailsPhotoManager = {
-        let manager = TreeDetailsPhotoManager()
+    private lazy var photoManager: PhotoManager = {
+        let manager = PhotoManager(treeId: tree.id)
         manager.delegate = self
         return manager
     }()
@@ -58,8 +58,7 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
         return TreeDetailsView.Input(title: titleSubject,
                                      items: itemsSubject,
                                      buttonTitle: buttonTitleSubject,
-                                     isButtonHidden: isButtonHiddenSubject,
-                                     photos: photosSubject)
+                                     isButtonHidden: isButtonHiddenSubject)
     }
     
     
@@ -73,8 +72,8 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
     }
     
     private func setupPhotos() {
-        let photos = photoManager.prepareImages(isEditAvailable: true)
-        photosSubject.onNext(.init(photoItems: photos))
+//        let photos = photoManager.prepareImages(isEditAvailable: true)
+//        photosSubject.onNext(.init(photoItems: photos))
     }
     
     private func didTapAction() {
@@ -93,15 +92,18 @@ extension TreeDetailsInteractor: TreeDetailsModuleInput {
     
     func addPhotos(_ photos: [UIImage]) {
         photoManager.addPhotos(photos)
-        let newPhotos = photoManager.prepareImages(isEditAvailable: true)
-        photosSubject.onNext(.init(photoItems: newPhotos))
+//        let newPhotos = photoManager.prepareImages(isEditAvailable: true)
+//        photosSubject.onNext(.init(photoItems: newPhotos))
     }
 }
 
 
 // MARK: - TreeDetailsPhotoManagerDelegate
 
-extension TreeDetailsInteractor: TreeDetailsPhotoManagerDelegate {
+extension TreeDetailsInteractor: PhotoManagerDelegate {
+    func reloadData() {
+        
+    }
     
     func openAddPhoto() {
         output?.moduleWantsToAddPhotos(input: self)

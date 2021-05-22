@@ -26,14 +26,6 @@ protocol TreeDetailsPhotoContainerDataSource: AnyObject {
 
 final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate {
     
-    // MARK: Public Structures
-    
-    struct DisplayData {
-        
-        let photoItems: [ViewRepresentableModel]
-    }
-    
-    
     // MARK: Private Properties
     
     private lazy var scrollView: UIScrollView = {
@@ -100,27 +92,54 @@ final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate 
         }
     }
     
+    func updateView(at index: Int, data: PhotoModelProtocol) {
+        if let model = data as? LocalPhotoModel {
+            updateView(index: index, data: model)
+        }
+        
+        if let model = data as? RemotePhotoModel {
+            updateView(index: index, data: model)
+        }
+    }
+    
     
     // MARK: Private
     
     private func setupViews() {
-        views = []
         removeArrangedSubviews()
+        setupAddButtonIfNeeded()
+        setupPhotoViews()
+    }
+    
+    private func setupAddButtonIfNeeded() {
         if isAddButtonEnabled {
             let view = TreeDetailsAddPhotoView(frame: .zero)
             view.delegate = self
             stackView.addArrangedSubview(view)
         }
-        let count = dataSource?.numberOfItems() ?? 0
-        if count < 1 {
+    }
+    
+    private func setupPhotoViews() {
+        views = []
+        guard let count = dataSource?.numberOfItems(), count >= 1 else {
             return
         }
-        (0..<count).forEach { _ in
+
+        (0..<count).forEach { index in
             let view = TreeDetailsPhotoView(frame: .zero)
             view.delegate = self
             stackView.addArrangedSubview(view)
             views.append(view)
+            delegate?.photoContainer(self, configureView: view, at: index)
         }
+    }
+    
+    private func updateView(index: Int, data: RemotePhotoModel) {
+        
+    }
+    
+    private func updateView(index: Int, data: LocalPhotoModel) {
+        
     }
     
     private func removeArrangedSubviews() {

@@ -127,10 +127,7 @@ final class TreeDetailsViewController: UIViewController {
     private func setupIO() {
         let output = TreeDetailsView.Output(didLoad: didLoadSubject,
                                            didTapAction: editButton.rx.tap.asObservable(),
-                                           didTapClose: didTapCloseSubject,
-                                           didTapAddPhoto: didTapAddPhotoSubject,
-                                           didTapPhoto: didTapPhotoSubject,
-                                           didTapClosePhoto: didTapClosePhotoSubject)
+                                           didTapClose: didTapCloseSubject)
         let input = interactor.configure(with: output)
         
         bag.insert {
@@ -152,12 +149,20 @@ final class TreeDetailsViewController: UIViewController {
                     obj.mapView.configure(with: data)
                 })
             
-            input.photos
-                .subscribe(onNext: { [weak self] (isAddAvailable, data) in
-                    self?.isAddAvailable = isAddAvailable
-                    self?.photosData = data
-                    self?.photosContainer.reloadData()
+            input.photosSource
+                .withUnretained(self)
+                .subscribe(onNext: { obj, source in
+                    obj.photoCollectionView.delegate = source
+                    obj.photoCollectionView.dataSource = source
+                    obj.photoCollectionView.reloadData()
                 })
+
+//            input.photos
+//                .subscribe(onNext: { [weak self] (isAddAvailable, data) in
+//                    self?.isAddAvailable = isAddAvailable
+//                    self?.photosData = data
+//                    self?.photosContainer.reloadData()
+//                })
         }
     }
 }
