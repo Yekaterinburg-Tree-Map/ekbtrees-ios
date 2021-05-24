@@ -8,15 +8,7 @@
 import UIKit
 
 
-class TreeDetailsBasePhotoView: UIView {
-    
-    // MARK: Private Properties
-    
-    private lazy var iconView: UIImageView = {
-        let view = UIImageView()
-        return view
-    }()
-    
+class TreeDetailsBasePhotoView: UICollectionViewCell {
     
     // MARK: Public Properties
     

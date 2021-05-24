@@ -10,6 +10,8 @@ import UIKit
 
 final class TreeDetailsAddPhotoView: TreeDetailsBasePhotoView {
     
+    static let reuseIdentifier = "TreeDetailsAddPhotoView"
+    
     // MARK: Private Properties
     
     private lazy var iconView: UIImageView = {

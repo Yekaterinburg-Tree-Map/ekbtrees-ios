@@ -20,6 +20,8 @@ enum PhotoViewState {
 
 final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
+    static let reuseIdentifier = "TreeDetailsPhotoView"
+    
     // MARK: Public Structures
     
     struct DisplayData {
@@ -85,6 +87,11 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        _imageView.image = nil
+    }
+    
     
     // MARK: Public
     
@@ -119,6 +126,7 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     private func updateView(data: LocalPhotoModel) {
         _imageView.image = data.image
+        processState(.ready)
     }
     
     private func processState(_ state: PhotoViewState) {

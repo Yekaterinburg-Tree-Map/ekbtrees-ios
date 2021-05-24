@@ -28,21 +28,23 @@ final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate 
     
     // MARK: Private Properties
     
-    private lazy var scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.contentInset = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
-        view.showsHorizontalScrollIndicator = false
-        return view
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.estimatedItemSize = CGSize(width: 90, height: 96)
+        
+        let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        v.backgroundColor = .clear
+        v.register(TreeDetailsAddPhotoView.self, forCellWithReuseIdentifier: TreeDetailsAddPhotoView.reuseIdentifier)
+        v.register(TreeDetailsPhotoView.self, forCellWithReuseIdentifier: TreeDetailsPhotoView.reuseIdentifier)
+        v.delegate = self
+        v.dataSource = self
+        return v
     }()
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.spacing = 8
-        view.axis = .horizontal
-        return view
-    }()
-    
-    private var views: [TreeDetailsBasePhotoView] = []
+    private var contentOffset: Int {
+        isAddButtonEnabled ? 1 : 0
+    }
     
     
     // MARK: Public Properties
@@ -74,86 +76,65 @@ final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate 
     // MARK: Public
     
     func reloadData() {
-        setupViews()
+        collectionView.reloadData()
     }
     
     func photoViewDidTriggerAction(_ view: TreeDetailsBasePhotoView, type: TreeDetailsPhotoViewType) {
         if let _ = view as? TreeDetailsAddPhotoView {
             delegate?.photoContainerDidTapAdd(self)
         }
-        if let index = views.firstIndex(of: view) {
-            delegate?.photoContainer(self, didTapItem: index)
+        if let path = collectionView.indexPath(for: view) {
+            delegate?.photoContainer(self, didTapItem: path.item - contentOffset)
         }
     }
     
     func photoViewDidTriggerClose(_ view: TreeDetailsBasePhotoView, type: TreeDetailsPhotoViewType) {
-        if let index = views.firstIndex(of: view) {
-            delegate?.photoContainer(self, didTapClose: index)
+        if let path = collectionView.indexPath(for: view) {
+            delegate?.photoContainer(self, didTapClose: path.item - contentOffset)
         }
     }
     
     func updateView(at index: Int, data: PhotoModelProtocol) {
-        guard
-            index < views.count,
-            let view = views[index] as? TreeDetailsPhotoView else
-        {
+        guard let view = collectionView.cellForItem(at: .init(item: index + contentOffset, section: 0))
+                as? TreeDetailsPhotoView else {
             return
         }
-        
         view.configure(with: data)
     }
     
     
     // MARK: Private
     
-    private func setupViews() {
-        removeArrangedSubviews()
-        setupAddButtonIfNeeded()
-        setupPhotoViews()
-    }
-    
-    private func setupAddButtonIfNeeded() {
-        if isAddButtonEnabled {
-            let view = TreeDetailsAddPhotoView(frame: .zero)
-            view.delegate = self
-            stackView.addArrangedSubview(view)
-        }
-    }
-    
-    private func setupPhotoViews() {
-        views = []
-        guard let count = dataSource?.numberOfItems(), count > 0 else {
-            return
-        }
-
-        (0..<count).forEach(addPhotoView)
-    }
-    
-    private func addPhotoView(at index: Int) {
-        let view = TreeDetailsPhotoView(frame: .zero)
-        view.delegate = self
-        stackView.addArrangedSubview(view)
-        views.append(view)
-        delegate?.photoContainer(self, configureView: view, at: index)
-    }
-    
-    private func removeArrangedSubviews() {
-        stackView.arrangedSubviews.forEach {
-            stackView.removeArrangedSubview($0)
-            $0.removeFromSuperview()
-        }
-    }
-    
     private func setupConstraints() {
-        addSubview(scrollView)
-        scrollView.snp.makeConstraints {
+        addSubview(collectionView)
+        collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+            $0.height.equalTo(96)
         }
-        
-        scrollView.addSubview(stackView)
-        stackView.snp.makeConstraints {
-            $0.top.bottom.equalTo(self)
-            $0.left.right.equalToSuperview()
+    }
+}
+
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
+extension TreeDetailsPhotoContainerView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        (dataSource?.numberOfItems() ?? 0) + contentOffset
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TreeDetailsAddPhotoView.reuseIdentifier,
+                                                          for: indexPath) as! TreeDetailsAddPhotoView
+            cell.delegate = self
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TreeDetailsPhotoView.reuseIdentifier,
+                                                          for: indexPath) as! TreeDetailsPhotoView
+            cell.delegate = self
+            delegate?.photoContainer(self, configureView: cell, at: indexPath.item - contentOffset)
+            return cell
         }
     }
 }
