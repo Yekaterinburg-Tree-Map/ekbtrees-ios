@@ -39,6 +39,8 @@ final class TreeDetailsViewController: UIViewController {
         return view
     }()
     
+    private lazy var gradientContainer = GradientContainer()
+    
     private lazy var editButton: UIButton = {
        let button = UIButton()
         button.backgroundColor = UIColor.systemGreen
@@ -73,6 +75,17 @@ final class TreeDetailsViewController: UIViewController {
         
         didLoadSubject.onNext(())
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 13.0, *) {
+            gradientContainer.setupGradient(colors: [UIColor.systemBackground.withAlphaComponent(0).cgColor,
+                                                     UIColor.systemBackground.cgColor])
+        } else {
+            gradientContainer.setupGradient(colors: [UIColor.white.withAlphaComponent(0).cgColor,
+                                                     UIColor.white.cgColor])
+        }
+    }
 
     
     // MARK: Private
@@ -84,8 +97,12 @@ final class TreeDetailsViewController: UIViewController {
     
         if #available(iOS 13.0, *) {
             view.backgroundColor = UIColor.systemBackground
+            gradientContainer.setupGradient(colors: [UIColor.systemBackground.withAlphaComponent(0).cgColor,
+                                                     UIColor.systemBackground.cgColor])
         } else {
             view.backgroundColor = .white
+            gradientContainer.setupGradient(colors: [UIColor.white.withAlphaComponent(0).cgColor,
+                                                     UIColor.white.cgColor])
         }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel,
@@ -108,11 +125,17 @@ final class TreeDetailsViewController: UIViewController {
             $0.left.right.equalTo(view)
         }
         
-        view.addSubview(editButton)
+        view.addSubview(gradientContainer)
+        gradientContainer.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(64)
+        }
+        
+        gradientContainer.addSubview(editButton)
         editButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.top.equalToSuperview()
             $0.height.equalTo(48)
-            $0.left.right.equalToSuperview().inset(16)
+            $0.left.right.equalToSuperview().inset(24)
         }
     }
     

@@ -93,6 +93,7 @@
 		2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */; };
 		2ED7F855265BC270001D8BF9 /* PhotoLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */; };
 		2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */; };
+		2ED7F877265BDB6E001D8BF9 /* GradientContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F876265BDB6E001D8BF9 /* GradientContainer.swift */; };
 		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
 		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
@@ -219,6 +220,7 @@
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
 		2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderService.swift; sourceTree = "<group>"; };
 		2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderRepository.swift; sourceTree = "<group>"; };
+		2ED7F876265BDB6E001D8BF9 /* GradientContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientContainer.swift; sourceTree = "<group>"; };
 		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
 		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				2EB34D56263EBED7009A2129 /* Representable */,
 				2ED57ED52619EF6D00EC9033 /* Extensions */,
 				2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */,
+				2ED7F876265BDB6E001D8BF9 /* GradientContainer.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1090,6 +1093,7 @@
 				2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
 				2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */,
+				2ED7F877265BDB6E001D8BF9 /* GradientContainer.swift in Sources */,
 				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,
 				2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */,
 				2EFD90142652DCBF0091D986 /* PhotoPickerFactory.swift in Sources */,
