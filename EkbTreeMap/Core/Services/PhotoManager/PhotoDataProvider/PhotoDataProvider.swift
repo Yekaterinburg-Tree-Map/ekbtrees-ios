@@ -13,11 +13,14 @@ protocol PhotoDataProviding {
     
     func deletePhoto(id: String)
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID)
+    func retryUploadPhoto(model: LocalPhotoModel)
+    func cancelUploadPhoto(model: LocalPhotoModel)
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
 }
 
 
 final class PhotoDataProvider: PhotoDataProviding {
+    
     
     // MARK: Private Properties
     
@@ -39,6 +42,18 @@ final class PhotoDataProvider: PhotoDataProviding {
     
     func deletePhoto(id: String) {
         remoteDataProvider.deletePhoto(id: id)
+    }
+    
+    func retryLoadPhoto(model: LocalPhotoModel) {
+        
+    }
+    
+    func cancelUploadPhoto(model: LocalPhotoModel) {
+        
+    }
+    
+    func retryUploadPhoto(model: LocalPhotoModel) {
+        
     }
     
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) {

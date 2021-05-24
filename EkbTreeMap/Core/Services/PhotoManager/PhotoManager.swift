@@ -88,7 +88,21 @@ final class PhotoManager: PhotoManagerProtocol {
     }
     
     func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapItem index: Int) {
-        delegate?.openPhotoPreview(startingIndex: index, photos: photos)
+        guard index < photos.count, index >= 0 else {
+            return
+        }
+        if let model = photos[index] as? LocalPhotoModel {
+            switch model.loadStatus {
+            case .cancelled:
+                dataProvider.retryUploadPhoto(model: model)
+            case .loading:
+                dataProvider.cancelUploadPhoto(model: model)
+            case .ready:
+                delegate?.openPhotoPreview(startingIndex: index, photos: photos)
+            }
+        } else {
+            delegate?.openPhotoPreview(startingIndex: index, photos: photos)
+        }
     }
     
     func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapClose index: Int) {

@@ -30,10 +30,11 @@ final class TreeDetailsPhotoContainerView: UIView, TreeDetailsPhotoViewDelegate 
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
         layout.estimatedItemSize = CGSize(width: 90, height: 96)
+        layout.scrollDirection = .horizontal
         
         let v = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        v.showsHorizontalScrollIndicator = false
         v.backgroundColor = .clear
         v.register(TreeDetailsAddPhotoView.self, forCellWithReuseIdentifier: TreeDetailsAddPhotoView.reuseIdentifier)
         v.register(TreeDetailsPhotoView.self, forCellWithReuseIdentifier: TreeDetailsPhotoView.reuseIdentifier)

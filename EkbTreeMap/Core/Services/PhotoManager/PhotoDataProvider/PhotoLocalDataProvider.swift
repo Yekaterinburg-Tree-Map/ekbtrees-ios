@@ -11,28 +11,45 @@ import RxSwift
 protocol PhotoLocalDataProviding {
     
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID)
+    func retryUploadPhoto(model: LocalPhotoModel)
+    func cancelUploadPhoto(model: LocalPhotoModel)
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
 }
 
 
 final class PhotoLocalDataProvider: PhotoLocalDataProviding {
     
+    // MARK: Private Properties
     
-    let localPhotos = BehaviorSubject<[PhotoModelProtocol]>(value: [LocalPhotoModel]())
+    private let photoLoaderService: PhotoLoaderServiceProtocol
+    private let photoLoaderRepository: PhotoLoaderRepositoryProtocol
+    
+    
+    // MARK: Lifecycle
+    
+    init(photoLoaderService: PhotoLoaderServiceProtocol,
+         photoLoaderRepository: PhotoLoaderRepositoryProtocol) {
+        self.photoLoaderService = photoLoaderService
+        self.photoLoaderRepository = photoLoaderRepository
+    }
+
     
     // MARK: Public
     
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) {
-        do {
-            let current = try localPhotos.value()
-            let result = current + photos.map { LocalPhotoModel(tempId: "", image: $0, loadStatus: nil) }
-            localPhotos.onNext(result)
-        } catch {
-            
-        }
+        photoLoaderService.uploadPhotos(photos, treeId: treeId)
+    }
+    
+    func retryUploadPhoto(model: LocalPhotoModel) {
+        photoLoaderService.retryUpload(id: model.tempId)
+    }
+    
+    func cancelUploadPhoto(model: LocalPhotoModel) {
+        photoLoaderService.cancelUpload(id: model.tempId)
     }
     
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]> {
-        localPhotos
+        photoLoaderRepository.fetchAndTrackPendingPhotos(treeId: treeId)
+            .map { $0.map { $0 as PhotoModelProtocol } }
     }
 }

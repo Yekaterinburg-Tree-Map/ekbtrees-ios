@@ -18,5 +18,10 @@ final class ServiceAssembly: Assembly {
         container.autoregister(PhotoRemoteDataProviding.self, initializer: PhotoRemoteDataProvider.init)
         container.autoregister(PhotoDataProviding.self, initializer: PhotoDataProvider.init)
         container.autoregister(PhotoManagerProtocol.self, initializer: PhotoManager.init)
+        
+        container.autoregister(PhotoLoaderRepositoryProtocol.self, initializer: PhotoLoaderRepository.init)
+            .inObjectScope(.container)
+        
+        container.autoregister(PhotoLoaderServiceProtocol.self, initializer: PhotoLoaderService.init)
     }
 }

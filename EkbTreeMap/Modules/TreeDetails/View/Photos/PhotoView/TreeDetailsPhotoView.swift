@@ -6,8 +6,9 @@
 //
 
 import UIKit
-import UCZProgressView
+import NVActivityIndicatorView
 import Imaginary
+import RxSwift
 
 
 enum PhotoViewState {
@@ -15,22 +16,13 @@ enum PhotoViewState {
     case ready
     case uploading
     case downloading
+    case cancelled
 }
 
 
 final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     static let reuseIdentifier = "TreeDetailsPhotoView"
-    
-    // MARK: Public Structures
-    
-    struct DisplayData {
-        
-        let image: UIImage?
-        let action: () -> ()
-        let state: PhotoViewState
-    }
-    
     
     // MARK: Public Properties
     
@@ -43,6 +35,8 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     
     // MARK: Private Properties
     
+    private var bag = DisposeBag()
+    
     private lazy var _imageView: UIImageView = {
         let view = UIImageView()
         view.clipsToBounds = true
@@ -50,11 +44,9 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
         return view
     }()
     
-    private lazy var progressView: UCZProgressView = {
-        let view = UCZProgressView(frame: .zero)
-        view.lineWidth = 4
-        view.radius = 36
-        view.tintColor = .white
+    private lazy var progressView: NVActivityIndicatorView = {
+        let frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        let view = NVActivityIndicatorView(frame: frame, type: .circleStrokeSpin, color: .white, padding: nil)
         return view
     }()
     
@@ -105,10 +97,6 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
         }
     }
     
-    func updateProgress(_ progress: CGFloat) {
-        progressView.setProgress(progress, animated: true)
-    }
-    
     override func didTapAction() {
         delegate?.photoViewDidTriggerAction(self, type: .photo)
     }
@@ -121,17 +109,49 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
     }
     
     private func updateView(data: RemotePhotoModel) {
-        _imageView.setImage(url: data.url)
+        _imageView.setImage(url: data.url) { [weak self] result in
+            switch result {
+            case .value:
+                self?.processState(.ready)
+            case .error:
+                self?.updateView(data: data)
+            }
+        }
+        closeButton.isHidden = false
+        processState(.downloading)
     }
     
     private func updateView(data: LocalPhotoModel) {
         _imageView.image = data.image
-        processState(.ready)
+        closeButton.isHidden = true
+        switch data.loadStatus {
+        case .ready:
+            processState(.ready)
+        case .loading:
+            processState(.uploading)
+        case .cancelled:
+            processState(.cancelled)
+        }
     }
     
     private func processState(_ state: PhotoViewState) {
-        progressView.isHidden = ![.downloading, .uploading].contains(state)
-        accessoryView.isHidden = ![.error].contains(state)
+        progressView.isHidden = state != .uploading
+        accessoryView.isHidden = state == .ready
+        switch state {
+        case .cancelled:
+            accessoryView.image = UIImage.general.retry
+        case .ready:
+            return
+        case .error:
+            accessoryView.image = UIImage.general.retry
+        case .uploading:
+            accessoryView.image = UIImage.general.closeCircle
+            progressView.startAnimating()
+        case .downloading:
+            accessoryView.isHidden = true
+            progressView.isHidden = false
+            progressView.startAnimating()
+        }
     }
     
     @objc
@@ -148,6 +168,7 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
         containerView.addSubview(progressView)
         progressView.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.width.height.equalTo(36)
         }
         
         addSubview(closeButton)

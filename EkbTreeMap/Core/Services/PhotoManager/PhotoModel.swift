@@ -16,15 +16,16 @@ protocol PhotoModelProtocol {
 
 struct LocalPhotoModel: PhotoModelProtocol {
     
-    struct LoadStatus {
+    enum LoadStatus {
         
-        let cancelAction: () -> ()
-        let progressStatus: Observable<CGFloat>
+        case loading
+        case cancelled
+        case ready
     }
     
-    let tempId: String
-    let image: UIImage
-    let loadStatus: LoadStatus?
+    var tempId: String
+    var image: UIImage
+    var loadStatus: LoadStatus
 }
 
 

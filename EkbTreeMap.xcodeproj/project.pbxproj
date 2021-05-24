@@ -91,6 +91,8 @@
 		2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */; };
 		2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED02619E43600EC9033 /* MapCoordinator.swift */; };
 		2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */; };
+		2ED7F855265BC270001D8BF9 /* PhotoLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */; };
+		2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */; };
 		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
 		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
@@ -215,6 +217,8 @@
 		2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED02619E43600EC9033 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
+		2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderService.swift; sourceTree = "<group>"; };
+		2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderRepository.swift; sourceTree = "<group>"; };
 		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
 		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -456,6 +460,7 @@
 		2E5271BB265902F0007B86BD /* PhotoDataProvider */ = {
 			isa = PBXGroup;
 			children = (
+				2ED7F859265BC504001D8BF9 /* PhotoLoader */,
 				2E52719F26590292007B86BD /* PhotoDataProvider.swift */,
 				2E5271BC26590300007B86BD /* PhotoLocalDataProvider.swift */,
 				2E5271C42659042D007B86BD /* PhotoRemoteDataProvider.swift */,
@@ -750,6 +755,15 @@
 				2E01F742262A108800DA2EF1 /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2ED7F859265BC504001D8BF9 /* PhotoLoader */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */,
+				2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */,
+			);
+			path = PhotoLoader;
 			sourceTree = "<group>";
 		};
 		2EDAA70B264D84F200D7F6BE /* PhotoView */ = {
@@ -1052,6 +1066,7 @@
 				2EB34DA1263FEF52009A2129 /* TreeDetailsInteractor.swift in Sources */,
 				2E01FF73262DE8EE00DA2EF1 /* MapPointChooserModuleFactory.swift in Sources */,
 				2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */,
+				2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
 				2E9831912647DEBB0088193B /* UIConfiguratorsAssembly.swift in Sources */,
 				2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */,
@@ -1086,6 +1101,7 @@
 				2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */,
 				2E5271BD26590300007B86BD /* PhotoLocalDataProvider.swift in Sources */,
 				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
+				2ED7F855265BC270001D8BF9 /* PhotoLoaderService.swift in Sources */,
 				2E01FF98262DFEFA00DA2EF1 /* TreeEditorViewController.swift in Sources */,
 				2EE2BC53264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift in Sources */,
 				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,

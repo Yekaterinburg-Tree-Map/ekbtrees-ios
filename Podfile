@@ -11,7 +11,7 @@ target 'EkbTreeMap' do
   pod 'Swinject'
   pod 'SwinjectAutoregistration'  
   pod 'IQKeyboardManagerSwift'
-  pod 'UCZProgressView'
+  pod 'NVActivityIndicatorView'
   pod 'YPImagePicker'
   pod 'Lightbox'
 
