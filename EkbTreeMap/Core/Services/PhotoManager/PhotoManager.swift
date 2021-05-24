@@ -17,18 +17,16 @@ protocol PhotoManagerDelegate: AnyObject {
 }
 
 
-protocol PhotoManagerProtocol {
+protocol PhotoManagerProtocol: TreeDetailsPhotoContainerDataSource, TreeDetailsPhotoContainerDelegate {
     
     var delegate: PhotoManagerDelegate? { get set }
     
-    func startPhotoObserving()
+    func startPhotoObserving(treeId: Tree.ID)
     func addPhotos(_ photos: [UIImage])
 }
 
 
-final class PhotoManager: PhotoManagerProtocol,
-                          TreeDetailsPhotoContainerDataSource,
-                          TreeDetailsPhotoContainerDelegate {
+final class PhotoManager: PhotoManagerProtocol {
     
     // MARK: Public Properties
     
@@ -38,7 +36,7 @@ final class PhotoManager: PhotoManagerProtocol,
     // MARK: Private Properties
     
     private let bag = DisposeBag()
-    private let treeId: Tree.ID
+    private var treeId: Tree.ID = ""
     private let dataProvider: PhotoDataProviding
     
     
@@ -53,16 +51,14 @@ final class PhotoManager: PhotoManagerProtocol,
     
     // MARK: Lifecycle
     
-    init(treeId: Tree.ID,
-         dataProvider: PhotoDataProviding) {
-        self.treeId = treeId
+    init(dataProvider: PhotoDataProviding) {
         self.dataProvider = dataProvider
     }
     
-    
     // MARK: Public
     
-    func startPhotoObserving() {
+    func startPhotoObserving(treeId: Tree.ID) {
+        self.treeId = treeId
         observeImageUpdates()
     }
     
@@ -79,7 +75,12 @@ final class PhotoManager: PhotoManagerProtocol,
     }
     
     func photoContainer(_ view: TreeDetailsPhotoContainerView, configureView: TreeDetailsPhotoView, at index: Int) {
+        guard index < photos.count else {
+            return
+        }
         
+        let model = photos[index]
+        configureView.configure(with: model)
     }
     
     func photoContainerDidTapAdd(_ view: TreeDetailsPhotoContainerView) {
@@ -91,7 +92,11 @@ final class PhotoManager: PhotoManagerProtocol,
     }
     
     func photoContainer(_ view: TreeDetailsPhotoContainerView, didTapClose index: Int) {
+        guard index < photos.count, let model = photos[index] as? RemotePhotoModel else {
+            return
+        }
         
+        dataProvider.deletePhoto(id: model.id)
     }
     
     

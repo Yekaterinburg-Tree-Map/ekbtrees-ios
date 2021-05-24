@@ -19,12 +19,15 @@ final class TreeDetailsModuleFactory: Factory {
     // MARK: Private Properties
     
     private let formFactory: TreeDetailsFormFactoryProtocol
+    private let photoManager: PhotoManagerProtocol
     
     
     // MARK: Lifecycle
     
-    init(formFactory: TreeDetailsFormFactoryProtocol) {
+    init(formFactory: TreeDetailsFormFactoryProtocol,
+         photoManager: PhotoManagerProtocol) {
         self.formFactory = formFactory
+        self.photoManager = photoManager
     }
     
     
@@ -33,6 +36,7 @@ final class TreeDetailsModuleFactory: Factory {
     func build(with context: Context) -> TreeDetailsViewController {
         let interactor = TreeDetailsInteractor(tree: context.tree,
                                                formFactory: formFactory,
+                                               photoManager: photoManager,
                                                output: context.output)
         let vc = TreeDetailsViewController.instantiate(with: interactor)
         return vc

@@ -10,11 +10,16 @@ import RxSwift
 
 protocol PhotoRemoteDataProviding {
     
+    func deletePhoto(id: String)
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
 }
 
 
 final class PhotoRemoteDataProvider: PhotoRemoteDataProviding {
+    
+    func deletePhoto(id: String) {
+        
+    }
     
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]> {
         Observable.just([]).startWith([])

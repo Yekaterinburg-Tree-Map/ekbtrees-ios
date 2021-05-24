@@ -11,7 +11,7 @@ import Lightbox
 final class PhotoViewerFactory: Factory {
     
     struct Context {
-        let images: [UIImage]
+        let images: [PhotoModelProtocol]
         let startIndex: Int
     }
     
@@ -26,9 +26,17 @@ final class PhotoViewerFactory: Factory {
     
     // MARK: Private
     
-    private func setupImages(_ images: [UIImage]) -> [LightboxImage] {
-        images.map { image -> LightboxImage in
-            LightboxImage(image: image)
+    private func setupImages(_ images: [PhotoModelProtocol]) -> [LightboxImage] {
+        images.compactMap { image -> LightboxImage? in
+            if let model = image as? LocalPhotoModel {
+                return LightboxImage(image: model.image)
+            }
+            
+            if let model = image as? RemotePhotoModel {
+                return LightboxImage(imageURL: model.url)
+            }
+            
+            return nil
         }
     }
 }

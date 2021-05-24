@@ -94,7 +94,7 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
         navigationController?.present(vc, animated: true)
     }
     
-    func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [UIImage]) {
+    func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [PhotoModelProtocol]) {
         let factory: PhotoViewerFactory = resolver.resolve()
         let vc = factory.build(with: .init(images: photos, startIndex: startingIndex))
         vc.modalPresentationStyle = .fullScreen

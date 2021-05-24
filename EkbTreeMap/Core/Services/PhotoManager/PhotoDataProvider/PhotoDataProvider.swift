@@ -11,6 +11,7 @@ import UIKit
 
 protocol PhotoDataProviding {
     
+    func deletePhoto(id: String)
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID)
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
 }
@@ -36,12 +37,16 @@ final class PhotoDataProvider: PhotoDataProviding {
     
     // MARK: Public
     
+    func deletePhoto(id: String) {
+        remoteDataProvider.deletePhoto(id: id)
+    }
+    
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) {
-        
+        localDataProvider.loadPhotos(photos, for: treeId)
     }
     
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]> {
-        Observable.combineLatest(localDataProvider.fetchPhotos(for: treeId),
-                                 remoteDataProvider.fetchPhotos(for: treeId)) { $0 + $1 }
+        Observable.combineLatest(localDataProvider.fetchPhotos(for: treeId).startWith([]),
+                                 remoteDataProvider.fetchPhotos(for: treeId).startWith([])) { $0 + $1 }
     }
 }
