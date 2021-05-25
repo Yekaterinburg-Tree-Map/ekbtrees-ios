@@ -14,6 +14,11 @@ PODS:
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
   - PryntTrimmerView (4.0.2)
+  - Realm (10.7.4):
+    - Realm/Headers (= 10.7.4)
+  - Realm/Headers (10.7.4)
+  - RealmSwift (10.7.4):
+    - Realm (= 10.7.4)
   - RxCocoa (6.1.0):
     - RxRelay (= 6.1.0)
     - RxSwift (= 6.1.0)
@@ -36,6 +41,7 @@ DEPENDENCIES:
   - Lightbox
   - Moya
   - NVActivityIndicatorView
+  - RealmSwift
   - RxCocoa
   - RxSwift
   - SnapKit
@@ -55,6 +61,8 @@ SPEC REPOS:
     - Moya
     - NVActivityIndicatorView
     - PryntTrimmerView
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -75,6 +83,8 @@ SPEC CHECKSUMS:
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  Realm: f08ce1a85649a41303ecfe1cbd914c62e9e6d710
+  RealmSwift: 60ec49d165f23d040ab48811d8dd177e09baf4d3
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
   RxRelay: 483e1a19fad961b41f0b0c0bee506f46c1ae14fe
   RxSwift: a834e5c538e89eca0cae86f403f4fbf0336786ce
@@ -86,6 +96,6 @@ SPEC CHECKSUMS:
   YandexMapsMobile: d7d7f3b452209b4c2787beb53bb2dfcea259c70c
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 424cd5480e5f9ee0051f62490b3f16b618b9ac78
+PODFILE CHECKSUM: 2d29e6235d671ab0781f139c3cdaf5d16d8284bf
 
 COCOAPODS: 1.10.0

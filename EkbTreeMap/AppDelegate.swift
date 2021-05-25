@@ -51,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                      UIConfiguratorsAssembly(),
                                      NetworkAssembly(),
                                      ParserAssembly(),
-                                     TargetAssembly()])
+                                     TargetAssembly(),
+                                     StoreAssembly()])
     }
     
     private func setupCredentials() {
