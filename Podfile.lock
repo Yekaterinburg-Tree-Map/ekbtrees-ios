@@ -1,10 +1,15 @@
 PODS:
+  - Alamofire (5.4.3)
   - Cache (6.0.0)
   - Imaginary (5.0.0):
     - Cache (~> 6.0.0)
   - IQKeyboardManagerSwift (6.5.6)
   - Lightbox (2.5.0):
     - Imaginary (~> 5.0.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
   - NVActivityIndicatorView (5.1.1):
     - NVActivityIndicatorView/Base (= 5.1.1)
   - NVActivityIndicatorView/Base (5.1.1)
@@ -29,6 +34,7 @@ PODS:
 DEPENDENCIES:
   - IQKeyboardManagerSwift
   - Lightbox
+  - Moya
   - NVActivityIndicatorView
   - RxCocoa
   - RxSwift
@@ -41,10 +47,12 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - Cache
     - Imaginary
     - IQKeyboardManagerSwift
     - Lightbox
+    - Moya
     - NVActivityIndicatorView
     - PryntTrimmerView
     - RxCocoa
@@ -59,10 +67,12 @@ SPEC REPOS:
     - YPImagePicker
 
 SPEC CHECKSUMS:
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   Cache: 4ca7e00363fca5455f26534e5607634c820ffc2d
   Imaginary: cf5e3a7dd6ab1dcbd47ba8ce5edf2307c4e99eb3
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   Lightbox: cc3d5124f024fa8197fd23f913160db1c61a1852
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
   NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
   RxCocoa: 5c51f02d562cbd94629f6c26cf0c80fe4ab8d343
@@ -76,6 +86,6 @@ SPEC CHECKSUMS:
   YandexMapsMobile: d7d7f3b452209b4c2787beb53bb2dfcea259c70c
   YPImagePicker: 6f410f475bd22fa8cd430495b54d4b2f15865c2d
 
-PODFILE CHECKSUM: 6180ca7a95ff6cded92c303ff48bc04ccaf90e7d
+PODFILE CHECKSUM: 424cd5480e5f9ee0051f62490b3f16b618b9ac78
 
 COCOAPODS: 1.10.0

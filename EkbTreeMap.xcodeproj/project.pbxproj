@@ -94,6 +94,13 @@
 		2ED7F855265BC270001D8BF9 /* PhotoLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */; };
 		2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */; };
 		2ED7F877265BDB6E001D8BF9 /* GradientContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F876265BDB6E001D8BF9 /* GradientContainer.swift */; };
+		2ED7F94A265CE92D001D8BF9 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F949265CE92D001D8BF9 /* Target.swift */; };
+		2ED7F953265CEAD8001D8BF9 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F952265CEAD8001D8BF9 /* NetworkServiceProtocol.swift */; };
+		2ED7F95C265CECAA001D8BF9 /* NetworkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F95B265CECAA001D8BF9 /* NetworkParser.swift */; };
+		2ED7F964265CEE05001D8BF9 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F963265CEE05001D8BF9 /* NetworkService.swift */; };
+		2ED7F969265CF4C7001D8BF9 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */; };
+		2ED7F96E265CF740001D8BF9 /* NetworkServiceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F96D265CF740001D8BF9 /* NetworkServiceName.swift */; };
+		2ED7F973265CF7BD001D8BF9 /* NetworkAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F972265CF7BD001D8BF9 /* NetworkAssembly.swift */; };
 		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
 		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
@@ -221,6 +228,13 @@
 		2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderService.swift; sourceTree = "<group>"; };
 		2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderRepository.swift; sourceTree = "<group>"; };
 		2ED7F876265BDB6E001D8BF9 /* GradientContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientContainer.swift; sourceTree = "<group>"; };
+		2ED7F949265CE92D001D8BF9 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		2ED7F952265CEAD8001D8BF9 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		2ED7F95B265CECAA001D8BF9 /* NetworkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkParser.swift; sourceTree = "<group>"; };
+		2ED7F963265CEE05001D8BF9 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		2ED7F96D265CF740001D8BF9 /* NetworkServiceName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceName.swift; sourceTree = "<group>"; };
+		2ED7F972265CF7BD001D8BF9 /* NetworkAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAssembly.swift; sourceTree = "<group>"; };
 		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
 		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -483,6 +497,7 @@
 		2E96880B260CD41900574BE2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				2ED7F947265CE897001D8BF9 /* Network */,
 				2E98317F2647DACD0088193B /* Assemblies */,
 				2E7FDAFC26105A620065E5C0 /* Parsers */,
 				2E968853260CFC4B00574BE2 /* UI */,
@@ -545,6 +560,7 @@
 			children = (
 				2E9831B92647E3D00088193B /* Resolver */,
 				2E9831802647DADE0088193B /* ServiceAssembly.swift */,
+				2ED7F972265CF7BD001D8BF9 /* NetworkAssembly.swift */,
 				2E9831882647DBEB0088193B /* FactoryAssembly.swift */,
 				2E9831902647DEBB0088193B /* UIConfiguratorsAssembly.swift */,
 			);
@@ -767,6 +783,43 @@
 				2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */,
 			);
 			path = PhotoLoader;
+			sourceTree = "<group>";
+		};
+		2ED7F947265CE897001D8BF9 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F957265CEC97001D8BF9 /* Parsers */,
+				2ED7F951265CEAC9001D8BF9 /* NetworkService */,
+				2ED7F948265CE89E001D8BF9 /* TargetType */,
+				2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2ED7F948265CE89E001D8BF9 /* TargetType */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F949265CE92D001D8BF9 /* Target.swift */,
+			);
+			path = TargetType;
+			sourceTree = "<group>";
+		};
+		2ED7F951265CEAC9001D8BF9 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F952265CEAD8001D8BF9 /* NetworkServiceProtocol.swift */,
+				2ED7F963265CEE05001D8BF9 /* NetworkService.swift */,
+				2ED7F96D265CF740001D8BF9 /* NetworkServiceName.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		2ED7F957265CEC97001D8BF9 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F95B265CECAA001D8BF9 /* NetworkParser.swift */,
+			);
+			path = Parsers;
 			sourceTree = "<group>";
 		};
 		2EDAA70B264D84F200D7F6BE /* PhotoView */ = {
@@ -1046,6 +1099,7 @@
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
 				2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */,
 				2E5271C52659042D007B86BD /* PhotoRemoteDataProvider.swift in Sources */,
+				2ED7F95C265CECAA001D8BF9 /* NetworkParser.swift in Sources */,
 				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
 				2E9831812647DADE0088193B /* ServiceAssembly.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
@@ -1065,6 +1119,7 @@
 				2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */,
 				2ED0FC4D2635BC08006A8683 /* TreeEditorModuleOutput.swift in Sources */,
 				2ED0FC3526340ED9006A8683 /* MapPointChooserModuleIO.swift in Sources */,
+				2ED7F96E265CF740001D8BF9 /* NetworkServiceName.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
 				2EB34DA1263FEF52009A2129 /* TreeDetailsInteractor.swift in Sources */,
 				2E01FF73262DE8EE00DA2EF1 /* MapPointChooserModuleFactory.swift in Sources */,
@@ -1082,6 +1137,7 @@
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
 				2EB34D5D263F013A009A2129 /* ViewRepresentableModel.swift in Sources */,
 				2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */,
+				2ED7F973265CF7BD001D8BF9 /* NetworkAssembly.swift in Sources */,
 				2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */,
 				2E01FF80262DE9C300DA2EF1 /* MapPointChooserIO.swift in Sources */,
 				2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */,
@@ -1095,6 +1151,8 @@
 				2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */,
 				2ED7F877265BDB6E001D8BF9 /* GradientContainer.swift in Sources */,
 				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,
+				2ED7F953265CEAD8001D8BF9 /* NetworkServiceProtocol.swift in Sources */,
+				2ED7F969265CF4C7001D8BF9 /* NetworkError.swift in Sources */,
 				2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */,
 				2EFD90142652DCBF0091D986 /* PhotoPickerFactory.swift in Sources */,
 				2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */,
@@ -1102,6 +1160,7 @@
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */,
 				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
+				2ED7F964265CEE05001D8BF9 /* NetworkService.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */,
 				2E5271BD26590300007B86BD /* PhotoLocalDataProvider.swift in Sources */,
 				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
@@ -1116,6 +1175,7 @@
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
 				2E9A5A92263B3E9000C5085F /* UIImage+Semantics.swift in Sources */,
+				2ED7F94A265CE92D001D8BF9 /* Target.swift in Sources */,
 				2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */,
 				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
 				2E01F748262A120A00DA2EF1 /* MapObserverViewIO.swift in Sources */,
