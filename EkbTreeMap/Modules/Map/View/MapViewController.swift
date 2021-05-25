@@ -75,9 +75,10 @@ final class MapViewController: UIViewController {
     
     private func showPoints(_ points: [TreePointRepresentable]) {
         let objects = mapView.mapWindow.map.mapObjects
+        objects.clear()
         points.forEach { point in
             let circle = YMKCircle(center: .init(latitude: point.position.latitude, longitude: point.position.longitude),
-                                   radius: Float(point.radius / 2))
+                                   radius: Float(point.radius))
             let stroke = UIColor.clear
             let obj = objects.addCircle(with: circle,
                                         stroke: stroke,
@@ -89,16 +90,24 @@ final class MapViewController: UIViewController {
     
     private func handleCameraPositionChanged(map: YMKMap) {
         let visibleRegion = map.visibleRegion
+        let cameraPosition = map.cameraPosition
+        let zoom = Int(cameraPosition.zoom)
         let topLeftPoint = TreePosition(latitude: visibleRegion.topLeft.latitude,
                                         longitude: visibleRegion.topLeft.longitude)
+        let topRightPoint = TreePosition(latitude: visibleRegion.topRight.latitude,
+                                         longitude: visibleRegion.topRight.longitude)
+        let bottomLeftPoint = TreePosition(latitude: visibleRegion.bottomLeft.latitude,
+                                           longitude: visibleRegion.bottomLeft.longitude)
         let bottomRightPoint = TreePosition(latitude: visibleRegion.bottomRight.latitude,
                                             longitude: visibleRegion.bottomRight.longitude)
-        let centerLongitude = (topLeftPoint.longitude + bottomRightPoint.longitude) / 2
-        let centerLatitude = (topLeftPoint.latitude + bottomRightPoint.latitude) / 2
-        let centerPoint = TreePosition(latitude: centerLatitude, longitude: centerLongitude)
+        let centerPoint = TreePosition(latitude: cameraPosition.target.latitude,
+                                       longitude: cameraPosition.target.longitude)
         let region = MapViewVisibleRegionPoints(topLeft: topLeftPoint,
+                                                topRight: topRightPoint,
                                                 center: centerPoint,
-                                                bottomRight: bottomRightPoint)
+                                                bottomLeft: bottomLeftPoint,
+                                                bottomRight: bottomRightPoint,
+                                                zoom: zoom)
         
         didChangeVisibleRegionSubject.onNext(region)
     }

@@ -9,6 +9,9 @@
 struct MapViewVisibleRegionPoints {
     
     let topLeft: TreePosition
+    let topRight: TreePosition
     let center: TreePosition
+    let bottomLeft: TreePosition
     let bottomRight: TreePosition
+    let zoom: Int
 }

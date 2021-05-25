@@ -48,7 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupDI() {
         assembler.apply(assemblies: [ServiceAssembly(),
                                      FactoryAssembly(),
-                                     UIConfiguratorsAssembly()])
+                                     UIConfiguratorsAssembly(),
+                                     NetworkAssembly(),
+                                     ParserAssembly(),
+                                     TargetAssembly()])
     }
     
     private func setupCredentials() {

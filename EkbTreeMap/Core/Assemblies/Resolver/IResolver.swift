@@ -13,6 +13,7 @@ protocol IResolver {
     
     func resolve<T>() -> T
     func resolve<T>(name: String) -> T
+    func resolve<T, Arg>(arg: Arg) -> T
 }
 
 
@@ -30,5 +31,9 @@ final class IResolverImpl: IResolver {
     
     func resolve<T>(name: String) -> T {
         resolver.resolve(T.self, name: name)!
+    }
+    
+    func resolve<T, Arg>(arg: Arg) -> T {
+        resolver.resolve(T.self, argument: arg)!
     }
 }

@@ -36,7 +36,7 @@ final class PhotoManager: PhotoManagerProtocol {
     // MARK: Private Properties
     
     private let bag = DisposeBag()
-    private var treeId: Tree.ID = ""
+    private var treeId: Tree.ID = 0
     private let dataProvider: PhotoDataProviding
     
     

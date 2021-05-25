@@ -101,6 +101,16 @@
 		2ED7F969265CF4C7001D8BF9 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */; };
 		2ED7F96E265CF740001D8BF9 /* NetworkServiceName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F96D265CF740001D8BF9 /* NetworkServiceName.swift */; };
 		2ED7F973265CF7BD001D8BF9 /* NetworkAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F972265CF7BD001D8BF9 /* NetworkAssembly.swift */; };
+		2ED7F97B265D0FDA001D8BF9 /* TreeRegionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F97A265D0FDA001D8BF9 /* TreeRegionParser.swift */; };
+		2ED7F980265D10BC001D8BF9 /* MapViewTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F97F265D10BC001D8BF9 /* MapViewTile.swift */; };
+		2ED7F985265D1207001D8BF9 /* CompactTreeInfoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F984265D1207001D8BF9 /* CompactTreeInfoParser.swift */; };
+		2ED7F98A265D13F9001D8BF9 /* ParserAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F989265D13F9001D8BF9 /* ParserAssembly.swift */; };
+		2ED7F992265D14E9001D8BF9 /* GetTreesByRegionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F991265D14E9001D8BF9 /* GetTreesByRegionTarget.swift */; };
+		2ED7F99A265D1910001D8BF9 /* TargetAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F999265D1910001D8BF9 /* TargetAssembly.swift */; };
+		2ED7F9A0265D1A63001D8BF9 /* MapPointsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F99F265D1A63001D8BF9 /* MapPointsService.swift */; };
+		2ED7F9A5265D3482001D8BF9 /* GetClasterByRegionTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F9A4265D3482001D8BF9 /* GetClasterByRegionTarget.swift */; };
+		2ED7F9AA265D35AD001D8BF9 /* ClustersRegionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F9A9265D35AD001D8BF9 /* ClustersRegionParser.swift */; };
+		2ED7F9B7265D3860001D8BF9 /* SingleClusterParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F9B6265D3860001D8BF9 /* SingleClusterParser.swift */; };
 		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
 		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
@@ -235,6 +245,16 @@
 		2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		2ED7F96D265CF740001D8BF9 /* NetworkServiceName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceName.swift; sourceTree = "<group>"; };
 		2ED7F972265CF7BD001D8BF9 /* NetworkAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAssembly.swift; sourceTree = "<group>"; };
+		2ED7F97A265D0FDA001D8BF9 /* TreeRegionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeRegionParser.swift; sourceTree = "<group>"; };
+		2ED7F97F265D10BC001D8BF9 /* MapViewTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTile.swift; sourceTree = "<group>"; };
+		2ED7F984265D1207001D8BF9 /* CompactTreeInfoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactTreeInfoParser.swift; sourceTree = "<group>"; };
+		2ED7F989265D13F9001D8BF9 /* ParserAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserAssembly.swift; sourceTree = "<group>"; };
+		2ED7F991265D14E9001D8BF9 /* GetTreesByRegionTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetTreesByRegionTarget.swift; sourceTree = "<group>"; };
+		2ED7F999265D1910001D8BF9 /* TargetAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetAssembly.swift; sourceTree = "<group>"; };
+		2ED7F99F265D1A63001D8BF9 /* MapPointsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPointsService.swift; sourceTree = "<group>"; };
+		2ED7F9A4265D3482001D8BF9 /* GetClasterByRegionTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetClasterByRegionTarget.swift; sourceTree = "<group>"; };
+		2ED7F9A9265D35AD001D8BF9 /* ClustersRegionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClustersRegionParser.swift; sourceTree = "<group>"; };
+		2ED7F9B6265D3860001D8BF9 /* SingleClusterParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleClusterParser.swift; sourceTree = "<group>"; };
 		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
 		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -396,6 +416,7 @@
 			isa = PBXGroup;
 			children = (
 				2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */,
+				2ED7F97F265D10BC001D8BF9 /* MapViewTile.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +511,10 @@
 				2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */,
 				2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */,
 				2ED57E762618D29800EC9033 /* ApiKeyParser.swift */,
+				2ED7F97A265D0FDA001D8BF9 /* TreeRegionParser.swift */,
+				2ED7F984265D1207001D8BF9 /* CompactTreeInfoParser.swift */,
+				2ED7F9A9265D35AD001D8BF9 /* ClustersRegionParser.swift */,
+				2ED7F9B6265D3860001D8BF9 /* SingleClusterParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -499,7 +524,6 @@
 			children = (
 				2ED7F947265CE897001D8BF9 /* Network */,
 				2E98317F2647DACD0088193B /* Assemblies */,
-				2E7FDAFC26105A620065E5C0 /* Parsers */,
 				2E968853260CFC4B00574BE2 /* UI */,
 				2E968819260CD5C500574BE2 /* Services */,
 				2E96880C260CD45C00574BE2 /* Models */,
@@ -522,6 +546,7 @@
 		2E968819260CD5C500574BE2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2ED7F99E265D1A07001D8BF9 /* Map */,
 				2E52719E265900BC007B86BD /* PhotoManager */,
 				2ED57E6D2618D27A00EC9033 /* Credentials */,
 				2ED57E6C2618D27100EC9033 /* Domain */,
@@ -560,6 +585,8 @@
 			children = (
 				2E9831B92647E3D00088193B /* Resolver */,
 				2E9831802647DADE0088193B /* ServiceAssembly.swift */,
+				2ED7F999265D1910001D8BF9 /* TargetAssembly.swift */,
+				2ED7F989265D13F9001D8BF9 /* ParserAssembly.swift */,
 				2ED7F972265CF7BD001D8BF9 /* NetworkAssembly.swift */,
 				2E9831882647DBEB0088193B /* FactoryAssembly.swift */,
 				2E9831902647DEBB0088193B /* UIConfiguratorsAssembly.swift */,
@@ -788,10 +815,9 @@
 		2ED7F947265CE897001D8BF9 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				2ED7F957265CEC97001D8BF9 /* Parsers */,
-				2ED7F951265CEAC9001D8BF9 /* NetworkService */,
-				2ED7F948265CE89E001D8BF9 /* TargetType */,
-				2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */,
+				2ED7F990265D14BD001D8BF9 /* Targets */,
+				2E7FDAFC26105A620065E5C0 /* Parsers */,
+				2ED7F98F265D14AC001D8BF9 /* Core */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -814,12 +840,40 @@
 			path = NetworkService;
 			sourceTree = "<group>";
 		};
-		2ED7F957265CEC97001D8BF9 /* Parsers */ = {
+		2ED7F957265CEC97001D8BF9 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
 				2ED7F95B265CECAA001D8BF9 /* NetworkParser.swift */,
 			);
-			path = Parsers;
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		2ED7F98F265D14AC001D8BF9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F968265CF4C7001D8BF9 /* NetworkError.swift */,
+				2ED7F948265CE89E001D8BF9 /* TargetType */,
+				2ED7F951265CEAC9001D8BF9 /* NetworkService */,
+				2ED7F957265CEC97001D8BF9 /* Parser */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		2ED7F990265D14BD001D8BF9 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F991265D14E9001D8BF9 /* GetTreesByRegionTarget.swift */,
+				2ED7F9A4265D3482001D8BF9 /* GetClasterByRegionTarget.swift */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		2ED7F99E265D1A07001D8BF9 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F99F265D1A63001D8BF9 /* MapPointsService.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		2EDAA70B264D84F200D7F6BE /* PhotoView */ = {
@@ -1088,9 +1142,11 @@
 				2EFD9031265396C50091D986 /* PhotoViewerFactory.swift in Sources */,
 				2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */,
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
+				2ED7F985265D1207001D8BF9 /* CompactTreeInfoParser.swift in Sources */,
 				2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */,
 				2ED0FC432635B931006A8683 /* TreeEditorViewIO.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
+				2ED7F9B7265D3860001D8BF9 /* SingleClusterParser.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
 				2EE2BC5E264C502800DC069F /* TreeDetailsAddPhotoView.swift in Sources */,
@@ -1102,6 +1158,7 @@
 				2ED7F95C265CECAA001D8BF9 /* NetworkParser.swift in Sources */,
 				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
 				2E9831812647DADE0088193B /* ServiceAssembly.swift in Sources */,
+				2ED7F992265D14E9001D8BF9 /* GetTreesByRegionTarget.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */,
 				2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */,
@@ -1111,6 +1168,7 @@
 				2E01FF7B262DE95600DA2EF1 /* MapPointChooserViewController.swift in Sources */,
 				2ED57E772618D29800EC9033 /* ApiKeyParser.swift in Sources */,
 				2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */,
+				2ED7F99A265D1910001D8BF9 /* TargetAssembly.swift in Sources */,
 				2ED0FC282633F702006A8683 /* CreateTreeCoordinator.swift in Sources */,
 				2E9A5A8D263B30A700C5085F /* TreeEditorPickerCell.swift in Sources */,
 				2EB34D7B263FDF4E009A2129 /* TreeEditorFormValidator.swift in Sources */,
@@ -1125,6 +1183,7 @@
 				2E01FF73262DE8EE00DA2EF1 /* MapPointChooserModuleFactory.swift in Sources */,
 				2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */,
 				2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */,
+				2ED7F97B265D0FDA001D8BF9 /* TreeRegionParser.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
 				2E9831912647DEBB0088193B /* UIConfiguratorsAssembly.swift in Sources */,
 				2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */,
@@ -1144,6 +1203,7 @@
 				2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */,
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
 				2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */,
+				2ED7F9A5265D3482001D8BF9 /* GetClasterByRegionTarget.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
 				2EF9F12626563C5000972189 /* TreeDetailsPhotoViewDelegate.swift in Sources */,
 				2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */,
@@ -1158,8 +1218,11 @@
 				2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */,
 				2E01FF85262DEC6E00DA2EF1 /* MapPointChooserInteractor.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
+				2ED7F9AA265D35AD001D8BF9 /* ClustersRegionParser.swift in Sources */,
 				2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */,
+				2ED7F980265D10BC001D8BF9 /* MapViewTile.swift in Sources */,
 				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
+				2ED7F9A0265D1A63001D8BF9 /* MapPointsService.swift in Sources */,
 				2ED7F964265CEE05001D8BF9 /* NetworkService.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */,
 				2E5271BD26590300007B86BD /* PhotoLocalDataProvider.swift in Sources */,
@@ -1176,6 +1239,7 @@
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,
 				2E9A5A92263B3E9000C5085F /* UIImage+Semantics.swift in Sources */,
 				2ED7F94A265CE92D001D8BF9 /* Target.swift in Sources */,
+				2ED7F98A265D13F9001D8BF9 /* ParserAssembly.swift in Sources */,
 				2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */,
 				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
 				2E01F748262A120A00DA2EF1 /* MapObserverViewIO.swift in Sources */,

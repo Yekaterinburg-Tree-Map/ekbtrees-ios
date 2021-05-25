@@ -17,6 +17,7 @@ final class MapViewInteractor: MapViewConfigurable {
     
     private let presenter: MapViewInteractorConfigurable
     private let treeRepository: TreePointsRepositoryProtocol
+    private let pointsService: MapPointsServiceProtocol
     
     private let startPointSubject = BehaviorSubject<TreePosition>(value: .init(latitude: 56.82,
                                                                                longitude: 60.62))
@@ -34,9 +35,11 @@ final class MapViewInteractor: MapViewConfigurable {
     
     init(presenter: MapViewInteractorConfigurable,
          treeRepository: TreePointsRepositoryProtocol,
+         pointsService: MapPointsServiceProtocol,
          output: MapViewModuleConfigurable?) {
         self.presenter = presenter
         self.treeRepository = treeRepository
+        self.pointsService = pointsService
         self.output = output
     }
     
@@ -81,7 +84,7 @@ final class MapViewInteractor: MapViewConfigurable {
     }
     
     private func didChangeVisibleRegion(_ region: MapViewVisibleRegionPoints) {
-        // TODO: fetch data for region
+        pointsService.updateTrees(for: region)
     }
     
     private func configureOutputIO() {

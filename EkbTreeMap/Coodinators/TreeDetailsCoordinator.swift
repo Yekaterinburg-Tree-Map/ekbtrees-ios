@@ -48,7 +48,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
     
     private func presentTreeDetails(animated: Bool) {
         let factory: TreeDetailsModuleFactory = resolver.resolve()
-        let tree = Tree(id: "", latitude: 56.84306, longitude: 60.6135)
+        var tree = Tree(id: 0, latitude: 56.84306, longitude: 60.6135)
         tree.age = 5
         tree.conditionAssessment = 5
         tree.diameterOfCrown = 10
@@ -79,7 +79,7 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
         let coordinator = EditTreeDetailsCoordinator(rootViewController: rootViewController,
                                                      resolver: resolver,
                                                      delegate: self,
-                                                     tree: Tree(id: "", latitude: 0, longitude: 0))
+                                                     tree: Tree(id: 0, latitude: 0, longitude: 0))
         childCoordinators.append(coordinator)
         coordinator.start(animated: true)
     }

@@ -8,11 +8,11 @@
 import Foundation
 
 
-class Tree: Identifiable {
+struct Tree: Identifiable {
     
     // MARK: Properties
     
-    let id: String
+    let id: Int
     let latitude: Double
     let longitude: Double
     
@@ -35,7 +35,7 @@ class Tree: Identifiable {
     
     // MARK: Lifecycle
     
-    init(id: String, latitude: Double, longitude: Double) {
+    init(id: Int, latitude: Double, longitude: Double) {
         self.id = id
         self.latitude = latitude
         self.longitude = longitude
