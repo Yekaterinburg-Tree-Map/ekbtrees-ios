@@ -118,6 +118,13 @@
 		2ED7FA10265D6FCB001D8BF9 /* StoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA0F265D6FCB001D8BF9 /* StoreAssembly.swift */; };
 		2ED7FA19265E6FA7001D8BF9 /* MapVisibleAreaToTilesConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA18265E6FA7001D8BF9 /* MapVisibleAreaToTilesConverter.swift */; };
 		2ED7FA1E265E702A001D8BF9 /* MapViewVisibleTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA1D265E702A001D8BF9 /* MapViewVisibleTiles.swift */; };
+		2ED7FA24265E8888001D8BF9 /* MapTreePointEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA23265E8888001D8BF9 /* MapTreePointEntity.swift */; };
+		2ED7FA29265E8C58001D8BF9 /* MapTreePointMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA28265E8C58001D8BF9 /* MapTreePointMapper.swift */; };
+		2ED7FA2E265E8E26001D8BF9 /* MapClusterEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA2D265E8E26001D8BF9 /* MapClusterEntity.swift */; };
+		2ED7FA33265E8E46001D8BF9 /* MapClusterMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA32265E8E46001D8BF9 /* MapClusterMapper.swift */; };
+		2ED7FA38265E9608001D8BF9 /* TileDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA37265E9608001D8BF9 /* TileDataEntity.swift */; };
+		2ED7FA3D265E9743001D8BF9 /* TileDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA3C265E9743001D8BF9 /* TileDataMapper.swift */; };
+		2ED7FA42265E9774001D8BF9 /* MapViewTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA41265E9774001D8BF9 /* MapViewTileData.swift */; };
 		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
 		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
@@ -269,6 +276,13 @@
 		2ED7FA0F265D6FCB001D8BF9 /* StoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreAssembly.swift; sourceTree = "<group>"; };
 		2ED7FA18265E6FA7001D8BF9 /* MapVisibleAreaToTilesConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVisibleAreaToTilesConverter.swift; sourceTree = "<group>"; };
 		2ED7FA1D265E702A001D8BF9 /* MapViewVisibleTiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewVisibleTiles.swift; sourceTree = "<group>"; };
+		2ED7FA23265E8888001D8BF9 /* MapTreePointEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTreePointEntity.swift; sourceTree = "<group>"; };
+		2ED7FA28265E8C58001D8BF9 /* MapTreePointMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTreePointMapper.swift; sourceTree = "<group>"; };
+		2ED7FA2D265E8E26001D8BF9 /* MapClusterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapClusterEntity.swift; sourceTree = "<group>"; };
+		2ED7FA32265E8E46001D8BF9 /* MapClusterMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapClusterMapper.swift; sourceTree = "<group>"; };
+		2ED7FA37265E9608001D8BF9 /* TileDataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDataEntity.swift; sourceTree = "<group>"; };
+		2ED7FA3C265E9743001D8BF9 /* TileDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDataMapper.swift; sourceTree = "<group>"; };
+		2ED7FA41265E9774001D8BF9 /* MapViewTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTileData.swift; sourceTree = "<group>"; };
 		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
 		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -432,6 +446,7 @@
 				2E3946452621D2910001E5FA /* MapViewVisibleRegionPoints.swift */,
 				2ED7F97F265D10BC001D8BF9 /* MapViewTile.swift */,
 				2ED7FA1D265E702A001D8BF9 /* MapViewVisibleTiles.swift */,
+				2ED7FA41265E9774001D8BF9 /* MapViewTileData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -753,7 +768,6 @@
 		2ED57E6C2618D27100EC9033 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				2E96881A260CD67400574BE2 /* TreePointsRepository.swift */,
 				2E7FDAEC261059330065E5C0 /* trees.geojson */,
 			);
 			path = Domain;
@@ -888,6 +902,7 @@
 		2ED7F99E265D1A07001D8BF9 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				2E96881A260CD67400574BE2 /* TreePointsRepository.swift */,
 				2ED7F99F265D1A63001D8BF9 /* MapPointsService.swift */,
 				2ED7FA18265E6FA7001D8BF9 /* MapVisibleAreaToTilesConverter.swift */,
 			);
@@ -897,6 +912,7 @@
 		2ED7F9DF265D6D2B001D8BF9 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				2ED7FA22265E82D0001D8BF9 /* Entities */,
 				2ED7FA14265D7028001D8BF9 /* Mappers */,
 				2ED7F9E0265D6D40001D8BF9 /* Store.swift */,
 				2ED7FA00265D6ECD001D8BF9 /* Mapper.swift */,
@@ -909,8 +925,21 @@
 		2ED7FA14265D7028001D8BF9 /* Mappers */ = {
 			isa = PBXGroup;
 			children = (
+				2ED7FA28265E8C58001D8BF9 /* MapTreePointMapper.swift */,
+				2ED7FA32265E8E46001D8BF9 /* MapClusterMapper.swift */,
+				2ED7FA3C265E9743001D8BF9 /* TileDataMapper.swift */,
 			);
 			path = Mappers;
+			sourceTree = "<group>";
+		};
+		2ED7FA22265E82D0001D8BF9 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7FA23265E8888001D8BF9 /* MapTreePointEntity.swift */,
+				2ED7FA2D265E8E26001D8BF9 /* MapClusterEntity.swift */,
+				2ED7FA37265E9608001D8BF9 /* TileDataEntity.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		2EDAA70B264D84F200D7F6BE /* PhotoView */ = {
@@ -1176,6 +1205,8 @@
 				2EB34DBB26402CA4009A2129 /* TreeDetailsMapView.swift in Sources */,
 				2E5271A026590292007B86BD /* PhotoDataProvider.swift in Sources */,
 				2E968815260CD48D00574BE2 /* TreeModels.swift in Sources */,
+				2ED7FA38265E9608001D8BF9 /* TileDataEntity.swift in Sources */,
+				2ED7FA2E265E8E26001D8BF9 /* MapClusterEntity.swift in Sources */,
 				2EFD9031265396C50091D986 /* PhotoViewerFactory.swift in Sources */,
 				2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */,
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
@@ -1186,6 +1217,7 @@
 				2ED7F9B7265D3860001D8BF9 /* SingleClusterParser.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
+				2ED7FA3D265E9743001D8BF9 /* TileDataMapper.swift in Sources */,
 				2EE2BC5E264C502800DC069F /* TreeDetailsAddPhotoView.swift in Sources */,
 				2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */,
 				2E9831C62647E5920088193B /* IResolver.swift in Sources */,
@@ -1228,8 +1260,11 @@
 				2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */,
 				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
 				2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */,
+				2ED7FA33265E8E46001D8BF9 /* MapClusterMapper.swift in Sources */,
+				2ED7FA29265E8C58001D8BF9 /* MapTreePointMapper.swift in Sources */,
 				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
 				2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */,
+				2ED7FA24265E8888001D8BF9 /* MapTreePointEntity.swift in Sources */,
 				2EB34DDA26405B39009A2129 /* TreeEditorFormCustomType.swift in Sources */,
 				2E968855260CFC5800574BE2 /* CircleImage.swift in Sources */,
 				2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */,
@@ -1285,6 +1320,7 @@
 				2ED7F98A265D13F9001D8BF9 /* ParserAssembly.swift in Sources */,
 				2ED01760263843DD006A8683 /* TreeEditorEnterDataCell.swift in Sources */,
 				2ED7F9E1265D6D40001D8BF9 /* Store.swift in Sources */,
+				2ED7FA42265E9774001D8BF9 /* MapViewTileData.swift in Sources */,
 				2EAE5A85261F64F1005E382B /* LoginButtonType.swift in Sources */,
 				2E01F748262A120A00DA2EF1 /* MapObserverViewIO.swift in Sources */,
 			);

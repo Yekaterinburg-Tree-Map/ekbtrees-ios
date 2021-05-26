@@ -16,5 +16,9 @@ final class StoreAssembly: Assembly {
             let configProvider = r.resolve(RealmConfigurationProviderProtocol.self)!
             return RealmStore(configuration: configProvider.getConfiguration())
         }
+        
+        container.autoregister(MapTreePointMapper.self, initializer: MapTreePointMapper.init)
+        container.autoregister(MapClusterMapper.self, initializer: MapClusterMapper.init)
+        container.autoregister(TileDataMapper.self, initializer: TileDataMapper.init)
     }
 }

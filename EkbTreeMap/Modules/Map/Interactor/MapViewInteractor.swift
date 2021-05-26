@@ -75,8 +75,8 @@ final class MapViewInteractor: MapViewConfigurable {
     
     private func didLoad() {
         configureOutputIO()
-        let points = treeRepository.fetchTreePoints()
-        visiblePointsSubject.onNext(points)
+//        let points = treeRepository.fetchTreePoints()
+//        visiblePointsSubject.onNext(points)
     }
     
     private func didTapOnMap(_ point: TreePosition) {
@@ -84,7 +84,7 @@ final class MapViewInteractor: MapViewConfigurable {
     }
     
     private func didChangeVisibleRegion(_ region: MapViewVisibleRegionPoints) {
-        pointsService.updateTrees(for: region)
+//        pointsService.updateTrees(for: region)
     }
     
     private func configureOutputIO() {
