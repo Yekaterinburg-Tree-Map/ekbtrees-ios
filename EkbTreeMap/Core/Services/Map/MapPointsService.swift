@@ -10,8 +10,8 @@ import RxSwift
 
 protocol MapPointsServiceProtocol {
     
-    func updateTrees(for region: MapViewVisibleRegionPoints)
-    func updateClusters(for region: MapViewVisibleRegionPoints)
+    func fetchTrees(in region: MapViewVisibleRegionPoints) -> Observable<Void>
+    func fetchClusters(in region: MapViewVisibleRegionPoints) -> Observable<Void>
 }
 
 
@@ -26,6 +26,7 @@ final class MapPointsService: MapPointsServiceProtocol {
     private let pointsParser: TreeRegionParser
     private let clusterParser: ClusterRegionParser
     private let treeRepository: TreePointsRepositoryProtocol
+    private let areaToTilesConverter: AreaToTilesConverting
     
     
     // MARK: Lifecycle
@@ -34,22 +35,37 @@ final class MapPointsService: MapPointsServiceProtocol {
          networkService: NetworkServiceProtocol,
          pointsParser: TreeRegionParser,
          clusterParser: ClusterRegionParser,
-         treeRepository: TreePointsRepositoryProtocol) {
+         treeRepository: TreePointsRepositoryProtocol,
+         areaToTilesConverter: AreaToTilesConverting) {
         self.resolver = resolver
         self.networkService = networkService
         self.pointsParser = pointsParser
         self.clusterParser = clusterParser
         self.treeRepository = treeRepository
+        self.areaToTilesConverter = areaToTilesConverter
     }
     
     
     // MARK: Public
     
-    func updateTrees(for region: MapViewVisibleRegionPoints) {
-        let params = GetTreesByRegionTarget.Parameters(x1: region.topLeft.latitude,
-                                                       x2: region.bottomRight.latitude,
-                                                       y1: region.topLeft.longitude,
-                                                       y2: region.bottomRight.longitude)
+    
+    func fetchTrees(in region: MapViewVisibleRegionPoints) -> Observable<Void> {
+        .empty()
+    }
+    
+    func fetchClusters(in region: MapViewVisibleRegionPoints) -> Observable<Void> {
+        .empty()
+    }
+    
+    
+    // MARK: Private
+
+    private func updateTrees(for region: MapViewVisibleRegionPoints) {
+        let position = getFullPosition(for: region)
+        let params = GetTreesByRegionTarget.Parameters(x1: position.topLeftPosition.latitude,
+                                                       x2: position.bottomRightPosition.latitude,
+                                                       y1: position.topLeftPosition.longitude,
+                                                       y2: position.bottomRightPosition.longitude)
         let target: GetTreesByRegionTarget = resolver.resolve(arg: params)
         networkService.sendRequest(target, parser: pointsParser)
             .subscribe(onNext: { data in
@@ -58,14 +74,19 @@ final class MapPointsService: MapPointsServiceProtocol {
             .disposed(by: bag)
     }
     
-    func updateClusters(for region: MapViewVisibleRegionPoints) {
-        let params = GetClasterByRegionTarget.Parameters(x1: region.topLeft.latitude,
-                                                       x2: region.bottomRight.latitude,
-                                                       y1: region.topLeft.longitude,
-                                                       y2: region.bottomRight.longitude)
+    private func updateClusters(for region: MapViewVisibleRegionPoints) {
+        let position = getFullPosition(for: region)
+        let params = GetClasterByRegionTarget.Parameters(x1: position.topLeftPosition.latitude,
+                                                         x2: position.bottomRightPosition.latitude,
+                                                         y1: position.topLeftPosition.longitude,
+                                                         y2: position.bottomRightPosition.longitude)
         let target: GetClasterByRegionTarget = resolver.resolve(arg: params)
         networkService.sendRequest(target, parser: clusterParser)
             .subscribe()
             .disposed(by: bag)
+    }
+    
+    private func getFullPosition(for region: MapViewVisibleRegionPoints) -> MapViewVisibleTiles {
+        areaToTilesConverter.processVisibleArea(region)
     }
 }

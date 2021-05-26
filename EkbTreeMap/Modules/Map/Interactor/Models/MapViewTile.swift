@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct MapViewTile: Equatable, Hashable {
+struct MapViewTile: Equatable, Hashable, Comparable {
     
     // MARK: Properties
     
@@ -23,6 +23,10 @@ struct MapViewTile: Equatable, Hashable {
         lhs.x == rhs.x
             && lhs.y == rhs.y
             && lhs.zoom == rhs.zoom
+    }
+    
+    static func < (lhs: MapViewTile, rhs: MapViewTile) -> Bool {
+        lhs.x < rhs.x && lhs.y < rhs.y
     }
     
     func hash(into hasher: inout Hasher) {

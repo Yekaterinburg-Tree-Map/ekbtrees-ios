@@ -29,7 +29,10 @@ final class ServiceAssembly: Assembly {
                                     networkService: resolver.resolve(name: NetworkServiceName.common.rawValue),
                                     pointsParser: r~>,
                                     clusterParser: r~>,
-                                    treeRepository: TreePointsRepository())
+                                    treeRepository: TreePointsRepository(),
+                                    areaToTilesConverter: r~>)
         }
+        
+        container.autoregister(AreaToTilesConverting.self, initializer: MapVisibleAreaToTilesConverter.init)
     }
 }
