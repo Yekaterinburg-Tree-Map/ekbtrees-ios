@@ -28,7 +28,7 @@ struct MapView {
     struct InteractorOutput {
         
         var startPoint: Observable<TreePosition> = .never()
-        var visiblePoints: Observable<[TreePoint]> = .never()
+        var visiblePoints: Observable<[Tree]> = .never()
     }
 }
 

@@ -31,6 +31,9 @@ final class TileDataMapper: Mapper {
     func mapEntity(_ model: MapViewTileData) -> TileDataEntity {
         let entity = TileDataEntity()
         entity.id = "\(model.tile.zoom)/\(model.tile.x)/\(model.tile.y)"
+        entity.x = model.tile.x
+        entity.y = model.tile.y
+        entity.zoom = model.tile.zoom
         entity.clusters.removeAll()
         entity.clusters.append(objectsIn: model.clusters.map(clusterMapper.mapEntity))
         entity.treePoints.removeAll()

@@ -21,8 +21,10 @@ final class MapViewInteractor: MapViewConfigurable {
     
     private let startPointSubject = BehaviorSubject<TreePosition>(value: .init(latitude: 56.82,
                                                                                longitude: 60.62))
-    private let visiblePointsSubject = PublishSubject<[TreePoint]>()
+    private let visiblePointsSubject = PublishSubject<[Tree]>()
     private let bag = DisposeBag()
+    
+    private var pointsBag = DisposeBag()
     
     
     // MARK: Output Observables
@@ -75,8 +77,6 @@ final class MapViewInteractor: MapViewConfigurable {
     
     private func didLoad() {
         configureOutputIO()
-//        let points = treeRepository.fetchTreePoints()
-//        visiblePointsSubject.onNext(points)
     }
     
     private func didTapOnMap(_ point: TreePosition) {
@@ -84,7 +84,10 @@ final class MapViewInteractor: MapViewConfigurable {
     }
     
     private func didChangeVisibleRegion(_ region: MapViewVisibleRegionPoints) {
-//        pointsService.updateTrees(for: region)
+        pointsBag = DisposeBag()
+        pointsService.fetchTrees(in: region)
+            .bind(to: visiblePointsSubject)
+            .disposed(by: pointsBag)
     }
     
     private func configureOutputIO() {

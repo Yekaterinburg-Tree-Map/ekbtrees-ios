@@ -20,15 +20,24 @@ final class MapVisibleAreaToTilesConverter: AreaToTilesConverting {
     // MARK: Public
     
     func processVisibleArea(_ area: MapViewVisibleRegionPoints) -> MapViewVisibleTiles {
-        let tiles = Set([area.topLeft, area.topRight, area.center, area.bottomLeft, area.bottomRight].map {
+        let cornerTiles = [area.topLeft, area.bottomRight].map {
             processTile(from: $0, zoom: area.zoom)
-        })
+        }
+        let tiles: Set<MapViewTile> = {
+            var result = Set<MapViewTile>()
+            for x in (cornerTiles.first!.x...cornerTiles.last!.x) {
+                for y in (cornerTiles.first!.y...cornerTiles.last!.y) {
+                    result.update(with: MapViewTile(x: x, y: y, zoom: area.zoom))
+                }
+            }
+            return result
+        }()
         let corner = findCornerTiles(tiles)
-        let topLeft = findTilePosition(MapViewTile(x: corner.0.x - 1,
-                                                   y: corner.0.y - 1,
+        let topLeft = findTilePosition(MapViewTile(x: corner.0.x - 2,
+                                                   y: corner.0.y - 2,
                                                    zoom: area.zoom))
-        let bottomRight = findTilePosition(MapViewTile(x: corner.0.x + 1,
-                                                       y: corner.0.y + 1,
+        let bottomRight = findTilePosition(MapViewTile(x: corner.0.x + 2,
+                                                       y: corner.0.y + 2,
                                                        zoom: area.zoom))
         
         return MapViewVisibleTiles(tiles: Array(tiles),

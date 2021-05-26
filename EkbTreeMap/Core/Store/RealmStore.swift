@@ -40,6 +40,18 @@ final class RealmStore: Store {
         }
     }
     
+    func createOrUpdate<Entity: Object>(entities: [Entity]) {
+        do {
+            try realm.write {
+                entities.forEach {
+                    realm.add($0, update: .all)
+                }
+            }
+        } catch {
+            // log
+        }
+    }
+    
     func delete<Entity: Object>(entity: Entity, predicate: String) {
         let entities = realm.objects(Entity.self).filter(predicate)
         

@@ -12,6 +12,7 @@ import RealmSwift
 protocol Store {
     
     func createOrUpdate<Entity: Object>(entity: Entity)
+    func createOrUpdate<Entity: Object>(entities: [Entity])
     
     func delete<Entity: Object>(entity: Entity, predicate: String)
     func deleteAll<Entity: Object>(of type: Entity.Type)

@@ -34,12 +34,12 @@ final class MapViewPresenter: MapViewInteractorConfigurable {
     
     // MARK: Private
     
-    private func mapTreeToRepresentable(_ points: [TreePoint]) -> [TreePointRepresentable] {
+    private func mapTreeToRepresentable(_ points: [Tree]) -> [TreePointRepresentable] {
         points.map { point in
             TreePointRepresentable(id: point.id,
-                                   position: point.position,
+                                   position: .init(latitude: point.latitude, longitude: point.longitude),
                                    circleColor: [UIColor.green, UIColor.blue].randomElement()!,
-                                   radius: CGFloat((point.diameter ?? 2) / 2))
+                                   radius: CGFloat((point.diameterOfCrown ?? 100) / 2))
         }
     }
 }

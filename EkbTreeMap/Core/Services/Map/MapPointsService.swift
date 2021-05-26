@@ -10,8 +10,8 @@ import RxSwift
 
 protocol MapPointsServiceProtocol {
     
-    func fetchTrees(in region: MapViewVisibleRegionPoints) -> Observable<Void>
-    func fetchClusters(in region: MapViewVisibleRegionPoints) -> Observable<Void>
+    func fetchTrees(in region: MapViewVisibleRegionPoints) -> Observable<[Tree]>
+    func fetchClusters(in region: MapViewVisibleRegionPoints) -> Observable<[TreeCluster]>
 }
 
 
@@ -49,12 +49,14 @@ final class MapPointsService: MapPointsServiceProtocol {
     // MARK: Public
     
     
-    func fetchTrees(in region: MapViewVisibleRegionPoints) -> Observable<Void> {
-        .empty()
+    func fetchTrees(in region: MapViewVisibleRegionPoints) -> Observable<[Tree]> {
+        updateTrees(for: region)
+        return treeRepository.fetchTreePoints(for: region)
     }
     
-    func fetchClusters(in region: MapViewVisibleRegionPoints) -> Observable<Void> {
-        .empty()
+    func fetchClusters(in region: MapViewVisibleRegionPoints) -> Observable<[TreeCluster]> {
+        updateClusters(for: region)
+        return treeRepository.fetchTreeClusters(for: region)
     }
     
     
@@ -68,8 +70,9 @@ final class MapPointsService: MapPointsServiceProtocol {
                                                        y2: position.bottomRightPosition.longitude)
         let target: GetTreesByRegionTarget = resolver.resolve(arg: params)
         networkService.sendRequest(target, parser: pointsParser)
-            .subscribe(onNext: { data in
-                print(data)
+            .map { self.processTrees($0, zoom: region.zoom)}
+            .subscribe(onNext: { [weak self] data in
+                self?.treeRepository.updateTileData(data)
             })
             .disposed(by: bag)
     }
@@ -82,8 +85,42 @@ final class MapPointsService: MapPointsServiceProtocol {
                                                          y2: position.bottomRightPosition.longitude)
         let target: GetClasterByRegionTarget = resolver.resolve(arg: params)
         networkService.sendRequest(target, parser: clusterParser)
-            .subscribe()
+            .map { self.processClusters($0, zoom: region.zoom)}
+            .subscribe(onNext: { [weak self] data in
+                self?.treeRepository.updateTileData(data)
+            })
             .disposed(by: bag)
+    }
+    
+    private func processTrees(_ trees: [Tree], zoom: Int) -> [MapViewTileData] {
+        var data: [MapViewTile: [Tree]] = [:]
+        for tree in trees {
+            let tile = areaToTilesConverter.processTile(from: .init(latitude: tree.latitude,
+                                                                    longitude: tree.longitude),
+                                                        zoom: zoom)
+            var array = data[tile] ?? []
+            array.append(tree)
+            data[tile] = array
+        }
+        
+        return data.map { key, value in
+            MapViewTileData(tile: key, treePoints: value, clusters: [])
+        }
+    }
+    
+    private func processClusters(_ clusters: [TreeCluster], zoom: Int) -> [MapViewTileData] {
+        var data: [MapViewTile: [TreeCluster]] = [:]
+        for cluster in clusters {
+            let tile = areaToTilesConverter.processTile(from: cluster.position,
+                                                        zoom: zoom)
+            var array = data[tile] ?? []
+            array.append(cluster)
+            data[tile] = array
+        }
+        
+        return data.map { key, value in
+            MapViewTileData(tile: key, treePoints: [], clusters: value)
+        }
     }
     
     private func getFullPosition(for region: MapViewVisibleRegionPoints) -> MapViewVisibleTiles {
