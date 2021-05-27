@@ -93,14 +93,11 @@ final class MapViewController: UIViewController {
         let objects = mapView.mapWindow.map.mapObjects
         objects.clear()
         clusters.forEach { cluster in
-//            let view = ClusterCircleView(frame: .init(x: 0, y: 0, width: 32, height: 32))
-//            view.configure(with: cluster)
             let view = UILabel(frame: .init(x: 0, y: 0, width: 32, height: 32))
             view.text = cluster.countString
             view.backgroundColor = cluster.color
             view.textAlignment = .center
             view.layer.cornerRadius = 16
-            let image = convertViewToImage(view)!
             objects.addPlacemark(with: .init(latitude: cluster.position.latitude,
                                              longitude: cluster.position.longitude),
                                  view: .init(uiView: view))
