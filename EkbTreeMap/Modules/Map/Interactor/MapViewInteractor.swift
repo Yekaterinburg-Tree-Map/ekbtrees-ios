@@ -22,6 +22,7 @@ final class MapViewInteractor: MapViewConfigurable {
     private let startPointSubject = BehaviorSubject<TreePosition>(value: .init(latitude: 56.82,
                                                                                longitude: 60.62))
     private let visiblePointsSubject = PublishSubject<[Tree]>()
+    private let visibleClustersSubject = PublishSubject<[TreeCluster]>()
     private let bag = DisposeBag()
     
     private var pointsBag = DisposeBag()
@@ -68,7 +69,8 @@ final class MapViewInteractor: MapViewConfigurable {
         }
         
         let interactorOutput = MapView.InteractorOutput(startPoint: startPointSubject,
-                                                        visiblePoints: visiblePointsSubject)
+                                                        visiblePoints: visiblePointsSubject,
+                                                        visibleClusters: visibleClustersSubject)
         return presenter.configure(with: interactorOutput)
     }
     
@@ -85,8 +87,22 @@ final class MapViewInteractor: MapViewConfigurable {
     
     private func didChangeVisibleRegion(_ region: MapViewVisibleRegionPoints) {
         pointsBag = DisposeBag()
+        if region.zoom > 16 {
+            updateTrees(in: region)
+        } else {
+            updateClusters(in: region)
+        }
+    }
+    
+    private func updateTrees(in region: MapViewVisibleRegionPoints) {
         pointsService.fetchTrees(in: region)
             .bind(to: visiblePointsSubject)
+            .disposed(by: pointsBag)
+    }
+    
+    private func updateClusters(in region: MapViewVisibleRegionPoints) {
+        pointsService.fetchClusters(in: region)
+            .bind(to: visibleClustersSubject)
             .disposed(by: pointsBag)
     }
     

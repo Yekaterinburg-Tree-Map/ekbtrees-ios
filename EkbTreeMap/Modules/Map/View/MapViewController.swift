@@ -75,6 +75,7 @@ final class MapViewController: UIViewController {
     
     private func showPoints(_ points: [TreePointRepresentable]) {
         let objects = mapView.mapWindow.map.mapObjects
+        objects.addTapListener(with: self)
         objects.clear()
         points.forEach { point in
             let circle = YMKCircle(center: .init(latitude: point.position.latitude, longitude: point.position.longitude),
@@ -86,6 +87,35 @@ final class MapViewController: UIViewController {
                                         fill: point.circleColor.withAlphaComponent(0.5))
             obj.userData = point.id
         }
+    }
+    
+    private func showClusters(_ clusters: [TreeClusterRepresentable]) {
+        let objects = mapView.mapWindow.map.mapObjects
+        objects.clear()
+        clusters.forEach { cluster in
+//            let view = ClusterCircleView(frame: .init(x: 0, y: 0, width: 32, height: 32))
+//            view.configure(with: cluster)
+            let view = UILabel(frame: .init(x: 0, y: 0, width: 32, height: 32))
+            view.text = cluster.countString
+            view.backgroundColor = cluster.color
+            view.textAlignment = .center
+            view.layer.cornerRadius = 16
+            let image = convertViewToImage(view)!
+            objects.addPlacemark(with: .init(latitude: cluster.position.latitude,
+                                             longitude: cluster.position.longitude),
+                                 view: .init(uiView: view))
+        }
+    }
+    
+    private func convertViewToImage(_ view: UIView) -> UIImage? {
+        let size = CGSize(width: view.bounds.size.width, height: view.bounds.size.height + 20)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        if let aContext = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: aContext)
+        }
+        let img: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img
     }
     
     private func handleCameraPositionChanged(map: YMKMap) {
@@ -118,17 +148,22 @@ final class MapViewController: UIViewController {
                                                      didTapOnMap: didTapOnMapSubject,
                                                      didChangeVisibleRegion: didChangeVisibleRegionSubject))
         
-        input.moveToPoint
-            .observe(on: MainScheduler.asyncInstance)
-            .withUnretained(self)
-            .subscribe(onNext: { $0.moveToPoint($1) })
-            .disposed(by: bag)
-        
-        input.visiblePoints
-            .observe(on: MainScheduler.asyncInstance)
-            .withUnretained(self)
-            .subscribe(onNext: { $0.showPoints($1) })
-            .disposed(by: bag)
+        bag.insert {
+            input.moveToPoint
+                .observe(on: MainScheduler.asyncInstance)
+                .withUnretained(self)
+                .subscribe(onNext: { $0.moveToPoint($1) })
+            
+            input.visiblePoints
+                .observe(on: MainScheduler.asyncInstance)
+                .withUnretained(self)
+                .subscribe(onNext: { $0.showPoints($1) })
+            
+            input.visibleClusters
+                .observe(on: MainScheduler.asyncInstance)
+                .withUnretained(self)
+                .subscribe(onNext: { $0.showClusters($1) })
+        }
     }
 }
 

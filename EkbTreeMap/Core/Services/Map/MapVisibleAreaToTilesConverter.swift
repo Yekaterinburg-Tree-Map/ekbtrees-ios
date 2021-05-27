@@ -25,8 +25,12 @@ final class MapVisibleAreaToTilesConverter: AreaToTilesConverting {
         }
         let tiles: Set<MapViewTile> = {
             var result = Set<MapViewTile>()
-            for x in (cornerTiles.first!.x...cornerTiles.last!.x) {
-                for y in (cornerTiles.first!.y...cornerTiles.last!.y) {
+            let minX = min(cornerTiles.first!.x, cornerTiles.last!.x)
+            let maxX = max(cornerTiles.first!.x, cornerTiles.last!.x)
+            for x in (minX...maxX) {
+                let minY = min(cornerTiles.first!.y, cornerTiles.last!.y)
+                let maxY = max(cornerTiles.first!.y, cornerTiles.last!.y)
+                for y in (minY...maxY) {
                     result.update(with: MapViewTile(x: x, y: y, zoom: area.zoom))
                 }
             }

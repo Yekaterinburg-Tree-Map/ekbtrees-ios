@@ -15,6 +15,7 @@ struct MapView {
         
         var moveToPoint: Observable<TreePosition> = .never()
         var visiblePoints: Observable<[TreePointRepresentable]> = .never()
+        var visibleClusters: Observable<[TreeClusterRepresentable]> = .never()
     }
     
     struct Output {
@@ -29,6 +30,7 @@ struct MapView {
         
         var startPoint: Observable<TreePosition> = .never()
         var visiblePoints: Observable<[Tree]> = .never()
+        var visibleClusters: Observable<[TreeCluster]> = .never()
     }
 }
 

@@ -16,6 +16,7 @@ final class MapViewPresenter: MapViewInteractorConfigurable {
     
     private let bag = DisposeBag()
     private let visiblePoints = PublishSubject<[TreePointRepresentable]>()
+    private let visibleClusters = PublishSubject<[TreeClusterRepresentable]>()
     
     
     // MARK: Public
@@ -25,10 +26,18 @@ final class MapViewPresenter: MapViewInteractorConfigurable {
             output.visiblePoints
                 .map { [unowned self] points in self.mapTreeToRepresentable(points) }
                 .bind(to: visiblePoints)
+            
+            output.visibleClusters
+                .map { [unowned self] clusters in self.mapClusterToRepresentable(clusters) }
+                .bind(to: visibleClusters)
+            
+            output.startPoint
+                .subscribe()
         }
         
         return MapView.Input(moveToPoint: output.startPoint,
-                             visiblePoints: visiblePoints)
+                             visiblePoints: visiblePoints,
+                             visibleClusters: visibleClusters)
     }
     
     
@@ -39,7 +48,15 @@ final class MapViewPresenter: MapViewInteractorConfigurable {
             TreePointRepresentable(id: point.id,
                                    position: .init(latitude: point.latitude, longitude: point.longitude),
                                    circleColor: [UIColor.green, UIColor.blue].randomElement()!,
-                                   radius: CGFloat((point.diameterOfCrown ?? 100) / 2))
+                                   radius: CGFloat((point.diameterOfCrown ?? 5) / 2))
+        }
+    }
+    
+    private func mapClusterToRepresentable(_ clusters: [TreeCluster]) -> [TreeClusterRepresentable] {
+        clusters.map { cluster in
+            TreeClusterRepresentable(position: cluster.position,
+                                     countString: "\(cluster.count)",
+                                     color: cluster.count < 50 ? .yellow : .red)
         }
     }
 }

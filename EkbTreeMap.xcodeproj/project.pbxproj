@@ -125,6 +125,8 @@
 		2ED7FA38265E9608001D8BF9 /* TileDataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA37265E9608001D8BF9 /* TileDataEntity.swift */; };
 		2ED7FA3D265E9743001D8BF9 /* TileDataMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA3C265E9743001D8BF9 /* TileDataMapper.swift */; };
 		2ED7FA42265E9774001D8BF9 /* MapViewTileData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA41265E9774001D8BF9 /* MapViewTileData.swift */; };
+		2ED7FA47265F7B6D001D8BF9 /* TreeClusterRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA46265F7B6D001D8BF9 /* TreeClusterRepresentable.swift */; };
+		2ED7FA4C265F8478001D8BF9 /* ClusterCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7FA4B265F8478001D8BF9 /* ClusterCircleView.swift */; };
 		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
 		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
 		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
@@ -283,6 +285,8 @@
 		2ED7FA37265E9608001D8BF9 /* TileDataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDataEntity.swift; sourceTree = "<group>"; };
 		2ED7FA3C265E9743001D8BF9 /* TileDataMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileDataMapper.swift; sourceTree = "<group>"; };
 		2ED7FA41265E9774001D8BF9 /* MapViewTileData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTileData.swift; sourceTree = "<group>"; };
+		2ED7FA46265F7B6D001D8BF9 /* TreeClusterRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeClusterRepresentable.swift; sourceTree = "<group>"; };
+		2ED7FA4B265F8478001D8BF9 /* ClusterCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterCircleView.swift; sourceTree = "<group>"; };
 		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
 		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
 		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
@@ -436,6 +440,7 @@
 			children = (
 				2E39463A2621CA090001E5FA /* TreePointRepresentable.swift */,
 				2E394658262340290001E5FA /* TreeAnnotationRepresentable.swift */,
+				2ED7FA46265F7B6D001D8BF9 /* TreeClusterRepresentable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -456,6 +461,7 @@
 			children = (
 				2E39465026233B3E0001E5FA /* TreeAnnotationView.swift */,
 				2EEE86182627579C002A9429 /* CircleImagedButton.swift */,
+				2ED7FA4B265F8478001D8BF9 /* ClusterCircleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1223,6 +1229,7 @@
 				2E9831C62647E5920088193B /* IResolver.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
 				2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */,
+				2ED7FA47265F7B6D001D8BF9 /* TreeClusterRepresentable.swift in Sources */,
 				2E5271C52659042D007B86BD /* PhotoRemoteDataProvider.swift in Sources */,
 				2ED7F95C265CECAA001D8BF9 /* NetworkParser.swift in Sources */,
 				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
@@ -1231,6 +1238,7 @@
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
 				2EB34DA6263FF2D6009A2129 /* TreeDetailsFormFactory.swift in Sources */,
 				2ED7FA19265E6FA7001D8BF9 /* MapVisibleAreaToTilesConverter.swift in Sources */,
+				2ED7FA4C265F8478001D8BF9 /* ClusterCircleView.swift in Sources */,
 				2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */,
 				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
