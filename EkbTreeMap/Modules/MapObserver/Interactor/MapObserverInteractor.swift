@@ -64,8 +64,8 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
         annotationDataSubject.onNext(nil)
     }
     
-    private func didTapPoint(_ id: String) {
-        annotationDataSubject.onNext(.init(id: "", position: .init(), diameter: nil, species: "Data for annotation"))
+    private func didTapPoint(_ id: Int) {
+        annotationDataSubject.onNext(.init(id: id, position: .init(), diameter: nil, species: "Data for annotation"))
     }
     
     private func didTapAdd() {

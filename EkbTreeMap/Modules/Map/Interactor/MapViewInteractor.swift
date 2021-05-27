@@ -30,7 +30,7 @@ final class MapViewInteractor: MapViewConfigurable {
     
     // MARK: Output Observables
     
-    private let didTapPointSubject = PublishSubject<String>()
+    private let didTapPointSubject = PublishSubject<Int>()
     private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     
     

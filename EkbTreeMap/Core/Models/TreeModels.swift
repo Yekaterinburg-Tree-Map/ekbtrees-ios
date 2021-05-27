@@ -16,7 +16,7 @@ struct TreeCluster {
 
 struct TreePoint {
     
-    let id: String
+    let id: Int
     let position: TreePosition
     var diameter: Double?
     var species: String

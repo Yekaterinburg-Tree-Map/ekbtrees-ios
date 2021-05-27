@@ -22,7 +22,7 @@ class ExampleTreeParser {
         let diameterString = data["properties"]["diameter_crown"].stringValue
         let diameter = Double(diameterString)
         
-        return TreePoint(id: UUID().uuidString,
+        return TreePoint(id: 0,
                          position: .init(latitude: coordinates![1], longitude: coordinates![0]),
                          diameter: diameter,
                          species: "")

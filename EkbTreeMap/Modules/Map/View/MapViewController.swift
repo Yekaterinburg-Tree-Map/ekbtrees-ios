@@ -21,7 +21,7 @@ final class MapViewController: UIViewController {
     private var objectsVisitor: MapObjectsVisiting!
     
     private let didLoadSubject = PublishSubject<Void>()
-    private let didTapPointSubject = PublishSubject<String>()
+    private let didTapPointSubject = PublishSubject<Int>()
     private let didTapOnMapSubject = PublishSubject<TreePosition>()
     private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     private let bag = DisposeBag()
@@ -124,6 +124,7 @@ final class MapViewController: UIViewController {
                                          view: .init(uiView: view))
                 }
             })
+            .disposed(by: reloadBag)
         
         objects.traverse(with: objectsVisitor)
     }
@@ -194,7 +195,7 @@ final class MapViewController: UIViewController {
 extension MapViewController: YMKMapObjectTapListener {
     
     func onMapObjectTap(with mapObject: YMKMapObject, point: YMKPoint) -> Bool {
-        guard let pointData = mapObject.userData as? String else {
+        guard let pointData = mapObject.userData as? Int else {
             return false
         }
         

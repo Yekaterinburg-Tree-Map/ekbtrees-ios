@@ -21,7 +21,7 @@ struct MapView {
     struct Output {
         
         var didLoad: Observable<Void> = .never()
-        var didTapPoint: Observable<String> = .never()
+        var didTapPoint: Observable<Int> = .never()
         var didTapOnMap: Observable<TreePosition> = .never()
         var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
     }
