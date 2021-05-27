@@ -18,6 +18,7 @@ final class MapViewController: UIViewController {
     
     private var interactor: MapViewConfigurable!
     private var mapView: YMKMapView!
+    private var objectsVisitor: MapObjectsVisiting!
     
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapPointSubject = PublishSubject<String>()
@@ -25,12 +26,15 @@ final class MapViewController: UIViewController {
     private let didChangeVisibleRegionSubject = PublishSubject<MapViewVisibleRegionPoints>()
     private let bag = DisposeBag()
     
+    private var reloadBag = DisposeBag()
     
     // MARK: Lifecycle
     
-    class func instantiate(interactor: MapViewConfigurable) -> MapViewController {
+    class func instantiate(interactor: MapViewConfigurable,
+                           objectsVisitor: MapObjectsVisiting) -> MapViewController {
         let vc = MapViewController()
         vc.interactor = interactor
+        vc.objectsVisitor = objectsVisitor
         return vc
     }
     
@@ -74,34 +78,54 @@ final class MapViewController: UIViewController {
     }
     
     private func showPoints(_ points: [TreePointRepresentable]) {
+        reloadBag = DisposeBag()
         let objects = mapView.mapWindow.map.mapObjects
-        objects.addTapListener(with: self)
-        objects.clear()
-        points.forEach { point in
-            let circle = YMKCircle(center: .init(latitude: point.position.latitude, longitude: point.position.longitude),
-                                   radius: Float(point.radius))
-            let stroke = UIColor.clear
-            let obj = objects.addCircle(with: circle,
-                                        stroke: stroke,
-                                        strokeWidth: 0,
-                                        fill: point.circleColor.withAlphaComponent(0.5))
-            obj.userData = point.id
-        }
+        
+        objectsVisitor.filterTreePoints(points)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, changes in
+                let objects = obj.mapView.mapWindow.map.mapObjects
+                changes.clusterDeletions.forEach { objects.remove(with: $0) }
+                changes.pointDeletions.forEach { objects.remove(with: $0) }
+                changes.additions.forEach { point in
+                    let circle = YMKCircle(center: .init(latitude: point.position.latitude, longitude: point.position.longitude),
+                                           radius: Float(point.radius))
+                    let stroke = UIColor.clear
+                    let obj = objects.addCircle(with: circle,
+                                                stroke: stroke,
+                                                strokeWidth: 0,
+                                                fill: point.circleColor.withAlphaComponent(0.5))
+                    obj.userData = point.id
+                }
+            })
+            .disposed(by: reloadBag)
+        
+        objects.traverse(with: objectsVisitor)
     }
     
     private func showClusters(_ clusters: [TreeClusterRepresentable]) {
+        reloadBag = DisposeBag()
         let objects = mapView.mapWindow.map.mapObjects
-        objects.clear()
-        clusters.forEach { cluster in
-            let view = UILabel(frame: .init(x: 0, y: 0, width: 32, height: 32))
-            view.text = cluster.countString
-            view.backgroundColor = cluster.color
-            view.textAlignment = .center
-            view.layer.cornerRadius = 16
-            objects.addPlacemark(with: .init(latitude: cluster.position.latitude,
-                                             longitude: cluster.position.longitude),
-                                 view: .init(uiView: view))
-        }
+        
+        objectsVisitor.filterClusterPoints(clusters)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, changes in
+                let objects = obj.mapView.mapWindow.map.mapObjects
+                changes.clusterDeletions.forEach { objects.remove(with: $0) }
+                changes.pointDeletions.forEach { objects.remove(with: $0) }
+                changes.additions.forEach { cluster in
+                    let view = UILabel(frame: .init(x: 0, y: 0, width: 32, height: 32))
+                    view.text = cluster.countString
+                    view.backgroundColor = cluster.color
+                    view.textAlignment = .center
+                    view.layer.cornerRadius = 16
+                    objects.addPlacemark(with: .init(latitude: cluster.position.latitude,
+                                                     longitude: cluster.position.longitude),
+                                         view: .init(uiView: view))
+                }
+            })
+        
+        objects.traverse(with: objectsVisitor)
     }
     
     private func convertViewToImage(_ view: UIView) -> UIImage? {
