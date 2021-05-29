@@ -13,6 +13,7 @@ class TreeEditorPendingData {
     var latitude: Double
     var longitude: Double
     
+    var id: Int?
     var type: String?
     var treeHeight: Double?
     var numberOfTreeTrunks: Int?

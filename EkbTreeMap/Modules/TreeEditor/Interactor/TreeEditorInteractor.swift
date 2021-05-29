@@ -15,10 +15,13 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
     private let formItemsSubject = PublishSubject<[ViewRepresentableModel]>()
     private let saveButtonTitleSubject = BehaviorSubject<String>(value: "Сохранить")
     private let titleSubject = BehaviorSubject<String>(value: "Детали")
+    private let isLoadingSubject = BehaviorSubject<Bool>(value: false)
     
     private var pendingData: TreeEditorPendingData
     private var formManager: TreeEditorFormManagerProtocol
     private let formatter: TreeEditorFormFormatterProtocol
+    private let treeService: TreeDataServiceProtocol
+    
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
     
@@ -30,10 +33,12 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
     init(pendingData: TreeEditorPendingData,
          formManager: TreeEditorFormManagerProtocol,
          formatter: TreeEditorFormFormatterProtocol,
+         treeService: TreeDataServiceProtocol,
          output: TreeEditorModuleOutput) {
         self.pendingData = pendingData
         self.formManager = formManager
         self.formatter = formatter
+        self.treeService = treeService
         self.output = output
     }
     
@@ -68,9 +73,13 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
             configureForm()
             return
         }
-        // save data
         
-        output?.moduleDidSave(input: self)
+        treeService.saveTree(pendingData)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, _ in
+                obj.output?.moduleDidSave(input: obj)
+            })
+            .disposed(by: bag)
     }
     
     /// MARK: Form configuration

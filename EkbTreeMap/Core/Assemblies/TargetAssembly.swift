@@ -21,7 +21,9 @@ final class TargetAssembly: Assembly {
         container.register(GetClasterByRegionTarget.self) { _, params in
             GetClasterByRegionTarget(baseURL: self.baseURL, params: params)
         }
+        
+        container.register(SaveTreeTarget.self) { _, params in
+            SaveTreeTarget(baseURL: self.baseURL, params: params)
+        }
     }
-    
-    
 }

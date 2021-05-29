@@ -25,14 +25,17 @@ final class TreeEditorModuleFactory: Factory {
     
     private let formManager: TreeEditorFormManagerProtocol
     private let formFormatter: TreeEditorFormFormatterProtocol
+    private let treeService: TreeDataServiceProtocol
     
     
     // MARK: Lifecycle
     
     init(formManager: TreeEditorFormManagerProtocol,
-         formFormatter: TreeEditorFormFormatterProtocol) {
+         formFormatter: TreeEditorFormFormatterProtocol,
+         treeService: TreeDataServiceProtocol) {
         self.formManager = formManager
         self.formFormatter = formFormatter
+        self.treeService = treeService
     }
     
     
@@ -42,6 +45,7 @@ final class TreeEditorModuleFactory: Factory {
         let interactor = TreeEditorInteractor(pendingData: context.pendingData,
                                               formManager: formManager,
                                               formatter: formFormatter,
+                                              treeService: treeService,
                                               output: context.output)
         return TreeEditorViewController.instantiate(with: interactor)
     }

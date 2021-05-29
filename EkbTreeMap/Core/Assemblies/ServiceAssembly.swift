@@ -35,6 +35,12 @@ final class ServiceAssembly: Assembly {
                                     areaToTilesConverter: r~>)
         }
         
+        container.register(TreeDataServiceProtocol.self) { r in
+            let resolver = IResolverImpl(resolver: r)
+            return TreeDataService(resolver: resolver,
+                                   networkService: resolver.resolve(name: NetworkServiceName.common.rawValue))
+        }
+        
         container.autoregister(AreaToTilesConverting.self, initializer: MapVisibleAreaToTilesConverter.init)
     }
 }

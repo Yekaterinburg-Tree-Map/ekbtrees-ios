@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SVProgressHUD
 
 
 final class TreeEditorViewController: UIViewController {
@@ -64,6 +65,13 @@ final class TreeEditorViewController: UIViewController {
         
         
         didLoadSubject.onNext(())
+//        SVProgressHUD.setBackgroundLayerColor(UIColor.black.withAlphaComponent(0.6))
+        SVProgressHUD.show()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            SVProgressHUD.showSuccess(withStatus: nil)
+            SVProgressHUD.dismiss(withDelay: 1.0)
+//            SVProgressHUD.dismiss()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

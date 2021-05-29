@@ -21,7 +21,8 @@ final class FactoryAssembly: Assembly {
         TreeEditorFormName.allCases.forEach { name in
             container.register(TreeEditorModuleFactory.self, name: name.rawValue) { r in
                 TreeEditorModuleFactory(formManager: r.resolve(TreeEditorFormManagerProtocol.self, name: name.rawValue)!,
-                                        formFormatter: r~>)
+                                        formFormatter: r~>,
+                                        treeService: r~>)
             }
         }
         

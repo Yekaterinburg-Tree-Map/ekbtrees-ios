@@ -37,6 +37,10 @@ class NetworkService: NetworkServiceProtocol {
             }
     }
     
+    func sendRequestWithEmptyResponse(_ target: Target) -> Observable<Void> {
+        return innerSendRequest(target).map { _ in Void() }
+    }
+    
     func sendUploadFileRequest<Parser: NetworkParser>(_ target: Target, parser: Parser) -> Observable<Parser.Response> {
         .empty()
     }
@@ -53,7 +57,7 @@ class NetworkService: NetworkServiceProtocol {
                 switch result {
                 case .success(let response):
                     do {
-                        try response.filterSuccessfulStatusAndRedirectCodes()
+                        let _ = try response.filterSuccessfulStatusCodes()
                         observer.onNext(response)
                         observer.onCompleted()
                     } catch {

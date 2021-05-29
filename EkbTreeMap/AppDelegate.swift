@@ -9,6 +9,7 @@ import UIKit
 import YandexMapsMobile
 import IQKeyboardManagerSwift
 import Swinject
+import SVProgressHUD
 
 
 @main
@@ -43,6 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainCoordinator = MainCoordinator(rootController: tabBar, resolver: resolver)
         mainCoordinator?.start(animated: false)
         IQKeyboardManager.shared.enable = true
+        setupProgressHUD()
     }
     
     private func setupDI() {
@@ -60,5 +62,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let service = ApiKeyService(parser: parser)
         let key = service.getKey()
         YMKMapKit.setApiKey(key)
+    }
+    
+    private func setupProgressHUD() {
+        SVProgressHUD.setHapticsEnabled(true)
+        SVProgressHUD.setForegroundColor(UIColor.white)
+        SVProgressHUD.setBackgroundColor(UIColor.black.withAlphaComponent(0.6))
     }
 }

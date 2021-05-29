@@ -52,9 +52,7 @@ final class EditTreeDetailsCoordinator: Coordinator {
             return
         }
         
-        let formManager = TreeEditorFormManagerEdit(baseManager: TreeEditorFormManager())
-        let factory = TreeEditorModuleFactory(formManager: formManager,
-                                              formFormatter: TreeEditorFormFormatter())
+        let factory: TreeEditorModuleFactory = resolver.resolve(name: TreeEditorFormName.edit.rawValue)
         let context = TreeEditorModuleFactory.Context(output: self,
                                                       pendingData: TreeEditorPendingData(latitude: 0, longitude: 0))
         let vc = factory.build(with: context)
