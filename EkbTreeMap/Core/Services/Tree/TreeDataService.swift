@@ -10,6 +10,7 @@ import RxSwift
 
 protocol TreeDataServiceProtocol {
     
+    func fetchTree(by id: Tree.ID) -> Observable<Tree>
     func saveTree(_ data: TreeEditorPendingData) -> Observable<Void>
 }
 
@@ -20,17 +21,27 @@ final class TreeDataService: TreeDataServiceProtocol {
     
     private let resolver: IResolver
     private let networkService: NetworkServiceProtocol
+    private let treeInfoParser: TreeInfoParser
     
     
     // MARK: Lifecycle
     
-    init(resolver: IResolver, networkService: NetworkServiceProtocol) {
+    init(resolver: IResolver,
+         networkService: NetworkServiceProtocol,
+         treeInfoParser: TreeInfoParser) {
         self.resolver = resolver
         self.networkService = networkService
+        self.treeInfoParser = treeInfoParser
     }
     
     
     // MARK: Public
+    
+    func fetchTree(by id: Tree.ID) -> Observable<Tree> {
+        let parameters = TreeInfoTarget.Parameters(id: id)
+        let target: TreeInfoTarget = resolver.resolve(arg: parameters)
+        return networkService.sendRequest(target, parser: treeInfoParser)
+    }
     
     func saveTree(_ data: TreeEditorPendingData) -> Observable<Void> {
         let parameters = SaveTreeTarget.Parameters(id: data.id,

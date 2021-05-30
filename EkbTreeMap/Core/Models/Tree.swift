@@ -27,6 +27,7 @@ struct Tree: Identifiable {
     var treePlantingType: Int?
     var authorId: Int?
     var status: String?
+    var fileIds: [Int] = []
     
     // ??
     var created: Date?

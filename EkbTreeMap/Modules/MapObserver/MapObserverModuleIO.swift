@@ -15,5 +15,5 @@ protocol MapObserverModuleInput: AnyObject {
 protocol MapObserverModuleOutput: AnyObject {
     
     func moduleWantsToCreateTree(input: MapObserverModuleInput)
-    func moduleWantsToOpenDetails(input: MapObserverModuleInput, tree: Tree)
+    func moduleWantsToOpenDetails(input: MapObserverModuleInput, treeId: Tree.ID)
 }

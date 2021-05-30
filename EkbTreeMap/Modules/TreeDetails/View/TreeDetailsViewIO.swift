@@ -19,11 +19,13 @@ struct TreeDetailsView {
         var mapData: Observable<TreeDetailsMapView.DisplayData> = .never()
         var photosSource: Observable<TreeDetailsPhotoContainerDataSource & TreeDetailsPhotoContainerDelegate> = .never()
         var reloadPhotos: Observable<Void> = .never()
+        var hudState: Observable<HUDState> = .never()
     }
     
     struct Output {
         
         var didLoad: Observable<Void> = .never()
+        var willAppear: Observable<Void> = .never()
         var didTapAction: Observable<Void> = .never()
         var didTapClose: Observable<Void> = .never()
     }

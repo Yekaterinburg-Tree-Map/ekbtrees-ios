@@ -23,6 +23,8 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
     // TODO: add authorization service binidng
     private let authorizationState = BehaviorSubject<AuthorizationState>(value: .authorized)
     
+    private var selectedTreeId: Int?
+    
     
     // MARK: Lifecycle
     
@@ -60,11 +62,16 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
     }
     
     private func didTapMore() {
-        output?.moduleWantsToOpenDetails(input: self, tree: Tree(id: 0, latitude: 60.02, longitude: 60.01))
+        guard let id = selectedTreeId else {
+            annotationDataSubject.onNext(nil)
+            return
+        }
+        output?.moduleWantsToOpenDetails(input: self, treeId: id)
         annotationDataSubject.onNext(nil)
     }
     
     private func didTapPoint(_ id: Int) {
+        selectedTreeId = id
         annotationDataSubject.onNext(.init(id: id, position: .init(), diameter: nil, species: "Data for annotation"))
     }
     
@@ -80,11 +87,11 @@ extension MapObserverInteractor: MapViewModuleConfigurable {
     
     func configure(with output: MapViewModule.Output) -> MapViewModule.Input {
         bag.insert {
-        output.didTapPoint
-            .subscribe(onNext: { [weak self] id in self?.didTapPoint(id) })
-        
-        output.didChangeVisibleRegion
-            .subscribe()
+            output.didTapPoint
+                .subscribe(onNext: { [weak self] id in self?.didTapPoint(id) })
+            
+            output.didChangeVisibleRegion
+                .subscribe()
         }
         
         return MapViewModule.Input()

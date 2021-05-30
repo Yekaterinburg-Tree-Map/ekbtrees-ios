@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 
 final class TreeDetailsInteractor: TreeDetailsConfigurable {
@@ -14,9 +15,10 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
     
     // MARK: Private Properties
     
-    private let tree: Tree
+    private let treeId: Tree.ID
     private let formFactory: TreeDetailsFormFactoryProtocol
     private var output: TreeDetailsModuleOutput?
+    private let treeService: TreeDataServiceProtocol
     
     private let bag = DisposeBag()
     private var photoManager: PhotoManagerProtocol
@@ -27,17 +29,20 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
     private lazy var photoSource = BehaviorSubject<PhotoSource>(value: photoManager)
     private let reloadPhotoSubject = PublishSubject<Void>()
     private let mapDataSubject = PublishSubject<TreeDetailsMapView.DisplayData>()
+    private let hudSubject = BehaviorRelay<HUDState>(value: .hidden)
     
     
     // MARK: Lifecycle
     
-    init(tree: Tree,
+    init(treeId: Tree.ID,
          formFactory: TreeDetailsFormFactoryProtocol,
          photoManager: PhotoManagerProtocol,
+         treeService: TreeDataServiceProtocol,
          output: TreeDetailsModuleOutput) {
-        self.tree = tree
+        self.treeId = treeId
         self.formFactory = formFactory
         self.photoManager = photoManager
+        self.treeService = treeService
         self.output = output
         
         photoManager.delegate = self
@@ -51,6 +56,10 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
             output.didLoad
                 .subscribe(onNext: { [weak self] in self?.didLoad() })
             
+            output.willAppear
+                .skip(1)
+                .subscribe(onNext: { [weak self] in self?.willAppear() })
+            
             output.didTapAction
                 .subscribe(onNext: { [weak self] in self?.didTapAction() })
             
@@ -63,22 +72,82 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
                                      isButtonHidden: isButtonHiddenSubject,
                                      mapData: mapDataSubject,
                                      photosSource: photoSource,
-                                     reloadPhotos: reloadPhotoSubject)
+                                     reloadPhotos: reloadPhotoSubject,
+                                     hudState: hudSubject.asObservable())
     }
     
     
     // MARK: Private
     
     private func didLoad() {
+        output?.moduleDidLoad(input: self)
+        loadDetails()
+    }
+    
+    private func willAppear() {
+        loadDetails()
+    }
+    
+    private func loadDetails() {
+        hudSubject.accept(.loading)
+        treeService.fetchTree(by: treeId)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, tree in
+                obj.didLoadDetails(tree)
+            }, onError: { [weak self] error in
+                self?.showError(error)
+            })
+            .disposed(by: bag)
+    }
+    
+    private func didLoadDetails(_ tree: Tree) {
+        setupPhotos()
         let items = formFactory.setupFields(tree: tree)
         itemsSubject.onNext(items)
-        setupPhotos()
         mapDataSubject.onNext(.init(treePoint: .init(latitude: tree.latitude, longitude: tree.longitude)))
-        output?.moduleDidLoad(input: self)
+        
+        hudSubject.accept(.success(duration: 1.0, completion: { [weak self] in
+            self?.hudSubject.accept(.hidden)
+        }))
+    }
+    
+    private func showError(_ error: Error) {
+        let completion: () -> () = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            let alert = self.setupNetworkAlert()
+            self.hudSubject.accept(.hidden)
+            self.output?.moduleWantsToShowAlert(input: self, alert: alert)
+        }
+        hudSubject.accept(.failure(duration: 1.0, completion: completion))
+    }
+    
+    private func setupNetworkAlert() -> Alert {
+        var alert = Alert(message: "Произошла ошибка")
+        
+        let cancelHandler: () -> () = { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.output?.moduleWantsToClose(input: self)
+        }
+        let cancelAction = AlertAction(title: "Отменить",
+                                       style: .cancel,
+                                       handler: cancelHandler)
+        
+        let retryHandler: () -> () = { [weak self] in
+            self?.loadDetails()
+        }
+        let retryAction = AlertAction(title: "Перезагрузить",
+                                      style: .default,
+                                      handler: retryHandler)
+        alert.actions = [cancelAction, retryAction]
+        return alert
     }
     
     private func setupPhotos() {
-        photoManager.startPhotoObserving(treeId: tree.id)
+        photoManager.startPhotoObserving(treeId: treeId)
     }
     
     private func didTapAction() {
