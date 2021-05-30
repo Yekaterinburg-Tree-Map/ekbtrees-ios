@@ -57,9 +57,9 @@ final class EditTreeDetailsCoordinator: Coordinator {
                                                       pendingData: TreeEditorPendingData(latitude: 0, longitude: 0))
         let vc = factory.build(with: context)
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Закрыть",
-                                                                  style: .plain,
-                                                                  target: self,
-                                                                  action: #selector(self.closeTreeEditor))
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(self.closeTreeEditor))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         rootViewController.present(nvc, animated: animated, completion: {

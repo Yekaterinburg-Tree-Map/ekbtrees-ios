@@ -34,7 +34,7 @@ class TreeDetailsFormFactory: TreeDetailsFormFactoryProtocol {
     // MARK: Public
     
     func setupFields(tree: Tree) -> [ViewRepresentableModel] {
-        var infoCells = TreeInfoCellType.allCases
+        let infoCells = TreeInfoCellType.allCases
             .compactMap { cellMapping[$0] }
             .compactMap { $0(tree) }
         
