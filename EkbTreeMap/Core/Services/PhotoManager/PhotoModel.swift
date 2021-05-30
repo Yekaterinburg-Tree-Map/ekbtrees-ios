@@ -31,6 +31,6 @@ struct LocalPhotoModel: PhotoModelProtocol {
 
 struct RemotePhotoModel: PhotoModelProtocol {
     
-    let id: String
+    let id: Int
     let url: URL
 }

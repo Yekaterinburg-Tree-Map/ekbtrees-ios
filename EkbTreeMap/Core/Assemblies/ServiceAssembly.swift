@@ -15,7 +15,13 @@ final class ServiceAssembly: Assembly {
         
         container.autoregister(TreePointsRepositoryProtocol.self, initializer: TreePointsRepository.init)
         container.autoregister(PhotoLocalDataProviding.self, initializer: PhotoLocalDataProvider.init)
-        container.autoregister(PhotoRemoteDataProviding.self, initializer: PhotoRemoteDataProvider.init)
+        container.register(PhotoRemoteDataProviding.self) { r in
+            let resolver = IResolverImpl(resolver: r)
+            return PhotoRemoteDataProvider(resolver: resolver,
+                                           networkService: resolver.resolve(name: NetworkServiceName.common.rawValue),
+                                           treeFilesParser: r~>)
+        }
+        
         container.autoregister(PhotoDataProviding.self, initializer: PhotoDataProvider.init)
         container.autoregister(PhotoManagerProtocol.self, initializer: PhotoManager.init)
         

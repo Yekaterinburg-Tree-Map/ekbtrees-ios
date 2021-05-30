@@ -29,5 +29,9 @@ final class TargetAssembly: Assembly {
         container.register(TreeInfoTarget.self) { _, params in
             TreeInfoTarget(baseURL: self.baseURL, params: params)
         }
+        
+        container.register(GetPhotosByTreeIdTarget.self) { _, params in
+            GetPhotosByTreeIdTarget(baseURL: self.baseURL, params: params)
+        }
     }
 }

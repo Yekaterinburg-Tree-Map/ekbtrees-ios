@@ -41,6 +41,8 @@
 		2E7B02FD2663AE0D00278AF4 /* TreeInfoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02FC2663AE0D00278AF4 /* TreeInfoParser.swift */; };
 		2E7B03022663AF9600278AF4 /* TreeInfoTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B03012663AF9600278AF4 /* TreeInfoTarget.swift */; };
 		2E7B03072663BFE300278AF4 /* UIViewController+HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B03062663BFE300278AF4 /* UIViewController+HUD.swift */; };
+		2E7B030C2663C64600278AF4 /* GetPhotosByTreeIdTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B030B2663C64600278AF4 /* GetPhotosByTreeIdTarget.swift */; };
+		2E7B03112663C7CA00278AF4 /* TreeFilesParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B03102663C7CA00278AF4 /* TreeFilesParser.swift */; };
 		2E7FDAED261059330065E5C0 /* trees.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2E7FDAEC261059330065E5C0 /* trees.geojson */; };
 		2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */; };
 		2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */; };
@@ -209,6 +211,8 @@
 		2E7B02FC2663AE0D00278AF4 /* TreeInfoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeInfoParser.swift; sourceTree = "<group>"; };
 		2E7B03012663AF9600278AF4 /* TreeInfoTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeInfoTarget.swift; sourceTree = "<group>"; };
 		2E7B03062663BFE300278AF4 /* UIViewController+HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+HUD.swift"; sourceTree = "<group>"; };
+		2E7B030B2663C64600278AF4 /* GetPhotosByTreeIdTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPhotosByTreeIdTarget.swift; sourceTree = "<group>"; };
+		2E7B03102663C7CA00278AF4 /* TreeFilesParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeFilesParser.swift; sourceTree = "<group>"; };
 		2E7FDAEC261059330065E5C0 /* trees.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trees.geojson; sourceTree = "<group>"; };
 		2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTreeParser.swift; sourceTree = "<group>"; };
 		2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleDataParser.swift; sourceTree = "<group>"; };
@@ -576,6 +580,7 @@
 				2ED7F9A9265D35AD001D8BF9 /* ClustersRegionParser.swift */,
 				2ED7F9B6265D3860001D8BF9 /* SingleClusterParser.swift */,
 				2E7B02FC2663AE0D00278AF4 /* TreeInfoParser.swift */,
+				2E7B03102663C7CA00278AF4 /* TreeFilesParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -933,6 +938,7 @@
 				2ED7F9A4265D3482001D8BF9 /* GetClasterByRegionTarget.swift */,
 				2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */,
 				2E7B03012663AF9600278AF4 /* TreeInfoTarget.swift */,
+				2E7B030B2663C64600278AF4 /* GetPhotosByTreeIdTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -1261,6 +1267,7 @@
 				2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */,
 				2E9831C62647E5920088193B /* IResolver.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
+				2E7B03112663C7CA00278AF4 /* TreeFilesParser.swift in Sources */,
 				2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */,
 				2ED7FA47265F7B6D001D8BF9 /* TreeClusterRepresentable.swift in Sources */,
 				2E5271C52659042D007B86BD /* PhotoRemoteDataProvider.swift in Sources */,
@@ -1343,6 +1350,7 @@
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2ED7F9AA265D35AD001D8BF9 /* ClustersRegionParser.swift in Sources */,
 				2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */,
+				2E7B030C2663C64600278AF4 /* GetPhotosByTreeIdTarget.swift in Sources */,
 				2ED7F980265D10BC001D8BF9 /* MapViewTile.swift in Sources */,
 				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
 				2ED7F9A0265D1A63001D8BF9 /* MapPointsService.swift in Sources */,
