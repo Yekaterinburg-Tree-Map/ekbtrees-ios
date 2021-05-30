@@ -14,6 +14,7 @@ protocol PhotoManagerDelegate: AnyObject {
     func reloadData()
     func openAddPhoto()
     func openPhotoPreview(startingIndex: Int, photos: [PhotoModelProtocol])
+    func didFailToDelete(error: Error)
 }
 
 
@@ -111,6 +112,10 @@ final class PhotoManager: PhotoManagerProtocol {
         }
         
         dataProvider.deletePhoto(id: model.id)
+            .subscribe(onError: { [weak self] error in
+                self?.delegate?.didFailToDelete(error: error)
+            })
+            .disposed(by: bag)
     }
     
     

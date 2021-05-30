@@ -185,4 +185,10 @@ extension TreeDetailsInteractor: PhotoManagerDelegate {
     func openAddPhoto() {
         output?.moduleWantsToAddPhotos(input: self)
     }
+    
+    func didFailToDelete(error: Error) {
+        var alert = Alert(message: "Не получилось удалить фото")
+        alert.actions = [.init(title: "OK")]
+        output?.moduleWantsToShowAlert(input: self, alert: alert)
+    }
 }

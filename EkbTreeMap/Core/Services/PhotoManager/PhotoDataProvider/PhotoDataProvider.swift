@@ -11,7 +11,7 @@ import UIKit
 
 protocol PhotoDataProviding {
     
-    func deletePhoto(id: Int)
+    func deletePhoto(id: Int) -> Observable<Void>
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID)
     func retryUploadPhoto(model: LocalPhotoModel)
     func cancelUploadPhoto(model: LocalPhotoModel)
@@ -40,7 +40,7 @@ final class PhotoDataProvider: PhotoDataProviding {
     
     // MARK: Public
     
-    func deletePhoto(id: Int) {
+    func deletePhoto(id: Int) -> Observable<Void> {
         remoteDataProvider.deletePhoto(id: id)
     }
     

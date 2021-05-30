@@ -33,5 +33,9 @@ final class TargetAssembly: Assembly {
         container.register(GetPhotosByTreeIdTarget.self) { _, params in
             GetPhotosByTreeIdTarget(baseURL: self.baseURL, params: params)
         }
+        
+        container.register(DeletePhotosByIdTarget.self) { _, params in
+            DeletePhotosByIdTarget(baseURL: self.baseURL, params: params)
+        }
     }
 }
