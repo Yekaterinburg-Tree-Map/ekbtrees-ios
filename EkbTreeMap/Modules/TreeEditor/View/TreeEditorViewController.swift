@@ -65,13 +65,6 @@ final class TreeEditorViewController: UIViewController {
         
         
         didLoadSubject.onNext(())
-//        SVProgressHUD.setBackgroundLayerColor(UIColor.black.withAlphaComponent(0.6))
-        SVProgressHUD.show()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-            SVProgressHUD.showSuccess(withStatus: nil)
-            SVProgressHUD.dismiss(withDelay: 1.0)
-//            SVProgressHUD.dismiss()
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +86,22 @@ final class TreeEditorViewController: UIViewController {
             view.backgroundColor = UIColor.systemBackground
         } else {
             view.backgroundColor = .white
+        }
+    }
+    
+    private func updateHUDState(_ state: HUDState) {
+        view.isUserInteractionEnabled = state == .hidden
+        switch state {
+        case .hidden:
+            SVProgressHUD.dismiss()
+        case .loading:
+            SVProgressHUD.show()
+        case .failure(let duration, let completion):
+            SVProgressHUD.showError(withStatus: nil)
+            SVProgressHUD.dismiss(withDelay: duration, completion: completion)
+        case .success(let duration, let completion):
+            SVProgressHUD.showSuccess(withStatus: nil)
+            SVProgressHUD.dismiss(withDelay: duration, completion: completion)
         }
     }
     
@@ -134,6 +143,12 @@ final class TreeEditorViewController: UIViewController {
             
             input.title
                 .bind(to: rx.title)
+            
+            input.hudState
+                .withUnretained(self)
+                .subscribe(onNext: { obj, state in
+                    obj.updateHUDState(state)
+                })
         }
     }
 }

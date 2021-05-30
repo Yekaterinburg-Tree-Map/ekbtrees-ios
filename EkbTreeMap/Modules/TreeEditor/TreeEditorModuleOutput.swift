@@ -14,6 +14,7 @@ protocol TreeEditorModuleInput: AnyObject {
 
 protocol TreeEditorModuleOutput: AnyObject {
     
+    func module(input: TreeEditorModuleInput, wantsToShowAlert alert: Alert)
     func moduleDidLoad(input: TreeEditorModuleInput)
     func moduleDidSave(input: TreeEditorModuleInput)
     func moduleDidSelectCustomAction(input: TreeEditorModuleInput, type: TreeEditorFormCustomType)

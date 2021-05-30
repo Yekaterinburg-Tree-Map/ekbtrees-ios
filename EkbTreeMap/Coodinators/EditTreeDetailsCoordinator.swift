@@ -87,6 +87,11 @@ final class EditTreeDetailsCoordinator: Coordinator {
 
 extension EditTreeDetailsCoordinator: TreeEditorModuleOutput {
     
+    func module(input: TreeEditorModuleInput, wantsToShowAlert alert: Alert) {
+        let alertController = UIAlertController(alert: alert)
+        navigationController?.present(alertController, animated: true)
+    }
+    
     func moduleDidLoad(input: TreeEditorModuleInput) {
         editorModuleInput = input
     }
