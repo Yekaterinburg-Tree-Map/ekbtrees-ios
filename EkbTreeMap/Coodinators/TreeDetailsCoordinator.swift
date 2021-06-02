@@ -20,6 +20,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
     private weak var rootViewController: UIViewController?
     private weak var navigationController: UINavigationController?
     private weak var delegate: CoordinatorDelegate?
+    private weak var detailsInput: TreeDetailsModuleInput?
     
     private let resolver: IResolver
     
@@ -58,9 +59,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
         tree.trunkGirth = 1.5
         let vc = factory.build(with: .init(tree: tree, output: self))
         let nvc = UINavigationController(rootViewController: vc)
-        if #available(iOS 13.0, *) {
-            nvc.isModalInPresentation = true
-        }
+        nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
         rootViewController?.present(nvc, animated: animated)
     }
@@ -68,6 +67,10 @@ class TreeDetailsCoordinator: ParentCoordinator {
 
 
 extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
+    
+    func moduleDidLoad(input: TreeDetailsModuleInput) {
+        detailsInput = input
+    }
     
     func moduleWantsToChangeDetails(input: TreeDetailsModuleInput) {
         guard let rootViewController = navigationController else {
@@ -84,6 +87,28 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
     func moduleWantsToClose(input: TreeDetailsModuleInput) {
         delegate?.coordinator(self, wantsToFinishAnimated: true)
     }
+    
+    func moduleWantsToAddPhotos(input: TreeDetailsModuleInput) {
+        let factory: PhotoPickerFactory = resolver.resolve()
+        let vc = factory.build(with: self)
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [PhotoModelProtocol]) {
+        let factory: PhotoViewerFactory = resolver.resolve()
+        let vc = factory.build(with: .init(images: photos, startIndex: startingIndex))
+        vc.modalPresentationStyle = .fullScreen
+        navigationController?.present(vc, animated: true)
+    }
+}
+
+
+extension TreeDetailsCoordinator: PhotoPickerOutput {
+    
+    func didSelectPhotos(photos: [UIImage]) {
+        detailsInput?.addPhotos(photos)
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
 }
 
 
@@ -95,3 +120,5 @@ extension TreeDetailsCoordinator: CoordinatorDelegate {
         childCoordinators.removeAll(where: {$0 === coordinator })
     }
 }
+
+

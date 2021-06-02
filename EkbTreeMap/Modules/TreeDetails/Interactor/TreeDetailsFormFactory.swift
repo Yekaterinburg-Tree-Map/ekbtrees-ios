@@ -37,18 +37,12 @@ class TreeDetailsFormFactory: TreeDetailsFormFactoryProtocol {
         var infoCells = TreeInfoCellType.allCases
             .compactMap { cellMapping[$0] }
             .compactMap { $0(tree) }
-        infoCells.insert(setupMapCell(tree), at: 0)
         
         return infoCells
     }
     
     
     // MARK: Private
-    
-    private func setupMapCell(_ tree: Tree) -> ViewRepresentableModel {
-        let data = TreeDetailsMapView.DisplayData(treePoint: .init(latitude: tree.latitude, longitude: tree.longitude))
-        return GenericViewModel<TreeDetailsMapView>(data: data)
-    }
     
     private func setupLatitudeCell(_ tree: Tree) -> ViewRepresentableModel? {
         return setupBaseCell(type: .latitude, subtitle: String(format: "%.5f", tree.latitude))

@@ -12,17 +12,27 @@ import RxCocoa
 
 final class TreeDetailsViewController: UIViewController {
     
+    private typealias PhotoSource = TreeDetailsPhotoContainerDataSource & TreeDetailsPhotoContainerDelegate
+    
     // MARK: Frame
     
     private lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.contentInset = .init(top: 0, left: 0, bottom: 64, right: 0)
+        scroll.contentInset = .init(top: 0, left: 0, bottom: 80, right: 0)
         scroll.showsVerticalScrollIndicator = false
         scroll.showsHorizontalScrollIndicator = false
         return scroll
     }()
     
-    private lazy var stackView: ViewRepresentableStackView = {
+    private lazy var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        return view
+    }()
+    
+    private lazy var mapView: TreeDetailsMapView = TreeDetailsMapView(frame: .zero)
+    private lazy var photoCollectionView = TreeDetailsPhotoContainerView(frame: .zero)
+    private lazy var detailsStackView: ViewRepresentableStackView = {
         let view = ViewRepresentableStackView()
         view.axis = .vertical
         view.spacing = 8
@@ -45,7 +55,7 @@ final class TreeDetailsViewController: UIViewController {
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
     private let didTapCloseSubject = PublishSubject<Void>()
-    
+        
     
     // MARK: Lifecycle
     
@@ -68,6 +78,10 @@ final class TreeDetailsViewController: UIViewController {
     // MARK: Private
     
     private func setupView() {
+        stackView.addArrangedSubview(mapView)
+        stackView.addArrangedSubview(photoCollectionView)
+        stackView.addArrangedSubview(detailsStackView)
+    
         if #available(iOS 13.0, *) {
             view.backgroundColor = UIColor.systemBackground
         } else {
@@ -90,8 +104,8 @@ final class TreeDetailsViewController: UIViewController {
         
         scrollView.addSubview(stackView)
         stackView.snp.makeConstraints {
-            $0.left.right.equalTo(view)
             $0.top.bottom.equalToSuperview()
+            $0.left.right.equalTo(view)
         }
         
         view.addSubview(editButton)
@@ -110,7 +124,7 @@ final class TreeDetailsViewController: UIViewController {
         
         bag.insert {
             input.items
-                .bind(to: stackView.rx.items)
+                .bind(to: detailsStackView.rx.items)
             
             input.buttonTitle
                 .bind(to: editButton.rx.title(for: .normal))
@@ -120,7 +134,26 @@ final class TreeDetailsViewController: UIViewController {
             
             input.title
                 .bind(to: rx.title)
+            
+            input.mapData
+                .withUnretained(self)
+                .subscribe(onNext: { obj, data in
+                    obj.mapView.configure(with: data)
+                })
+            
+            input.photosSource
+                .withUnretained(self)
+                .subscribe(onNext: { obj, source in
+                    obj.photoCollectionView.delegate = source
+                    obj.photoCollectionView.dataSource = source
+                    obj.photoCollectionView.reloadData()
+                })
+            
+            input.reloadPhotos
+                .withUnretained(self)
+                .subscribe(onNext: { obj, _ in
+                    obj.photoCollectionView.reloadData()
+                })
         }
     }
-
 }

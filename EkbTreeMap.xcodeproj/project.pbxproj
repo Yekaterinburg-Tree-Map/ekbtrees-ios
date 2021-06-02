@@ -30,6 +30,10 @@
 		2E491805260B9AC400ECE0FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E491803260B9AC400ECE0FD /* LaunchScreen.storyboard */; };
 		2E491810260B9AC400ECE0FD /* EkbTreeMapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E49180F260B9AC400ECE0FD /* EkbTreeMapTests.swift */; };
 		2E49181B260B9AC400ECE0FD /* EkbTreeMapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E49181A260B9AC400ECE0FD /* EkbTreeMapUITests.swift */; };
+		2E5271A026590292007B86BD /* PhotoDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E52719F26590292007B86BD /* PhotoDataProvider.swift */; };
+		2E5271BD26590300007B86BD /* PhotoLocalDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271BC26590300007B86BD /* PhotoLocalDataProvider.swift */; };
+		2E5271C52659042D007B86BD /* PhotoRemoteDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271C42659042D007B86BD /* PhotoRemoteDataProvider.swift */; };
+		2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271C9265904E2007B86BD /* PhotoModel.swift */; };
 		2E7FDAED261059330065E5C0 /* trees.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2E7FDAEC261059330065E5C0 /* trees.geojson */; };
 		2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */; };
 		2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */; };
@@ -87,11 +91,21 @@
 		2ED57ECC2619D7AC00EC9033 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */; };
 		2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED02619E43600EC9033 /* MapCoordinator.swift */; };
 		2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */; };
+		2ED7F855265BC270001D8BF9 /* PhotoLoaderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */; };
+		2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */; };
+		2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */; };
+		2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */; };
+		2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */; };
 		2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */; };
 		2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */; };
+		2EE2BC53264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */; };
+		2EE2BC5E264C502800DC069F /* TreeDetailsAddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */; };
 		2EE3673A620F3B7DCBA72998 /* Pods_EkbTreeMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */; };
 		2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE86182627579C002A9429 /* CircleImagedButton.swift */; };
 		2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EEE861D26275D5C002A9429 /* AuthorizationState.swift */; };
+		2EF9F12626563C5000972189 /* TreeDetailsPhotoViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF9F12526563C5000972189 /* TreeDetailsPhotoViewDelegate.swift */; };
+		2EFD90142652DCBF0091D986 /* PhotoPickerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFD90132652DCBF0091D986 /* PhotoPickerFactory.swift */; };
+		2EFD9031265396C50091D986 /* PhotoViewerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFD9030265396C50091D986 /* PhotoViewerFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +156,10 @@
 		2E491816260B9AC400ECE0FD /* EkbTreeMapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EkbTreeMapUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E49181A260B9AC400ECE0FD /* EkbTreeMapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EkbTreeMapUITests.swift; sourceTree = "<group>"; };
 		2E49181C260B9AC400ECE0FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E52719F26590292007B86BD /* PhotoDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDataProvider.swift; sourceTree = "<group>"; };
+		2E5271BC26590300007B86BD /* PhotoLocalDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLocalDataProvider.swift; sourceTree = "<group>"; };
+		2E5271C42659042D007B86BD /* PhotoRemoteDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRemoteDataProvider.swift; sourceTree = "<group>"; };
+		2E5271C9265904E2007B86BD /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		2E7FDAEC261059330065E5C0 /* trees.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trees.geojson; sourceTree = "<group>"; };
 		2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTreeParser.swift; sourceTree = "<group>"; };
 		2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleDataParser.swift; sourceTree = "<group>"; };
@@ -199,10 +217,20 @@
 		2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED02619E43600EC9033 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		2ED57ED62619EF7F00EC9033 /* UITabBarController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+Extensions.swift"; sourceTree = "<group>"; };
+		2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderService.swift; sourceTree = "<group>"; };
+		2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLoaderRepository.swift; sourceTree = "<group>"; };
+		2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsBasePhotoView.swift; sourceTree = "<group>"; };
+		2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoView.swift; sourceTree = "<group>"; };
+		2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		2EDC6C19261CC1D400BB7F5A /* LoginModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModuleFactory.swift; sourceTree = "<group>"; };
 		2EDC6C21261CC21D00BB7F5A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoContainerView.swift; sourceTree = "<group>"; };
+		2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsAddPhotoView.swift; sourceTree = "<group>"; };
 		2EEE86182627579C002A9429 /* CircleImagedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImagedButton.swift; sourceTree = "<group>"; };
 		2EEE861D26275D5C002A9429 /* AuthorizationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationState.swift; sourceTree = "<group>"; };
+		2EF9F12526563C5000972189 /* TreeDetailsPhotoViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDetailsPhotoViewDelegate.swift; sourceTree = "<group>"; };
+		2EFD90132652DCBF0091D986 /* PhotoPickerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerFactory.swift; sourceTree = "<group>"; };
+		2EFD9030265396C50091D986 /* PhotoViewerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerFactory.swift; sourceTree = "<group>"; };
 		4B42923BC04993C8BA07528D /* Pods-EkbTreeMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.debug.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.debug.xcconfig"; sourceTree = "<group>"; };
 		CB1F68E76C6F47289A63F2A2 /* Pods_EkbTreeMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EkbTreeMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -419,6 +447,27 @@
 			path = EkbTreeMapUITests;
 			sourceTree = "<group>";
 		};
+		2E52719E265900BC007B86BD /* PhotoManager */ = {
+			isa = PBXGroup;
+			children = (
+				2E5271BB265902F0007B86BD /* PhotoDataProvider */,
+				2EDAA726264DA75E00D7F6BE /* PhotoManager.swift */,
+				2E5271C9265904E2007B86BD /* PhotoModel.swift */,
+			);
+			path = PhotoManager;
+			sourceTree = "<group>";
+		};
+		2E5271BB265902F0007B86BD /* PhotoDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F859265BC504001D8BF9 /* PhotoLoader */,
+				2E52719F26590292007B86BD /* PhotoDataProvider.swift */,
+				2E5271BC26590300007B86BD /* PhotoLocalDataProvider.swift */,
+				2E5271C42659042D007B86BD /* PhotoRemoteDataProvider.swift */,
+			);
+			path = PhotoDataProvider;
+			sourceTree = "<group>";
+		};
 		2E7FDAFC26105A620065E5C0 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -456,6 +505,7 @@
 		2E968819260CD5C500574BE2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2E52719E265900BC007B86BD /* PhotoManager */,
 				2ED57E6D2618D27A00EC9033 /* Credentials */,
 				2ED57E6C2618D27100EC9033 /* Domain */,
 			);
@@ -465,6 +515,8 @@
 		2E968822260CD7A500574BE2 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				2EFD902F265396B20091D986 /* PhotoViewer */,
+				2EFD90122652DC050091D986 /* PhotoPicker */,
 				2EB34D8B263FE99E009A2129 /* TreeDetails */,
 				2E01FF8C262DFB6900DA2EF1 /* TreeEditor */,
 				2E01F72F2629CC1200DA2EF1 /* MapPointChooser */,
@@ -568,6 +620,7 @@
 		2EB34D8C263FE9A5009A2129 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2EE2BC51264C4CC300DC069F /* Photos */,
 				2EB34DB926402C91009A2129 /* MapView */,
 				2EB34D93263FE9F9009A2129 /* TreeDetailsViewController.swift */,
 				2EB34D9B263FEBBA009A2129 /* TreeDetailsViewIO.swift */,
@@ -704,6 +757,26 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2ED7F859265BC504001D8BF9 /* PhotoLoader */ = {
+			isa = PBXGroup;
+			children = (
+				2ED7F854265BC270001D8BF9 /* PhotoLoaderService.swift */,
+				2ED7F85A265BC516001D8BF9 /* PhotoLoaderRepository.swift */,
+			);
+			path = PhotoLoader;
+			sourceTree = "<group>";
+		};
+		2EDAA70B264D84F200D7F6BE /* PhotoView */ = {
+			isa = PBXGroup;
+			children = (
+				2EE2BC5D264C502800DC069F /* TreeDetailsAddPhotoView.swift */,
+				2EDAA70C264D850100D7F6BE /* TreeDetailsBasePhotoView.swift */,
+				2EDAA717264DA33F00D7F6BE /* TreeDetailsPhotoView.swift */,
+				2EF9F12526563C5000972189 /* TreeDetailsPhotoViewDelegate.swift */,
+			);
+			path = PhotoView;
+			sourceTree = "<group>";
+		};
 		2EDC6C17261CC19000BB7F5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +795,31 @@
 				2EAE5A84261F64F1005E382B /* LoginButtonType.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		2EE2BC51264C4CC300DC069F /* Photos */ = {
+			isa = PBXGroup;
+			children = (
+				2EDAA70B264D84F200D7F6BE /* PhotoView */,
+				2EE2BC52264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift */,
+			);
+			path = Photos;
+			sourceTree = "<group>";
+		};
+		2EFD90122652DC050091D986 /* PhotoPicker */ = {
+			isa = PBXGroup;
+			children = (
+				2EFD90132652DCBF0091D986 /* PhotoPickerFactory.swift */,
+			);
+			path = PhotoPicker;
+			sourceTree = "<group>";
+		};
+		2EFD902F265396B20091D986 /* PhotoViewer */ = {
+			isa = PBXGroup;
+			children = (
+				2EFD9030265396C50091D986 /* PhotoViewerFactory.swift */,
+			);
+			path = PhotoViewer;
 			sourceTree = "<group>";
 		};
 		96DAE8556E6A8CB20BE4A1C5 /* Frameworks */ = {
@@ -929,7 +1027,9 @@
 				2ED0FC2D26340A8B006A8683 /* MapObserverModuleIO.swift in Sources */,
 				2EB34DE326405BC3009A2129 /* TreeEditorActionCell.swift in Sources */,
 				2EB34DBB26402CA4009A2129 /* TreeDetailsMapView.swift in Sources */,
+				2E5271A026590292007B86BD /* PhotoDataProvider.swift in Sources */,
 				2E968815260CD48D00574BE2 /* TreeModels.swift in Sources */,
+				2EFD9031265396C50091D986 /* PhotoViewerFactory.swift in Sources */,
 				2E01FF8E262DFD1900DA2EF1 /* TreeEditorModuleFactory.swift in Sources */,
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
 				2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */,
@@ -937,9 +1037,12 @@
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2E01F743262A108800DA2EF1 /* UIViewController+Extensions.swift in Sources */,
 				2ED0FC522635D98B006A8683 /* TreeEditorPendingData.swift in Sources */,
+				2EE2BC5E264C502800DC069F /* TreeDetailsAddPhotoView.swift in Sources */,
 				2EB34DD52640598A009A2129 /* TreeEditorFormManagerEdit.swift in Sources */,
 				2E9831C62647E5920088193B /* IResolver.swift in Sources */,
 				2ED01765263846E7006A8683 /* TreeEditorStepperCell.swift in Sources */,
+				2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */,
+				2E5271C52659042D007B86BD /* PhotoRemoteDataProvider.swift in Sources */,
 				2EB34DB526401496009A2129 /* TreeDetailsCoordinator.swift in Sources */,
 				2E9831812647DADE0088193B /* ServiceAssembly.swift in Sources */,
 				2ED57EC72619D6EA00EC9033 /* Coordinator.swift in Sources */,
@@ -963,6 +1066,7 @@
 				2EB34DA1263FEF52009A2129 /* TreeDetailsInteractor.swift in Sources */,
 				2E01FF73262DE8EE00DA2EF1 /* MapPointChooserModuleFactory.swift in Sources */,
 				2E01F752262A19F400DA2EF1 /* MapObserverPresenter.swift in Sources */,
+				2ED7F85B265BC516001D8BF9 /* PhotoLoaderRepository.swift in Sources */,
 				2ED57E8D2618E79700EC9033 /* Factory.swift in Sources */,
 				2E9831912647DEBB0088193B /* UIConfiguratorsAssembly.swift in Sources */,
 				2EB34D94263FE9F9009A2129 /* TreeDetailsViewController.swift in Sources */,
@@ -980,18 +1084,26 @@
 				2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */,
 				2ED0125726373BEA006A8683 /* TreeEditorDataCell.swift in Sources */,
 				2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */,
+				2EDAA70D264D850100D7F6BE /* TreeDetailsBasePhotoView.swift in Sources */,
 				2E96881B260CD67400574BE2 /* TreePointsRepository.swift in Sources */,
+				2EF9F12626563C5000972189 /* TreeDetailsPhotoViewDelegate.swift in Sources */,
+				2EDAA718264DA33F00D7F6BE /* TreeDetailsPhotoView.swift in Sources */,
 				2E96882C260CDCBD00574BE2 /* MapViewController.swift in Sources */,
+				2EDAA727264DA75E00D7F6BE /* PhotoManager.swift in Sources */,
 				2E39464B26221EAF0001E5FA /* Tree.swift in Sources */,
 				2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */,
+				2EFD90142652DCBF0091D986 /* PhotoPickerFactory.swift in Sources */,
 				2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */,
 				2E01FF85262DEC6E00DA2EF1 /* MapPointChooserInteractor.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */,
 				2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */,
 				2ED57E922618E82C00EC9033 /* MapViewModuleFactory.swift in Sources */,
+				2E5271BD26590300007B86BD /* PhotoLocalDataProvider.swift in Sources */,
 				2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */,
+				2ED7F855265BC270001D8BF9 /* PhotoLoaderService.swift in Sources */,
 				2E01FF98262DFEFA00DA2EF1 /* TreeEditorViewController.swift in Sources */,
+				2EE2BC53264C4CDE00DC069F /* TreeDetailsPhotoContainerView.swift in Sources */,
 				2EB34D73263FD6F5009A2129 /* TreeEditorFormManager.swift in Sources */,
 				2EAE5A80261F62F6005E382B /* LoginViewIO.swift in Sources */,
 				2E4917F9260B9AC300ECE0FD /* AppDelegate.swift in Sources */,
