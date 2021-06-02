@@ -38,6 +38,8 @@ final class TreeEditorViewController: UIViewController {
         return button
     }()
     
+    private lazy var gradientContainer = GradientContainer()
+    
     
     // MARK: Private Properties
     
@@ -64,6 +66,17 @@ final class TreeEditorViewController: UIViewController {
         didLoadSubject.onNext(())
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if #available(iOS 13.0, *) {
+            gradientContainer.setupGradient(colors: [UIColor.systemBackground.withAlphaComponent(0).cgColor,
+                                                     UIColor.systemBackground.cgColor])
+        } else {
+            gradientContainer.setupGradient(colors: [UIColor.white.withAlphaComponent(0).cgColor,
+                                                     UIColor.white.cgColor])
+        }
+    }
+    
     
     // MARK: Private
     
@@ -85,11 +98,17 @@ final class TreeEditorViewController: UIViewController {
             $0.top.bottom.equalToSuperview()
         }
         
-        view.addSubview(addButton)
+        view.addSubview(gradientContainer)
+        gradientContainer.snp.makeConstraints {
+            $0.left.right.bottom.equalToSuperview()
+            $0.height.equalTo(64)
+        }
+        
+        gradientContainer.addSubview(addButton)
         addButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(16)
+            $0.top.equalToSuperview()
             $0.height.equalTo(48)
-            $0.left.right.equalToSuperview().inset(16)
+            $0.left.right.equalToSuperview().inset(24)
         }
     }
     

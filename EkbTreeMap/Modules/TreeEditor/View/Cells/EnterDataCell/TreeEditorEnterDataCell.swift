@@ -88,19 +88,16 @@ final class TreeEditorEnterDataCell: UIView, ViewRepresentable, UITextFieldDeleg
         addSubview(titleLabel)
         titleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         titleLabel.snp.makeConstraints {
-            $0.top.left.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().inset(8)
+            $0.left.right.equalToSuperview().inset(16)
         }
         
         addSubview(textField)
         textField.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         textField.snp.makeConstraints {
-            $0.top.right.equalToSuperview().inset(16)
-            $0.left.greaterThanOrEqualTo(titleLabel.snp.right).inset(-8)
+            $0.left.right.equalTo(titleLabel)
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-8)
             $0.bottom.equalToSuperview().inset(8)
-        }
-        
-        snp.makeConstraints {
-            $0.height.equalTo(48)
         }
     }
 }
