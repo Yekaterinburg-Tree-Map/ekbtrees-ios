@@ -23,16 +23,19 @@ class TreeDetailsCoordinator: ParentCoordinator {
     private weak var detailsInput: TreeDetailsModuleInput?
     
     private let resolver: IResolver
+    private let treeId: Tree.ID
     
     
     // MARK: Lifecycle
     
     init(rootViewController: UIViewController,
          resolver: IResolver,
-         delegate: CoordinatorDelegate) {
+         delegate: CoordinatorDelegate,
+         treeId: Tree.ID) {
         self.rootViewController = rootViewController
         self.resolver = resolver
         self.delegate = delegate
+        self.treeId = treeId
     }
     
     func start(animated: Bool) {
@@ -48,16 +51,7 @@ class TreeDetailsCoordinator: ParentCoordinator {
     
     private func presentTreeDetails(animated: Bool) {
         let factory: TreeDetailsModuleFactory = resolver.resolve()
-        var tree = Tree(id: 0, latitude: 56.84306, longitude: 60.6135)
-        tree.age = 5
-        tree.conditionAssessment = 5
-        tree.diameterOfCrown = 10
-        tree.heightOfTheFirstBranch = 2
-        tree.numberOfTreeTrunks = 15
-        tree.treeHeight = 20
-        tree.type = "Хвойное"
-        tree.trunkGirth = 1.5
-        let vc = factory.build(with: .init(tree: tree, output: self))
+        let vc = factory.build(with: .init(treeId: treeId, output: self))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         navigationController = nvc
@@ -99,6 +93,11 @@ extension TreeDetailsCoordinator: TreeDetailsModuleOutput {
         let vc = factory.build(with: .init(images: photos, startIndex: startingIndex))
         vc.modalPresentationStyle = .fullScreen
         navigationController?.present(vc, animated: true)
+    }
+    
+    func moduleWantsToShowAlert(input: TreeDetailsModuleInput, alert: Alert) {
+        let alertController = UIAlertController(alert: alert)
+        navigationController?.present(alertController, animated: true)
     }
 }
 

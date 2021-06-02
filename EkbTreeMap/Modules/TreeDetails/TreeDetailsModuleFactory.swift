@@ -12,7 +12,7 @@ final class TreeDetailsModuleFactory: Factory {
     
     struct Context {
         
-        let tree: Tree
+        let treeId: Tree.ID
         let output: TreeDetailsModuleOutput
     }
     
@@ -20,23 +20,27 @@ final class TreeDetailsModuleFactory: Factory {
     
     private let formFactory: TreeDetailsFormFactoryProtocol
     private let photoManager: PhotoManagerProtocol
+    private let treeService: TreeDataServiceProtocol
     
     
     // MARK: Lifecycle
     
     init(formFactory: TreeDetailsFormFactoryProtocol,
-         photoManager: PhotoManagerProtocol) {
+         photoManager: PhotoManagerProtocol,
+         treeService: TreeDataServiceProtocol) {
         self.formFactory = formFactory
         self.photoManager = photoManager
+        self.treeService = treeService
     }
     
     
     // MARK: Public
     
     func build(with context: Context) -> TreeDetailsViewController {
-        let interactor = TreeDetailsInteractor(tree: context.tree,
+        let interactor = TreeDetailsInteractor(treeId: context.treeId,
                                                formFactory: formFactory,
                                                photoManager: photoManager,
+                                               treeService: treeService,
                                                output: context.output)
         let vc = TreeDetailsViewController.instantiate(with: interactor)
         return vc

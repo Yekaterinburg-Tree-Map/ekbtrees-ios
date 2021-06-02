@@ -20,4 +20,5 @@ protocol TreeDetailsModuleOutput: AnyObject {
     func moduleWantsToClose(input: TreeDetailsModuleInput)
     func moduleWantsToAddPhotos(input: TreeDetailsModuleInput)
     func moduleWantToShowPreview(input: TreeDetailsModuleInput, startingIndex: Int, photos: [PhotoModelProtocol])
+    func moduleWantsToShowAlert(input: TreeDetailsModuleInput, alert: Alert)
 }

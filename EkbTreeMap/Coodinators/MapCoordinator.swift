@@ -71,13 +71,14 @@ extension MapCoordinator: MapObserverModuleOutput {
         startPointChooserModule()
     }
     
-    func moduleWantsToOpenDetails(input: MapObserverModuleInput, tree: Tree) {
+    func moduleWantsToOpenDetails(input: MapObserverModuleInput, treeId: Tree.ID) {
         guard let rootViewController = rootController else {
             return
         }
         let coordinator = TreeDetailsCoordinator(rootViewController: rootViewController,
                                                  resolver: resolver,
-                                                 delegate: self)
+                                                 delegate: self,
+                                                 treeId: treeId)
         childCoordinators.append(coordinator)
         coordinator.start(animated: true)
     }

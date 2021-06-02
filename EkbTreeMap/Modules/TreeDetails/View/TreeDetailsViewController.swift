@@ -56,6 +56,7 @@ final class TreeDetailsViewController: UIViewController {
     private var interactor: TreeDetailsConfigurable!
     private let bag = DisposeBag()
     private let didLoadSubject = PublishSubject<Void>()
+    private let willAppearSubject = PublishSubject<Void>()
     private let didTapCloseSubject = PublishSubject<Void>()
         
     
@@ -74,6 +75,12 @@ final class TreeDetailsViewController: UIViewController {
         setupIO()
         
         didLoadSubject.onNext(())
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        willAppearSubject.onNext(())
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,8 +148,9 @@ final class TreeDetailsViewController: UIViewController {
     
     private func setupIO() {
         let output = TreeDetailsView.Output(didLoad: didLoadSubject,
-                                           didTapAction: editButton.rx.tap.asObservable(),
-                                           didTapClose: didTapCloseSubject)
+                                            willAppear: willAppearSubject,
+                                            didTapAction: editButton.rx.tap.asObservable(),
+                                            didTapClose: didTapCloseSubject)
         let input = interactor.configure(with: output)
         
         bag.insert {
@@ -176,6 +184,11 @@ final class TreeDetailsViewController: UIViewController {
                 .withUnretained(self)
                 .subscribe(onNext: { obj, _ in
                     obj.photoCollectionView.reloadData()
+                })
+            
+            input.hudState.withUnretained(self)
+                .subscribe(onNext: { obj, state in
+                    obj.updateHUDState(state)
                 })
         }
     }
