@@ -60,12 +60,12 @@ final class MapObserverInteractor: MapObserverViewConfigurable {
     }
     
     private func didTapMore() {
-        output?.moduleWantsToOpenDetails(input: self, tree: Tree(id: "", latitude: 60.02, longitude: 60.01))
+        output?.moduleWantsToOpenDetails(input: self, tree: Tree(id: 0, latitude: 60.02, longitude: 60.01))
         annotationDataSubject.onNext(nil)
     }
     
-    private func didTapPoint(_ id: String) {
-        annotationDataSubject.onNext(.init(id: "", position: .init(), diameter: nil, species: "Data for annotation"))
+    private func didTapPoint(_ id: Int) {
+        annotationDataSubject.onNext(.init(id: id, position: .init(), diameter: nil, species: "Data for annotation"))
     }
     
     private func didTapAdd() {

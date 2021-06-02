@@ -10,7 +10,7 @@ import UIKit
 
 struct TreePointRepresentable {
     
-    let id: String
+    let id: Int
     let position: TreePosition
     var circleColor: UIColor
     var radius: CGFloat

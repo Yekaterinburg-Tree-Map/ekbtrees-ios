@@ -37,5 +37,7 @@ final class UIConfiguratorsAssembly: Assembly {
             return configuration
         }
         .inObjectScope(.container)
+        
+        container.autoregister(MapObjectsVisiting.self, initializer: MapObjectsVisitor.init)
     }
 }

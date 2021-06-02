@@ -19,12 +19,18 @@ class MapViewModuleFactory: Factory {
     // MARK: Private Properties
     
     private let repository: TreePointsRepositoryProtocol
+    private let pointsService: MapPointsServiceProtocol
+    private let objectsVisitor: MapObjectsVisiting
     
     
     // MARK: Lifecycle
     
-    init(repository: TreePointsRepositoryProtocol) {
+    init(repository: TreePointsRepositoryProtocol,
+         pointsService: MapPointsServiceProtocol,
+         objectsVisitor: MapObjectsVisiting) {
         self.repository = repository
+        self.pointsService = pointsService
+        self.objectsVisitor = objectsVisitor
     }
     
     
@@ -34,8 +40,9 @@ class MapViewModuleFactory: Factory {
         let presenter = MapViewPresenter()
         let interactor = MapViewInteractor(presenter: presenter,
                                            treeRepository: repository,
+                                           pointsService: pointsService,
                                            output: context.output)
-        let vc = MapViewController.instantiate(interactor: interactor)
+        let vc = MapViewController.instantiate(interactor: interactor, objectsVisitor: objectsVisitor)
         return vc
     }
 }

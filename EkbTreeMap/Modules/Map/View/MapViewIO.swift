@@ -15,12 +15,13 @@ struct MapView {
         
         var moveToPoint: Observable<TreePosition> = .never()
         var visiblePoints: Observable<[TreePointRepresentable]> = .never()
+        var visibleClusters: Observable<[TreeClusterRepresentable]> = .never()
     }
     
     struct Output {
         
         var didLoad: Observable<Void> = .never()
-        var didTapPoint: Observable<String> = .never()
+        var didTapPoint: Observable<Int> = .never()
         var didTapOnMap: Observable<TreePosition> = .never()
         var didChangeVisibleRegion: Observable<MapViewVisibleRegionPoints> = .never()
     }
@@ -28,7 +29,8 @@ struct MapView {
     struct InteractorOutput {
         
         var startPoint: Observable<TreePosition> = .never()
-        var visiblePoints: Observable<[TreePoint]> = .never()
+        var visiblePoints: Observable<[Tree]> = .never()
+        var visibleClusters: Observable<[TreeCluster]> = .never()
     }
 }
 

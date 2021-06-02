@@ -16,7 +16,7 @@ struct TreeCluster {
 
 struct TreePoint {
     
-    let id: String
+    let id: Int
     let position: TreePosition
     var diameter: Double?
     var species: String
@@ -29,8 +29,18 @@ struct TreeSpecies {
 }
 
 
-struct TreePosition {
+struct TreePosition: Equatable, Hashable {
     
     var latitude: Double = 0
     var longitude: Double = 0
+    
+    static func == (lhs: TreePosition, rhs: TreePosition) -> Bool {
+        lhs.latitude == rhs.latitude
+            && lhs.longitude == rhs.longitude
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(latitude)
+        hasher.combine(longitude)
+    }
 }

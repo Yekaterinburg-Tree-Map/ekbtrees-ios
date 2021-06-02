@@ -22,6 +22,19 @@ final class ServiceAssembly: Assembly {
         container.autoregister(PhotoLoaderRepositoryProtocol.self, initializer: PhotoLoaderRepository.init)
             .inObjectScope(.container)
         
+        container.autoregister(TreePointsRepositoryProtocol.self, initializer: TreePointsRepository.init)
+        
         container.autoregister(PhotoLoaderServiceProtocol.self, initializer: PhotoLoaderService.init)
+        container.register(MapPointsServiceProtocol.self) { r in
+            let resolver = IResolverImpl(resolver: r)
+            return MapPointsService(resolver: resolver,
+                                    networkService: resolver.resolve(name: NetworkServiceName.common.rawValue),
+                                    pointsParser: r~>,
+                                    clusterParser: r~>,
+                                    treeRepository: r~>,
+                                    areaToTilesConverter: r~>)
+        }
+        
+        container.autoregister(AreaToTilesConverting.self, initializer: MapVisibleAreaToTilesConverter.init)
     }
 }
