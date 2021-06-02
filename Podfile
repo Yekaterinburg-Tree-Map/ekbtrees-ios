@@ -15,7 +15,8 @@ target 'EkbTreeMap' do
   pod 'YPImagePicker'
   pod 'Lightbox'
   pod 'Moya'
-  pod 'RealmSwift' 
+  pod 'RealmSwift'
+  pod 'SVProgressHUD' 
 
   # maps
   pod 'YandexMapsMobile', ’4.0.0-lite’

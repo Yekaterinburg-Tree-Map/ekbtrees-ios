@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 
 final class TreeEditorInteractor: TreeEditorConfigurable {
@@ -15,10 +16,14 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
     private let formItemsSubject = PublishSubject<[ViewRepresentableModel]>()
     private let saveButtonTitleSubject = BehaviorSubject<String>(value: "Сохранить")
     private let titleSubject = BehaviorSubject<String>(value: "Детали")
+    private let isLoadingSubject = BehaviorSubject<Bool>(value: false)
+    private let hudSubject = BehaviorRelay<HUDState>(value: .hidden)
     
     private var pendingData: TreeEditorPendingData
     private var formManager: TreeEditorFormManagerProtocol
     private let formatter: TreeEditorFormFormatterProtocol
+    private let treeService: TreeDataServiceProtocol
+    
     private weak var output: TreeEditorModuleOutput?
     private let bag = DisposeBag()
     
@@ -30,10 +35,12 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
     init(pendingData: TreeEditorPendingData,
          formManager: TreeEditorFormManagerProtocol,
          formatter: TreeEditorFormFormatterProtocol,
+         treeService: TreeDataServiceProtocol,
          output: TreeEditorModuleOutput) {
         self.pendingData = pendingData
         self.formManager = formManager
         self.formatter = formatter
+        self.treeService = treeService
         self.output = output
     }
     
@@ -50,7 +57,8 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
         }
         return TreeEditorView.Input(title: titleSubject,
                                     formItems: formItemsSubject,
-                                    saveButtonTitle: saveButtonTitleSubject)
+                                    saveButtonTitle: saveButtonTitleSubject,
+                                    hudState: hudSubject.asObservable())
     }
     
     
@@ -68,9 +76,34 @@ final class TreeEditorInteractor: TreeEditorConfigurable {
             configureForm()
             return
         }
-        // save data
         
-        output?.moduleDidSave(input: self)
+        hudSubject.accept(.loading)
+        
+        treeService.saveTree(pendingData)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, _ in
+                let completion: () -> () = { [weak self] in
+                    guard let self = self else {
+                        return
+                    }
+                    self.hudSubject.accept(.hidden)
+                    self.output?.moduleDidSave(input: self)
+                }
+                obj.hudSubject.accept(.success(duration: 1.0, completion: completion))
+            }, onError: { [weak self] error in
+                let completion: () -> () = { [weak self] in
+                    self?.hudSubject.accept(.hidden)
+                    self?.showError(error: error)
+                }
+                self?.hudSubject.accept(.failure(duration: 1.0, completion: completion))
+            })
+            .disposed(by: bag)
+    }
+    
+    private func showError(error: Error) {
+        var alert = Alert(message: "Произошла ошибка")
+        alert.actions = [.init(title: "ОК")]
+        output?.module(input: self, wantsToShowAlert: alert)
     }
     
     /// MARK: Form configuration

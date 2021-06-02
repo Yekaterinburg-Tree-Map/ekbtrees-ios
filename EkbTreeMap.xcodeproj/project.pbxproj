@@ -34,6 +34,10 @@
 		2E5271BD26590300007B86BD /* PhotoLocalDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271BC26590300007B86BD /* PhotoLocalDataProvider.swift */; };
 		2E5271C52659042D007B86BD /* PhotoRemoteDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271C42659042D007B86BD /* PhotoRemoteDataProvider.swift */; };
 		2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271C9265904E2007B86BD /* PhotoModel.swift */; };
+		2E7B02B72660E7E000278AF4 /* TreeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02B62660E7E000278AF4 /* TreeDataService.swift */; };
+		2E7B02BF2660EA5000278AF4 /* SaveTreeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */; };
+		2E7B02DD266368BA00278AF4 /* HUDState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02DC266368BA00278AF4 /* HUDState.swift */; };
+		2E7B02E22663739700278AF4 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02E12663739700278AF4 /* Alert.swift */; };
 		2E7FDAED261059330065E5C0 /* trees.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 2E7FDAEC261059330065E5C0 /* trees.geojson */; };
 		2E7FDAFE26105A880065E5C0 /* ExampleTreeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */; };
 		2E7FDB0626105C4D0065E5C0 /* ExampleDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */; };
@@ -195,6 +199,10 @@
 		2E5271BC26590300007B86BD /* PhotoLocalDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLocalDataProvider.swift; sourceTree = "<group>"; };
 		2E5271C42659042D007B86BD /* PhotoRemoteDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoRemoteDataProvider.swift; sourceTree = "<group>"; };
 		2E5271C9265904E2007B86BD /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		2E7B02B62660E7E000278AF4 /* TreeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDataService.swift; sourceTree = "<group>"; };
+		2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTreeTarget.swift; sourceTree = "<group>"; };
+		2E7B02DC266368BA00278AF4 /* HUDState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDState.swift; sourceTree = "<group>"; };
+		2E7B02E12663739700278AF4 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		2E7FDAEC261059330065E5C0 /* trees.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trees.geojson; sourceTree = "<group>"; };
 		2E7FDAFD26105A880065E5C0 /* ExampleTreeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleTreeParser.swift; sourceTree = "<group>"; };
 		2E7FDB0526105C4D0065E5C0 /* ExampleDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleDataParser.swift; sourceTree = "<group>"; };
@@ -543,6 +551,14 @@
 			path = PhotoDataProvider;
 			sourceTree = "<group>";
 		};
+		2E7B02B52660E7D000278AF4 /* Tree */ = {
+			isa = PBXGroup;
+			children = (
+				2E7B02B62660E7E000278AF4 /* TreeDataService.swift */,
+			);
+			path = Tree;
+			sourceTree = "<group>";
+		};
 		2E7FDAFC26105A620065E5C0 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
@@ -585,6 +601,7 @@
 		2E968819260CD5C500574BE2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2E7B02B52660E7D000278AF4 /* Tree */,
 				2ED7F99E265D1A07001D8BF9 /* Map */,
 				2E52719E265900BC007B86BD /* PhotoManager */,
 				2ED57E6D2618D27A00EC9033 /* Credentials */,
@@ -615,6 +632,8 @@
 				2ED57ED52619EF6D00EC9033 /* Extensions */,
 				2EB34D51263C5307009A2129 /* ButtonWithArrowDown.swift */,
 				2ED7F876265BDB6E001D8BF9 /* GradientContainer.swift */,
+				2E7B02DC266368BA00278AF4 /* HUDState.swift */,
+				2E7B02E12663739700278AF4 /* Alert.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -904,6 +923,7 @@
 			children = (
 				2ED7F991265D14E9001D8BF9 /* GetTreesByRegionTarget.swift */,
 				2ED7F9A4265D3482001D8BF9 /* GetClasterByRegionTarget.swift */,
+				2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -1258,6 +1278,7 @@
 				2EEE86192627579C002A9429 /* CircleImagedButton.swift in Sources */,
 				2ED0FC4D2635BC08006A8683 /* TreeEditorModuleOutput.swift in Sources */,
 				2ED0FC3526340ED9006A8683 /* MapPointChooserModuleIO.swift in Sources */,
+				2E7B02E22663739700278AF4 /* Alert.swift in Sources */,
 				2ED7FA01265D6ECD001D8BF9 /* Mapper.swift in Sources */,
 				2ED7F96E265CF740001D8BF9 /* NetworkServiceName.swift in Sources */,
 				2ED57E6F2618D28D00EC9033 /* ApiKeyService.swift in Sources */,
@@ -1273,6 +1294,7 @@
 				2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */,
 				2ED7FA33265E8E46001D8BF9 /* MapClusterMapper.swift in Sources */,
 				2ED7FA29265E8C58001D8BF9 /* MapTreePointMapper.swift in Sources */,
+				2E7B02DD266368BA00278AF4 /* HUDState.swift in Sources */,
 				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
 				2EB34D52263C5307009A2129 /* ButtonWithArrowDown.swift in Sources */,
 				2ED7FA24265E8888001D8BF9 /* MapTreePointEntity.swift in Sources */,
@@ -1283,6 +1305,7 @@
 				2ED57ED12619E43600EC9033 /* MapCoordinator.swift in Sources */,
 				2ED7F973265CF7BD001D8BF9 /* NetworkAssembly.swift in Sources */,
 				2ED7FA10265D6FCB001D8BF9 /* StoreAssembly.swift in Sources */,
+				2E7B02B72660E7E000278AF4 /* TreeDataService.swift in Sources */,
 				2ED57EC12619D4C700EC9033 /* MapViewPresenter.swift in Sources */,
 				2E01FF80262DE9C300DA2EF1 /* MapPointChooserIO.swift in Sources */,
 				2E3946462621D2910001E5FA /* MapViewVisibleRegionPoints.swift in Sources */,
@@ -1304,6 +1327,7 @@
 				2EFD90142652DCBF0091D986 /* PhotoPickerFactory.swift in Sources */,
 				2EB34DAB26400F0B009A2129 /* TreeInfoCellType.swift in Sources */,
 				2E01FF85262DEC6E00DA2EF1 /* MapPointChooserInteractor.swift in Sources */,
+				2E7B02BF2660EA5000278AF4 /* SaveTreeTarget.swift in Sources */,
 				2ED57ED72619EF7F00EC9033 /* UITabBarController+Extensions.swift in Sources */,
 				2ED7F9AA265D35AD001D8BF9 /* ClustersRegionParser.swift in Sources */,
 				2E9831892647DBEB0088193B /* FactoryAssembly.swift in Sources */,

@@ -52,16 +52,14 @@ final class EditTreeDetailsCoordinator: Coordinator {
             return
         }
         
-        let formManager = TreeEditorFormManagerEdit(baseManager: TreeEditorFormManager())
-        let factory = TreeEditorModuleFactory(formManager: formManager,
-                                              formFormatter: TreeEditorFormFormatter())
+        let factory: TreeEditorModuleFactory = resolver.resolve(name: TreeEditorFormName.edit.rawValue)
         let context = TreeEditorModuleFactory.Context(output: self,
                                                       pendingData: TreeEditorPendingData(latitude: 0, longitude: 0))
         let vc = factory.build(with: context)
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Закрыть",
-                                                                  style: .plain,
-                                                                  target: self,
-                                                                  action: #selector(self.closeTreeEditor))
+                                                              style: .plain,
+                                                              target: self,
+                                                              action: #selector(self.closeTreeEditor))
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         rootViewController.present(nvc, animated: animated, completion: {
@@ -88,6 +86,11 @@ final class EditTreeDetailsCoordinator: Coordinator {
 // MARK: - TreeEditorModuleOutput
 
 extension EditTreeDetailsCoordinator: TreeEditorModuleOutput {
+    
+    func module(input: TreeEditorModuleInput, wantsToShowAlert alert: Alert) {
+        let alertController = UIAlertController(alert: alert)
+        navigationController?.present(alertController, animated: true)
+    }
     
     func moduleDidLoad(input: TreeEditorModuleInput) {
         editorModuleInput = input

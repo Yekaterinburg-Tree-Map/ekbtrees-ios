@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SVProgressHUD
 
 
 final class TreeEditorViewController: UIViewController {
@@ -88,6 +89,22 @@ final class TreeEditorViewController: UIViewController {
         }
     }
     
+    private func updateHUDState(_ state: HUDState) {
+        view.isUserInteractionEnabled = state == .hidden
+        switch state {
+        case .hidden:
+            SVProgressHUD.dismiss()
+        case .loading:
+            SVProgressHUD.show()
+        case .failure(let duration, let completion):
+            SVProgressHUD.showError(withStatus: nil)
+            SVProgressHUD.dismiss(withDelay: duration, completion: completion)
+        case .success(let duration, let completion):
+            SVProgressHUD.showSuccess(withStatus: nil)
+            SVProgressHUD.dismiss(withDelay: duration, completion: completion)
+        }
+    }
+    
     private func setupConstraint() {
         view.addSubview(scrollView)
         scrollView.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -126,6 +143,12 @@ final class TreeEditorViewController: UIViewController {
             
             input.title
                 .bind(to: rx.title)
+            
+            input.hudState
+                .withUnretained(self)
+                .subscribe(onNext: { obj, state in
+                    obj.updateHUDState(state)
+                })
         }
     }
 }
