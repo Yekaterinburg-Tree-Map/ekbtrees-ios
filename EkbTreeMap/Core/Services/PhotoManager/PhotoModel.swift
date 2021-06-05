@@ -14,18 +14,21 @@ protocol PhotoModelProtocol {
 }
 
 
+enum UploadPhotoStatus: String {
+    
+    case loading
+    case cancelled
+    case ready
+    case pending
+}
+
+
 struct LocalPhotoModel: PhotoModelProtocol {
-    
-    enum LoadStatus {
-        
-        case loading
-        case cancelled
-        case ready
-    }
-    
+
     var tempId: String
+    var treeId: Int
     var image: UIImage
-    var loadStatus: LoadStatus
+    var loadStatus: UploadPhotoStatus
 }
 
 

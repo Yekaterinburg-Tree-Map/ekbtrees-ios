@@ -20,24 +20,25 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
     
     // MARK: Private Properties
     
+    private let networkService: NetworkServiceProtocol
     private let loaderRepository: PhotoLoaderRepositoryProtocol
+    private var currentRequests: [String: Disposable] = [:]
     
     
     // MARK: Lifecycle
     
-    init(loaderRepository: PhotoLoaderRepositoryProtocol) {
+    init(networkService: NetworkServiceProtocol,
+         loaderRepository: PhotoLoaderRepositoryProtocol) {
+        self.networkService = networkService
         self.loaderRepository = loaderRepository
+        observePendingPhotos()
     }
+    
     
     // MARK: Public
     
     func uploadPhotos(_ photos: [UIImage], treeId: Tree.ID) {
-        let ids = loaderRepository.addPendingPhotos(photos, treeId: treeId)
-        for id in ids {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.loaderRepository.updatePhotoModelStatus(id: id, status: .ready)
-            }
-        }
+        loaderRepository.addPendingPhotos(photos, treeId: treeId)
     }
     
     func cancelUpload(id: String) {
@@ -51,5 +52,12 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.loaderRepository.updatePhotoModelStatus(id: id, status: .ready)
         }
+    }
+    
+    
+    // MARK: Private
+    
+    private func observePendingPhotos() {
+        
     }
 }
