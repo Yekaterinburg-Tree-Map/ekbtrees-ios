@@ -21,7 +21,6 @@ protocol PhotoDataProviding {
 
 final class PhotoDataProvider: PhotoDataProviding {
     
-    
     // MARK: Private Properties
     
     private let localDataProvider: PhotoLocalDataProviding
@@ -44,16 +43,12 @@ final class PhotoDataProvider: PhotoDataProviding {
         remoteDataProvider.deletePhoto(id: id)
     }
     
-    func retryLoadPhoto(model: LocalPhotoModel) {
-        
+    func retryUploadPhoto(model: LocalPhotoModel) {
+        localDataProvider.retryUploadPhoto(model: model)
     }
     
     func cancelUploadPhoto(model: LocalPhotoModel) {
-        
-    }
-    
-    func retryUploadPhoto(model: LocalPhotoModel) {
-        
+        localDataProvider.cancelUploadPhoto(model: model)
     }
     
     func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) {

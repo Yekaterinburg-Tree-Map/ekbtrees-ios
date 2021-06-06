@@ -20,15 +20,19 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
     
     // MARK: Private Properties
     
+    private let resolver: IResolver
     private let networkService: NetworkServiceProtocol
     private let loaderRepository: PhotoLoaderRepositoryProtocol
-    private var currentRequests: [String: Disposable] = [:]
+    private var currentRequests: [String: DisposeBag] = [:]
+    private let bag = DisposeBag()
     
     
     // MARK: Lifecycle
     
-    init(networkService: NetworkServiceProtocol,
+    init(resolver: IResolver,
+         networkService: NetworkServiceProtocol,
          loaderRepository: PhotoLoaderRepositoryProtocol) {
+        self.resolver = resolver
         self.networkService = networkService
         self.loaderRepository = loaderRepository
         observePendingPhotos()
@@ -42,22 +46,68 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
     }
     
     func cancelUpload(id: String) {
-        // network cancel
+        currentRequests[id] = nil
         loaderRepository.updatePhotoModelStatus(id: id, status: .cancelled)
     }
     
     func retryUpload(id: String) {
-        // network retry
-        loaderRepository.updatePhotoModelStatus(id: id, status: .loading)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.loaderRepository.updatePhotoModelStatus(id: id, status: .ready)
-        }
+        loaderRepository.fetchAndTrackAllPendingPhotos()
+            .compactMap { $0.first(where: { $0.tempId == id })}
+            .withUnretained(self)
+            .subscribe(onNext: { obj, model in
+                obj.uploadPhoto(model)
+            })
+            .disposed(by: bag)
     }
     
     
     // MARK: Private
     
     private func observePendingPhotos() {
-        
+        loaderRepository.fetchAndTrackAllPendingPhotos()
+            .map { photos in
+                photos.filter { [.pending].contains($0.loadStatus) }
+            }
+            .withUnretained(self)
+            .subscribe(onNext: { obj, photos in
+                obj.uploadPhotos(photos)
+            })
+            .disposed(by: bag)
+    }
+    
+    private func uploadPhotos(_ photos: [LocalPhotoModel]) {
+        for photo in photos {
+            uploadPhoto(photo)
+        }
+    }
+    
+    private func uploadPhoto(_ photo: LocalPhotoModel) {
+        loaderRepository.updatePhotoModelStatus(id: photo.tempId, status: .loading)
+        guard let target = configureTarget(photo) else {
+            loaderRepository.updatePhotoModelStatus(id: photo.tempId, status: .cancelled)
+            return
+        }
+        let bag = DisposeBag()
+        networkService.sendRequestWithEmptyResponse(target)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, _ in
+                obj.didUploadPhoto(photo)
+            })
+            .disposed(by: bag)
+        currentRequests[photo.tempId] = bag
+    }
+    
+    private func configureTarget(_ photo: LocalPhotoModel) -> AttachFileToTreeTarget? {
+        guard let data = photo.image.jpegData(compressionQuality: 1) else {
+            return nil
+        }
+        let params = AttachFileToTreeTarget.Parameters(treeId: photo.treeId, data: data)
+        let target: AttachFileToTreeTarget = resolver.resolve(arg: params)
+        return target
+    }
+    
+    private func didUploadPhoto(_ photo: LocalPhotoModel) {
+        loaderRepository.updatePhotoModelStatus(id: photo.tempId, status: .ready)
+        currentRequests[photo.tempId] = nil
     }
 }

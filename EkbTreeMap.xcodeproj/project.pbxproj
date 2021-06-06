@@ -36,6 +36,7 @@
 		2E5271CA265904E2007B86BD /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5271C9265904E2007B86BD /* PhotoModel.swift */; };
 		2E705F07266BC46500873742 /* UploadingPhotoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E705F06266BC46500873742 /* UploadingPhotoEntity.swift */; };
 		2E705F0C266BC70B00873742 /* UploadPhotoMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E705F0B266BC70B00873742 /* UploadPhotoMapper.swift */; };
+		2E705F11266CA88800873742 /* AttachFileToTreeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E705F10266CA88800873742 /* AttachFileToTreeTarget.swift */; };
 		2E7B02B72660E7E000278AF4 /* TreeDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02B62660E7E000278AF4 /* TreeDataService.swift */; };
 		2E7B02BF2660EA5000278AF4 /* SaveTreeTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */; };
 		2E7B02DD266368BA00278AF4 /* HUDState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7B02DC266368BA00278AF4 /* HUDState.swift */; };
@@ -208,6 +209,7 @@
 		2E5271C9265904E2007B86BD /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		2E705F06266BC46500873742 /* UploadingPhotoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingPhotoEntity.swift; sourceTree = "<group>"; };
 		2E705F0B266BC70B00873742 /* UploadPhotoMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoMapper.swift; sourceTree = "<group>"; };
+		2E705F10266CA88800873742 /* AttachFileToTreeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachFileToTreeTarget.swift; sourceTree = "<group>"; };
 		2E7B02B62660E7E000278AF4 /* TreeDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeDataService.swift; sourceTree = "<group>"; };
 		2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveTreeTarget.swift; sourceTree = "<group>"; };
 		2E7B02DC266368BA00278AF4 /* HUDState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDState.swift; sourceTree = "<group>"; };
@@ -935,6 +937,7 @@
 				2E7B03012663AF9600278AF4 /* TreeInfoTarget.swift */,
 				2E7B030B2663C64600278AF4 /* GetPhotosByTreeIdTarget.swift */,
 				2E7B03152663FC6200278AF4 /* DeletePhotosByIdTarget.swift */,
+				2E705F10266CA88800873742 /* AttachFileToTreeTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -1254,6 +1257,7 @@
 				2ED57EBC2619D0B100EC9033 /* MapViewInteractor.swift in Sources */,
 				2ED7F985265D1207001D8BF9 /* CompactTreeInfoParser.swift in Sources */,
 				2EB34D62263F04D9009A2129 /* StackView+ViewRepresentable.swift in Sources */,
+				2E705F11266CA88800873742 /* AttachFileToTreeTarget.swift in Sources */,
 				2ED0FC432635B931006A8683 /* TreeEditorViewIO.swift in Sources */,
 				2EAE5A72261F5E5B005E382B /* LoginInteractor.swift in Sources */,
 				2ED7F9B7265D3860001D8BF9 /* SingleClusterParser.swift in Sources */,

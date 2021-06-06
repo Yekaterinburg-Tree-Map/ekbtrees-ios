@@ -12,7 +12,8 @@ import RxRelay
 
 protocol PhotoLoaderRepositoryProtocol {
     
-    func fetchAndTrackPendingPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]>
+    func fetchAndTrackAllPendingPhotos() -> Observable<[LocalPhotoModel]>
+    func fetchAndTrackPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]>
     func addPendingPhotos(_ photos: [UIImage], treeId: Tree.ID)
     func updatePhotoModelStatus(id: String, status: UploadPhotoStatus)
 }
@@ -37,7 +38,11 @@ final class PhotoLoaderRepository: PhotoLoaderRepositoryProtocol {
     
     // MARK: Public
     
-    func fetchAndTrackPendingPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]> {
+    func fetchAndTrackAllPendingPhotos() -> Observable<[LocalPhotoModel]> {
+        store.fetchAllAndMap(mapper: mapper)
+    }
+    
+    func fetchAndTrackPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]> {
         store.fetchAllAndMap(mapper: mapper)
             .map { photos in
                 photos.filter { $0.treeId == treeId }
@@ -53,8 +58,9 @@ final class PhotoLoaderRepository: PhotoLoaderRepositoryProtocol {
     }
     
     func updatePhotoModelStatus(id: String, status: UploadPhotoStatus) {
-        store.fetchAndNotify(of: UploadingPhotoEntity.self, predicate: "id == '\(id)")
+        store.fetchAndNotify(of: UploadingPhotoEntity.self, predicate: "id == '\(id)'")
             .withUnretained(self)
+            .subscribe(on: SerialDispatchQueueScheduler.init(qos: .utility))
             .subscribe(onNext: { obj, entity in
                 obj.updatePhotoEntity(entity, status: status)
             })
@@ -72,7 +78,9 @@ final class PhotoLoaderRepository: PhotoLoaderRepositoryProtocol {
     }
     
     private func updatePhotoEntity(_ entity: UploadingPhotoEntity, status: UploadPhotoStatus) {
-        entity.uploadStatus = status.rawValue
-        store.createOrUpdate(entity: entity)
+        var model = mapper.mapModel(entity)
+        model.loadStatus = status
+        let newEntity = mapper.mapEntity(model)
+        store.createOrUpdate(entity: newEntity)
     }
 }

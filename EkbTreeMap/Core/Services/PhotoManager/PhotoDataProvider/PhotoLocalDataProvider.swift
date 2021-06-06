@@ -49,7 +49,9 @@ final class PhotoLocalDataProvider: PhotoLocalDataProviding {
     }
     
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]> {
-        photoLoaderRepository.fetchAndTrackPendingPhotos(treeId: treeId)
-            .map { $0.map { $0 as PhotoModelProtocol } }
+        photoLoaderRepository.fetchAndTrackPhotos(treeId: treeId)
+            .map {
+                $0.map { $0 as PhotoModelProtocol }
+            }
     }
 }

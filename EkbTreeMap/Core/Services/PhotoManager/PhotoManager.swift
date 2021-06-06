@@ -96,7 +96,7 @@ final class PhotoManager: PhotoManagerProtocol {
             switch model.loadStatus {
             case .cancelled:
                 dataProvider.retryUploadPhoto(model: model)
-            case .loading:
+            case .loading, .pending:
                 dataProvider.cancelUploadPhoto(model: model)
             case .ready:
                 delegate?.openPhotoPreview(startingIndex: index, photos: photos)

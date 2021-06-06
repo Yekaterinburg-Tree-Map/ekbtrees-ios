@@ -30,7 +30,13 @@ final class ServiceAssembly: Assembly {
         
         container.autoregister(TreePointsRepositoryProtocol.self, initializer: TreePointsRepository.init)
         
-        container.autoregister(PhotoLoaderServiceProtocol.self, initializer: PhotoLoaderService.init)
+        container.register(PhotoLoaderServiceProtocol.self) { r in
+            let resolver = IResolverImpl(resolver: r)
+            return PhotoLoaderService(resolver: resolver,
+                                      networkService: resolver.resolve(name: NetworkServiceName.common.rawValue),
+                                      loaderRepository: r~>)
+        }
+        
         container.register(MapPointsServiceProtocol.self) { r in
             let resolver = IResolverImpl(resolver: r)
             return MapPointsService(resolver: resolver,
