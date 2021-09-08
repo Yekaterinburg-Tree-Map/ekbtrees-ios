@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0159AB4E26D79DAC00A1AABF /* credentials.json in Sources */ = {isa = PBXBuildFile; fileRef = 2ED57E7B2618D37B00EC9033 /* credentials.json */; };
+		016D048626E9207800D3238D /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D048526E9207800D3238D /* AuthorizationService.swift */; };
+		016D048826E9220A00D3238D /* SignInTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D048726E9220A00D3238D /* SignInTarget.swift */; };
+		0194ABCD26D9367F004223E9 /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194ABCC26D9367F004223E9 /* AuthCoordinator.swift */; };
 		2E01F7312629CC3100DA2EF1 /* MapViewModuleIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F7302629CC3100DA2EF1 /* MapViewModuleIO.swift */; };
 		2E01F739262A0F2600DA2EF1 /* MapObserverModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F738262A0F2600DA2EF1 /* MapObserverModuleFactory.swift */; };
 		2E01F73E262A0FF500DA2EF1 /* MapObserverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01F73D262A0FF500DA2EF1 /* MapObserverViewController.swift */; };
@@ -168,6 +172,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		016D048526E9207800D3238D /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
+		016D048726E9220A00D3238D /* SignInTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTarget.swift; sourceTree = "<group>"; };
+		0194ABCC26D9367F004223E9 /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		12BEC177D98EC628469F1ED5 /* Pods-EkbTreeMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EkbTreeMap.release.xcconfig"; path = "Target Support Files/Pods-EkbTreeMap/Pods-EkbTreeMap.release.xcconfig"; sourceTree = "<group>"; };
 		2E01F7302629CC3100DA2EF1 /* MapViewModuleIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModuleIO.swift; sourceTree = "<group>"; };
 		2E01F738262A0F2600DA2EF1 /* MapObserverModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapObserverModuleFactory.swift; sourceTree = "<group>"; };
@@ -345,6 +352,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		016D048426E9205100D3238D /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				016D048526E9207800D3238D /* AuthorizationService.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
 		02C4FE712F659BD3A8F23668 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,6 +623,7 @@
 		2E968819260CD5C500574BE2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				016D048426E9205100D3238D /* Authorization */,
 				2E7B02B52660E7D000278AF4 /* Tree */,
 				2ED7F99E265D1A07001D8BF9 /* Map */,
 				2E52719E265900BC007B86BD /* PhotoManager */,
@@ -851,6 +867,7 @@
 				2ED57EC62619D6EA00EC9033 /* Coordinator.swift */,
 				2ED57ECB2619D7AC00EC9033 /* MainCoordinator.swift */,
 				2ED57ED02619E43600EC9033 /* MapCoordinator.swift */,
+				0194ABCC26D9367F004223E9 /* AuthCoordinator.swift */,
 				2ED0FC272633F702006A8683 /* CreateTreeCoordinator.swift */,
 				2EB34DB426401496009A2129 /* TreeDetailsCoordinator.swift */,
 				2EB34DCE264056AB009A2129 /* EditTreeDetailsCoordinator.swift */,
@@ -933,6 +950,7 @@
 				2ED7F9A4265D3482001D8BF9 /* GetClasterByRegionTarget.swift */,
 				2E7B02BE2660EA5000278AF4 /* SaveTreeTarget.swift */,
 				2E7B03012663AF9600278AF4 /* TreeInfoTarget.swift */,
+				016D048726E9220A00D3238D /* SignInTarget.swift */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
@@ -1237,6 +1255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0159AB4E26D79DAC00A1AABF /* credentials.json in Sources */,
 				2EB34D58263EBEF4009A2129 /* ViewRepresentable.swift in Sources */,
 				2ED0FC2D26340A8B006A8683 /* MapObserverModuleIO.swift in Sources */,
 				2EB34DE326405BC3009A2129 /* TreeEditorActionCell.swift in Sources */,
@@ -1274,6 +1293,7 @@
 				2ED7FA4C265F8478001D8BF9 /* ClusterCircleView.swift in Sources */,
 				2EB34D8F263FE9B8009A2129 /* TreeDetailsModuleFactory.swift in Sources */,
 				2EEE861E26275D5C002A9429 /* AuthorizationState.swift in Sources */,
+				0194ABCD26D9367F004223E9 /* AuthCoordinator.swift in Sources */,
 				2E3946592623402A0001E5FA /* TreeAnnotationRepresentable.swift in Sources */,
 				2ED0FC482635BAF2006A8683 /* TreeEditorInteractor.swift in Sources */,
 				2E01FF7B262DE95600DA2EF1 /* MapPointChooserViewController.swift in Sources */,
@@ -1304,6 +1324,7 @@
 				2EDC6C22261CC21D00BB7F5A /* LoginViewController.swift in Sources */,
 				2EB34D9C263FEBBA009A2129 /* TreeDetailsViewIO.swift in Sources */,
 				2ED7FA33265E8E46001D8BF9 /* MapClusterMapper.swift in Sources */,
+				016D048626E9207800D3238D /* AuthorizationService.swift in Sources */,
 				2ED7FA29265E8C58001D8BF9 /* MapTreePointMapper.swift in Sources */,
 				2E7B02DD266368BA00278AF4 /* HUDState.swift in Sources */,
 				2E39463B2621CA090001E5FA /* TreePointRepresentable.swift in Sources */,
@@ -1360,6 +1381,7 @@
 				2ED7FA0B265D6F9B001D8BF9 /* RealmConfigurationProvider.swift in Sources */,
 				2EB34DCF264056AB009A2129 /* EditTreeDetailsCoordinator.swift in Sources */,
 				2EB34DB0264012B4009A2129 /* TreeDetailsModuleOutput.swift in Sources */,
+				016D048826E9220A00D3238D /* SignInTarget.swift in Sources */,
 				2E39465126233B3E0001E5FA /* TreeAnnotationView.swift in Sources */,
 				2ED7FA51265FACBD001D8BF9 /* MapObjectsVisitor.swift in Sources */,
 				2EDC6C1A261CC1D400BB7F5A /* LoginModuleFactory.swift in Sources */,

@@ -29,6 +29,5 @@ struct LoginView {
 
 
 protocol LoginViewConfigurable {
-    
     func configure(with output: LoginView.Output) -> LoginView.Input
 }

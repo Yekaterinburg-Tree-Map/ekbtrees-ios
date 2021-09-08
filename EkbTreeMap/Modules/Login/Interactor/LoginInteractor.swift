@@ -15,8 +15,13 @@ class LoginInteractor: LoginViewConfigurable {
     private let titleSubject = BehaviorSubject<String>(value: "Вход")
     private let availableButtons = BehaviorSubject<[LoginButtonType]>(value: [])
     private let bag = DisposeBag()
-    
-    
+    private let authorizationService: AuthorizationServiceProtocol
+	
+    // MARK: - Lifecycle
+	
+	init(authorizationService: AuthorizationServiceProtocol) {
+		self.authorizationService = authorizationService
+	}
     
     // MARK: Public
     

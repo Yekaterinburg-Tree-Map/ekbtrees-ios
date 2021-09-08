@@ -33,6 +33,7 @@ final class MainCoordinator: ParentCoordinator {
     
     func start(animated: Bool) {
         appendMapCoordinator()
+		appendAuthorizationCoordinator()
     }
     
     func finish(animated: Bool) {
@@ -50,4 +51,13 @@ final class MainCoordinator: ParentCoordinator {
         childCoordinators.append(coordinator)
         coordinator.start(animated: false)
     }
+	
+	private func appendAuthorizationCoordinator() {
+		guard let tabBar = rootController else {
+			return
+		}
+		let coordinator = AuthCoordinator(resolver: resolver, tabBarController: tabBar)
+		childCoordinators.append(coordinator)
+		coordinator.start(animated: false)
+	}
 }

@@ -67,7 +67,7 @@ final class SaveTreeTarget: AuthorizedTarget {
                                          Keys.heightOfTheFirstBranch.rawValue: params.heightOfFirstBranch,
                                          Keys.conditionAssessment.rawValue: params.condition,
                                          Keys.age.rawValue: params.age]
-        return .requestParameters(parameters: parameters.filter { $1 != nil }.mapValues { $0! },
+		return .requestParameters(parameters: parameters.filter { $1 != nil }.compactMapValues { $0 },
                                   encoding: JSONEncoding.default)
     }
     

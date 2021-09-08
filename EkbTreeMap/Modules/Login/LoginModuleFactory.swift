@@ -10,9 +10,15 @@ import UIKit
 
 final class LoginModuleFactory: Factory {
     
-    func build(with: Void) -> UIViewController {
+	private let authService: AuthorizationServiceProtocol
+	
+	init(authService: AuthorizationServiceProtocol) {
+		self.authService = authService
+	}
+	
+	func build(with: Void) -> UIViewController {
         let vc = LoginViewController()
-        let interactor = LoginInteractor()
+        let interactor = LoginInteractor(authorizationService: authService)
         
         vc.interactor = interactor
         return vc
