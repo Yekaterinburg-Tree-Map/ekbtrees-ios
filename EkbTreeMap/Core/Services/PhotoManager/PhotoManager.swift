@@ -23,7 +23,7 @@ protocol PhotoManagerProtocol: TreeDetailsPhotoContainerDataSource, TreeDetailsP
     var delegate: PhotoManagerDelegate? { get set }
     
     func startPhotoObserving(treeId: Tree.ID)
-    func addPhotos(_ photos: [UIImage])
+    func addPhotos(_ photos: [UIImage]) -> Observable<Void>
 }
 
 
@@ -63,7 +63,7 @@ final class PhotoManager: PhotoManagerProtocol {
         observeImageUpdates()
     }
     
-    func addPhotos(_ photos: [UIImage]) {
+    func addPhotos(_ photos: [UIImage]) -> Observable<Void> {
         dataProvider.loadPhotos(photos, for: treeId)
     }
     

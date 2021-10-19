@@ -19,6 +19,7 @@ final class ServiceAssembly: Assembly {
             let resolver = IResolverImpl(resolver: r)
             return PhotoRemoteDataProvider(resolver: resolver,
                                            networkService: resolver.resolve(name: NetworkServiceName.common.rawValue),
+                                           photoLoaderService: r~>,
                                            treeFilesParser: r~>)
         }
         

@@ -10,6 +10,7 @@ import RxSwift
 
 protocol PhotoLoaderServiceProtocol {
     
+    func uploadPhotosSync(_ photos: [UIImage], treeId: Tree.ID) -> Observable<Void>
     func uploadPhotos(_ photos: [UIImage], treeId: Tree.ID)
     func cancelUpload(id: String)
     func retryUpload(id: String)
@@ -40,6 +41,16 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
     
     
     // MARK: Public
+    
+    func uploadPhotosSync(_ photos: [UIImage], treeId: Tree.ID) -> Observable<Void> {
+        let targets = photos.map { self.configureTarget($0, treeId: treeId) }
+        return Observable.zip(
+            targets
+                .compactMap { $0 }
+                .map { self.networkService.sendRequestWithEmptyResponse($0) }
+        )
+        .map { _ in () }
+    }
     
     func uploadPhotos(_ photos: [UIImage], treeId: Tree.ID) {
         loaderRepository.addPendingPhotos(photos, treeId: treeId)
@@ -83,7 +94,7 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
     
     private func uploadPhoto(_ photo: LocalPhotoModel) {
         loaderRepository.updatePhotoModelStatus(id: photo.tempId, status: .loading)
-        guard let target = configureTarget(photo) else {
+        guard let target = configureTarget(photo.image, treeId: photo.treeId) else {
             loaderRepository.updatePhotoModelStatus(id: photo.tempId, status: .cancelled)
             return
         }
@@ -97,11 +108,11 @@ final class PhotoLoaderService: PhotoLoaderServiceProtocol {
         currentRequests[photo.tempId] = bag
     }
     
-    private func configureTarget(_ photo: LocalPhotoModel) -> AttachFileToTreeTarget? {
-        guard let data = photo.image.jpegData(compressionQuality: 1) else {
+    private func configureTarget(_ image: UIImage, treeId: Tree.ID) -> AttachFileToTreeTarget? {
+        guard let data = image.jpegData(compressionQuality: 1) else {
             return nil
         }
-        let params = AttachFileToTreeTarget.Parameters(treeId: photo.treeId, data: data)
+        let params = AttachFileToTreeTarget.Parameters(treeId: treeId, data: data)
         let target: AttachFileToTreeTarget = resolver.resolve(arg: params)
         return target
     }

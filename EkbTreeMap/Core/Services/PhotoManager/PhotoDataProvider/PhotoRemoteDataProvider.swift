@@ -11,6 +11,7 @@ import RxSwift
 protocol PhotoRemoteDataProviding {
     
     func deletePhoto(id: Int) -> Observable<Void>
+    func uploadPhotos(_ photos: [UIImage], for treeId: Tree.ID) -> Observable<Void>
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
 }
 
@@ -21,6 +22,7 @@ final class PhotoRemoteDataProvider: PhotoRemoteDataProviding {
     
     private let resolver: IResolver
     private let networkService: NetworkServiceProtocol
+    private let photoLoaderService: PhotoLoaderServiceProtocol
     private let treeFilesParser: TreeFilesParser
     
     private var photos: [RemotePhotoModel] = []
@@ -32,13 +34,19 @@ final class PhotoRemoteDataProvider: PhotoRemoteDataProviding {
     
     init(resolver: IResolver,
          networkService: NetworkServiceProtocol,
+         photoLoaderService: PhotoLoaderServiceProtocol,
          treeFilesParser: TreeFilesParser) {
         self.resolver = resolver
         self.networkService = networkService
+        self.photoLoaderService = photoLoaderService
         self.treeFilesParser = treeFilesParser
     }
     
     // MARK: Public
+    
+    func uploadPhotos(_ photos: [UIImage], for treeId: Tree.ID) -> Observable<Void> {
+        photoLoaderService.uploadPhotosSync(photos, treeId: treeId)
+    }
     
     func deletePhoto(id: Int) -> Observable<Void> {
         let parameters = DeletePhotosByIdTarget.Parameters(id: id)
