@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxRelay
 
 
 class LoginInteractor: LoginViewConfigurable {
@@ -14,6 +15,7 @@ class LoginInteractor: LoginViewConfigurable {
     
     private let titleSubject = BehaviorSubject<String>(value: "Вход")
     private let availableButtons = BehaviorSubject<[LoginButtonType]>(value: [])
+    private let hudSubject = BehaviorRelay<HUDState>(value: .hidden)
     private let bag = DisposeBag()
     private let authorizationService: AuthorizationServiceProtocol
 	
@@ -50,14 +52,29 @@ class LoginInteractor: LoginViewConfigurable {
     }
     
     private func didTapEnter(email: String?, password: String?) {
-        guard validateInput(email: email, password: password) else {
+        guard
+            let email = email,
+            let password = password,
+            validateInput(email: email, password: password)
+        else {
             // show validation issues
             return
         }
+        
+        hudSubject.accept(.loading)
+        authorizationService.login(email: email, password: password)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, _ in
+                obj.hudSubject.accept(.hidden)
+                
+            }, onError: { [weak self] error in
+                self?.hudSubject.accept(.hidden)
+                
+            })
+            .disposed(by: bag)
     }
     
-    private func validateInput(email: String?, password: String?) -> Bool {
-        // add regex for email
-        email != nil && password != nil
+    private func validateInput(email: String, password: String) -> Bool {
+        true
     }
 }

@@ -21,7 +21,7 @@ final class SignInTarget: Target {
 	var baseURL: URL
 	
 	var path: String {
-		"/auth/login/"
+		"/auth/login"
 	}
 	
 	var method: Method = .post

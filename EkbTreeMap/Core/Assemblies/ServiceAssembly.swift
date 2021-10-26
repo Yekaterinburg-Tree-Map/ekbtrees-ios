@@ -18,7 +18,13 @@ final class ServiceAssembly: Assembly {
         container.autoregister(PhotoRemoteDataProviding.self, initializer: PhotoRemoteDataProvider.init)
         container.autoregister(PhotoDataProviding.self, initializer: PhotoDataProvider.init)
         container.autoregister(PhotoManagerProtocol.self, initializer: PhotoManager.init)
-		container.autoregister(AuthorizationServiceProtocol.self, initializer: AuthorizationService.init)
+        container.register(AuthorizationServiceProtocol.self) { r in
+            let resolver = IResolverImpl(resolver: r)
+            return AuthorizationService(
+                resolver: resolver,
+                networkService: resolver.resolve(name: NetworkServiceName.common.rawValue)
+            )
+        }
         
         container.autoregister(PhotoLoaderRepositoryProtocol.self, initializer: PhotoLoaderRepository.init)
             .inObjectScope(.container)

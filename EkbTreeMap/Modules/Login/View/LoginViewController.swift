@@ -140,6 +140,20 @@ final class LoginViewController: UIViewController {
             .withUnretained(self)
             .subscribe(onNext: { $0.addEntryButtons($1) })
             .disposed(by: bag)
+        
+        input.hudState
+            .withUnretained(self)
+            .subscribe(onNext: { obj, state in
+                obj.updateHUDState(state)
+            })
+            .disposed(by: bag)
+        
+        signInButton.rx.tap
+            .map { [unowned self] in
+                return (self.emailTextField.text, self.passwordTextField.text)
+            }
+            .bind(to: didTapEnter)
+            .disposed(by: bag)
     }
     
     private func addEntryButtons(_ buttons: [LoginButtonType]) {

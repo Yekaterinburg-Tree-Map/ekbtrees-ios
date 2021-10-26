@@ -15,6 +15,7 @@ struct LoginView {
         
         var title: Observable<String> = .never()
         var availableButton: Observable<[LoginButtonType]> = .never()
+        var hudState: Observable<HUDState> = .never()
     }
     
     struct Output {
