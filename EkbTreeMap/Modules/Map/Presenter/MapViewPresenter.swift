@@ -48,7 +48,7 @@ final class MapViewPresenter: MapViewInteractorConfigurable {
             TreePointRepresentable(id: point.id,
                                    position: .init(latitude: point.latitude, longitude: point.longitude),
                                    circleColor: [UIColor.green, UIColor.blue].randomElement()!,
-                                   radius: CGFloat((point.diameterOfCrown ?? 5) / 2))
+                                   radius: CGFloat(max((point.diameterOfCrown ?? 5), 5) / 2))
         }
     }
     

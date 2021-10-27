@@ -70,7 +70,7 @@ final class MapPointsService: MapPointsServiceProtocol {
                                                        y2: position.bottomRightPosition.longitude)
         let target: GetTreesByRegionTarget = resolver.resolve(arg: params)
         networkService.sendRequest(target, parser: pointsParser)
-            .map { self.processTrees($0, zoom: region.zoom)}
+            .map { self.processTrees($0, position: position) }
             .subscribe(onNext: { [weak self] data in
                 self?.treeRepository.updateTileData(data)
             })
@@ -85,19 +85,20 @@ final class MapPointsService: MapPointsServiceProtocol {
                                                          y2: position.bottomRightPosition.longitude)
         let target: GetClasterByRegionTarget = resolver.resolve(arg: params)
         networkService.sendRequest(target, parser: clusterParser)
-            .map { self.processClusters($0, zoom: region.zoom)}
+            .map { self.processClusters($0, position: position) }
             .subscribe(onNext: { [weak self] data in
                 self?.treeRepository.updateTileData(data)
             })
             .disposed(by: bag)
     }
     
-    private func processTrees(_ trees: [Tree], zoom: Int) -> [MapViewTileData] {
+    private func processTrees(_ trees: [Tree], position: MapViewVisibleTiles) -> [MapViewTileData] {
         var data: [MapViewTile: [Tree]] = [:]
+        position.tiles.forEach { data[$0] = [] }
         for tree in trees {
             let tile = areaToTilesConverter.processTile(from: .init(latitude: tree.latitude,
                                                                     longitude: tree.longitude),
-                                                        zoom: zoom)
+                                                        zoom: position.zoom)
             var array = data[tile] ?? []
             array.append(tree)
             data[tile] = array
@@ -108,11 +109,12 @@ final class MapPointsService: MapPointsServiceProtocol {
         }
     }
     
-    private func processClusters(_ clusters: [TreeCluster], zoom: Int) -> [MapViewTileData] {
+    private func processClusters(_ clusters: [TreeCluster], position: MapViewVisibleTiles) -> [MapViewTileData] {
         var data: [MapViewTile: [TreeCluster]] = [:]
+        position.tiles.forEach { data[$0] = [] }
         for cluster in clusters {
             let tile = areaToTilesConverter.processTile(from: cluster.position,
-                                                        zoom: zoom)
+                                                        zoom: position.zoom)
             var array = data[tile] ?? []
             array.append(cluster)
             data[tile] = array
