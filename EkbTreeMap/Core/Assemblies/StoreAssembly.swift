@@ -20,5 +20,6 @@ final class StoreAssembly: Assembly {
         container.autoregister(MapTreePointMapper.self, initializer: MapTreePointMapper.init)
         container.autoregister(MapClusterMapper.self, initializer: MapClusterMapper.init)
         container.autoregister(TileDataMapper.self, initializer: TileDataMapper.init)
+        container.autoregister(UploadPhotoMapper.self, initializer: UploadPhotoMapper.init)
     }
 }

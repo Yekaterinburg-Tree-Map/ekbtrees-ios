@@ -14,6 +14,7 @@ protocol PhotoManagerDelegate: AnyObject {
     func reloadData()
     func openAddPhoto()
     func openPhotoPreview(startingIndex: Int, photos: [PhotoModelProtocol])
+    func didFailToDelete(error: Error)
 }
 
 
@@ -22,7 +23,7 @@ protocol PhotoManagerProtocol: TreeDetailsPhotoContainerDataSource, TreeDetailsP
     var delegate: PhotoManagerDelegate? { get set }
     
     func startPhotoObserving(treeId: Tree.ID)
-    func addPhotos(_ photos: [UIImage])
+    func addPhotos(_ photos: [UIImage]) -> Observable<Void>
 }
 
 
@@ -62,7 +63,7 @@ final class PhotoManager: PhotoManagerProtocol {
         observeImageUpdates()
     }
     
-    func addPhotos(_ photos: [UIImage]) {
+    func addPhotos(_ photos: [UIImage]) -> Observable<Void> {
         dataProvider.loadPhotos(photos, for: treeId)
     }
     
@@ -95,7 +96,7 @@ final class PhotoManager: PhotoManagerProtocol {
             switch model.loadStatus {
             case .cancelled:
                 dataProvider.retryUploadPhoto(model: model)
-            case .loading:
+            case .loading, .pending:
                 dataProvider.cancelUploadPhoto(model: model)
             case .ready:
                 delegate?.openPhotoPreview(startingIndex: index, photos: photos)
@@ -111,6 +112,10 @@ final class PhotoManager: PhotoManagerProtocol {
         }
         
         dataProvider.deletePhoto(id: model.id)
+            .subscribe(onError: { [weak self] error in
+                self?.delegate?.didFailToDelete(error: error)
+            })
+            .disposed(by: bag)
     }
     
     

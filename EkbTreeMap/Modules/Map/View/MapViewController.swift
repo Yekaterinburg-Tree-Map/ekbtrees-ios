@@ -88,7 +88,8 @@ final class MapViewController: UIViewController {
                 changes.clusterDeletions.forEach { objects.remove(with: $0) }
                 changes.pointDeletions.forEach { objects.remove(with: $0) }
                 changes.additions.forEach { point in
-                    let circle = YMKCircle(center: .init(latitude: point.position.latitude, longitude: point.position.longitude),
+                    let circle = YMKCircle(center: .init(latitude: point.position.latitude,
+                                                         longitude: point.position.longitude),
                                            radius: Float(point.radius))
                     let stroke = UIColor.clear
                     let obj = objects.addCircle(with: circle,
@@ -127,17 +128,6 @@ final class MapViewController: UIViewController {
             .disposed(by: reloadBag)
         
         objects.traverse(with: objectsVisitor)
-    }
-    
-    private func convertViewToImage(_ view: UIView) -> UIImage? {
-        let size = CGSize(width: view.bounds.size.width, height: view.bounds.size.height + 20)
-        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-        if let aContext = UIGraphicsGetCurrentContext() {
-            view.layer.render(in: aContext)
-        }
-        let img: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img
     }
     
     private func handleCameraPositionChanged(map: YMKMap) {

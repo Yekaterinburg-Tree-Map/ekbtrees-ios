@@ -12,48 +12,75 @@ import RxRelay
 
 protocol PhotoLoaderRepositoryProtocol {
     
-    func fetchAndTrackPendingPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]>
-    func fetchPendingPhotos(treeId: Tree.ID) -> [LocalPhotoModel]
-    func addPendingPhotos(_ photos: [UIImage], treeId: Tree.ID) -> [String]
-    func updatePhotoModelStatus(id: String, status: LocalPhotoModel.LoadStatus)
+    func fetchAndTrackAllPendingPhotos() -> Observable<[LocalPhotoModel]>
+    func fetchAndTrackPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]>
+    func addPendingPhotos(_ photos: [UIImage], treeId: Tree.ID)
+    func updatePhotoModelStatus(id: String, status: UploadPhotoStatus)
 }
 
 
 final class PhotoLoaderRepository: PhotoLoaderRepositoryProtocol {
     
-    private var photosSubject = BehaviorRelay<[LocalPhotoModel]>(value: [])
+    // MARK: Private Properties
     
-    func fetchAndTrackPendingPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]> {
-        photosSubject.asObservable()
+    private let store: Store
+    private let mapper: UploadPhotoMapper
+    private let bag = DisposeBag()
+    
+    
+    // MARK: Lifecycle
+    
+    init(store: Store, mapper: UploadPhotoMapper) {
+        self.store = store
+        self.mapper = mapper
     }
     
-    func fetchPendingPhotos(treeId: Tree.ID) -> [LocalPhotoModel] {
-        photosSubject.value
+    
+    // MARK: Public
+    
+    func fetchAndTrackAllPendingPhotos() -> Observable<[LocalPhotoModel]> {
+        store.fetchAllAndMap(mapper: mapper)
     }
     
-    func addPendingPhotos(_ photos: [UIImage], treeId: Tree.ID) -> [String] {
-        let current = photosSubject.value
-        let new = photos.map(setupNewPhoto)
-        photosSubject.accept(current + new)
-        return new.map(\.tempId)
+    func fetchAndTrackPhotos(treeId: Tree.ID) -> Observable<[LocalPhotoModel]> {
+        store.fetchAllAndMap(mapper: mapper)
+            .map { photos in
+                photos.filter { $0.treeId == treeId }
+            }
     }
     
-    func updatePhotoModelStatus(id: String, status: LocalPhotoModel.LoadStatus) {
-        var tempArray = photosSubject.value
-        guard var existingModel = tempArray.first(where: { $0.tempId == id }) else {
-            return
+    func addPendingPhotos(_ photos: [UIImage], treeId: Tree.ID) {
+        let entities = photos.map { photo -> UploadingPhotoEntity in
+            let model = self.setupNewPhoto(photo, treeId: treeId)
+            return self.mapper.mapEntity(model)
         }
-        existingModel.loadStatus = status
-        tempArray.removeAll(where: { $0.tempId == existingModel.tempId })
-        photosSubject.accept(tempArray + [existingModel])
+        store.createOrUpdate(entities: entities)
+    }
+    
+    func updatePhotoModelStatus(id: String, status: UploadPhotoStatus) {
+        store.fetchAndNotify(of: UploadingPhotoEntity.self, predicate: "id == '\(id)'")
+            .withUnretained(self)
+            .subscribe(on: SerialDispatchQueueScheduler.init(qos: .utility))
+            .subscribe(onNext: { obj, entity in
+                obj.updatePhotoEntity(entity, status: status)
+            })
+            .disposed(by: bag)
     }
     
     
     // MARK: Private
     
-    private func setupNewPhoto(_ photos: UIImage) -> LocalPhotoModel {
+    private func setupNewPhoto(_ photo: UIImage, treeId: Tree.ID) -> LocalPhotoModel {
         return LocalPhotoModel(tempId: UUID().uuidString,
-                               image: photos,
-                               loadStatus: .loading)
+                               treeId: treeId,
+                               image: photo,
+                               loadStatus: .pending)
+    }
+    
+    private func updatePhotoEntity(_ entity: UploadingPhotoEntity, status: UploadPhotoStatus) {
+        var model = mapper.mapModel(entity)
+        model.loadStatus = status
+        let newEntity = mapper.mapEntity(model)
+        store.createOrUpdate(entity: newEntity)
     }
 }

@@ -127,7 +127,7 @@ final class TreeDetailsPhotoView: TreeDetailsBasePhotoView {
         switch data.loadStatus {
         case .ready:
             processState(.ready)
-        case .loading:
+        case .loading, .pending:
             processState(.uploading)
         case .cancelled:
             processState(.cancelled)

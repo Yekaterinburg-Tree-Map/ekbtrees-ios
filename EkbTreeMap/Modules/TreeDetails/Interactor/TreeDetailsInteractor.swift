@@ -111,27 +111,33 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
         }))
     }
     
-    private func showError(_ error: Error) {
+    private func showError(_ error: Error, shouldCloseAfterError: Bool = true) {
         let completion: () -> () = { [weak self] in
             guard let self = self else {
                 return
             }
-            let alert = self.setupNetworkAlert()
+            let alert = self.setupNetworkAlert(shouldCloseAfterError: shouldCloseAfterError)
             self.hudSubject.accept(.hidden)
             self.output?.moduleWantsToShowAlert(input: self, alert: alert)
         }
         hudSubject.accept(.failure(duration: 1.0, completion: completion))
     }
     
-    private func setupNetworkAlert() -> Alert {
+    private func setupNetworkAlert(shouldCloseAfterError: Bool = false) -> Alert {
         var alert = Alert(message: "Произошла ошибка")
         
-        let cancelHandler: () -> () = { [weak self] in
-            guard let self = self else {
-                return
+        let cancelHandler: () -> ()
+        if shouldCloseAfterError {
+            cancelHandler = { [weak self] in
+                guard let self = self else {
+                    return
+                }
+                self.output?.moduleWantsToClose(input: self)
             }
-            self.output?.moduleWantsToClose(input: self)
+        } else {
+            cancelHandler = {}
         }
+        
         let cancelAction = AlertAction(title: "Отменить",
                                        style: .cancel,
                                        handler: cancelHandler)
@@ -165,7 +171,17 @@ final class TreeDetailsInteractor: TreeDetailsConfigurable {
 extension TreeDetailsInteractor: TreeDetailsModuleInput {
     
     func addPhotos(_ photos: [UIImage]) {
+        hudSubject.accept(.loading)
         photoManager.addPhotos(photos)
+            .withUnretained(self)
+            .subscribe(onNext: { obj, _ in
+                obj.hudSubject.accept(.success(duration: 1.0, completion: {}))
+            }, onError: { [weak self] error in
+                self?.hudSubject.accept(.failure(duration: 1.0, completion: {
+                    self?.showError(error, shouldCloseAfterError: false)
+                }))
+            })
+            .disposed(by: bag)
     }
 }
 
@@ -184,5 +200,11 @@ extension TreeDetailsInteractor: PhotoManagerDelegate {
     
     func openAddPhoto() {
         output?.moduleWantsToAddPhotos(input: self)
+    }
+    
+    func didFailToDelete(error: Error) {
+        var alert = Alert(message: "Не получилось удалить фото")
+        alert.actions = [.init(title: "OK")]
+        output?.moduleWantsToShowAlert(input: self, alert: alert)
     }
 }

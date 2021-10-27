@@ -16,5 +16,6 @@ final class ParserAssembly: Assembly {
         container.autoregister(SingleClusterParser.self, initializer: SingleClusterParser.init)
         container.autoregister(ClusterRegionParser.self, initializer: ClusterRegionParser.init)
         container.autoregister(TreeInfoParser.self, initializer: TreeInfoParser.init)
+        container.autoregister(TreeFilesParser.self, initializer: TreeFilesParser.init)
     }
 }

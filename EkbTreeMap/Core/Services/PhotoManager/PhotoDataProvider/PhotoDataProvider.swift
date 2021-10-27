@@ -11,8 +11,8 @@ import UIKit
 
 protocol PhotoDataProviding {
     
-    func deletePhoto(id: String)
-    func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID)
+    func deletePhoto(id: Int) -> Observable<Void>
+    func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) -> Observable<Void>
     func retryUploadPhoto(model: LocalPhotoModel)
     func cancelUploadPhoto(model: LocalPhotoModel)
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
@@ -20,7 +20,6 @@ protocol PhotoDataProviding {
 
 
 final class PhotoDataProvider: PhotoDataProviding {
-    
     
     // MARK: Private Properties
     
@@ -40,24 +39,20 @@ final class PhotoDataProvider: PhotoDataProviding {
     
     // MARK: Public
     
-    func deletePhoto(id: String) {
+    func deletePhoto(id: Int) -> Observable<Void> {
         remoteDataProvider.deletePhoto(id: id)
     }
     
-    func retryLoadPhoto(model: LocalPhotoModel) {
-        
+    func retryUploadPhoto(model: LocalPhotoModel) {
+        localDataProvider.retryUploadPhoto(model: model)
     }
     
     func cancelUploadPhoto(model: LocalPhotoModel) {
-        
+        localDataProvider.cancelUploadPhoto(model: model)
     }
     
-    func retryUploadPhoto(model: LocalPhotoModel) {
-        
-    }
-    
-    func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) {
-        localDataProvider.loadPhotos(photos, for: treeId)
+    func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID) -> Observable<Void> {
+        remoteDataProvider.uploadPhotos(photos, for: treeId)
     }
     
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]> {

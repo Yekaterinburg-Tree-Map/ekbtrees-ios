@@ -10,7 +10,6 @@ import RxSwift
 
 protocol PhotoLocalDataProviding {
     
-    func loadPhotos(_ photos: [UIImage], for treeId: Tree.ID)
     func retryUploadPhoto(model: LocalPhotoModel)
     func cancelUploadPhoto(model: LocalPhotoModel)
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]>
@@ -49,7 +48,9 @@ final class PhotoLocalDataProvider: PhotoLocalDataProviding {
     }
     
     func fetchPhotos(for treeId: Tree.ID) -> Observable<[PhotoModelProtocol]> {
-        photoLoaderRepository.fetchAndTrackPendingPhotos(treeId: treeId)
-            .map { $0.map { $0 as PhotoModelProtocol } }
+        photoLoaderRepository.fetchAndTrackPhotos(treeId: treeId)
+            .map {
+                $0.map { $0 as PhotoModelProtocol }
+            }
     }
 }
