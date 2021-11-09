@@ -7,7 +7,7 @@
 
 import Moya
 
-final class SignInTarget: Target {
+final class SignInTarget: AuthorizedTarget {
 	
 	// MARK: Public Structures
 	
@@ -23,6 +23,14 @@ final class SignInTarget: Target {
 	var path: String {
 		"/auth/login"
 	}
+    
+    var authorizationType: AuthorizationType? {
+        guard let authorization = "\(params.email):\(params.password)".data(using: .utf8)?.base64EncodedString() else {
+            return nil
+        }
+        
+        return .custom(authorization)
+    }
 	
 	var method: Method = .post
 	
@@ -32,12 +40,7 @@ final class SignInTarget: Target {
 		return .requestPlain
 	}
 	
-	var headers: [String : String]? {
-		guard let authorization = "\(params.email):\(params.password)".data(using: .utf8)?.base64EncodedString() else {
-			return nil
-		}
-		return ["Authorization": authorization]
-	}
+	var headers: [String : String]? = nil
 	
 	
 	// MARK: Private Properties
